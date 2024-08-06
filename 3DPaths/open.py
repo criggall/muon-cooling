@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-x = [line.strip('\n').split(',') for line in open("x.csv")]
+x = [line.strip('\n').split(',') for line in open("data/x.csv")]
 x = np.array([(float(a),float(b)) for a,b in x])
-y = [line.strip('\n').split(',') for line in open("y.csv")]
+y = [line.strip('\n').split(',') for line in open("data/y.csv")]
 y = np.array([(float(a),float(b)) for a,b in y])
 
 #fig,ax = plt.subplots()
