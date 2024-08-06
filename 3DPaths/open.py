@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-x = [line.strip('\n').split(',') for line in open("data/x.csv")]
+x = [line.strip('\n').split(',') for line in open("3DPaths/data/x.csv")]
 x = np.array([(float(a),float(b)) for a,b in x])
-y = [line.strip('\n').split(',') for line in open("data/y.csv")]
+y = [line.strip('\n').split(',') for line in open("3DPaths/data/y.csv")]
 y = np.array([(float(a),float(b)) for a,b in y])
 
 #fig,ax = plt.subplots()
@@ -27,14 +27,14 @@ ax.set_title('3D Trajectory')
 
 plt.clf() 
 period = 10
-x = np.concatenate([poly1d_x(z) for i in range(period)])
-y = np.concatenate([poly1d_y(z) for i in range(period)])
+x = np.concatenate([poly1d_x(z)/i**0.5 for i in range(period)])
+y = np.concatenate([poly1d_y(z)/i**0.5 for i in range(period)])
 
 z = np.linspace(0,400*period,100*period)
 ax = plt.axes(projection ='3d')
-ax.plot3D(z, x/z**0.2, y/z**0.2, 'green')
-ax.plot3D(z, 0.7*x/z**0.2, 0.7*y/z**0.2, 'blue')
-ax.plot3D(z, 0.4*x/z**0.2, 0.4*y/z**0.2, 'red')
+ax.plot3D(z, x, y, 'green')
+ax.plot3D(z, 0.7*x, 0.7*y, 'blue')
+ax.plot3D(z, 0.4*x, 0.4*y, 'red')
 ax.set_title('3D Trajectory')
 
 plt.show()
