@@ -44,3 +44,9 @@ for j in range(len(icool_df.values)-1):
     f.write(' '.join(valsStr) + '\n')
 
 f.close()
+
+# Convert to .dat file:
+with open('output.txt','r') as f:
+    r = f.read()
+with open('output.dat','w') as f:
+    f.write(r)
