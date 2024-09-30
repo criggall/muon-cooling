@@ -50,3 +50,6 @@ with open('output.txt','r') as f:
     r = f.read()
 with open('output.dat','w') as f:
     f.write(r)
+
+f.close()
+r.close()
