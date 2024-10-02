@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import math
 
 # Read in ICOOL file:
 icool_file = 'for003Pre6D.dat'
@@ -25,19 +26,24 @@ for j in range(len(icool_df.values)-1):
     for k in range(len(valsICOOL)):
         valsICOOL[k] = float(valsICOOL[k])
 
-    # Rearrange and convert units to BLTrackFile format:
+    # Remove events with low event weight:
+    eventWeight = valsICOOL[5]
+    eventWeightOrder = math.floor(math.log(eventWeight, 10))
     valsBL = []
-    valsBL.append(valsICOOL[6]*100) # x (m -> cm)
-    valsBL.append(valsICOOL[7]*100) # y (m -> cm)
-    valsBL.append(valsICOOL[8]*100) # z (m -> cm)
-    valsBL.append(valsICOOL[9]*1000) # Px (GeV/c -> MeV/c)
-    valsBL.append(valsICOOL[10]*1000) # Py (GeV/c -> MeV/c)
-    valsBL.append(valsICOOL[11]*1000) # Pz (GeV/c -> MeV/c)
-    valsBL.append(valsICOOL[4]*10**9) # t (s -> ns)
-    valsBL.append(13.0) # PDGid (13 = muon)
-    valsBL.append(valsICOOL[0]) # EvNum
-    valsBL.append(-1.0) # TrkId (?)
-    valsBL.append(-1.0) # Parent weight (try -1 for now)
+    if eventWeightOrder >= 0:
+
+        # Rearrange and convert units to BLTrackFile format:
+        valsBL.append(valsICOOL[6]*100) # x (m -> cm)
+        valsBL.append(valsICOOL[7]*100) # y (m -> cm)
+        valsBL.append(valsICOOL[8]*100) # z (m -> cm)
+        valsBL.append(valsICOOL[9]*1000) # Px (GeV/c -> MeV/c)
+        valsBL.append(valsICOOL[10]*1000) # Py (GeV/c -> MeV/c)
+        valsBL.append(valsICOOL[11]*1000) # Pz (GeV/c -> MeV/c)
+        valsBL.append(valsICOOL[4]*10**9) # t (s -> ns)
+        valsBL.append(13.0) # PDGid (13 = muon)
+        valsBL.append(valsICOOL[0]) # EvNum
+        valsBL.append(-1.0) # TrkId (?)
+        valsBL.append(-1.0) # Parent weight (try -1 for now)
 
     # Write to txt:
     valsStr = [str(x) for x in valsBL]
@@ -50,6 +56,3 @@ with open('output.txt','r') as f:
     r = f.read()
 with open('output.dat','w') as f:
     f.write(r)
-
-f.close()
-r.close()
