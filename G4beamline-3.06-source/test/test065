@@ -1,0 +1,33 @@
+=pillbox B field (2 sec)
+=require gsl
+
+=file test065.in 
+physics QGSP_BIC doStochastics=0
+beam gaussian particle=geantino nEvents=1
+pillbox PB maxGradient=10.0 frequency=0.9562 innerLength=100 phaseAcc=0 \
+	timeOffset=0
+place PB z=0
+printfield exit=0 field=Ez t=0.000 layout=zx drow=10 dcol=10 nrow=1 ncol=13
+printfield exit=0 field=By t=0.000 layout=zx drow=10 dcol=10 nrow=1 ncol=13
+printfield exit=0 field=Ez t=0.26145 layout=zx drow=10 dcol=10 nrow=1 ncol=13
+printfield exit=0 field=By t=0.26145 layout=zx drow=10 dcol=10 nrow=1 ncol=13
+printfield exit=0 field=Ez t=0.26145*2 layout=zx drow=10 dcol=10 nrow=1 ncol=13
+printfield exit=0 field=By t=0.26145*2 layout=zx drow=10 dcol=10 nrow=1 ncol=13
+printfield exit=0 field=Ez t=0.26145*3 layout=zx drow=10 dcol=10 nrow=1 ncol=13
+printfield exit=0 field=By t=0.26145*3 layout=zx drow=10 dcol=10 nrow=1 ncol=13
+printfield exit=0 field=Ez t=0.26145*4 layout=zx drow=10 dcol=10 nrow=1 ncol=13
+printfield exit=1 field=By t=0.26145*4 layout=zx drow=10 dcol=10 nrow=1 ncol=13
+=file test065.good 
+0.0      10.0000   9.8998   9.6024   9.1166   8.4569   7.6431   6.6992   5.6532   4.5356   3.3787   2.2156   1.0789  -0.0002
+0.0       0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+0.0       0.0001   0.0001   0.0001   0.0001   0.0001   0.0001   0.0001   0.0001   0.0000   0.0000   0.0000   0.0000  -0.0000
+0.0       0.0000  -0.0033  -0.0066  -0.0096  -0.0123  -0.0147  -0.0166  -0.0181  -0.0190  -0.0194  -0.0192  -0.0185  -0.0173
+0.0     -10.0000  -9.8998  -9.6024  -9.1166  -8.4569  -7.6431  -6.6992  -5.6532  -4.5356  -3.3787  -2.2156  -1.0789   0.0002
+0.0       0.0000  -0.0000  -0.0000  -0.0000  -0.0000  -0.0000  -0.0000  -0.0000  -0.0000  -0.0000  -0.0000  -0.0000  -0.0000
+0.0      -0.0003  -0.0003  -0.0003  -0.0003  -0.0002  -0.0002  -0.0002  -0.0002  -0.0001  -0.0001  -0.0001  -0.0000   0.0000
+0.0       0.0000   0.0033   0.0066   0.0096   0.0123   0.0147   0.0166   0.0181   0.0190   0.0194   0.0192   0.0185   0.0173
+0.0      10.0000   9.8998   9.6024   9.1166   8.4569   7.6431   6.6992   5.6532   4.5356   3.3787   2.2156   1.0789  -0.0002
+0.0       0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000   0.0000
+=run g4bl test065.in 
+=grep "^z=" g4bl.out test065.txt
+=compare test065.txt test065.good -1 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001 0.001

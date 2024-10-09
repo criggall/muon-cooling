@@ -1,0 +1,50 @@
+#	distrib-WIN32 -- construct a distribution for Windows (build on Xp)
+#
+#	executed from top-level build directory, $1 = VERSION
+#
+#	WINDOWS ONLY: DISTRIB hard-coded (no version in directory name,
+#	and the directory remains aftr this script exits -- run Advanced 
+#	installer and then delete the directory)
+#
+#	This distribution is for Advanced Installer. Note that the VC++
+#	libraries are handled as a Merge Module within the installer, so
+#	no vcredist.exe is needed.
+#
+#	This version copies any .DLL-s that are present in bin
+#	into the distribution. This implies that all necessary .DLL-s
+#	should be install()-ed there in CMake.
+#
+#	NOTE: avoid using .. as that fails in the presence of symbolic links;
+#	use `dirname "$PWD"` instead.
+
+if test -z "$1"
+then
+	echo VERSION must be specified
+	exit 1
+fi
+if test ! -x bin/g4bl
+then
+	echo wrong directory!
+	exit 1
+fi
+
+VERSION=$1
+DISTRIB=C:/G4beamline
+
+rm -fr G4beamline.msi $DISTRIB.msi $DISTRIB
+
+# clean up a bit
+rm -fr doc/html doc/doxygen.log *.dat *.hst *.ldd \
+	examples/*.dat examples/*.hst examples/*.out \
+	examples/*.heprep* examples/*.root \
+	examples/zap* examples/*.swf examples/*.mov examples/*.avi \
+	zap* 
+
+mkdir $DISTRIB
+cp -RLp README.txt bin doc examples share test validation $DISTRIB
+
+echo $DISTRIB directory created
+echo "Now you should run the AdvancedInstaller, open" `cygpath -m "SOURCE/scripts/G4beamline.aip"`
+echo "edit the version number, make other changes (if necessary),"
+echo "and build the product (G4beamline.msi)."
+echo "Then copy G4beamline.msi to SOURCE/Distributions/G4beamline-VERSION.msi."

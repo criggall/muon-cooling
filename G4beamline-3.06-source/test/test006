@@ -1,0 +1,13 @@
+=mu+ decay distributions (5 sec)
+=file test006.in 
+physics QGSP doStochastics=0
+beam gaussian nEvents=10000
+virtualdetector Det format=BLTrackFile radius=2000 length=1 color=1,1,1
+particlefilter Decayer height=100 width=100 decay=mu+
+place Decayer z=1000
+place Det z=2000 front=1 rename=test006.Det
+=file test006.good 
+-1.51496 496.667 3.10979 494.733 2000 0 -0.00254948 22.3431 0.00570611 22.2854 76.5225 46.0544 7.76363 0.813947
+=run  g4bl test006.in 
+=meanAndSigma test006.Det.txt test006.meanandsigma 7
+=compare test006.meanandsigma test006.good 2 10 2 10 0.1 .001 .1 1 .1 1 1 1 .1 .1

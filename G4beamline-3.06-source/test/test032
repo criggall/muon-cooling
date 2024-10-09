@@ -1,0 +1,16 @@
+=tune reference momentum (2 sec)
+
+=file test032.in 
+param maxStep=11.356 steppingFormat="GLOBAL CLX P STEP VOL PROCESS"
+physics QGSP
+beam gaussian nEvents=1
+reference referenceMomentum=200 tuneZ=1000 tuneMomentum=220 tolerance=0.001
+
+box Absorber length=30 height=100 width=100 material=Al
+place Absorber z=500
+
+printf z=1000 "Pz=%.6f" Pz require=reference
+box End height=100 width=100 length=100
+place End z=1150
+=run g4bl test032.in 
+=grep "reference: tune Complete" g4bl.out 

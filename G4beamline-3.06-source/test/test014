@@ -1,0 +1,19 @@
+=Eloss and multiple scattering in LH2 (6 sec)
+=platform WINDOWS
+=omit Unknown problem on WINDOWS
+=platform
+
+=file test014.in 
+param histoFile=""
+physics QGSP
+beam gaussian meanMomentum=200 particle=mu+ nEvents=10000
+trackcuts keep=mu+
+tubs Absorber length=1000 outerRadius=500 material=LH2
+place Absorber z=500
+virtualdetector AF format=BLTrackFile radius=500 length=1 color=1,1,1 file=test014.txt
+place AF z=1000.5
+=file test014.good
+-0.0638386 14.9292 0.1378 14.3446 1000 0 0.0145474 4.30005 0.0603095 4.35166 162.761 2.25238 3.85697 0.012652 
+=run g4bl test014.in 
+=meanAndSigma test014.txt test014.meanandsigma 7
+=compare test014.meanandsigma test014.good 3 3 3 3 3 .01 .5 1 .5 1 2 1 .1 .1

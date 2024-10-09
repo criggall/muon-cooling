@@ -1,0 +1,44 @@
+=material particle filtering (2 sec)
+
+=file test091.in 
+param histoFile=""
+physics QGSP doStochastics=0
+beam ascii filename=test091.beam 
+material A Vacuum,1.0 density=1e-10 kill=mu+
+material B Vacuum,1.0 density=1e-10 keep=mu+
+material C Vacuum,1.0 density=1e-10 require=Pz>1000.0
+box AA material=A height=10 width=1000 length=1
+place AA z=100 y=100
+box BB material=B height=10 width=1000 length=1
+place BB z=200 y=-100
+box CC material=C height=1000 width=1000 length=1
+place CC z=300 y=0
+virtualdetector format=BLTrackFile AF radius=1000 length=1 color=1,1,1 \
+	file=test091.txt
+place AF z=1000
+=file test091.beam 
+#BLTrackFile test091 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 1 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 13 2 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 1200.000 0.375 -13 3 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 1200.000 0.375 13 4 1 0 1.0000
+0.000 100.0 0.000 0.000 0.000 200.000 0.375 -13 5 1 0 1.0000
+0.000 100.0 0.000 0.000 0.000 200.000 0.375 13 6 1 0 1.0000
+0.000 100.0 0.000 0.000 0.000 1200.000 0.375 -13 7 1 0 1.0000
+0.000 100.0 0.000 0.000 0.000 1200.000 0.375 13 8 1 0 1.0000
+0.000 -100.0 0.000 0.000 0.000 200.000 0.375 -13 9 1 0 1.0000
+0.000 -100.0 0.000 0.000 0.000 200.000 0.375 13 10 1 0 1.0000
+0.000 -100.0 0.000 0.000 0.000 1200.000 0.375 -13 11 1 0 1.0000
+0.000 -100.0 0.000 0.000 0.000 1200.000 0.375 13 12 1 0 1.0000
+=file test091.good 
+#BLTrackFile VirtualDetector/AF
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 999.5 0 0 1200 3.72187 -13 3 1 0 1
+0 0 999.5 0 0 1200 3.72187 13 4 1 0 1
+0 100 999.5 0 0 1200 3.72187 13 8 1 0 1
+0 -100 999.5 0 0 1200 3.72187 -13 11 1 0 1
+=run g4bl test091.in 
+=compare test091.txt test091.good

@@ -1,0 +1,41 @@
+=zntuple various coordinates (1 sec)
+
+=file test105.in 
+# By not tuned, ref != centerline after B
+param histoFile="" maxStep=10
+physics QGSP_BERT doStochastics=0
+beam ascii file=test105.beam
+reference P=200
+idealsectorbend B angle=45 fieldCenterRadius=1000 fieldInnerRadius=700 		fieldOuterRadius=1300 fieldHeight=100 ironInnerRadius=500 \ 
+ironOuterRadius=1500 ironHeight=400 By=-0.6 ironColor=1,0,0,.3
+place B z=100
+cornerarc z=100 centerRadius=1000 angle=45
+virtualdetector Det height=100 width=500 length=1 color=0,0,1 \
+	format=ascii file=test105.txt  kill=1
+place Det z=1500.1 front=1
+zntuple z=1500 format=ascii file=test105.txt coordinates=r
+zntuple z=1500 format=ascii file=test105.txt coordinates=c
+zntuple z=1500 format=ascii file=test105.txt coordinates=g
+=file test105.beam 
+#BLTrackFile test105 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+0.000 0.000 0.000 0.000 0.000 200.0 0.0 -13 1 1 0 1.0000
+=file test105.good 
+#BLTrackFile VirtualDetector/Det
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+#BLTrackFile NTuple/Z1500
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+#BLTrackFile NTuple/Z1500
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+#BLTrackFile NTuple/Z1500
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+-0.000329588 0 1510.48 0.000151913 0 200 5.6983 -13 1 1 0 1
+-74.6338 0 1500 -14.3606 0 199.484 5.6983 -13 1 1 0 1
+674.708 0 1294.47 130.902 0 151.211 5.6983 -13 1 1 0 1
+-74.641 0 1500.1 -14.3606 0 199.484 5.69868 -13 1 1 0 1
+=run g4bl test105.in 
+=compare test105.txt test105.good 0.02 0.02 0.02 0.005 0.005 0.005 0.005 0.5 0.5 0.5 0.5 0.1

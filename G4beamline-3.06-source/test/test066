@@ -1,0 +1,77 @@
+=tracker (4 sec)
+=require root
+
+=platform WINDOWS
+=omit track order differs on WINDOWS
+=platform
+
+=file test066.in 
+param histoFile=test066.$mode
+physics QGSP_BIC doStochastics=0
+beam ascii file=test066.beam
+reference particle=mu+ referenceMomentum=200
+trackermode $mode file=test066.true.root
+genericbend B fieldWidth=700 fieldHeight=400 fieldLength=500 \
+	ironWidth=1000 ironHeight=500 ironLength=500 ironColor=1,0,0 By=-1.088
+tracker test066 trackerZ=999.4 scalePtot=0.1 scaleX=0.1 scaleXp=0.0001 scaleT=0.070 \
+	verbose=0 for009=1 reportZ=5021
+trackerplane Plane tracker=test066 height=500 width=1000 length=1 wireSpacing=1
+trackerplane C1 tracker=test066 height=500 width=1000 length=50.8 sigmaTime=0.070
+place Plane rename=T1ax z=1000 errOffset=0
+place Plane rename=T1ay theta=90
+place C1 rename=T1at
+place Plane rename=T1bx z=2000 errOffset=0
+place Plane rename=T1by theta=90
+place B z=3000 rotation=Y22.5
+corner C z=3000 rotation=Y45
+place Plane rename=T1cx z=4000 errOffset=0
+place Plane rename=T1cy theta=90
+place Plane rename=T1dx z=5000 errOffset=0
+place Plane rename=T1dy theta=90
+tracker T2 trackerZ=6999.4 scalePtot=0.3 scaleX=0.1 scaleXp=0.0001 \
+	scaleT=0.002 verbose=0 for009=1 reportZ=9021
+trackerplane P2 tracker=T2 height=500 width=1000 length=1 wireSpacing=1
+trackerplane C2 tracker=T2 height=500 width=1000 length=10 sigmaTime=0.002
+place P2 rename=T2ax z=7000 errOffset=0
+place P2 rename=T2ay theta=90
+place C2 rename=T2at
+place P2 rename=T2bx z=8000 errOffset=0
+place P2 rename=T2by theta=90
+place C2 rename=T2bt
+place P2 rename=T2cx z=9000 errOffset=0
+place P2 rename=T2cy theta=90
+place C2 rename=T2ct
+=file test066.beam 
+#BLTrackFile test066 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.000 -13 1 1 0 1.0000
+0.000 0.000 0.000 5.000 5.000 200.000 0.000 -13 2 9 0 1.0000
+0.000 0.000 0.000 -5.000 0.000 200.000 0.000 -13 2 11 0 1.0000
+0.000 0.000 0.000 0.000 -5.000 210.000 0.000 -13 3 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 190.000 0.000 -13 3 2 0 1.0000
+0.000 0.000 0.000 5.000 5.000 200.000 0.000 -13 3 14 0 1.0000
+0.000 0.000 0.000 -5.000 0.000 200.000 0.000 -13 7 1 0 1.0000
+=file test066.good 
+#TrackerFit/test066
+#Units are ns, meters, GeV/c, Tesla, and V/m
+#IEVT IPNUM IPTYP IPFLG JSRG T X Y Z Px Py Pz Bx By Bz Weight Ex Ey Ez SARC POLx POLy POLz
+0 1 2 0 1 1.86817e-08 0.109856 0 5.021 0.0103442 0 0.199732 0 0 0 1.0000 0 0 0 0   0 0 0
+1 10001 2 0 1 1.87345e-08 0.1101 -2.32767e-05 5.021 0.0103639 -2.05053e-06 0.19971 0 0 0 1.0000 0 0 0 0   0 0 0
+2 10009 2 0 1 1.84785e-08 0.141635 0.0608695 5.021 0.00562364 -0.00138971 0.200114 0 0 0 1.0000 0 0 0 0   0 0 0
+2 10011 2 0 1 1.88978e-08 0.0272167 1.25353e-05 5.021 0.0100757 4.58739e-07 0.19993 0 0 0 1.0000 0 0 0 0   0 0 0
+3 10001 2 0 1 1.85901e-08 0.0373939 -0.0538483 5.021 0.0037781 0.00188584 0.209954 0 0 0 1.0000 0 0 0 0   0 0 0
+3 10002 2 0 1 1.88928e-08 0.184928 3.02354e-05 5.021 0.0163381 3.21403e-06 0.189363 0 0 0 1.0000 0 0 0 0   0 0 0
+3 10014 2 0 1 1.84164e-08 0.141629 0.0608589 5.021 0.00562173 -0.00139017 0.200117 0 0 0 1.0000 0 0 0 0   0 0 0
+7 10001 2 0 1 1.9042e-08 0.0271847 -8.75177e-06 5.021 0.0100665 -2.19677e-06 0.199956 0 0 0 1.0000 0 0 0 0   0 0 0
+0 1 2 0 2 3.37919e-08 0.317018 0 9.021 0.0103442 0 0.199732 0 0 0 1.0000 0 0 0 0   0 0 0
+1 10001 2 0 2 3.37916e-08 0.317124 7.25889e-06 9.021 0.0103915 1.22419e-06 0.199827 0 0 0 1.0000 0 0 0 0   0 0 0
+2 10009 2 0 2 3.35949e-08 0.255446 0.0328508 9.021 0.00569542 -0.00139948 0.199833 0 0 0 1.0000 0 0 0 0   0 0 0
+2 10011 2 0 2 3.39993e-08 0.229923 7.3564e-08 9.021 0.0101027 1.89915e-06 0.200025 0 0 0 1.0000 0 0 0 0   0 0 0
+3 10001 2 0 2 3.34451e-08 0.1084 -0.018804 9.021 0.00377544 0.00188948 0.209647 0 0 0 1.0000 0 0 0 0   0 0 0
+3 10014 2 0 2 3.35924e-08 0.255451 0.0328559 9.021 0.00569263 -0.00139773 0.199739 0 0 0 1.0000 0 0 0 0   0 0 0
+7 10001 2 0 2 3.39999e-08 0.229924 2.92306e-06 9.021 0.0101178 -2.02864e-07 0.200339 0 0 0 1.0000 0 0 0 0   0 0 0
+=run g4bl test066.in mode=true 
+=run g4bl test066.in mode=fit 
+# comparing FOR009.DAT files - meters,GeV,seconds
+=compare test066.txt test066.good .1 .1 .1 .1 .1 0.000001 .001 .001 .001 .001 .001 .001 

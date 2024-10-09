@@ -1,0 +1,17 @@
+#	eloss.g4bl
+#
+#	vary Thick so mu+ lose about 5% of their initial momentum.
+
+param -unset P=1.0 Thick=1.0 Det=1.0.txt
+param material=Cu M=105.658
+
+physics QGSP_BERT disable=Decay
+trackcuts kill=e+,e-,gamma
+
+beam gaussian particle=mu+ meanMomentum=$P nEvents=10000
+
+tubs Absorber outerRadius=200 material=$material length=$Thick
+place Absorber z=1000
+
+virtualdetector Det radius=200 length=1 format=ascii file=$Det
+place Det

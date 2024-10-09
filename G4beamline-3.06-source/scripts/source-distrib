@@ -1,0 +1,56 @@
+#	source-distrib - make a G4beamline source distribution
+#
+#	USAGE: 
+#		source-distrib [G4beamline-source-dir]
+#
+#	Executed via CMake on Mac OS X:
+#	install(CODE "execute_process(COMMAND \
+#				${CMAKE_SOURCE_DIR}/scripts/source-distrib \
+#				${CMAKE_SOURCE_DIR})")
+
+set -e
+
+ORGPWD=$PWD
+
+if test "$1"
+then
+	'cd' "$1"
+fi
+
+# verify correct directory
+if test ! -r CMakeLists.txt -o ! -d finalize
+then
+	echo Wrong Directory
+	exit 1
+fi
+
+G4BLVERSION=$(grep '^set(G4BLVERSION' CMakeLists.txt | \
+						sed -e 's/.* //' -e 's/).*//')
+
+# verify we have a version
+if test -z "$G4BLVERSION" 
+then
+	echo no G4BLVERSION in CMakeLists.txt
+	exit 1
+fi
+
+DIR=G4beamline-$G4BLVERSION-source
+DEST=$DIR.tgz
+echo creating $ORGPWD/$DEST
+
+rm -fr $DIR
+mkdir $DIR
+for i in *
+do
+	if test "$i" = Distributions; then continue; fi
+	if test "$i" = $DIR; then continue; fi
+	cp -Rp $i $DIR
+done
+
+find $DIR -name .DS_Store -exec rm {} \;
+rm -fr $DIR/scripts/*cache
+
+# COPYFILE_DISABLE=1 omits the ._file from the tarball (resource forks)
+COPYFILE_DISABLE=1 tar -czf $ORGPWD/$DEST $DIR
+
+rm -fr $DIR

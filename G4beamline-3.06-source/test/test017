@@ -1,0 +1,50 @@
+=various kill arguments (15 sec)
+=require gsl
+
+=file test017.in 
+param histoFile=""
+physics QGSP doStochastics=0
+beam ascii filename=test017.beam nEvents=9
+tubs Tubs1 outerRadius=10 length=10
+place Tubs1 z=500 x=-100 kill=1
+tubs Tubs2 innerRadius=1 outerRadius=10 length=10
+place Tubs2 z=500 x=100 kill=1
+box Box height=10 width=10 length=10
+place Box z=500 x=-100 y=100 kill=1
+place Box z=500 x=0 y=-100 kill=0
+sphere Sphere outerRadius=10
+place Sphere z=500 x=100 y=100 kill=1
+randomseed now 1
+coil Coil innerRadius=10 outerRadius=20 length=10 filename=test017.coil \
+	material=Cu tolerance=0.005
+solenoid Solenoid coilName=Coil current=0 
+place Solenoid z=500 x=-100 y=-115 kill=1
+multipole Multipole fieldLength=10 ironLength=10 apertureRadius=10 \
+	ironRadius=20 kill=1
+place Multipole z=500 x=100 y=-115
+virtualdetector format=BLTrackFile AF radius=200 length=1 color=1,1,1 \
+	file=test017.txt
+place AF z=1000
+=file test017.beam 
+#BLTrackFile test017 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 0 1 0 1.0000
+100.0 0.000 0.000 0.000 0.000 200.000 0.375 -13 1 1 0 2.0000
+0.000 100.0 0.000 0.000 0.000 200.000 0.375 -13 2 1 0 2.0000
+100.0 100.0 0.000 0.000 0.000 200.000 0.375 -13 3 1 0 3.0000
+-100. 0.000 0.000 0.000 0.000 200.000 0.375 -13 4 1 0 2.0000
+0.000 -100. 0.000 0.000 0.000 200.000 0.375 -13 5 1 0 2.0000
+-100. -100. 0.000 0.000 0.000 200.000 0.375 -13 6 1 0 3.0000
+100.0 -100. 0.000 0.000 0.000 200.000 0.375 -13 7 1 0 3.0000
+-100. 100.0 0.000 0.000 0.000 200.000 0.375 -13 8 1 0 3.0000
+=file test017.good 
+#BLTrackFile VirtualDetector/AF
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 999.5 0 0 200 4.14562 -13 0 1 0 1
+100 0 999.5 0 0 200 4.14562 -13 1 1 0 2
+0 100 999.5 0 0 200 4.14562 -13 2 1 0 2
+0 -100 999.5 0 0 200 4.14562 -13 5 1 0 2
+=run g4bl test017.in 
+=compare test017.txt test017.good

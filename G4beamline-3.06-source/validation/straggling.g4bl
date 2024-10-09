@@ -1,0 +1,14 @@
+#	straggling.g4bl
+#param Thick=0.099
+#param Thick=0.2675
+#param Thick=0.398
+param Thick=0.497
+
+physics QGSP_BERT
+param DEN=2.699 M=938.272 KE=19.68 histoFile=$Thick
+param P=sqrt(($KE+$M)*($KE+$M)-$M*$M)
+beam gaussian particle=proton meanMomentum=$P nEvents=100000
+cylinder Abs1 material=Al outerRadius=1000 length=$Thick/$DEN*10
+place Abs1 z=1 front=1
+virtualdetector Det radius=1000 length=1 color=0,0,1
+place Det

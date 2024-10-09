@@ -1,0 +1,7 @@
+#	pidecay.g4bl - pi+ decay with spinTracking
+physics QGSP_BERT spinTracking=1 
+setdecay pi- lifetime=0.001
+beam gaussian nEvents=1000 particle=pi+ meanMomentum=0.000010
+box B height=1000 width=1000 length=1000
+place B z=0
+newparticlentuple New format=extended

@@ -1,0 +1,78 @@
+#	SpaceCharge.g4bl
+#
+#	The beamline is a quad triplet tuned to do parallel to point focusing
+#	at z=6000mm.
+#
+#	To plot sigmaX and -sigmaY using gnuplot, do:
+#		plot "profile.txt" using 1:4 with lines, \
+#		     "profile.txt" using 1:(-$6) with lines
+#	HistoRoot can also be used to plot profile.txt.
+#
+#	Note the simulation ends when tracks start leaving the world, making
+#	the number of tracks in the bunch drop below 95% of the initial 
+#	number, around meanZ=10000.
+#
+#	NOTE: the spacecharge command currently has the limitation that the
+#	reference particle must be parallel to the z axis. The spacechargelw
+#	command uses no reference and has no such limitation, but is
+#	computationally limited to about 1,000 macro-particles.
+#
+#	nMP=5000 takes ~ 3 min on my Mac, gives same plot as nMP=50000.
+#
+#	The default deltaT is 0.100 ns, which may well be too large for
+#	practical use.
+#
+#	At the default P=200, the effects of space charge start to become
+#	visible around totalCharge=1E10. At 1E12 the focus is very washed out,
+#	and at 1E13 is gone. The default bunch has sigmaX=sigmaY=sigmaZ=20mm.
+#
+#	The default quadrupole strengths are scaled with momentum, so the 
+#	focus remains at z=6000 independent of P.
+#
+#	These parameters can be given on the command line to explore variations:
+#	Bunch parameters:
+#		nMP		# macro particles
+#		totalCharge	total charge of the bunch (number of e+).
+#				    (totalCharge=1 makes spacecharge negligible)
+#	Beam parameters:
+#		P		momentum of the reference and bunch center
+#		sigmaP		sigmaP of the initial beam
+#		sigmaX,sigmaY,sigmaZ,sigmaXp,sigmaYp - other beam parameters
+#	spacecharge parameters:
+#		deltaT		time step (ns)
+#		nGrid		# points in each dimension of the grid
+#		nApprox		# points in each dimension of the approximation
+#		maxBeta		max beta in reference frome for bunch
+#		percentile	percentile of charge distribution used for
+#				    grid sizing
+#		verbose		verbose print control
+
+param -unset P=200 sigmaP=0 sigmaX=20 sigmaY=20 sigmaZ=20 sigmaXp=0 sigmaYp=0
+param -unset deltaT=0.100 nGrid=65 nApprox=7 maxBeta=0.1 percentile=99 verbose=0
+param -unset nMP=5000 totalCharge=1
+# parallel-to-point focus at z=6000, determined using triplet.sh, scaled by P:
+param -unset QF=2.79310*$P/200 QD=-4.95221*$P/200
+
+physics QGSP_BERT disable=Decay
+spacecharge deltaT=0.100 charge=$totalCharge/$nMP dx=3*$sigmaX dy=3*$sigmaY \
+	dz=3*$sigmaZ verbose=0 deltaT=$deltaT nx=$nGrid ny=$nGrid nz=$nGrid \
+	nxApprox=$nApprox nyApprox=$nApprox nzApprox=$nApprox maxBeta=$maxBeta \
+	percentile=$percentile verbose=$verbose
+collective
+param worldMaterial=Vacuum
+
+beam gaussian particle=mu+ nEvents=$nMP meanMomentum=$P sigmaP=$sigmaP \
+  sigmaX=$sigmaX sigmaY=$sigmaY sigmaZ=$sigmaZ sigmaXp=$sigmaXp sigmaYp=$sigmaYp
+reference particle=mu+ referenceMomentum=$P
+
+genericquad Quad fieldLength=100 ironLength=100 apertureRadius=100 \
+	ironRadius=200 kill=1
+box Box height=50 width=50 length=1
+
+place Box z=0 rename=Beam color=0,1,0
+place Quad z=2000 rename=Q1 gradient=$QF
+place Quad z=3000 rename=Q2 gradient=$QD
+place Quad z=4000 rename=Q3 gradient=$QF
+place Box z=10000 rename=End color=1,0,0
+
+profile file=profile.txt particle=mu+ zloop=0.01:10000:100

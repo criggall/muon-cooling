@@ -1,0 +1,33 @@
+*	SampleMovie.g4bl
+*
+* Just like Example1.g4bl but with movie command added
+*
+* Simple example g4beamline input file:
+*	a 200 MeV mu+ Gaussian beam is tracked through 1-meter drift
+*	spaces into four detectors
+movie
+
+# QGSP is the "default" physics use-case for High Energy Physics
+# but QGSP_BERT is better for low-energy simulations
+physics QGSP_BERT
+
+# the beam is nominally headed in the +Z direction
+beam gaussian particle=mu+ nEvents=1000 beamZ=0.0 \
+	sigmaX=10.0 sigmaY=10.0 sigmaXp=0.100 sigmaYp=0.100 \
+	meanMomentum=200.0 sigmaP=4.0 meanT=0.0 sigmaT=0.0
+
+# a reference particle
+reference particle=mu+ referenceMomentum=200
+
+# BeamVis just shows where the beam comes from
+box BeamVis width=100.0 height=100.0 length=0.1 material=Vacuum color=1,0,0
+place BeamVis z=0
+
+# define the detector
+virtualdetector Det radius=1000.0 color=0,1,0
+
+# place four detectors, putting their number into their names
+place Det z=1000.0 rename=Det#
+place Det z=2000.0 rename=Det#
+place Det z=3000.0 rename=Det#
+place Det z=4000.0 rename=Det#

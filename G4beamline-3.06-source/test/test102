@@ -1,0 +1,59 @@
+=tessellatedsolid (1 sec)
+
+=file test102.in 
+param histoFile="" steppingFormat="EXT N GLOBAL KE STEP VOL PROCESS"
+beam ascii filename=test102.beam 
+physics QGSP_BERT doStochastics=0
+tessellatedsolid TS kill=1
+v -100 -100 0
+v -100 100 0
+v 100 100 0
+v 100 -100 0
+v -200 -200 0
+v -200 200 0
+v 200 200 0
+v 200 -200 0
+v -100 -100 100
+v 100 -100 100
+v 100 100 100
+v -100 100 100
+v -200 -200 100
+v 200 -200 100
+v 200 200 100
+v -200 200 100
+f 5 1 0 4
+f 6 2 1 5
+f 7 3 2 6
+f 4 0 3 7
+f 5 4 12 15
+f 6 5 15 14
+f 7 6 14 13
+f 4 7 13 12
+f 15 12 8 11
+f 14 15 11 10
+f 13 14 10 9
+f 12 13 9 8
+f 0 1 11 8
+f 1 2 10 11
+f 2 3 9 10
+f 0 3 9 8
+end
+place TS z=100
+virtualdetector Det height=1000 width=1000 length=1 format=ascii filename=test102
+place Det z=300
+=file test102.beam 
+#BLTrackFile2 D
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight 
+0 0 0 0 0 200 0.0 -13 1 1 0 1
+-150 0 0 0 0 200 0.0 -13 2 1 0 1
+150 0 0 0 0 200 0.0 -13 3 1 0 1
+250 0 0 0 0 200 0.0 -13 4 1 0 1
+0 150 0 0 0 200 0.0 -13 5 1 0 1
+=file test102.good 
+#BLTrackFile VirtualDetector/Det
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 299.5 0 0 200 1.12987 -13 1 1 0 1
+250 0 299.5 0 0 200 1.12987 -13 4 1 0 1
+=run g4bl test102.in 
+=compare test102.txt test102.good 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1

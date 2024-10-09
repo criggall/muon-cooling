@@ -1,0 +1,24 @@
+*	multipol.g4bl multipole field lines
+physics QGSP_BERT
+#multipole MP fieldLength=200 ironLength=200 apertureRadius=200 ironRadius=400 ironColor=0,0,1,.3 dipole=1
+#fieldlines center=0,0,0 radius=200 square=1 dl=1 nLines=10 exit=1
+#multipole MP fieldLength=200 ironLength=200 apertureRadius=200 ironRadius=400 ironColor=0,0,1,.3 quadrupole=1
+#param N=4 r1=80 r2=110 r3=160
+#multipole MP fieldLength=200 ironLength=200 apertureRadius=200 ironRadius=400 ironColor=0,0,1,.3 sextupole=1
+#param N=6 r1=80 r2=110 r3=160
+#multipole MP fieldLength=200 ironLength=200 apertureRadius=200 ironRadius=400 ironColor=0,0,1,.3 octopole=1
+#param N=8 r1=100 r2=120 r3=160
+#multipole MP fieldLength=200 ironLength=200 apertureRadius=200 ironRadius=400 ironColor=0,0,1,.3 decapole=10
+#param N=10 r1=100 r2=120 r3=160
+multipole MP fieldLength=200 ironLength=200 apertureRadius=200 ironRadius=400 ironColor=0,0,1,.3 dodecapole=100
+param N=12 r1=100 r2=120 r3=160
+do i 0 $N-1
+    if $i==$N-1
+    	param exit=1
+    else
+	param exit=0
+    endif
+    param a=$i*2*3.14159/$N
+    fieldlines nLines=0 dl=1 exit=$exit $r1*cos($a),$r1*sin($a),0 $r2*cos($a),$r2*sin($a),0 $r3*cos($a),$r3*sin($a),0
+enddo
+place MP z=0

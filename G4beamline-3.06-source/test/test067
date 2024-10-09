@@ -1,0 +1,49 @@
+=various comma-separated list arguments (3 sec)
+
+=file test067.in1 
+param histoFile=""
+physics QGSP disable=Decay,eIoni,muIoni,msc,muMsc,muIoni,muBrems,muPairProd,
+trackcuts kill=anti_nu_e,nu_e,anti_nu_mu,nu_mu,gamma
+beam ascii filename=test067.beam nEvents=9
+particlefilter Filter1 height=500 width=500 length=1 decay=mu+,pi+
+place Filter1 z=100
+particlefilter Filter2 height=500 width=500 length=1 kill=e+,mu+
+place Filter2 z=100
+virtualdetector format=BLTrackFile AF radius=200 length=1 color=1,1,1 file=test067.txt
+place AF z=200
+=file test067.in2 
+param histoFile=""
+physics QGSP disable=Decay,eIoni,muIoni,msc,muBrems,muPairProd,muMsc,muIoni,muBrems,muPairProd
+# track only mu+ and mu-
+beam ascii filename=test067.beam nEvents=2
+box Scatterer height=500 width=500 length=500 material=C
+place Scatterer z=500
+virtualdetector format=BLTrackFile AF radius=200 length=1 color=1,1,1 file=test067.txt
+place AF z=1000
+=file test067.beam 
+#BLTrackFile test067 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.0 -13 0 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 200.000 0.0 13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 0.000 200.000 0.0 -11 2 1 0 2.0000
+0.000 0.000 0.000 0.000 0.000 200.000 0.0 11 3 1 0 3.0000
+0.000 0.000 0.000 0.000 0.000 200.000 0.0 211 4 1 0 2.0000
+0.000 0.000 0.000 0.000 0.000 200.000 0.0 -211 5 1 0 2.0000
+=file test067.good1 
+#BLTrackFile VirtualDetector/AF
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 199.5 0 0 200 0.752615 13 1 1 0 2
+0 0 199.5 0 0 200 0.665463 11 3 1 0 3
+0 0 199.5 0 0 200 0.811478 -211 5 1 0 2
+=file test067.good2 
+#BLTrackFile VirtualDetector/AF
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 999.5 0 0 200 3.77062 -13 0 1 0 1
+0 0 999.5 0 0 200 3.77062 13 1 1 0 2
+=run g4bl test067.in1 
+=compare test067.txt test067.good1
+=run g4bl test067.in2 
+=compare test067.txt test067.good2

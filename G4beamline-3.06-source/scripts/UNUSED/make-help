@@ -1,0 +1,75 @@
+#!/bin/bash
+#	USAGE: make-help G4BL_DIR SOURCE_DIR
+#
+#	G4BL_DIR is used to run g4bl. SOURCE_DIR is used to find the
+#	source files, and to write share/g4beamline/Help.html.
+#
+#	The Cmake scripts run this only on Darwin; that MUST be the first
+#	OS built, as the other OS-s just copy Help.html.
+#
+#	G4BLVERSION is obtained from SOURCE_DIR/CMakeLists.txt
+
+echo "make-help '$1' '$2'"
+
+G4BL_DIR="$1"
+'cd' "$2"
+
+set -e 
+
+if ! test -r share/g4beamline/G4blGuiInstructions.html
+then
+	echo "make-help: wrong directory"
+	exit 1
+fi
+
+if test -z "$G4BL_DIR"
+then
+	echo "make-help: G4BL_DIR not set"
+	exit 1
+fi
+
+G4BLVERSION=$(grep '^set(G4BLVERSION' CMakeLists.txt | \
+						sed -e 's/.* //' -e 's/).*//')
+
+INPUTFILE=/tmp/in.$$
+
+trap "rm -f $INPUTFILE" 0
+
+OUT=share/g4beamline/Help.html
+rm -f $OUT
+sed "s/VERSION/$G4BLVERSION/" <$OUT \
+			>share/g4beamline/Help.html
+
+echo "<A name=Commands></A>" >>$OUT
+echo "<h2>G4beamline Commands</h2>" >>$OUT
+echo "<pre>" >>$OUT
+cat <<-! >$INPUTFILE
+	*
+	*
+	*
+	list commands
+	*
+	*
+	*
+	help -exit *
+!
+$G4BL_DIR/bin/g4bl $INPUTFILE 2>&- | \
+    sed -e '1,/^----/d' -e 's/&/\&amp;/g' -e 's/>/\&gt;/g' -e 's/</\&lt;/g' \
+    >>$OUT
+echo "</pre>" >>$OUT
+
+echo "<A name=Particles>" >>$OUT
+echo "<h2>List of Particles (QGSP_BERT)</h2>" >>$OUT
+echo "<pre>" >>$OUT
+cat <<-! >$INPUTFILE
+	physics QGSP_BERT
+	*
+	*
+	*
+	list -exit particles
+!
+$G4BL_DIR/bin/g4bl $INPUTFILE 2>&- | \
+    sed -e '1,/^----/d' -e 's/&/\&amp;/g' -e 's/>/\&gt;/g' -e 's/</\&lt;/g' \
+    >>$OUT
+echo "</pre>" >>$OUT
+echo "</body></html>" >>$OUT

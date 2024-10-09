@@ -1,0 +1,18 @@
+*	collective.g4bl - test collective tracking
+
+# comment or un-comment these lines
+collective deltaT=0.01 verbose=1
+param histoFile=collective
+#param histoFile=standard
+
+# keep individual steps shorter than the time step
+param maxStep=1
+
+physics QGSP_BERT
+beam gaussian particle=mu+ meanMomentum=200 nEvents=100000
+
+cylinder Target outerRadius=200 length=20 material=Fe
+place Target z=1 front=1
+
+virtualdetector Det radius=1000 length=1
+place Det

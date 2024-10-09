@@ -1,0 +1,30 @@
+=spacecharge (12 sec)
+=require fftw
+
+=file test087.in 
+param histoFile="" nEvents=500 totalCharge=1E13
+physics QGSP_BERT 
+setdecay mu+ lifetime=1E20
+beam gaussian nEvents=$nEvents particle=mu+ meanMomentum=100  \
+	sigmaX=5 sigmaY=5 sigmaZ=5
+reference particle=mu+ referenceMomentum=100
+trackcuts maxTime=1.9
+spacecharge deltaT=0.2 charge=$totalCharge/$nEvents dx=25 dy=25 dz=25
+collective format=ascii filenamePrefix=test087.
+box end height=2000 width=2000 length=1 kill=1
+place end z=2000 front=1
+=file test087.good 
+# TimeStep
+#t Ntracks meanDT sigmaDT meanX sigmaX meanY sigmaY meanZ sigmaZ cpuTime
+0 500 0 0 0.312788 4.78522 -0.346386 5.06844 -0.00132517 5.06922 0.04 
+0.2 500 3.53673e-06 0.00155293 0.311217 5.19563 -0.347615 5.4722 41.2044 5.06951 0.04 
+0.4 500 -1.34576e-05 0.00154123 0.31003 6.4342 -0.351569 6.70987 82.3766 5.91562 0.06 
+0.6 500 -2.31327e-05 0.000982732 0.313729 8.36425 -0.355904 8.6492 123.519 7.36838 0.061 
+0.8 500 -1.78159e-05 0.000627784 0.32057 10.7554 -0.361499 11.0604 164.636 9.13893 0.06 
+1 500 -1.40705e-05 0.000411599 0.328913 13.445 -0.368064 13.7772 205.731 11.1089 0.062 
+1.2 500 -1.23953e-05 0.000283644 0.338287 16.3331 -0.375116 16.6974 246.81 13.212 0.06 
+1.4 500 -1.12016e-05 0.000200504 0.348477 19.3579 -0.382035 19.7573 287.878 15.4106 0.06 
+1.6 500 -1.01114e-05 0.000144935 0.359318 22.4799 -0.388373 22.9163 328.937 17.6788 0.061 
+1.8 500 -9.45129e-06 0.000106687 0.370667 25.6734 -0.394026 26.1478 369.991 19.9982 0.06 
+=run g4bl test087.in 
+=compare test087.TimeStep.txt test087.good 0.02 0.02 0.02 0.02 0.5 0.5 0.5 0.05 0.5 0.5 2

@@ -14,7 +14,7 @@ data = icool_df.iloc[1:]
 # Create txt file with column and unit labels:
 f = open('output.txt','w')
 f.write("#BLTrackFile\n")
-f.write("#x y z Px Py Pz t PDGid EvNum TrkId Parent weight\n")
+f.write("#x y z Px Py Pz t PDGid EventID TrackId ParentID Weight\n")
 f.write("#cm cm cm MeV/c MeV/c MeV/c ns - - - - -\n")
 
 trackCount = 1.0
@@ -41,10 +41,11 @@ for j in range(len(icool_df.values)-1):
         valsBL.append(valsICOOL[11]*1000) # Pz (GeV/c -> MeV/c)
         valsBL.append(valsICOOL[4]*10**9) # t (s -> ns)
         valsBL.append(13.0) # PDGid (13 = muon)
-        valsBL.append(valsICOOL[0]) # EvNum
-        valsBL.append(trackCount) # TrkId (count)
+        valsBL.append(valsICOOL[0]) # EventID
+        valsBL.append(trackCount) # TrackId (count)
         trackCount += 1.0
-        valsBL.append(-1.0) # Parent weight (try -1 for now)
+        valsBL.append(-1.0) # ParentID (try -1 for now)
+        valsBL.append(eventWeight) # Weight
 
         # Write to txt:
         valsStr = [str(x) for x in valsBL]

@@ -1,0 +1,25 @@
+=detector solid=sphere (2 sec)
+=file test113.in
+physics FTFP_BERT
+
+sphere S innerRadius=100 outerRadius=101
+detector D solid=S format=ascii
+place D z=0
+
+beam gaussian nEvents=1 rotation=Z0
+beam gaussian nEvents=1 rotation=Y90
+beam gaussian nEvents=1 rotation=Y180
+beam gaussian nEvents=1 rotation=Y270
+beam gaussian nEvents=1 rotation=X90
+beam gaussian nEvents=1 rotation=X-90
+=file D.good
+# D
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight Edep VisibleEdep Ntracks
+0 0 100 0 0 200 0.377251 -13 1 1 0 1 0.191151 0.188293 1 
+100 0 0 200 0 1.22465e-14 0.377251 -13 2 1 0 1 0.176942 0.174489 1 
+0 0 -100 2.44929e-14 0 -200 0.377251 -13 3 1 0 1 0.178556 0.176059 1 
+-100 0 0 -200 0 -3.67394e-14 0.377251 -13 4 1 0 1 0.160028 0.158019 1 
+0 -100 0 0 -200 1.22465e-14 0.377251 -13 5 1 0 1 0.17086 0.168572 1 
+0 100 0 0 200 1.22465e-14 0.377251 -13 6 1 0 1 0.164314 0.162197 1 
+=run g4bl test113.in
+=compare D.txt D.good .1 .1 .1 .1 .1 .1 .1 .1 .1 .1 .1 .1

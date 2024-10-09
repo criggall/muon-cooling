@@ -1,0 +1,6 @@
+*	dataio.g4bl - test BLTrackFile data accuracy
+physics QGSP_BERT
+beam ASCII file=in.txt
+
+virtualdetector Det radius=1000 length=1 format=ASCII file=out.txt
+place Det z=0.001 front=1

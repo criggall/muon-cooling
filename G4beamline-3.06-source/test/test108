@@ -1,0 +1,26 @@
+=isotropicsource (10 sec)
+
+=file test108.in 
+physics QGSP doStochastics=0  # comment
+randomseed time
+isotropicsource nEvents=100000
+virtualdetector D length=1 radius=100 format=ascii
+place D z=1000 rename=test108.1
+place D z=-1000 rename=test108.2
+place D z=0 x=1000 rotation=Y90 rename=test108.3
+place D z=0 x=-1000 rotation=Y-90 rename=test108.4
+place D z=0 y=1000 rotation=X-90 rename=test108.5
+place D z=0 y=-1000 rotation=X90 rename=test108.6
+=run g4bl test108.in 
+=filelines test108.1.txt > 180
+=filelines test108.1.txt < 310
+=filelines test108.2.txt > 180
+=filelines test108.2.txt < 310
+=filelines test108.3.txt > 180
+=filelines test108.3.txt < 310
+=filelines test108.4.txt > 180
+=filelines test108.4.txt < 310
+=filelines test108.5.txt > 180
+=filelines test108.5.txt < 310
+=filelines test108.6.txt > 180
+=filelines test108.6.txt < 310

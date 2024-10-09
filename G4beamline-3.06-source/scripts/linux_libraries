@@ -1,0 +1,115 @@
+#!/bin/bash
+#	linux_libraries [--all]  - for Linux, copy all needed .so-s
+#
+#	Copies required .so-s referenced by bin/* and lib/* and plugins/*
+#	into lib.
+#	If --all is present, all .so-s are copied; if not present,
+#	those in /usr or /lib or /lib64 are not copied unless they are Qt.
+
+ALL=false
+if test "$1" = "--all"
+then
+	ALL=true
+fi
+
+DEST=lib
+DIRLIST='bin lib plugins'
+
+mkdir -p $DEST
+
+###
+### Get DIRS to be directories in DIRLIST that exist
+###
+DIRS=""
+for i in $DIRLIST
+do
+	if test -d "$i"
+	then
+		DIRS+=" $i"
+	fi
+done
+
+echo "linux_libraries DIRS='$DIRS' DEST=$DEST"
+
+# On Linux, all programs are linked with rpath pointing to $DEST
+# copy all necessary .so-s into $DEST
+for i in 1 2 3 4 5 6 7 8 9 10 # limit recursion to 10 deep
+do
+	MORE=false
+	find $DIRS -type f | while read F
+	do
+		LIBS1=$(ldd $F | grep '=>' | sed -e 's/.*=> //' -e 's/ .*//')
+		# set LIBS2 to the list of libraries to be copied
+		LIBS2=''
+		for L in $LIBS1
+		do
+			if $ALL
+			then
+echo ALL $L
+			    LIBS2="$LIBS2 $L"
+			else
+			    # always copy libXm.so and Qt
+			    if test "${L/libXm}" != "$L" -o "${L/Qt}" != "$L"
+			    then
+echo Qt,Xm $L
+				    LIBS2="$LIBS2 $L"
+				    continue
+			    fi
+			    # always copy from /usr/local
+			    if test "${L#/usr/local}" != "$L"
+			    then
+echo usr-local $L
+				    LIBS2="$LIBS2 $L"
+				    continue
+			    fi
+			    # always copy fftw, gsl, cblas, and atlas
+			    if test "${L/fftw}" != "$L" -o "${L/gsl}" != "$L" \
+			       -o "${L/cblas}" != "$L" -o "${L/atlas}" != "$L"
+			    then
+echo fftw,gsl,cblas $L
+				    LIBS2="$LIBS2 $L"
+				    continue
+			    fi
+			    # always copy pcre2, gfortran, and quadmath
+			    if test "${L/pcre2}" != "$L" \
+			    			-o "${L/gfortran}" != "$L" \
+			    			-o "${L/quadmath}" != "$L"
+			    then
+echo fftw,gsl,cblas $L
+				    LIBS2="$LIBS2 $L"
+				    continue
+			    fi
+			    # omit libraries in /usr and /lib (and /lib64)
+			    if test "${L#/usr}" != "$L" -o "${L#/lib}" != "$L"
+			    then
+echo OMIT /usr,/lib $L
+				    continue
+			    fi
+			    # omit Root libraries
+			    if test "${L/root}" != "$L"
+			    then
+echo OMIT root $L
+			    	    continue
+			    fi
+			    # setup to copy it
+echo default copy $L
+			    LIBS2="$LIBS2 $L"
+			fi
+		done
+		# copy libraries in LIBS2
+		for L in $LIBS2
+		do
+			B=$(basename $L)
+			if test -r $L -a ! -r $DEST/$B
+			then
+				cp $L $DEST
+				chmod +x $DEST/$B
+				echo linux_libraries copied $L
+				MORE=true
+			fi
+		done
+	done
+	if ! $MORE; then break; fi
+done
+
+echo linux_libraries complete

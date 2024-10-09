@@ -1,0 +1,10 @@
+*	solenoid.g4bl - solenoid field lines
+physics QGSP_BERT
+coil C innerRadius=199.5 outerRadius=200.5 length=2000
+solenoid S coil=C current=1000 color=1,1,0,.5
+place S z=0
+
+cylinder K outerRadius=20000 length=1 color=''
+place K z=10000
+printfield field=Bz layout=zx drow=50 nrow=100 dcol=1 ncol=1 x=0 y=0 z=0
+fieldlines center=0,0,0 radius=200 dl=1 exit=1 nLines=10

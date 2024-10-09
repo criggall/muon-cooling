@@ -1,0 +1,16 @@
+=120 GeV/c beam (6 sec)
+
+=file test062.in
+physics QGSP_BIC
+beam gaussian meanMomentum=120000 particle=proton nEvents=10000
+trackcuts keep=proton
+param histofile="" 
+tubs Target outerRadius=10 length=100 material=Cu
+place Target z=50
+virtualdetector End radius=2000 length=1 format=ascii file=test062.txt
+place End z=200
+=run g4bl test062.in 
+=meanAndSigma test062.txt ms.txt 7
+=file ms.good
+0.100529 137.331 1.43016 136.2 199.5 0 0.93004 385.705 0.100316 384.359 54906.2 55753.9 1.22545 1.97317
+=compare ms.txt ms.good 10 10 10 10 1 1 20 20 20 20  200 200 1 1

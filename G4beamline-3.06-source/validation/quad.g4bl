@@ -1,0 +1,8 @@
+*	quad.g4bl genericbend field lines
+physics QGSP_BERT
+genericquad Q1 fieldLength=1000 ironLength=1000 apertureRadius=200 ironRadius=600 gradient=4 ironColor=0,1,0,0.5
+place Q1 z=0
+fieldlines center=50,0,0 radius=200 square=1 dl=1 nLines=10 exit=0
+fieldlines center=-50,0,0 radius=200 square=1 dl=1 nLines=10 exit=0
+fieldlines center=0,-50,0 radius=200 square=1 dl=1 nLines=10 exit=0
+fieldlines center=0,50,0 radius=200 square=1 dl=1 nLines=10 exit=1

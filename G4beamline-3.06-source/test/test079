@@ -1,0 +1,32 @@
+=reference noEloss and noEfield (2 sec)
+
+=file test079.in 
+param histoFile=""  steppingVerbose=1
+physics QGSP doStochastics=0
+beam ascii filename=test079.beam nEvents=3
+reference referenceMomentum=200 particle=mu+ beamZ=0.0 \
+	noEfield=1 noEloss=1
+fieldexpr Field Ez=12 radius=200 length=1000
+place Field z=500
+cylinder Abs radius=200 length=500 material=LH2
+place Abs z=1250
+virtualdetector format=BLTrackFile AF radius=200 length=1 \
+	color=1,1,1 file=test079.txt referenceParticle=1
+place AF z=2000
+=file test079.beam 
+#BLTrackFile test079 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.0 -13 0 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 202.000 0.0 -13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 0.000 198.000 0.0 -13 2 1 0 2.0000
+=file test079.good 
+#BLTrackFile VirtualDetector/AF
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 1999.5 0 0 200 7.54313 -13 -1 1 0 1
+0 0 1999.5 0 0 196.034 7.51277 -13 0 1 0 1
+0 0 1999.5 0 0 198.091 7.49726 -13 1 1 0 2
+0 0 1999.5 0 0 193.974 7.52872 -13 2 1 0 2
+=run g4bl test079.in 
+=compare test079.txt test079.good 0.02 0.02 0.02 0.03 0.03 0.3 0.005 0.5 0.5 0.5 0.5 0.1

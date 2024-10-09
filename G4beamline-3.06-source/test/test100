@@ -1,0 +1,32 @@
+=beam read Extended formats (2 sec)
+=require root
+
+=file test100.in1 
+param histoFile=test100.root
+physics QGSP_BERT spinTracking=1 doStochastics=0
+beam ascii filename=test100.beam polarization=0,0,-1
+virtualdetector D height=100 width=100 length=0.010 format=rootExtended kill=1
+place D z=100
+=file test100.in2 
+param histoFile=""
+physics QGSP_BERT spinTracking=1 doStochastics=0
+beam root filename=test100.root category=VirtualDetector name=D nEvents=99 beamZ=0.0
+virtualdetector D height=100 width=100 length=0.010 format=asciiExtended file=test100.txt kill=1
+place D z=100
+=file test100.beam 
+#BLTrackFile2 D
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight Bx By Bz Ex Ey Ez ProperTime PathLength PolX PolY PolZ InitX InitY InitZ InitT InitKE
+0 0 0 0 0 3094 149.126 -13 1 1 0 1 0 1.4513 0 0 0 0 5.08962 44680.9 1 0 0 0 0 0 0 2990.15 
+0 0 0 0 0 3094 149.126 13 2 1 0 1 0 1.4513 0 0 0 0 5.08962 44680.9 0 1 0 0 0 0 0 2990.15 
+0 0 0 0 0 3094 149.04 -11 3 1 0 1 0 1.4513 0 0 0 0 0.0246151 44680.9 0 0 1 0 0 0 0 3093.49 
+0 0 0 0 0 3094 149.04 11 4 1 0 1 0 1.4513 0 0 0 0 0.0246151 44680.9 .707 0 .707 0 0 0 0 3093.49 
+=file test100.good 
+#BLTrackFile2 D
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight Bx By Bz Ex Ey Ez ProperTime PathLength PolX PolY PolZ InitX InitY InitZ InitT InitKE
+0 0 99.995 0 0 3094 149.793 -13 1 1 0 1 0 0 0 0 0 0 0.0113905 99.995 1 0 0 0 0 0 149.46 2990.15 
+0 0 99.995 0 0 3094 149.793 13 2 1 0 1 0 0 0 0 0 0 0.0113905 99.995 0 1 0 0 0 0 149.46 2990.15 
+0 0 99.995 0 0 3094 149.707 -11 3 1 0 1 0 0 0 0 0 0 5.5088e-05 99.995 0 0 1 0 0 0 149.374 3093.49 
+0 0 99.995 0 0 3094 149.707 11 4 1 0 1 0 0 0 0 0 0 5.5088e-05 99.995 0.707107 0 0.707107 0 0 0 149.374 3093.49 
+=run g4bl test100.in1 
+=run g4bl test100.in2 
+=compare test100.txt test100.good 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 .001 .001 .001 .001 .001 .001 .1 .1 0.001 0.001 0.001 0.1 0.1 0.1 0.1 1

@@ -1,0 +1,45 @@
+=tune By of genericbend (2 sec)
+
+=file test030.in 
+param histoFile="" steppingFormat="STEP CLX B VOL PROCESS"
+physics QGSP doStochastics=0
+beam ascii filename=test030.beam nEvents=9
+reference referenceMomentum=200 particle=mu+ beamZ=0.0
+tune B1 z0=100 z1=3000 initial=-0.6500 step=0.01 expr=Px1/Pz1 \
+	tolerance=0.0000001
+genericbend B fieldWidth=500 fieldHeight=500 fieldLength=500 \
+	ironWidth=800 ironHeight=800 ironLength=500 \
+	fieldMaterial=Vacuum
+place B z=2000 rename=B1 rotation=Y15 By=B1
+corner C z=2000 rotation=Y30
+virtualdetector format=BLTrackFile AF radius=200 length=1 \
+	color=1,1,1 file=test030.txt
+place AF z=4000
+=file test030.beam 
+#BLTrackFile test030 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 5.000 0.000 200.000 0.375 -13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 5.000 200.000 0.375 -13 2 1 0 2.0000
+0.000 0.000 0.000 5.000 5.000 200.000 0.375 -13 3 1 0 3.0000
+0.000 0.000 0.000 -5.000 0.000 200.000 0.375 -13 4 1 0 2.0000
+0.000 0.000 0.000 0.000 -5.000 200.000 0.375 -13 5 1 0 2.0000
+0.000 0.000 0.000 -5.000 -5.000 200.000 0.375 -13 6 1 0 3.0000
+0.000 0.000 0.000 -5.000 5.000 200.000 0.375 -13 7 1 0 3.0000
+0.000 0.000 0.000 5.000 -5.000 200.000 0.375 -13 8 1 0 3.0000
+=file test030.good 
+#BLTrackFile VirtualDetector/AF
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+-0.02 0.00 3999.50 -0.001 0.000 200.000 15.347 -13 0 1 0 1.0000
+52.33 0.00 3999.50 -0.481 0.000 200.062 15.264 -13 1 1 0 2.0000
+-0.12 83.55 3999.50 0.038 3.317 200.035 15.349 -13 2 1 0 2.0000
+52.11 84.96 3999.50 -0.475 3.547 200.093 15.266 -13 3 1 0 3.0000
+-77.28 0.00 3999.50 -2.473 0.000 200.047 15.439 -13 4 1 0 2.0000
+-0.12 -83.55 3999.50 0.038 -3.317 200.035 15.349 -13 5 1 0 2.0000
+-77.52 -82.74 3999.50 -2.454 -3.158 200.085 15.442 -13 6 1 0 3.0000
+-77.52 82.74 3999.50 -2.454 3.158 200.085 15.442 -13 7 1 0 3.0000
+52.11 -84.96 3999.50 -0.475 -3.547 200.093 15.266 -13 8 1 0 3.0000
+=run g4bl test030.in 
+=compare test030.txt test030.good 0.1 0.1 0.1 0.01 0.01 0.01 0.01 0.5 0.5 0.5 0.5 0.1

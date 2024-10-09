@@ -1,0 +1,8 @@
+*	helmholtz.g4bl - test Helmholtz coils
+physics QGSP_BERT
+coil C innerRadius=499.5 outerRadius=500.5 length=1 maxR=500 maxZ=500
+# coil C has an area of 1 mm^2, so current in amp/mm^2 is also amps.
+solenoid S coil=C current=10000
+place S z=-250
+place S z=250
+probefield

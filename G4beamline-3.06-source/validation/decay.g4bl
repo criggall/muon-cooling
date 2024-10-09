@@ -1,0 +1,8 @@
+*	decay.g4bl - test pion decay
+randomseed time
+physics QGSP_BERT
+setdecay mu- lifetime=1E99
+beam gaussian particle=pi- meanMomentum=10 nEvents=1000000
+newparticlentuple New
+box End height=1 width=1 length=1
+place End z=100000

@@ -1,0 +1,37 @@
+*       Idealized_g-2.g4bl
+*
+*	This is an idealized simulation of the BNL g-2 experiment:
+*	3.094 GeV/c mu- are started with polarization=(0,0,1) in a
+*	perfectly uniform B field of 1.4513 T; their decay electrons
+*	are put into an NTuple for histogramming. This requires hundreds
+*	of millions of events, so you probably need to run it on a grid
+*	or a cluster. The .root and .out files are named for $first (may
+*	need to be changed on a grid). Default is just 100 events.
+
+param -unset first=0 last=99
+
+# set name of .root and .out files
+param histoFile=$first
+output $histoFile.out
+
+# set steppingFormat to include the polarization
+param steppingFormat=GLOBAL,P,KE,POLAR,B
+
+# physics includes spin tracking; keep only mu- and e-
+physics QGSP_BERT spinTracking=1
+trackcuts keep=mu-,e-
+
+# beam is polarized.
+beam gaussian polarization=0,0,1 particle=mu- meanMomentum=3094 \
+	firstEvent=$first lastEvent=$last
+
+# NTuple for electrons
+newparticlentuple Electrons require=PDGid==11 kill=1
+
+# B is used to expand the world to 100 meters square (more than enough)
+box B height=1 width=100000 length=100000
+place B z=0 y=500
+
+# F gives the field.
+fieldexpr F height=1000 width=100000 length=100000 By=1.4513
+place F z=0

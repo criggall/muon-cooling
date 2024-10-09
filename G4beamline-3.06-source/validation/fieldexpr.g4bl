@@ -1,0 +1,7 @@
+#	fieldexpr.g4bl - test fieldexpr
+physics QGSP_BERT
+fieldexpr Expr height=1000 width=1000 length=1000 Bz=(x+500)*(y+500)/1000
+place Expr z=0
+box Vis height=1000 width=1000 length=1000 color=0,1,0,0.2
+place Vis z=0
+fieldlines center=0,0,0 radius=500 square=1 exit=1 nLines=500 N=50

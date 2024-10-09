@@ -1,0 +1,41 @@
+=simple geometry and tracking test (1 sec)"
+
+=file test001.in 
+# input line with just whitespace
+	   
+# input lines with comment to end-of-line
+param histoFile=""  # comment
+physics QGSP doStochastics=0  # comment
+beam ascii filename=test001.beam nEvents=9  # comment
+# check spaces after back-slash for continuation line
+virtualdetector format=BLTrackFile AF radius=200 length=1 \
+		color=1,1,1 file=test001.txt
+place AF z=100  # comment
+=file test001.beam 
+#BLTrackFile test001 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 10.000 0.000 200.000 0.375 -13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 10.000 200.000 0.375 -13 2 1 0 2.0000
+0.000 0.000 0.000 10.000 10.000 200.000 0.375 -13 3 1 0 3.0000
+0.000 0.000 0.000 -10.000 0.000 200.000 0.375 -13 4 1 0 2.0000
+0.000 0.000 0.000 0.000 -10.000 200.000 0.375 -13 5 1 0 2.0000
+0.000 0.000 0.000 -10.000 -10.000 200.000 0.375 -13 6 1 0 3.0000
+0.000 0.000 0.000 -10.000 10.000 200.000 0.375 -13 1.00010E9 1 0 3.0000
+0.000 0.000 0.000 10.000 -10.000 200.000 0.375 -13 800000001 1 0 3.0000
+=file test001.good 
+#BLTrackFile VirtualDetector/AF
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 99.5 0 0 200 0.750365 -13 0 1 0 1
+4.975 0 99.5 10 0 200 0.750731 -13 1 1 0 2
+0 4.975 99.5 0 10 200 0.750731 -13 2 1 0 2
+4.975 4.975 99.5 10 10 200 0.751098 -13 3 1 0 3
+-4.975 0 99.5 -10 0 200 0.750731 -13 4 1 0 2
+0 -4.975 99.5 0 -10 200 0.750731 -13 5 1 0 2
+-4.975 -4.975 99.5 -10 -10 200 0.751098 -13 6 1 0 3
+-4.975 4.975 99.5 -10 10 200 0.751098 -13 1000100000 1 0 3
+4.975 -4.975 99.5 10 -10 200 0.751098 -13 800000001 1 0 3
+=run g4bl test001.in
+=compare test001.txt test001.good

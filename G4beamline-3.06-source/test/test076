@@ -1,0 +1,42 @@
+=ntuple command (1 sec)
+
+=file test076.in 
+param histoFile=""
+physics QGSP doStochastics=0
+beam ascii filename=test076.beam nEvents=9
+timentuple test076.Time time=1.0 format=ascii
+newparticlentuple test076.New format=ascii
+beamlossntuple test076.Loss format=ascii
+virtualdetector test076.Det radius=1000 format=ascii
+place test076.Det z=1000
+zntuple z=800 format=ascii
+ntuple test076 detectors=* format=ascii
+box zap height=1 width=1 length=1
+place zap z=1200
+=file test076.beam 
+#BLTrackFile test076 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 10.000 0.000 200.000 0.375 -13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 10.000 200.000 0.375 -13 2 1 0 2.0000
+0.000 0.000 0.000 10.000 10.000 200.000 0.375 -13 3 1 0 3.0000
+0.000 0.000 0.000 -10.000 0.000 200.000 0.375 -13 4 1 0 2.0000
+0.000 0.000 0.000 0.000 -10.000 200.000 0.375 -13 5 1 0 2.0000
+0.000 0.000 0.000 -10.000 -10.000 200.000 0.375 -13 6 1 0 3.0000
+0.000 0.000 0.000 -10.000 10.000 200.000 0.375 -13 7 1 0 3.0000
+0.000 0.000 0.000 10.000 -10.000 200.000 0.375 -13 8 1 0 3.0000
+=file test076.good 
+# test076
+#test076.Time_x test076.Time_y test076.Time_z test076.Time_Px test076.Time_Py test076.Time_Pz test076.Time_t test076.Time_PDGid test076.Time_EventID test076.Time_TrackID test076.Time_ParentID test076.Time_Weight test076.New_x test076.New_y test076.New_z test076.New_Px test076.New_Py test076.New_Pz test076.New_t test076.New_PDGid test076.New_EventID test076.New_TrackID test076.New_ParentID test076.New_Weight test076.Loss_x test076.Loss_y test076.Loss_z test076.Loss_Px test076.Loss_Py test076.Loss_Pz test076.Loss_t test076.Loss_PDGid test076.Loss_EventID test076.Loss_TrackID test076.Loss_ParentID test076.Loss_Weight test076.Det_x test076.Det_y test076.Det_z test076.Det_Px test076.Det_Py test076.Det_Pz test076.Det_t test076.Det_PDGid test076.Det_EventID test076.Det_TrackID test076.Det_ParentID test076.Det_Weight Z800_x Z800_y Z800_z Z800_Px Z800_Py Z800_Pz Z800_t Z800_PDGid Z800_EventID Z800_TrackID Z800_ParentID Z800_Weight
+0 0 200 0 0 200 1 -13 0 1 0 1 0 0 0 0 0 200 0.375 -13 0 1 0 1 0 0 1501.18 0 0 200 6.03821 -13 0 1 0 1 0 0 999.5 0 0 200 4.14562 -13 0 1 0 1 0 0 800 0 0 200 3.39301 -13 0 1 0 1 
+9.98752 0 199.75 10 0 200 1 -13 1 1 0 2 0 0 0 10 0 200 0.375 -13 1 1 0 2 75.0589 0 1501.18 10 0 200 6.04374 -13 1 1 0 2 49.975 0 999.5 10 0 200 4.14931 -13 1 1 0 2 40 0 800 10 0 200 3.39595 -13 1 1 0 2 
+0 9.98752 199.75 0 10 200 1 -13 2 1 0 2 0 0 0 0 10 200 0.375 -13 2 1 0 2 0 75.0589 1501.18 0 10 200 6.04374 -13 2 1 0 2 0 49.975 999.5 0 10 200 4.14931 -13 2 1 0 2 0 40 800 0 10 200 3.39595 -13 2 1 0 2 
+9.97509 9.97509 199.502 10 10 200 1 -13 3 1 0 3 0 0 0 10 10 200 0.375 -13 3 1 0 3 75.0589 75.0589 1501.18 10 10 200 6.04927 -13 3 1 0 3 49.975 49.975 999.5 10 10 200 4.15298 -13 3 1 0 3 40 40 800 10 10 200 3.3989 -13 3 1 0 3 
+-9.98752 0 199.75 -10 0 200 1 -13 4 1 0 2 0 0 0 -10 0 200 0.375 -13 4 1 0 2 -75.0589 0 1501.18 -10 0 200 6.04374 -13 4 1 0 2 -49.975 0 999.5 -10 0 200 4.14931 -13 4 1 0 2 -40 0 800 -10 0 200 3.39595 -13 4 1 0 2 
+0 -9.98752 199.75 0 -10 200 1 -13 5 1 0 2 0 0 0 0 -10 200 0.375 -13 5 1 0 2 0 -75.0589 1501.18 0 -10 200 6.04374 -13 5 1 0 2 0 -49.975 999.5 0 -10 200 4.14931 -13 5 1 0 2 0 -40 800 0 -10 200 3.39595 -13 5 1 0 2 
+-9.97509 -9.97509 199.502 -10 -10 200 1 -13 6 1 0 3 0 0 0 -10 -10 200 0.375 -13 6 1 0 3 -75.0589 -75.0589 1501.18 -10 -10 200 6.04927 -13 6 1 0 3 -49.975 -49.975 999.5 -10 -10 200 4.15298 -13 6 1 0 3 -40 -40 800 -10 -10 200 3.3989 -13 6 1 0 3 
+-9.97509 9.97509 199.502 -10 10 200 1 -13 7 1 0 3 0 0 0 -10 10 200 0.375 -13 7 1 0 3 -75.0589 75.0589 1501.18 -10 10 200 6.04927 -13 7 1 0 3 -49.975 49.975 999.5 -10 10 200 4.15298 -13 7 1 0 3 -40 40 800 -10 10 200 3.3989 -13 7 1 0 3 
+9.97509 -9.97509 199.502 10 -10 200 1 -13 8 1 0 3 0 0 0 10 -10 200 0.375 -13 8 1 0 3 75.0589 -75.0589 1501.18 10 -10 200 6.04927 -13 8 1 0 3 49.975 -49.975 999.5 10 -10 200 4.15298 -13 8 1 0 3 40 -40 800 10 -10 200 3.3989 -13 8 1 0 3 
+=run g4bl test076.in 
+=compare test076.txt test076.good

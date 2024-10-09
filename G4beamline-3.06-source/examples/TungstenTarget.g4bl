@@ -1,0 +1,37 @@
+#	TungstenTarget.g4bl - 8 GeV proton beam into a tungsten target
+
+# The "default" physics list is QGSP_BERT
+physics QGSP_BERT
+
+# the beam is 8 GeV kinetic energy, the mass of a proton is 938.272 MeV/c^2
+param M=938.272 KE=8000.0
+param P=sqrt(($M+$KE)*($M+$KE)-$M*$M)
+
+# a zero-emittance beam is unrealistic, but simple; it easily fits through
+# a 1 mm hole in the backward detector. It emanates from z=0.
+beam gaussian meanMomentum=$P nEvents=1000 particle=proton
+
+# the target is a tungsten rod 20 cm long and 1 cm in diameter; make it red
+cylinder Target outerRadius=5 length=200 material=W color=1,0,0
+place Target z=200
+
+
+
+# These three virtualdetector-s catch everything that comes out, except for
+# a 1mm hole for the incoming beam. Note the 0.5 mm clearance at each end of
+# the target, and the 201 mm length of the cylinder to match corners.
+
+# This virtualdetector catches what comes out of the target to the back;
+# note the hole for the incoming beam; make it yellow
+virtualdetector DetBackward innerRadius=0.5 radius=1000 length=1 color=1,1,0
+place DetBackward z=99
+
+# This virtualdetector catches what comes out of the target to the side,
+# one meter away; make it blue
+virtualdetector DetSideways innerRadius=1000 radius=1001 length=201 color=0,0,1
+place DetSideways z=200
+
+# This virtualdetector catches what comes out of the target in the forward
+# direction; make it green
+virtualdetector DetForward radius=1000 length=1 color=0,1,0
+place DetForward z=301

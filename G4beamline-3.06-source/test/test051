@@ -1,0 +1,33 @@
+=newparticlentuple (2 sec)
+
+=file test051.in 
+physics QGSP 
+beam ascii filename=test051.beam nEvents=9
+newparticlentuple Create format=ascii file=test051.txt require='Px>=0'
+box NotEmpty height=1 width=1 length=1
+place NotEmpty z=0
+=file test051.beam 
+#BLTrackFile test051 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 10.000 0.000 200.000 0.375 -13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 10.000 200.000 0.375 -13 2 1 0 2.0000
+0.000 0.000 0.000 10.000 10.000 200.000 0.375 -13 3 1 0 3.0000
+0.000 0.000 0.000 -10.000 0.000 200.000 0.375 -13 4 1 0 2.0000
+0.000 0.000 0.000 0.000 -10.000 200.000 0.375 -13 5 1 0 2.0000
+0.000 0.000 0.000 -10.000 -10.000 200.000 0.375 -13 6 1 0 3.0000
+0.000 0.000 0.000 -10.000 10.000 200.000 0.375 -13 7 1 0 3.0000
+0.000 0.000 0.000 10.000 -10.000 200.000 0.375 -13 8 1 0 3.0000
+=file test051.good 
+# Create
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 0 0 0 200 0.375 -13 0 1 0 1 
+0 0 0 10 0 200 0.375 -13 1 1 0 2 
+0 0 0 0 10 200 0.375 -13 2 1 0 2 
+0 0 0 10 10 200 0.375 -13 3 1 0 3 
+0 0 0 0 -10 200 0.375 -13 5 1 0 2 
+0 0 0 10 -10 200 0.375 -13 8 1 0 3 
+=run g4bl test051.in 
+=compare test051.txt test051.good 0.02 0.02 0.02 0.005 0.005 0.005 0.005 0.005 0.5 0.5 0.5 0.1

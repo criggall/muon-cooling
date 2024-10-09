@@ -1,0 +1,18 @@
+# Movie.in - input file to g4blmovie command
+# for SampleMovie.g4bl with movie command -- outputs a Flash movie
+setup outputFile=SampleMovie.swf tMin=0.001 tMax=18 duration=10
+
+# e+=red, mu+=blue, others=gray (neutrtinos)
+particle -11=#FF0000 -13=#0000FF 0=#808080
+
+plot filename=g4beamline.root xMin=-800 xMax=800 yMin=-800 yMax=800 x=x y=y
+plot xMin=-200 xMax=200 yMin=-200 yMax=50 x=z y=Pz
+row
+plot xMin=-800 xMax=800 yMin=-50 yMax=50 x=x y=Px
+plot xMin=-800 xMax=800 yMin=-50 yMax=50 x=y y=Py
+row height=0.2
+sideview xMin=-100 xMax=5000 yMin=-2000 yMax=2000 markerSize=2.0
+row height=0.1
+time textHeight=12
+space title=Example6 textHeight=12
+position textHeight=12

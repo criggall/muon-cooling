@@ -1,0 +1,21 @@
+=ion beams (1 sec)
+
+=file test104.in 
+param histoFile=""
+physics QGSP_BERT doStochastics=0
+beam gaussian particle=1000060120 # C12
+beam ascii filename=test104.beam nEvents=9
+virtualdetector format=BLTrackFile AF radius=1000 length=1 file=test104.txt
+place AF z=1000
+=file test104.beam 
+#BLTrackFile test104 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+-100.000 0.000 0.000 0.000 0.000 200.0 0.375 1000060120 2 1 0 2.0000
+=file test104.good 
+#BLTrackFile VirtualDetector/AF
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 999.5 0 0 200 186.313 1000060120 1 1 0 1
+-100 0 999.5 0 0 200 186.688 1000060120 2 1 0 2
+=run g4bl test104.in 
+=compare test104.txt test104.good 0.02 0.02 0.02 0.005 0.005 0.005 0.005 0.005 0.5 0.5 0.5 0.1

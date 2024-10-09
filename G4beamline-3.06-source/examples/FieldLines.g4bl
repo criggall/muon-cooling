@@ -1,0 +1,21 @@
+*	FieldLines.g4bl - display magnetic field lines.
+*
+*	Display magnetic field lines for 5 solenoids.
+
+# uncomment the following line to get a white background
+#g4ui when=4 "/vis/viewer/set/background 1 1 1"
+
+# display magnetic field lines
+fieldlines exit=0  center=0,0,0 nLines=100
+
+# five solenoids (note transparency to show lines inside them)
+coil C innerRadius=100 outerRadius=120 length=100
+solenoid S coil=C current=100 color=1,0,0,0.3
+place S z=0 
+place S z=500
+place S z=-500
+place S z=1000
+place S z=-1000
+
+# physics is required, even though it is not used.
+physics QGSP_BERT

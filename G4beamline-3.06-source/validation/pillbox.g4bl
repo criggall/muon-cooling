@@ -1,0 +1,6 @@
+#	pillbox.g4bl
+physics QGSP_BERT
+pillbox Pbox maxGradient=10.0 frequency=0.20125 innerLength=430 phaseAcc=90 
+place Pbox z=0
+fieldlines center=0,0,0 Efield=1 radius=800 exit=1 nLines=500
+#fieldlines center=400,0,0 radius=800 exit=1 nLines=25

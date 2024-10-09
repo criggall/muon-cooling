@@ -1,0 +1,13 @@
+#	visualization.g4bl
+physics QGSP_BERT
+beam gaussian sigmaXp=0.5 nEvents=1000
+param color=1,0,0 steppingVerbose=1
+cylinder Cyl outerRadius=25 length=200
+do i 1 10
+	param x=$i*100-500
+	do j 1 10
+		param z=$j*100
+		place Cyl z=$z x=$x rotation=X90 rename=$i,$j color=$color
+		param color=1,1,1
+	enddo
+enddo

@@ -1,0 +1,10 @@
+*	chaos.g4bl
+physics QGSP_BERT
+coil C innerRadius=199.5 outerRadius=200.5 length=1 nSheets=1 exactComputation=0
+solenoid S coil=C current=10000 color=0,0,0
+box Huge height=50000 width=50000 length=50000 color=invisible
+place S z=0 x=250 parent=Huge
+place S z=0 x=-250 parent=Huge rotation=Y180,X90
+place Huge z=0
+g4ui when=4 "/vis/viewer/set/background 1 1 1"
+fieldlines exit=1 nLines=0 forever=1 dl=1 67.1,0,0 color=1,0,0

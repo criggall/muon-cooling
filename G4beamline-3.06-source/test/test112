@@ -1,0 +1,37 @@
+=detector solid=boolean (2 sec)
+=file test112.in
+physics FTFP_BERT
+beam ascii file=beam
+
+box B0 height=1000 width=1000 length=10
+cylinder C radius=20 length=11
+boolean op=subtraction B1 B0 C
+boolean op=subtraction B2 B1 C x=200
+boolean op=subtraction B3 B2 C x=-200
+boolean op=subtraction B4 B3 C y=200
+boolean op=subtraction B5 B4 C y=-200
+
+detector Det1 solid=B5 kill=1 format=ascii material=Vacuum
+place Det1 z=100
+
+detector Det2 height=1000 width=1000 length=10 format=ascii material=Vacuum
+place Det2 z=1000
+=file Det1.good
+# Det1
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight Edep VisibleEdep Ntracks
+-200 -200 -5 0 0 10 0.317299 11 1 1 0 1 3.0203e-25 3.0203e-25 1 
+-200 200 -5 0 0 10 0.317299 11 3 1 0 1 3.0203e-25 3.0203e-25 1 
+200 -200 -5 0 0 10 0.317299 11 7 1 0 1 3.0203e-25 3.0203e-25 1 
+200 200 -5 0 0 10 0.317299 11 9 1 0 1 3.0203e-25 3.0203e-25 1 
+=file Det2.good
+# Det2
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight Edep VisibleEdep Ntracks
+-200 0 -5 0 0 10 3.32329 11 2 1 0 1 3.0203e-25 3.0203e-25 1 
+0 -200 -5 0 0 10 3.32329 11 4 1 0 1 3.0203e-25 3.0203e-25 1 
+0 0 -5 0 0 10 3.32329 11 5 1 0 1 3.0203e-25 3.0203e-25 1 
+0 200 -5 0 0 10 3.32329 11 6 1 0 1 3.0203e-25 3.0203e-25 1 
+200 0 -5 0 0 10 3.32329 11 8 1 0 1 3.0203e-25 3.0203e-25 1 
+=testbeam beam -200 200 3 -200 200 3 0 11 10
+=run g4bl test112.in
+=compare Det1.txt Det1.good .1 .1 .1 .1 .1 .1 .1 .1 .1 .1 .1 .1
+=compare Det2.txt Det2.good .1 .1 .1 .1 .1 .1 .1 .1 .1 .1 .1 .1

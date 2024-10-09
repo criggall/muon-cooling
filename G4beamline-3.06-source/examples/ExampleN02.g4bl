@@ -1,0 +1,19 @@
+#	ExampleN02.g4bl - mimic Geant4 examples/novice/N02, APPROXIMATELY
+#
+physics QGSP
+material Pb A=207.19 Z=82 density=11.35
+box Target width=50 height=50 length=50 material=Pb color=1,0,0
+material Xe A=131.29 Z=54 density=0.005458
+virtualdetector Det1 width=480 height=480 length=100 material=Xe color=1,1,1
+virtualdetector Det2 width=1344 height=1344 length=100 material=Xe color=1,1,1
+virtualdetector Det3 width=2208 height=2208 length=100 material=Xe color=1,1,1
+virtualdetector Det4 width=3072 height=3072 length=100 material=Xe color=1,1,1
+virtualdetector Det5 width=3936 height=3936 length=100 material=Xe color=1,1,1
+beam gaussian beamZ=-200 sigmaX=0 sigmaY=0 sigmaXp=0 sigmaYp=0 \
+	meanMomentum=3824 sigmaP=0 particle=proton nEvents=100
+place Target z=0
+place Det1 z=800
+place Det2 z=1600
+place Det3 z=2400
+place Det4 z=3200
+place Det5 z=4000

@@ -1,0 +1,65 @@
+=multiple beam-s and corner-s (3 sec)
+=require root
+
+=file test059.in1 
+param histoFile=test059.root
+physics QGSP_BIC
+beam gaussian beamX=-50 beamY=-50 nEvents=1
+virtualdetector det width=200 height=200 length=1
+place det z=2
+=file test059.in 
+param histoFile="" 
+physics QGSP_BIC
+box B width=100 height=100 length=1
+start x=0 y=0 z=-1000 initialZ=0 rotation=X32,Y75 radiusCut=500
+place B z=0 color=1,0,0
+reference referenceMomentum=200
+particlecolor reference=1,1,1
+beam gaussian nEvents=1 beamX=-20 beamY=-20 beamZ=100
+beam root file=test059.root name=VirtualDetector/det beamZ=100
+beam ascii file=test059.beam beamZ=100
+corner C1 rotation=Y45 z=1000 radius=200 length=0.1 color=1,1,1 radiusCut=500
+beam gaussian nEvents=1 beamX=-40 beamY=-40 beamZ=1100
+beam root file=test059.root name=VirtualDetector/det beamZ=1100
+beam ascii file=test059.beam beamZ=1100
+corner C2 rotation=Y45 z=2000 radius=200 length=0.1 color=1,1,1 radiusCut=500
+beam gaussian nEvents=1 beamX=-60 beamY=-60 beamZ=2100
+beam root file=test059.root name=VirtualDetector/det beamZ=2100
+beam ascii file=test059.beam beamZ=2100
+corner C3 rotation=Y45 z=3000 radius=200 length=0.1 color=1,1,1 radiusCut=500
+beam gaussian nEvents=1 beamX=-80 beamY=-80 beamZ=3100
+beam root file=test059.root name=VirtualDetector/det beamZ=3100
+beam ascii file=test059.beam beamZ=3100
+corner C4 rotation=X-45 z=4000 radius=200 length=0.1 color=1,1,1 radiusCut=500
+beam gaussian nEvents=1 beamX=-100 beamY=-100 beamZ=4100
+beam root file=test059.root name=VirtualDetector/det beamZ=4100
+beam ascii file=test059.beam beamZ=4100
+virtualdetector det radius=200 length=1 format=ascii file=test059.txt
+place det z=5000 color=0,1,0
+=file test059.beam <<-!
+#BLTrackFile test059 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+-25.000 -20.000 0.000 0.000 0.000 200.000 0.000 -13 0 1 0 1.0000
+=file test059.good 
+# det
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+-7.07107 -14.1422 4999.5 4.9738e-14 -1.42109e-14 200 18.6545 -13 1 1 0 1 
+-17.6777 -35.3553 4999.5 4.9738e-14 -1.42109e-14 200 18.9112 -13 1 1 0 1 
+-8.83884 -14.1421 4999.5 4.9738e-14 -1.42109e-14 200 18.6839 -13 0 1 0 1 
+-20 -28.2843 4999.5 2.13163e-14 1.42109e-14 200 14.9998 -13 1 1 0 1 
+-25 -35.3554 4999.5 2.13163e-14 1.42109e-14 200 15.072 -13 1 1 0 1 
+-12.5 -14.1422 4999.5 2.13163e-14 1.42109e-14 200 14.8781 -13 0 1 0 1 
+-42.4263 -42.4265 4999.5 1.42109e-14 1.42109e-14 200 11.2585 -13 1 1 0 1 
+-35.3553 -35.3554 4999.5 1.42109e-14 1.42109e-14 200 11.2051 -13 1 1 0 1 
+-17.6773 -14.1424 4999.5 1.42109e-14 1.42109e-14 200 11.0584 -13 0 1 0 1 
+-79.9996 -56.5687 4999.5 0 2.84217e-14 200 7.37929 -13 1 1 0 1 
+-49.9998 -35.3554 4999.5 0 2.84217e-14 200 7.29926 -13 1 1 0 1 
+-24.9993 -14.1425 4999.5 0 2.84217e-14 200 7.21923 -13 0 1 0 1 
+-99.9998 -100 4999.5 -2.13163e-14 -1.42109e-14 200 3.39337 -13 1 1 0 1 
+-50 -50 4999.5 -2.13163e-14 -1.42109e-14 200 3.39337 -13 1 1 0 1 
+-24.9995 -20.0004 4999.5 -2.13163e-14 -1.42109e-14 200 3.39337 -13 0 1 0 1 
+=run g4bl test059.in1 
+=run g4bl test059.in 
+=compare test059.txt test059.good 0.2 0.2 0.2 0.02 0.02 0.02 0.02 0.02 0.5 0.5 0.5 0.1

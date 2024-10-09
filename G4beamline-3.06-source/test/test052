@@ -1,0 +1,37 @@
+=tune fieldexpr (2 sec)
+
+=file test052.in 
+param histoFile="" steppingFormat="STEP CLX P B E VOL PROCESS"
+param maxStep=10
+physics QGSP doStochastics=0
+beam ascii filename=test052.beam nEvents=9
+reference referenceMomentum=200 particle=mu+ beamZ=0.0
+tune B1 z0=100 z1=2400 initial=-1.3 step=0.01 expr=Px1/Pz1 \
+	tolerance=0.0000001
+fieldexpr Field By=1.0 Ez=1.0 length=1000 width=1000 height=250 \
+	factorB=0 factorE=0
+place Field z=2000 rename=B1 factorB=B1
+cornerarc C z=1500 centerRadius=500 angle=90
+tune E1 z0=2450 z1=3550 initial=20.0 step=0.01 expr=Pz1-225 \
+	tolerance=0.001
+place Field z=3000 rename=E1 factorE=E1
+virtualdetector format=BLTrackFile AF radius=200 length=1 \
+	color=1,1,1 file=test052.txt
+place AF z=4000
+=file test052.beam 
+#BLTrackFile test052 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 1 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 202.000 0.375 -13 2 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 198.000 0.375 -13 3 1 0 1.0000
+=file test052.good 
+#BLTrackFile VirtualDetector/AF
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+-1.82 0.00 3999.50 -0.222 0.000 225.000 15.373 -13 1 1 0 1.0000
+-21.84 0.00 3999.50 -2.121 0.000 226.943 15.354 -13 2 1 0 1.0000
+20.84 0.00 3999.50 1.959 0.000 223.037 15.393 -13 3 1 0 1.0000
+=run g4bl test052.in 
+=grep "tune 'B1' complete" g4bl.out
+=compare test052.txt test052.good 0.2 0.2 0.2 0.02 0.02 0.02 0.02 0.02 0.5 0.5 0.5 0.1

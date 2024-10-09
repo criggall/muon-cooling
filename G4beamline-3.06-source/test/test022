@@ -1,0 +1,46 @@
+=argument expressions (1 sec)
+
+=file test022.in 
+param histoFile=""
+param a=1 b=2.0
+physics QGSP doStochastics=0
+beam ascii filename=test022.beam nEvents=9*$a
+genericquad Q fieldLength=2*10*10 ironLength=100+100 \
+	apertureRadius=$b*100 ironRadius=400 fieldMaterial=Vacuum
+genericbend B fieldWidth=500 fieldHeight=500 fieldLength=500 \
+	ironWidth=8*10^2 ironHeight=800 ironLength=500 \
+	fieldMaterial=Vacuum
+place Q z=$a*10^3 rename=Q1 gradient=4.2000
+place B z=2000 rename=B1 By=-0.6500 rotation=Y15
+corner C z=2000 rotation=Y30
+place Q z=3000 rename=Q2 gradient=-4.2000
+virtualdetector format=BLTrackFile AF radius=200 length=1 color=1,1,1 file=test022.txt
+place AF z=4000
+=file test022.beam 
+#BLTrackFile test022 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 5.000 0.000 200.000 0.375 -13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 5.000 200.000 0.375 -13 2 1 0 2.0000
+0.000 0.000 0.000 5.000 5.000 200.000 0.375 -13 3 1 0 3.0000
+0.000 0.000 0.000 -5.000 0.000 200.000 0.375 -13 4 1 0 2.0000
+0.000 0.000 0.000 0.000 -5.000 200.000 0.375 -13 5 1 0 2.0000
+0.000 0.000 0.000 -5.000 -5.000 200.000 0.375 -13 6 1 0 3.0000
+0.000 0.000 0.000 -5.000 5.000 200.000 0.375 -13 7 1 0 3.0000
+0.000 0.000 0.000 5.000 -5.000 200.000 0.375 -13 8 1 0 3.0000
+=file test022.good 
+#BLTrackFile VirtualDetector/AF
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+-18.91 0.00 3999.50 -2.718 0.000 199.982 15.350 -13 0 1 0 1.0000
+-32.82 0.00 3999.50 -5.549 0.000 199.986 15.326 -13 1 1 0 2.0000
+-16.79 8.60 3999.50 -2.261 -26.334 198.309 15.391 -13 2 1 0 2.0000
+-31.17 9.21 3999.50 -5.121 -26.190 198.338 15.367 -13 3 1 0 3.0000
+-16.84 0.00 3999.50 -1.538 0.000 200.057 15.379 -13 4 1 0 2.0000
+-16.79 -8.60 3999.50 -2.261 26.334 198.309 15.391 -13 5 1 0 2.0000
+-13.84 -7.92 3999.50 -0.950 26.464 198.365 15.421 -13 6 1 0 3.0000
+-13.84 7.92 3999.50 -0.950 -26.464 198.365 15.421 -13 7 1 0 3.0000
+-31.17 -9.21 3999.50 -5.121 26.190 198.338 15.367 -13 8 1 0 3.0000
+=run g4bl test022.in 
+=compare test022.txt test022.good 0.02 0.02 0.02 0.005 0.005 0.005 0.005 0.005 0.5 0.5 0.5 0.1

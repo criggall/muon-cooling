@@ -1,0 +1,12 @@
+*	placement.g4bl - verify object placement with beam
+
+physics QGSP_BERT
+
+# this is a uniform beam emanating from a square 20 cm on a side
+beam gaussian sigmaX=-20 sigmaY=-20 nEvents=10000000
+
+box B height=10 width=10 length=10 kill=1 color=0,0,1
+place B z=100
+
+virtualdetector Det height=1000 width=1000 length=1 color=0,1,0
+place Det z=200

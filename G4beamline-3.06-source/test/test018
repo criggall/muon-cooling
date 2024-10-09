@@ -1,0 +1,95 @@
+=various object arguments on the place command (10 sec)
+=require gsl
+
+=file test018.in1 
+param histoFile=""
+physics QGSP doStochastics=0
+beam ascii filename=test018.beam nEvents=9
+genericquad Q fieldLength=350 ironLength=350 apertureRadius=250 \
+	ironRadius=400 fieldMaterial=Vacuum gradient=4.2000
+genericbend B fieldWidth=500 fieldHeight=500 fieldLength=500 \
+	ironWidth=800 ironHeight=800 ironLength=500 \
+	fieldMaterial=Vacuum By=-0.6500
+fieldmap Field filename=test018.B current=7.0
+multipole Multipole fieldLength=350 ironLength=240 \
+	apertureRadius=250 ironRadius=400  \
+	dipole=1.23 quadrupole=3.45 sextupole=3.21 octopole=2.31 \
+	decapole=5.43 dodecapole=9.87
+randomseed now 1
+coil test018.coil innerRadius=201 outerRadius=300 length=500 \
+	material=Cu tolerance=0.005
+solenoid test018.solenoid coilName=test018.coil current=50.0
+
+place Q z=0 rename=Q1 
+place B z=500 rename=B1 
+place Field z=1000
+place Multipole z=2000
+place test018.solenoid z=4000
+
+printfield type=print field=Bx layout=zx drow=100 dcol=100 \
+	nrow=60 ncol=3 z=-100 
+printfield type=print field=By layout=zx drow=100 dcol=100 \
+	nrow=60 ncol=3 z=-100 
+printfield type=print field=Bz layout=zx drow=100 dcol=100 \
+	nrow=60 ncol=3 z=-100 exit=1
+=file test018.in2 
+param histoFile=""
+physics QGSP doStochastics=0
+beam ascii filename=test018.beam nEvents=9
+genericquad Q fieldLength=350 ironLength=350 apertureRadius=250 \
+	ironRadius=400 fieldMaterial=Vacuum 
+genericbend B fieldWidth=500 fieldHeight=500 fieldLength=500 \
+	ironWidth=800 ironHeight=800 ironLength=500 \
+	fieldMaterial=Vacuum 
+fieldmap Field filename=test018.B 
+multipole Multipole fieldLength=350 ironLength=240 \
+	apertureRadius=250 ironRadius=400 
+randomseed now 1
+coil test018.coil innerRadius=201 outerRadius=300 length=500 \
+	material=Cu tolerance=0.005
+solenoid test018.solenoid coilName=test018.coil 
+
+place Q z=0 rename=Q1 gradient=4.2000
+place B z=500 rename=B1 By=-0.6500
+place Field z=1000 current=7.0
+place Multipole z=2000 \
+	dipole=1.23 quadrupole=3.45 sextupole=3.21 octopole=2.31 \
+	decapole=5.43 dodecapole=9.87
+place test018.solenoid z=4000 current=50.0
+
+printfield type=print field=Bx layout=zx drow=100 dcol=100 \
+	nrow=60 ncol=3 z=-100 
+printfield type=print field=By layout=zx drow=100 dcol=100 \
+	nrow=60 ncol=3 z=-100 
+printfield type=print field=Bz layout=zx drow=100 dcol=100 \
+	nrow=60 ncol=3 z=-100 exit=1
+=file test018.beam 
+#BLTrackFile test018 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 10.000 0.000 200.000 0.375 -13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 10.000 200.000 0.375 -13 2 1 0 2.0000
+0.000 0.000 0.000 10.000 10.000 200.000 0.375 -13 3 1 0 3.0000
+0.000 0.000 0.000 -10.000 0.000 200.000 0.375 -13 4 1 0 2.0000
+0.000 0.000 0.000 0.000 -10.000 200.000 0.375 -13 5 1 0 2.0000
+0.000 0.000 0.000 -10.000 -10.000 200.000 0.375 -13 6 1 0 3.0000
+0.000 0.000 0.000 -10.000 10.000 200.000 0.375 -13 7 1 0 3.0000
+0.000 0.000 0.000 10.000 -10.000 200.000 0.375 -13 8 1 0 3.0000
+=file test018.B 
+#	test018.B -- a test BLFieldMap
+grid X0=-100 Y0=-100 Z0=-100 nX=2 nY=2 nZ=2 dX=200 dY=200 dZ=200
+data
+-100 -100 -100 0.0 1.0 0.0
+-100 -100 +100 0.0 1.0 0.0
+-100 +100 -100 0.0 1.0 0.0
+-100 +100 +100 0.0 1.0 0.0
++100 -100 -100 0.0 1.0 0.0
++100 -100 +100 0.0 1.0 0.0
++100 +100 -100 0.0 1.0 0.0
++100 +100 +100 0.0 1.0 0.0
+=run g4bl test018.in1 >test018.out1 2>&1
+=run g4bl test018.in2 >test018.out2 2>&1
+=grep "^z=" test018.out1 test018.B1 
+=grep "^z=" test018.out2 test018.B2 
+=compare test018.B1 test018.B2 -1 0.01 0.01 0.01

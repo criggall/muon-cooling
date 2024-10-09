@@ -1,0 +1,32 @@
+=randomseed command (4 sec)
+
+=file test027.in 
+param histoFile=""
+physics QGSP
+beam gaussian nEvents=5 sigmaP=30 sigmaX=20 sigmaY=20 sigmaXp=.05 sigmaYp=.05 firstEvent=0
+randomseed $METHOD
+virtualdetector format=BLTrackFile AF radius=200 length=1 color=1,1,1 file=$FILE
+place AF z=100
+=run g4bl test027.in METHOD=EventNumber  FILE=A.txt
+=run g4bl test027.in METHOD=None  FILE=B.txt
+=run g4bl test027.in METHOD=Time  FILE=C.txt
+=run g4bl test027.in METHOD=Time  FILE=D.txt
+# check the files are all DIFFERENT
+=ignore differ
+=compare A.txt B.txt
+=ignore differ
+=compare A.txt C.txt
+=ignore differ
+=compare A.txt D.txt
+=ignore differ
+=compare B.txt C.txt
+=ignore differ
+=compare B.txt D.txt
+=ignore differ
+=compare C.txt D.txt
+# check EventNumber gives the same result 
+=run g4bl test027.in METHOD=EventNumber  FILE=E.txt
+=compare A.txt E.txt
+# check None gives the same result 
+=run g4bl test027.in METHOD=None  FILE=F.txt
+=compare B.txt F.txt

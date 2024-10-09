@@ -1,0 +1,70 @@
+=multiple NTuple-s to single ASCII file (1 sec)
+
+=file test086.in 
+param histoFile=""
+physics QGSP doStochastics=0
+beam ascii filename=test086.beam nEvents=9
+virtualdetector format=AsciiExtended AF radius=200 length=1 color=1,1,1 file=test086.AF.txt
+printf z=1 "%.0f %.0f %.0f %.1f %.1f %.1f" x y z Px Py Pz file=test086.printf.txt
+printf z=2 "%.0f %.0f %.0f %.1f %.1f %.1f" x y z Px Py Pz file=test086.printf.txt
+zntuple z=150,250,350 format=AsciiExtended file=test086.zntuple.txt
+place AF z=100 rename=AF1
+place AF z=200 rename=AF2
+place AF z=300 rename=AF3
+place AF z=400 rename=AF4
+=file test086.beam 
+#BLTrackFile test086 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 10.000 0.000 200.000 0.375 -13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 10.000 200.000 0.375 -13 2 1 0 2.0000
+=file test086.good 
+#BLTrackFile2 AF1
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight Bx By Bz Ex Ey Ez ProperTime PathLength PolX PolY PolZ InitX InitY InitZ InitT InitKE
+#BLTrackFile2 AF2
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight Bx By Bz Ex Ey Ez ProperTime PathLength PolX PolY PolZ InitX InitY InitZ InitT InitKE
+#BLTrackFile2 AF3
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight Bx By Bz Ex Ey Ez ProperTime PathLength PolX PolY PolZ InitX InitY InitZ InitT InitKE
+#BLTrackFile2 AF4
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight Bx By Bz Ex Ey Ez ProperTime PathLength PolX PolY PolZ InitX InitY InitZ InitT InitKE
+0 0 99.5 0 0 200 0.750365 -13 0 1 0 1 0 0 0 0 0 0 0.175338 99.5 0 0 0 0 0 0 0.375 120.536 
+0 0 199.5 0 0 200 1.12762 -13 0 1 0 1 0 0 0 0 0 0 0.351557 199.5 0 0 0 0 0 0 0.375 120.536 
+0 0 299.5 0 0 200 1.50487 -13 0 1 0 1 0 0 0 0 0 0 0.527776 299.5 0 0 0 0 0 0 0.375 120.536 
+0 0 399.5 0 0 200 1.88212 -13 0 1 0 1 0 0 0 0 0 0 0.703996 399.5 0 0 0 0 0 0 0.375 120.536 
+4.975 0 99.5 10 0 200 0.750731 -13 1 1 0 2 0 0 0 0 0 0 0.175338 99.6243 0 0 0 0 0 0 0.375 120.756 
+9.975 0 199.5 10 0 200 1.12835 -13 1 1 0 2 0 0 0 0 0 0 0.351557 199.749 0 0 0 0 0 0 0.375 120.756 
+14.975 0 299.5 10 0 200 1.50597 -13 1 1 0 2 0 0 0 0 0 0 0.527776 299.874 0 0 0 0 0 0 0.375 120.756 
+19.975 0 399.5 10 0 200 1.88359 -13 1 1 0 2 0 0 0 0 0 0 0.703996 399.999 0 0 0 0 0 0 0.375 120.756 
+0 4.975 99.5 0 10 200 0.750731 -13 2 1 0 2 0 0 0 0 0 0 0.175338 99.6243 0 0 0 0 0 0 0.375 120.756 
+0 9.975 199.5 0 10 200 1.12835 -13 2 1 0 2 0 0 0 0 0 0 0.351557 199.749 0 0 0 0 0 0 0.375 120.756 
+0 14.975 299.5 0 10 200 1.50597 -13 2 1 0 2 0 0 0 0 0 0 0.527776 299.874 0 0 0 0 0 0 0.375 120.756 
+0 19.975 399.5 0 10 200 1.88359 -13 2 1 0 2 0 0 0 0 0 0 0.703996 399.999 0 0 0 0 0 0 0.375 120.756 
+0 0 1 0.0 0.0 200.0
+0 0 2 0.0 0.0 200.0
+0 0 1 10.0 0.0 200.0
+0 0 2 10.0 0.0 200.0
+0 0 1 0.0 10.0 200.0
+0 0 2 0.0 10.0 200.0
+#BLTrackFile2 Z150
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight Bx By Bz Ex Ey Ez ProperTime PathLength PolX PolY PolZ InitX InitY InitZ InitT InitKE
+#BLTrackFile2 Z250
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight Bx By Bz Ex Ey Ez ProperTime PathLength PolX PolY PolZ InitX InitY InitZ InitT InitKE
+#BLTrackFile2 Z350
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight Bx By Bz Ex Ey Ez ProperTime PathLength PolX PolY PolZ InitX InitY InitZ InitT InitKE
+0 0 150 0 0 200 0.940876 -13 0 1 0 1 0 0 0 0 0 0 0.264329 150 0 0 0 0 0 0 0.375 120.536 
+0 0 250 0 0 200 1.31813 -13 0 1 0 1 0 0 0 0 0 0 0.440548 250 0 0 0 0 0 0 0.375 120.536 
+0 0 350 0 0 200 1.69538 -13 0 1 0 1 0 0 0 0 0 0 0.616767 350 0 0 0 0 0 0 0.375 120.536 
+7.5 0 150 10 0 200 0.941429 -13 1 1 0 2 0 0 0 0 0 0 0.264329 150.187 0 0 0 0 0 0 0.375 120.756 
+12.5 0 250 10 0 200 1.31905 -13 1 1 0 2 0 0 0 0 0 0 0.440548 250.312 0 0 0 0 0 0 0.375 120.756 
+17.5 0 350 10 0 200 1.69667 -13 1 1 0 2 0 0 0 0 0 0 0.616767 350.437 0 0 0 0 0 0 0.375 120.756 
+0 7.5 150 0 10 200 0.941429 -13 2 1 0 2 0 0 0 0 0 0 0.264329 150.187 0 0 0 0 0 0 0.375 120.756 
+0 12.5 250 0 10 200 1.31905 -13 2 1 0 2 0 0 0 0 0 0 0.440548 250.312 0 0 0 0 0 0 0.375 120.756 
+0 17.5 350 0 10 200 1.69667 -13 2 1 0 2 0 0 0 0 0 0 0.616767 350.437 0 0 0 0 0 0 0.375 120.756 
+=run g4bl test086.in 
+=platform LINUX DARWIN
+=run cat test086.AF.txt test086.printf.txt test086.zntuple.txt >test086.txt
+=platform WINDOWS
+=omit need concatenate file on WINDOWS
+=platform
+=compare test086.txt test086.good

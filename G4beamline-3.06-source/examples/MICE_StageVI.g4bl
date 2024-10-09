@@ -1,0 +1,422 @@
+*	MICE_StageVI.g4bl  2/5/2006 TJR
+#
+#	This is an old model of MICE Stage VI, as of Aug05.
+#
+#	Command-line parameters (optional - default as follows):
+#		first=0 last=1000 viewer=none
+#
+#	NOTES:
+#	A. dp/p = 2.5% is only 11 MeV/c, which seems WAY too small!
+#	   (old value was 75 MeV/c; tests show we need +- 17 MeV.c)
+#
+#	The MICE beamline is from bmdata_AUG2105(p3v3).xls
+#
+#	The vacuum windows and pipes are my best GUESS -- this needs to be
+#	properly designed. APPROXIMATION: the vacuum windows are flat.
+#
+#	The MICE magnetic lattice for the cooling channel is Stage VI, flip,
+#	beta=42 cm, from UB-09-04-A-TJR (I added the column "Center Z").
+#
+#	The downstream PID detector layout is from cm9_palladino_pidupdate.pdf.
+#	Except I have used a total of 1" scintillator for TOF2.
+#
+#	APPROXIMATION: The DecaySolenoid map is for 3.7 T, scaled to 4.172 T.
+#
+#	APPROXIMATION: The RF layout is from Study2, not updated.
+#
+#	APPROXIMATION: I have an old spreadsheet for computing the absorber
+#	and safety window profiles.
+#
+#	APPROXIMATION: the outer shapes of quads and bends are wrong; but there
+#	are no particles of interest out there, so that's OK.
+#
+#	APPROXIMATION: neglect the varying density of the ISIS beam over
+#	the target.
+#
+#	APPROXIMATION: the ISIS vacuum and pipe do not implement ISIS at all,
+#                but are OK for our pions.
+#
+#	APPROXIMATION: the vacuum between Q3 and B1 is a box without any pipe
+#
+#	APPROXIMATION: the vacuum between B1 and DecaySolenoid is a box
+#                without any pipe
+
+# command-line parameter default values
+param -unset first=0 last=10000 viewer=none
+
+# Absorber material, LH2 or Vacuum
+param -unset absMaterial=Vacuum 
+
+# HistoScope filename from first event #
+param histoFile=$first histoUpdate=100000
+param steppingFormat="TAG CL STEP VOL MAT PROCESS B"
+
+###
+### Beamline tune parameters, AUG05
+###
+# piMomentumRef is the pion reference momentum at target
+# muMomentum is the muon design momentum at center of B2
+# muMomentumRef is the muon reference momentum at center of DecaySolenoid
+# (account for Eloss in vacuum window, air, and ProtonAbsorber)
+# slight change in B2 field and position (compared to Kevin's AUG05), due to
+# Eloss in air
+param -unset piMomentumRef=440.42 muMomentum=255.24 muMomentumRef=266.0
+param -unset DecaySolenoidCurrent=86.02
+param -unset Q1=1.155989 Q2=-1.445 Q3=1.005937
+param -unset B1=-1.41384  B1z=7918.02
+param -unset B2=-0.424270 B2z=15791.47
+# Kevin's values: param B1=-1.413935 B2=-0.424573
+param -unset Q4=-1.13004 Q5=1.477795 Q6=-0.80022
+param -unset Q7=-0.98765 Q8=1.520426 Q9=-1.43098
+param -unset DiffuserThickness=7.6
+
+###
+### Colors
+###
+param -unset vacuumPipeColor=0.6,0.6,0.6
+
+
+###
+### general definitions
+###
+param worldMaterial=Air maxStep=100.0
+physics QGSP_BIC
+trackcuts keep=proton,pi+,mu+,e+,e- kineticEnergyCut=30 maxTime=1000
+particlecolor proton=1,0,0 pi+=0,1,0 mu+=0,0,1 plus=1,0,1 minus=1,1,0 \
+        neutral=0,1,1 reference=1,1,1
+coil default material=Cu dR=5.0 dZ=5.0 tolerance=0.001
+solenoid default color=1,1,0
+
+# Target is 1mm wide and 10mm long: (1*cos(25*deg)+10*sin(25*deg))/2 = 2.57
+# For now we assume the target dips 2mm into the ISIS beam.
+# sigmaP, sigmaXp, and sigmaYp are determined empirically to be larger than 
+# the actual beamline acceptance.
+# (In the beam command, sigma<0 means a flat distribution with that halfwidth.)
+beam gaussian sigmaX=-2.57 sigmaY=-1.0 meanMomentum=$piMomentumRef \
+	particle=pi+ sigmaXp=-0.040 sigmaYp=-0.020 sigmaP=-17 \
+	firstEvent=$first lastEvent=$last
+
+
+###
+### define the beamline magnets and components
+###
+virtualdetector TargetDet radius=100 length=1 material=Vacuum noSingles=1
+genericquad QuadTypeIV fieldLength=853.4 apertureRadius=101.5 ironRadius=381 \
+	ironLength=914 ironColor=0,.6,0 kill=1 
+# Type I bend shimmed to 200 mm gap
+genericbend BendTypeI fieldWidth=660 fieldHeight=200 fieldLength=1038 \
+	ironColor=1,0,0 ironWidth=1828 ironHeight=1320 ironLength=990
+# PSI solenoid 
+coil Decay innerRadius=60.0 outerRadius=97.0 length=5000.0 maxR=60.0 \
+	mapFile=Magnets/DecaySolenoid
+solenoid DecayS coilName=Decay current=$DecaySolenoidCurrent color=1,1,0
+tubs SolenoidBody innerRadius=97.0 outerRadius=180 length=5000 kill=1 \
+	color=1,1,0
+tubs DecayEnd innerRadius=48 outerRadius=180 length=68 material=Fe kill=1 \
+	color=1,1,0
+# invisible shield to kill junk from B1 that misses the aperture
+tubs DecayShield innerRadius=180 outerRadius=1000 length=2 kill=1 \
+	color=invisible
+# the assempled DecaySolenoid
+group DecaySolenoid length=5138 radius=0 material=Vacuum
+	place DecayShield z=-2568
+	place DecayEnd z=-2534
+        place DecayS z=0
+	place SolenoidBody z=0
+	place DecayEnd z=2534
+endgroup
+# Proton Absorber.
+material H Z=1 A=1.00794 density=0.0838
+material C Z=6 A=12.011 density=2.265
+material polyethylene density=0.93  C,0.856 H,0.144
+# 50mm * cos(15 deg) = 48.29
+box ProtonAbsorber width=400 height=400 length=50 material=polyethylene \
+	color=1,0,1 
+# Type  QC Quads - includes mirror plates
+genericquad QuadTypeQC fieldLength=660 poleTipRadius=171.5 coilRadius=236 \
+        coilHalfwidth=57 ironRadius=700 ironLength=1046 ironColor=0,.6,0 \
+	kill=1 
+# Diffuser
+tubs Diffuser outerRadius=200 material=Pb length=$DiffuserThickness color=1,0,1
+virtualdetector DiffuserDet radius=200 length=1
+# Collimator -- place twice, on beam left and right
+box Collimator width=600 height=500 length=150 material=Fe color=.8,.8,.8 kill=1
+
+###
+### The beamline vacuum components
+###
+### GUESS: vacuum windows are 0.5mm Al, flat.
+### GUESS: 0.5mm Al flat isolation windows at each end of DecaySolenoid.
+### NOTE: vacuum3 and vacuum4 intersect B1; this is OK as all are Vacuum.
+tubs ISISVacuum outerRadius=100 length=600 material=Vacuum
+tubs vacuumWindow outerRadius=120 length=0.5 material=Al color=$vacuumPipeColor
+tubs ISISPipe innerRadius=100 outerRadius=103 length=600 material=Al \
+	color=$vacuumPipeColor
+tubs vacuum1 outerRadius=100 length=2143 material=Vacuum
+tubs pipe1 innerRadius=100 outerRadius=103 length=2143 material=Al \
+	color=$vacuumPipeColor
+tubs vacuum2 outerRadius=100 length=486 material=Vacuum
+tubs pipe2 innerRadius=100 outerRadius=103 length=486 material=Al \
+	color=$vacuumPipeColor
+box vacuum3 width=300 height=200 length=1643 material=Vacuum
+box vacuum4 width=300 height=200 length=1745.2 material=Vacuum
+
+
+###
+### Lay out the beamline
+###
+
+# reference particle for manually tuning B1, and the RF
+reference referenceMomentum=$piMomentumRef particle=pi+ beamZ=0
+
+place TargetDet z=152 parent=ISISVacuum
+place ISISVacuum z=0
+place ISISPipe z=0
+place vacuumWindow z=300.25
+place vacuumWindow z=399.75
+place vacuum1 z=1471.5
+place pipe1 z=1471.5
+place QuadTypeIV rename=Q1 gradient=$Q1 z=3000
+place vacuum2 z=3700
+place pipe2 z=3700
+place QuadTypeIV rename=Q2 gradient=$Q2 z=4400 ironColor=0,0,.6
+place vacuum2 z=5100
+place pipe2 z=5100
+place QuadTypeIV rename=Q3 gradient=$Q3 z=5800
+place vacuum3 z=7078.5
+
+place BendTypeI rename=B1 By=$B1 z=$B1z x=200 rotation=Y30
+cornerarc z=7434.2 angle=60 centerRadius=1038
+
+place vacuum4 z=8722.6
+place vacuumWindow z=9595.45
+place DecaySolenoid z=12164.7
+place vacuumWindow z=14733.95
+
+# reference particle for manually tuning B2
+reference referenceMomentum=$muMomentumRef particle=mu+ beamZ=12164.7
+
+place ProtonAbsorber z=15070.9
+
+place BendTypeI rename=B2 By=$B2 z=$B2z x=100 rotation=Y15 fieldMaterial=Air
+cornerarc z=15281.7 angle=30 centerRadius=2005.2
+
+place Collimator z=16760 x=353
+place Collimator z=16760 x=-353
+
+place QuadTypeQC rename=Q4 gradient=$Q4 z=17361.6 fieldMaterial=Air
+place QuadTypeQC rename=Q5 gradient=$Q5 z=18521.6 fieldMaterial=Air ironColor=0,0,.6
+place QuadTypeQC rename=Q6 gradient=$Q6 z=19681.6 fieldMaterial=Air
+place QuadTypeQC rename=Q7 gradient=$Q7 z=22993.7 fieldMaterial=Air
+place QuadTypeQC rename=Q8 gradient=$Q8 z=24153.7 fieldMaterial=Air ironColor=0,0,.6
+place QuadTypeQC rename=Q9 gradient=$Q9 z=25313.7 fieldMaterial=Air
+
+place Diffuser z=27165.3
+place DiffuserDet
+
+### NOTE - the entire cooling channel has moved upstream
+### End coil 1.1 upstream face is now z=27169.1
+
+###
+### Define and place the MICE upstream particleID elements
+###
+material scintillator density=1.032  C,0.918 H,0.082
+virtualdetector TOF0 height=500 width=500 length=50.8 color=1,1,1 \
+	material=scintillator
+virtualdetector TOF1 height=480 width=480 length=50.8 color=1,1,1 \
+	material=scintillator
+place TOF0 z=20537.0
+# TOF1 and TOF2 are placed with the cooling channel
+
+material F Z=9 A=18.998 density=1.5
+material C6F14 density=1.7 C,0.213 F,0.787
+material Si Z=14 A=28.086 density=2.33
+material O z=8 A=15.999 density=0.001
+material quartz density=2.20 Si,0.467 O,0.533
+box Cherenkov1Front width=400 height=400 length=1 color=1,0,0 material=Al
+virtualdetector Cherenkov1 width=400 height=400 length=20 color=0,0,1 \
+	material=C6F14
+box Cherenkov1Window width=400 height=400 length=2 color=0,1,0 material=quartz
+box Cherenkov1Light width=550 height=550 length=478 material=Air color=1,1,1
+place Cherenkov1Front z=20762.9
+place Cherenkov1
+place Cherenkov1Window
+place Cherenkov1Light
+
+###
+### The MICE cooling channel solenoids and IronShield
+### all currents give Bz>0; rotation=Y180 is used for Bz<0.
+###
+# TRD 09/09/2005 Table 4.1-1
+coil Focus innerRadius=263 outerRadius=347 length=210 maxR=263
+coil Coupl innerRadius=725 outerRadius=841 length=250 maxR=725
+coil Match1 innerRadius=255 outerRadius=355 length=202 maxR=255
+coil Match2 innerRadius=255 outerRadius=312 length=202 maxR=255
+coil End1 innerRadius=255 outerRadius=393 length=120 maxR=255
+coil Center innerRadius=255 outerRadius=305 length=1260 maxR=255
+coil End2 innerRadius=255 outerRadius=404 length=120 maxR=255
+# TRD 09/09/2005 Flip mode, Case 1 Stage VI
+solenoid Focus coilName=Focus current=113.95
+solenoid Coupl coilName=Coupl current=96.21
+solenoid Match1 coilName=Match1 current=56.30
+solenoid Match2 coilName=Match2 current=66.79
+solenoid End1 coilName=End1 current=62.80
+solenoid Center coilName=Center current=64.44
+solenoid End2 coilName=End2 current=67.11
+# IronShield is the downstream magnetic shield for the detectors
+tubs IronShield innerRadius=250 outerRadius=750 length=100 material=Fe \
+	color=0.7,0.7,0.7
+
+###
+### The MICE Trackers
+###
+### APPROXIMATION: each SciFi station is approximated as 2.0mm scintillator
+### GUESS: the vacuum window is 1mm Al, flat; placed in the center of End2.
+### APPROXIMATION: the tracker pipe ends at the vacuum window (make room for
+### the Diffuser)
+virtualdetector  SciFi radius=150 length=2.0 color=0,0,1 material=scintillator
+tubs TrackerPipe innerRadius=200 outerRadius=255 length=2491 material=Al \
+	kill=1 color=1,0,1
+tubs TrackerWindow outerRadius=200 length=1.0 material=Al color=1,0,0
+group Tracker1 material=Vacuum length=2491 radius=0
+	place TrackerWindow z=-1245.0
+	place SciFi rename=Tracker1a z=-1045.5
+	place SciFi rename=Tracker1b z=-595.5
+	place SciFi rename=Tracker1c z=-245.5
+	place SciFi rename=Tracker1d z=-45.5
+	place TrackerPipe z=0
+	place SciFi rename=Tracker1e z=54.5
+endgroup
+group Tracker2 material=Vacuum length=2491 radius=0
+	place SciFi rename=Tracker2a z=-54.5
+	place TrackerPipe z=0
+	place SciFi rename=Tracker2b z=45.5
+	place SciFi rename=Tracker2c z=245.5
+	place SciFi rename=Tracker2d z=595.5
+	place SciFi rename=Tracker2e z=1045.5
+	place TrackerWindow z=1245.0
+endgroup
+
+###
+### The MICE Absorbers
+###
+### APPROXIMATION: I used an old spreadsheet to compute window profiles
+absorber Abs absWindow=Windows/abs300 safetyWindow=Windows/safe320 \
+	insideLength=350 absMaterial=$absMaterial windowMaterial=Al \
+	safetyDistance=133 color=0,1,0 
+tubs AFCPipe innerRadius=160 outerRadius=263 length=850 material=Al \
+	color=$vacuumPipeColor
+group Absorber radius=0 material=Vacuum length=850
+	place Abs rename='' z=0
+	place AFCPipe z=0
+endgroup
+
+###
+### The MICE RF Linacs
+###
+### APPROXIMATION: the drawings in the Mar28 TRD gave no dimensions, so these 
+###        are Study2 RF cavities.
+### APPROXIMATION: the RF windows are flat, 0.38mm thick.
+#pillbox Pbox maxGradient=16 frequency=0.20125 innerLength=430 pipeThick=3 \
+#	wallThick=3 irisRadius=210 collarRadialThick=25 collarThick=12.5 \
+#	win1Thick=0.38 win1OuterRadius=140 win2Thick=0.38 winMat=Be \
+#	phaseAcc=40 skinDepth=0.1 timingTolerance=0.001 \
+#	tuneEnd=RF2C1 goalFactor=1.0 initialStep=0.5 tuneTolerance=0.001
+# for empty absorber and no RF
+pillbox Pbox maxGradient=0 frequency=0 innerLength=430 pipeThick=3 \
+	wallThick=3 irisRadius=210 collarRadialThick=25 collarThick=12.5 \
+	win1Thick=0.38 win1OuterRadius=140 win2Thick=0.38 winMat=Be \
+	skinDepth=0.1 innerRadius=608.5
+tubs RFPipe innerRadius=700 outerRadius=725 length=1900 material=Al \
+	color=$vacuumPipeColor
+group RF radius=0 material=Vacuum length=1900
+	place Pbox z=-690 rename=C1
+	place Pbox z=-230 rename=C2
+	place RFPipe z=0
+	place Pbox z=230 rename=C3
+	place Pbox z=690 rename=C4
+endgroup
+
+###
+### Cooling channel vacuum components
+###
+tubs vacuumPipeA innerRadius=200 outerRadius=255 length=285 material=Al \
+	color=$vacuumPipeColor
+group vacuumA radius=0 material=Vacuum
+	place vacuumPipeA
+endgroup
+
+
+###
+### Lay out the MICE cooling channel
+### (use z=0 for the center of Absorber2, Tracker1End2 US edge is at z=29486.0)
+###
+### AUG05 value, Cooling Channel TRD 09/09/2005
+place OFFSET z=33180.1
+
+place TOF1 z=-6611
+place IronShield z=-6461
+
+place End2 z=-5951 rotation=Y180 current=0
+place Center z=-5201 rotation=Y180 current=0
+place Tracker1 z=-4705.5
+place End1 z=-4451 rotation=Y180
+place Match2 z=-4052 rotation=Y180
+place Match1 z=-3611 rotation=Y180
+place vacuumA z=-3317.5
+place Focus z=-2955 rotation=Y180
+place Absorber rename=Abs1 z=-2750
+place Focus z=-2545 
+place Coupl z=-1375 
+place RF rename=RF1 z=-1375
+place Focus z=-205 
+
+place Absorber rename=Abs2 z=0
+
+place Focus z=205 rotation=Y180
+place RF rename=RF2 z=1375
+place Coupl z=1375 rotation=Y180
+place Focus z=2545 rotation=Y180
+place Absorber rename=Abs3 z=2750
+place Focus z=2955 
+place vacuumA z=3317.5
+place Match1 z=3611 
+place Match2 z=4052 
+place End1 z=4451 
+place Tracker2 z=4705.5
+place Center z=5201 current=0
+place End2 z=5951 current=0
+
+place IronShield z=6461
+
+###
+### Downstream PID counters
+### (OFFSET for cooling channel still applies; DS edge of Tracker2End2=6011)
+###
+### APPROXIMATION: the octagonal Cherenkov2 is approximated as a circle
+### APPROXIMATION: an additional window is used in place of the mirror
+virtualdetector TOF2 height=480 width=480 length=50.8 color=1,1,1 \
+	material=scintillator
+material aerogel density=0.2 Si,0.292 O,0.666 H,0.042
+tubs Cherenkov2Window outerRadius=400 length=1.0 material=Al color=0,0,1
+virtualdetector Cherenkov2 radius=425 length=100 material=aerogel color=0,0,1
+tubs Cherenkov2Light outerRadius=640 length=367 material=Air color=1,1,1
+material calorimeter density=3.7 Pb,0.85 scintillator,0.15
+virtualdetector Calorimeter width=1200 height=1200 length=160 \
+	material=calorimeter color=0,1,1
+
+place TOF2 z=6586.4
+place Cherenkov2Window z=6710.5
+place Cherenkov2
+place Cherenkov2Light 
+# This Cherenkov2Window is standing in for the mirror, so there are 2
+place Cherenkov2Window
+place Cherenkov2Window
+place Calorimeter z=7308
+
+
+###
+### an NTuple for good particles
+###
+ntuple GoodParticle category=NTuples \
+    detectors=TargetDet,TOF0,Cherenkov1,TOF1,SciFi,TOF2,Cherenkov2,Calorimeter

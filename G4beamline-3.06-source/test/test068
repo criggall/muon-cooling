@@ -1,0 +1,31 @@
+=polycone (2 sec)
+
+=file test068.in 
+param histoFile=""
+physics QGSP 
+beam ascii filename=test068.beam nEvents=9
+polycone P z=0,100,200,3*100,400 outerRadius=100,100,200,200+10,300 \
+	innerRadius=80,80,80,80,80
+place P z=0
+tubs A innerRadius=101 outerRadius=102 length=10 color=1,0,0
+place A z=50 front=1
+tubs B innerRadius=160 outerRadius=161 length=10 color=0,1,0
+place B z=150 front=1
+tubs C innerRadius=211 outerRadius=212 length=10 color=0,0,1
+place C z=250 front=1
+tubs D innerRadius=265 outerRadius=266 length=10 color=1,0,1
+place D z=350 front=1
+tubs E innerRadius=75 outerRadius=79 length=400 color=0,1,1
+place E z=0 front=1
+=file test068.beam 
+#BLTrackFile test068 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.0 -13 0 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 200.000 0.0 13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 0.000 200.000 0.0 -11 2 1 0 2.0000
+0.000 0.000 0.000 0.000 0.000 200.000 0.0 11 3 1 0 3.0000
+0.000 0.000 0.000 0.000 0.000 200.000 0.0 211 4 1 0 2.0000
+0.000 0.000 0.000 0.000 0.000 200.000 0.0 -211 5 1 0 2.0000
+=run g4bl test068.in 
+=grep -v intersects g4bl.out

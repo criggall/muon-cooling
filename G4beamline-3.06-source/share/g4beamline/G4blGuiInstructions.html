@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>G4blGui Instructions</title></head><body>
+<center><table cellpadding="10" width="100%">
+   <tbody><tr>
+   	<td><img src="MuonsInc.png" alt="Muons, Inc.">
+	</td><td align="center">
+	    <h1><font color="#0000ff" size="+2"><b>G4beamline</b></font></h1>
+	    <h2>VERSION</h2><br>
+	    <b>http://g4beamline.muonsinc.com</b>
+	</td><td align="right"><img src="g4blicon.png" alt="G4beamline">
+   </td></tr>
+</tbody></table></center>
+
+<b>
+<a href="#Intro">Introduction</a><br>
+<a href="#Using">Using the Program</a><br>
+<a href="#Vis">Visualizing the System</a><br>
+<a href="#HistoRoot">HistoRoot - program to Create Histograms</a><br>
+<a href="#References">References</a><br>
+<a href="#Commands">Appendix: G4beamline Commands</a><br>
+<a href="#Particles">Appendix: List of Particles (QGSP)</a><br>
+</b>
+<H2>Downloading Geant4 Data Sets</H2>
+<p> <b>NOTE:</b>Before G4beamline can run, it requires that various Geant4 
+data sets be downloaded and unpacked; which specific data-sets are required
+depends on the physics list used in the input.file. When first run, 
+G4beamline prompts the user to download them. If you find you need to
+download more data-sets, click <a href="file:/G4blData">here</a>.
+</p><p>
+<a name="Intro"></a>
+</p><h2>Introduction</h2>
+G4beamline is a particle-at-a-time simulation program based
+on Geant4 <a href="#References">[1]</a> and optimized for the simulation of
+beamlines. See the G4beamline User's Guide at the above URL for a
+description of the program (it is also installed with this distribution in
+the doc directory).
+<p>
+This brief description only discusses how to use the program, it does not
+describe how to construct a simulation's input file; for that see the
+G4beamline User's Guide.
+<a name="Using"></a>
+</p><h2>Using the Program</h2>
+Select the input file using the "Browse" button above, or via the File/Open menu.
+The directory containing it will become the current directory, and the
+output file will be "g4bl.out", which will be displayed in this space.
+Any additional Parameters used by the input file can be entered above.
+Pushing the "Run" button above will run the program, replacing this
+text with its output.<br>
+<br>
+If you wish, you can enter a simple directory name into the "Directory"
+field; that directory will be created and the output files placed into
+it (including any NTuple output files). No '/' or '\' can be used.<br>
+ 
+<p>
+While the program is running, the "Run" button above will change to
+"Abort" to permit you to stop the program immediately. Closing this 
+window will also abort g4beamline.
+</p><p>
+After running the simulation (with viewer=none), the simulation usually creates
+one or more Root files containing the NTuples. You can use the 
+<a href="#HistoRoot">HistoRoot</a> program to generate histograms from these
+files.
+</p><p>
+<b>IMPORTANT NOTE:</b>
+With a viewer selected, NTuple output files are not written. This includes both
+.root files and ASCII files from vitualdetector-s, zntuple-s, etc.
+</p><p>Several examples are provided in the distribution. They are
+located in the "examples" directory under the install directory. In
+Linux the install directory is usually in your HOME directory; in Mac
+OS X it is usually in /Applications; in Windows a Copy of "G4beamline
+examples" is placed into "Documents". When installing G4beamline, it is
+helpful to put the G4beamlineExamples directory into your HOME or Desktop.<br>
+
+</p><p>
+<a name="Vis"></a>
+</p><h2>Visualizing the system</h2>Un-checking the Visualization box
+will run the simulation and write the NTuple files; checking it will
+run the simulation and viewer without writing NTuple files.
+Each image in the viewer is a single run containing the selected number of
+events.
+<p>
+viewer=best will visualize the system using OGLSQt, a viewer based on the Qt library and OpenGL. The number at the top left is the number of events per run;
+each run will be shown as a separate image; push "Start Run" to start a run.
+For usage hints, see the "useful tips" tab.
+</p><p>Other viewers can be used, see the View/Other menu item for details.</p>
+<a name="HistoRoot"></a>
+<h2>Using HistoRoot to Create Histograms</h2>
+<P>G4beamline often generates Root files containing NTuples; it can also
+generate ASCII files containing those NTuples. The Root program 
+<a href="#References">[2]</a> can be used to analyze these files, generate
+plots and histograms, etc.
+</P><P>
+Root is very general, and therefore quite complex; understanding C++
+programming is essential to be able to use it directly.
+The HistoRoot program makes it easy to generate plots and histograms from
+Root and ASCII files containing NTuples. It is a GUI program implemented in
+Root that requires no C++ programming by users. HistoRoot is available at
+http://historoot.muonsinc.com;
+it requires the spedific version of Root from that webpage.
+G4beamline can create .root files without Root being installed, and you can
+install Root and/or HistoRoot after generating them, if necessary. 
+<a name="References"></a>
+<h2>References</h2>
+<pre> [1] http://geant4.cern.ch<br> [2] http://root.cern.ch<br></pre>
+</p></body></html>

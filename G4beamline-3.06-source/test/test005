@@ -1,0 +1,63 @@
+=multiple successive transforms (1 sec)
+
+=file test005.in 
+physics QGSP doStochastics=0
+beam gaussian
+fieldmap Field filename=test005.B
+box Box5 height=700 width=700 length=700
+box Box4 height=300 width=300 length=300
+box Box3 height=200 width=200 length=200
+box Box2 height=100 width=100 length=100
+box Box1 height=4 width=4 length=4
+place Field z=0 parent=Box1
+place Box1 z=0 x=10 rotation=Z90 parent=Box2
+place Box2 z=10 y=20 rotation=Y-90 parent=Box3
+place Box3 z=20 x=15 rotation=Z90,Y90 parent=Box4
+place Box4 z=-40 x=-30 parent=Box5
+place Box5 z=10 x=5 rotation=Y15
+printfield type=grid file=test005.txt nX=3 nY=3 nZ=3 \
+		dX=5 dY=5 dZ=5 exit=1
+=file test005.B 
+#	test005.B -- a test BLFieldMap
+# a 4 mm cube with 1 Tesla field
+grid X0=-2 Y0=-2 Z0=-2 nX=2 nY=2 nZ=2 dX=4 dY=4 dZ=4
+data
+-2 -2 -2 0.0 1.0 0.0
+-2 -2 +2 0.0 1.0 0.0
+-2 +2 -2 0.0 1.0 0.0
+-2 +2 +2 0.0 1.0 0.0
++2 -2 -2 0.0 1.0 0.0
++2 -2 +2 0.0 1.0 0.0
++2 +2 -2 0.0 1.0 0.0
++2 +2 +2 0.0 1.0 0.0
+=file test005.good 
+0.0 0.0 0.0 0 0 0
+0.0 0.0 5.0 0 0 0
+0.0 0.0 10.0 0 0 0
+0.0 5.0 0.0 0 0 0
+0.0 5.0 5.0 0 0 0
+0.0 5.0 10.0 0 0 0
+0.0 10.0 0.0 0 0 0
+0.0 10.0 5.0 0 0 0
+0.0 10.0 10.0 0 0 0
+5.0 0.0 0.0 0 0 0
+5.0 0.0 5.0 0 0 0
+5.0 0.0 10.0 0 0 0
+5.0 5.0 0.0 0 0 0
+5.0 5.0 5.0 0 0 0
+5.0 5.0 10.0 0 0 0
+5.0 10.0 0.0 0 0 0
+5.0 10.0 5.0 0 0 0
+5.0 10.0 10.0 0 0 0
+10.0 0.0 0.0 0 0 0
+10.0 0.0 5.0 0 0 0
+10.0 0.0 10.0 -0.965926 -6.12303e-17 0.258819
+10.0 5.0 0.0 0 0 0
+10.0 5.0 5.0 0 0 0
+10.0 5.0 10.0 0 0 0
+10.0 10.0 0.0 0 0 0
+10.0 10.0 5.0 0 0 0
+10.0 10.0 10.0 0 0 0
+=run g4bl test005.in 
+=grep '^[0-9]' test005.txt test005.try
+=compare test005.good test005.try 0.1 0.1 0.1 0.001 0.001 0.001

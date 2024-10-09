@@ -1,0 +1,30 @@
+cmake_minimum_required(VERSION 2.8)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+cmake_policy(SET CMP0020 OLD)
+find_package(Qt4 4.8.6 REQUIRED QtGui)
+
+if(G4BL_VISUAL)
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DG4BL_VISUAL")
+endif()
+
+add_executable(g4blgui g4blgui.cc G4blGuiWindow.cc RecentFile.cc ../g4bl/Util.cc)
+if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+	target_link_libraries(g4blgui "-Wl,-rpath,$ORIGIN/../lib")
+	set(CMAKE_SKIP_RPATH ON)
+elseif(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+	target_link_libraries(g4blgui "-Wl,-rpath,@executable_path/../lib")
+	set(CMAKE_SKIP_RPATH ON)
+endif()
+target_link_libraries(g4blgui Qt4::QtGui ${LIBS})
+
+install(TARGETS g4blgui RUNTIME DESTINATION bin)
+# Qt plugins 
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+	### no idea why this cannot find the plugins
+	#install(DIRECTORY ${QT_PLUGINS_DIR}/imageformats
+	#        DESTINATION ${INSTALL_DIR}/plugins USE_SOURCE_PERMISSIONS)
+	install(DIRECTORY /usr/local/Cellar/qt/4.8.7_2/plugins/imageformats
+		/usr/local/Cellar/qt/4.8.7_2/plugins/bearer
+		DESTINATION plugins USE_SOURCE_PERMISSIONS)
+endif()

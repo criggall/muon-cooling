@@ -1,0 +1,25 @@
+=reweightprocess (15 sec)
+
+=platform WINDOWS
+=omit needs awk on WINDOWS
+=platform
+
+=file test093.in 
+param histoFile=""
+physics QGSP_BERT 
+reweightprocess process=Decay ratio=2
+beam gaussian particle=pi+ meanMomentum=200 nEvents=10000
+box end height=1 width=1 length=1
+place end z=100000
+beamlossntuple test093 format=ascii require=ParentID==0
+=file test093.awk 
+# print the average of column 3 (z)
+BEGIN	{ n=0; sum=0; w=0; sumw=0;}
+/^#/	{ next; }
+	{ ++n; sum += $3; w += $12; sumw += $3 * $12; }
+END	{ print sum/n, sumw/w, n, w; }
+=file test093.good 
+5613.61 11500
+=run g4bl test093.in 
+=run awk -f test093.awk <test093.txt >test093.avg
+=compare test093.avg test093.good 250 3000

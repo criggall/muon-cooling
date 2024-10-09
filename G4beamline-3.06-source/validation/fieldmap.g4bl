@@ -1,0 +1,7 @@
+#	fieldmap.g4bl - test fieldmap
+physics QGSP_BERT
+fieldmap Map file=fieldmap.B
+place Map z=0
+box Vis height=1000 width=1000 length=1000 color=1,1,1,0.2
+place Vis x=500 y=500 z=500
+fieldlines center=500,500,500 radius=500 square=1 exit=1 nLines=500 N=50

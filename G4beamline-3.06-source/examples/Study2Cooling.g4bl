@@ -1,0 +1,69 @@
+*	Study2Cooling.g4bl
+*
+* Simple example g4beamline file:
+*	There are 4 Study2 cooling cells.
+*	This version uses a Gaussian beam
+
+# trace the first 10 tracks
+trace nTrace=10 
+
+# QGSP is the "default" physics use-case for HEP
+physics QGSP disable=Decay
+
+beam gaussian meanMomentum=200 sigmaP=-10 sigmaXp=0.01 sigmaYp=0.01  \
+	nEvents=100 beamZ=0
+reference particle=mu+ referenceMomentum=200.0 beamZ=0
+trackcuts kineticEnergyCut=50.0 killSecondaries=1
+
+# define the solenoids (use individual Focus solenoids for alternate=1 to work)
+coil default material=Cu dR=5.0 dZ=5.0 
+solenoid default alternate=1 color=1,1,0
+coil Focus1 innerRadius=330.0 outerRadius=505.0 length=167.0 maxR=330.0
+coil Coupl1 innerRadius=770.0 outerRadius=850.0 length=330.0 maxR=770.0
+solenoid USFocus coilName=Focus1 current=75.20
+solenoid DSFocus coilName=Focus1 current=-75.20
+solenoid Coupl coilName=Coupl1 current=-98.25
+
+# define a detector for the center of each absorber
+virtualdetector Det radius=179.9 length=1
+
+# define the absorber with flat Al windows
+tubs Win1 outerRadius=180.0 length=0.360 material=Al color=0.0,1.0,0.0
+tubs LH2 length=350.0 outerRadius=180.0 color=1.0,0.0,1.0 material=LH2
+
+# place the virtualdetector into the absorber, so its front is in the center
+place Det z=0.5 parent=LH2 color=1,1,1
+
+group Abs radius=0
+	place Win1
+	place LH2
+	place Win1
+endgroup
+
+# tune the RF Gradient
+tune Grad z0=100 z1=11300 initial=15 step=0.1 expr=Pz1-Pz0 tolerance=0.001
+
+# define the pillbox RF cavity, and put 4 of them into a linac
+pillbox RF innerLength=466.0 frequency=0.20125 maxGradient=Grad \
+	irisRadius=160.0 win1Thick=0.300 win2Thick=0.700 wallThick=5.0 \
+	winMat=Be collarThick=5.0 phaseAcc=40.0 maxStep=10.0
+group Linac1 radius=0
+	place RF rename=RF# copies=4
+endgroup
+
+# define one cooling cell
+group Cell length=2750.0
+	place Abs z=-1033.0
+	place USFocus z=-1291.5 rename=Focus
+	place DSFocus z=-774.5 rename=Focus
+	place Coupl z=342.0 rename=Coupl
+	place Linac1 z=342.0 rename=''
+endgroup
+
+tubs Spacer length=200 outerRadius=300 material=Vacuum
+place Spacer z=100
+
+# place 4 cells
+place Cell copies=4 rename=C#
+
+place Spacer

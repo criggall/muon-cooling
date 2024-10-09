@@ -1,0 +1,9 @@
+#	mudecay.in
+physics QGSP_BERT spinTracking=1 
+setdecay mu- lifetime=0.001
+setdecay mu+ lifetime=0.001
+param histoFile=Pol=0,1,0
+beam gaussian polarization=0,0,1 particle=mu+ meanMomentum=3094 nEvents=100000
+newparticlentuple New require=PDGid==11||PDGid==-11
+box B height=1000 width=1000 length=1000
+place B z=0

@@ -1,0 +1,38 @@
+=torus (2 sec)
+
+=file test064.in 
+param histoFile=""
+physics QGSP doStochastics=0
+beam ascii filename=test064.beam nEvents=9
+torus Torus innerRadius=110 outerRadius=150 majorRadius=200 kill=1 \
+	initialPhi=0 finalPhi=60
+place Torus z=50 x=-100 rotation=X90
+beamlossntuple test064 format=ascii file=test064.txt
+=file test064.beam 
+#BLTrackFile test064 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 0 1 0 1.0000
+100.0 0.000 0.000 0.000 0.000 200.000 0.375 -13 1 1 0 2.0000
+0.000 100.0 0.000 0.000 0.000 200.000 0.375 -13 2 1 0 2.0000
+100.0 100.0 0.000 0.000 0.000 200.000 0.375 -13 3 1 0 3.0000
+-100. 0.000 0.000 0.000 0.000 200.000 0.375 -13 4 1 0 2.0000
+0.000 -100. 0.000 0.000 0.000 200.000 0.375 -13 5 1 0 2.0000
+-100. -100. 0.000 0.000 0.000 200.000 0.375 -13 6 1 0 3.0000
+100.0 -100. 0.000 0.000 0.000 200.000 0.375 -13 7 1 0 3.0000
+-100. 100.0 0.000 0.000 0.000 200.000 0.375 -13 8 1 0 3.0000
+=file test064.good 
+#BLTrackFile NTuple/test064
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 700.678 0 0 200 3.01832 -13 0 1 0 1
+100 0 286.854 0 0 200 1.45716 -13 1 1 0 2
+0 100 50 0 0 200 0.563625 -13 2 1 0 2
+100 100 192.935 0 0 200 1.10285 -13 3 1 0 3
+-100 0 700.678 0 0 200 3.01832 -13 4 1 0 2
+0 -100 50 0 0 200 0.563625 -13 5 1 0 2
+-100 -100 700.678 0 0 200 3.01832 -13 6 1 0 3
+100 -100 192.935 0 0 200 1.10285 -13 7 1 0 3
+-100 100 700.678 0 0 200 3.01832 -13 8 1 0 3
+=run g4bl test064.in 
+=compare test064.txt test064.good

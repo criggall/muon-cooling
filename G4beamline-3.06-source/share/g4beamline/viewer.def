@@ -1,0 +1,313 @@
+#	viewer.def - graphics viewer definitions for g4beamline
+#
+#	Each [section] defines the commands for one viewer.
+#	Lines beginning with "init:" are executed once, 
+#	lines beginning with "beginRun:" are excuted at the beginning
+#	of each run, and lines beginning with
+#	"endRun:" are executed at the end of each run. Lines
+#	beginning with "help:" are simply printed. Lines beginning with
+#	"include:" name another section to include in this one.
+#	Lines beginning with "load:" will load a shared object.
+#
+#	viewer=best will be replaced by OIX or OIWin32 in g4beamline.cc.
+#
+#	NOTE: the commands in this file just setup the viewer. You are then
+#	given a Geant4 Idle> prompt to which you should respond:
+#		/run/beamOn 100
+#	(or however many events you want in the picture). Each run is a
+#	single picture, and you can do multiple beamOn commands.
+#	This is done automatically in thhe G4blGui.
+
+[ATree]
+help: Simple ASCII dump of the geometry hierarchy.
+init:/vis/open ATree
+init:/vis/ASCIITree/verbose  13
+init:/vis/drawVolume
+init:/vis/viewer/flush
+
+
+[DAWNFILE]
+help:With the programs dawn and DAWN_GUI in your PATH, this viewer sort-of acts
+help:like an interactive viewer. At the end of a beamOn command it runs dawn
+help:with its gui, which can display the scene either to a .eps/.ps file or
+help:on the display. To display on your screen select device OpenGL. Pushing
+help:the OK button closes the GUI and opens the drawing window (you
+belp:must click in the window that pops up to start the display).
+help:
+help:Once a window is displayed, you can click the middle mouse button in it
+help:to being up another GUI window in which you can change parameters and
+help:redraw the scene in a new window (manually close the old ones).
+init:/tracking/storeTrajectory 1
+init:/vis/scene/create
+init:/vis/sceneHandler/create DAWNFILE
+init:/vis/viewer/create
+init:/vis/scene/add/volume
+init:/vis/viewer/set/culling global false
+init:/vis/scene/add/trajectories
+init:/vis/scene/endOfEventAction accumulate
+#init:/vis/scene/notifyHandlers
+init:/run/beamOn 1
+init:/vis/viewer/update
+
+[GAGTree]
+help: Not yet implemented in viewer.def
+
+[HepRepFile]
+help:The HepRepFile driver is for interfacing to the Wired event viewer.
+help:To use it, you must install both Java and Wired, see
+help: http://www.slac.stanford.edu/BFROOT/www/Computing/Graphics/Wired
+help:
+help:This is an offline event viewer, and the driver merely writes files
+help:named G4Data0.heprep, incrementing the event number in the name for
+help:each event. At present each event is placed into its own file, which
+help:includes the complete world geometry as well.
+#init:/tracking/storeTrajectory 1
+#init:/vis/scene/create
+#init:/vis/sceneHandler/create HepRepFile
+#init:/vis/viewer/create
+#init:/vis/scene/add/volume
+#init:/vis/viewer/set/culling global false
+#init:/vis/scene/add/trajectories
+#init:/vis/scene/endOfEventAction accumulate
+##init:/vis/scene/notifyHandlers
+#init:/run/beamOn 1
+#init:/vis/viewer/update
+init:/vis/open HepRepFile
+init:/vis/drawVolume
+init:/vis/scene/add/trajectories
+init:/vis/scene/endOfEventAction accumulate
+
+[Wired]
+include:HepRepFile
+
+[Wired3]
+include:HepRepFile
+
+[HepRepXML]
+help:The HepRepXML driver is for interfacing to the Wired event viewer.
+help:To use it, you must install both Java and Wired, see
+help: http://www.slac.stanford.edu/BFROOT/www/Computing/Graphics/Wired
+help:
+help:This is an offline event viewer, and the driver merely writes files
+help:named G4Data0.heprep, incrementing the event number in the name for
+help:each event. At present each event is placed into its own file, which
+help:includes the complete world geometry as well.
+init:/tracking/storeTrajectory 1
+init:/vis/scene/create
+init:/vis/sceneHandler/create HepRepXML
+init:/vis/viewer/create
+init:/vis/scene/add/volume
+init:/vis/viewer/set/culling global false
+init:/vis/scene/add/trajectories
+init:/vis/scene/endOfEventAction accumulate
+#init:/vis/scene/notifyHandlers
+init:/run/beamOn 1
+init:/vis/viewer/update
+
+[RayTracer]
+help:The RayTracer viewer generates JPEG files.
+help:It does not replot for a /vis/viewer/flush command in endRun:, so
+help:you need to manually flush it after each /run/beamOn command.
+help:
+help:Sometimes it generates a segmentation violation, most often when
+help:the viewpoint phi is set >90....
+init:/tracking/storeTrajectory 1
+init:/vis/open RayTracer
+init:/vis/viewer/set/style surface
+init:/vis/drawVolume
+init:/vis/viewer/set/culling global false
+init:/vis/viewer/set/viewpointThetaPhi 90 90 deg
+init:/vis/scene/add/trajectories
+init:/vis/scene/endOfEventAction accumulate
+
+[VRML1FILE]
+init:/vis/open VRML1FILE
+init:/vis/viewer/set/auxiliaryEdge true
+#init:/vis/viewer/set/style wireframe
+init:/vis/viewer/set/style surface
+init:/vis/viewer/set/viewpointThetaPhi 0 0 deg
+init:/vis/drawVolume
+init:/tracking/storeTrajectory 1
+init:/vis/scene/add/trajectories
+init:/vis/scene/endOfEventAction accumulate -1
+init:/vis/viewer/set/hiddenMarker true
+
+[VRML2FILE]
+init:/vis/open VRML2FILE
+init:/vis/viewer/set/auxiliaryEdge true
+#init:/vis/viewer/set/style wireframe
+init:/vis/viewer/set/style surface
+init:/vis/viewer/set/viewpointThetaPhi 0 0 deg
+init:/vis/drawVolume
+init:/tracking/storeTrajectory 1
+init:/vis/scene/add/trajectories
+init:/vis/scene/endOfEventAction accumulate -1
+init:/vis/viewer/set/hiddenMarker true
+
+[OGLIX]
+help: Not yet implemented in viewer.def
+
+[OGLSX]
+init:/vis/open OGLSX
+init:/vis/viewer/set/auxiliaryEdge true
+#init:/vis/viewer/set/style wireframe
+init:/vis/viewer/set/style surface
+init:/vis/viewer/set/viewpointThetaPhi 90 90 deg
+init:/vis/drawVolume
+init:/tracking/storeTrajectory 1
+init:/vis/scene/add/trajectories
+init:/vis/scene/endOfEventAction accumulate -1
+init:/vis/viewer/set/hiddenMarker true
+
+[OGLIXm]
+help:The OGLIXm driver is user-friendly, in that it has graphical widgets
+help:that permit the user to rotate, zoom, and pan the display (rather than
+help:having to guess what the viewer commands will do).
+help:It has several bugs, but is still quite useful:
+help: 1. It often replots unnecessarily -- If you drag a window in
+help:    front of it, it may replot hundreds of times (several minutes).
+help:    But if the menu is not active it does not replot at all.
+help: 2. phi=90 deg screws up. phi=89.9 is 180 degrees in theta from phi=90.1.
+help: 3. Rotating the camera is confusing at best; rotate the object --
+help:    this means the light and camera remain fixed wrt the screen, as do
+help:    the rotation axes.
+help: 4. It cannot draw trajectories and also listen to the menu.
+help:    To activate the menu do: /vis/viewer/flush
+help:    To exit the viewer back to an "Idle>" prompt, select the
+help:    "Miscellany" menu and Exit.
+help: 5. To display event trajectories, do /run/beamOn 1
+help:    (or however many events you want). Each /run/beamOn command redraws
+help:    the world and then draws the trajectories; menus are dead.
+help:    Trajectories are drawn on top of the detector (in 2-d), rather than
+help:    inside it (in the 3-d sense).
+init:/tracking/storeTrajectory 1
+init:/vis/open OGLIXm
+init:/vis/viewer/set/style surface
+init:/vis/drawVolume
+init:/vis/viewer/set/culling global false
+init:/vis/viewer/set/viewpointThetaPhi 90 90.1 deg
+init:/vis/scene/add/trajectories
+init:/vis/scene/endOfEventAction accumulate
+init:/vis/viewer/flush
+
+[OGLSXm]
+help: Not yet implemented in viewer.def
+
+[OIX]
+help:
+help:
+help:The OpenInventor driver is user-friendly, in that it has graphical widgets
+help:that permit the user to rotate, zoom, and pan the display (rather than
+help:having to guess what the viewer commands will do). This is by far the most
+help:user-friendly visualization driver available.
+help:
+help:See the G4Beamline Users Guide for a description of the menus and mouse
+help:controls available.
+help:
+help:
+init:/vis/open OIX
+init:/vis/viewer/set/auxiliaryEdge true
+init:/vis/viewer/set/style wireframe
+init:/vis/viewer/set/style surface
+init:/vis/viewer/set/viewpointThetaPhi 0 0 deg
+init:/vis/drawVolume
+init:/tracking/storeTrajectory 1
+init:/vis/scene/add/trajectories
+init:/vis/scene/endOfEventAction accumulate
+
+[OIXE]
+help:
+help:
+help:The OpenInventor driver is user-friendly, in that it has graphical widgets
+help:that permit the user to rotate, zoom, and pan the display (rather than
+help:having to guess what the viewer commands will do). This is by far the most
+help:user-friendly visualization driver available.
+help:
+help:See the G4Beamline Users Guide for a description of the menus and mouse
+help:controls available.
+help:
+help:
+init:/vis/open OIXE
+init:/vis/viewer/set/auxiliaryEdge true
+init:/vis/viewer/set/style wireframe
+init:/vis/viewer/set/style surface
+init:/vis/viewer/set/viewpointThetaPhi 0 0 deg
+init:/vis/drawVolume
+init:/tracking/storeTrajectory 1
+init:/vis/scene/add/trajectories
+init:/vis/scene/endOfEventAction accumulate
+
+
+[OIWin32]
+help:The OpenInventor driver is user-friendly, in that it has graphical widgets
+help:that permit the user to rotate, zoom, and pan the display (rather than
+help:having to guess what the viewer commands will do). This is by far the most
+help:user-friendly visualization driver available.
+help:
+help:See the G4Beamline Users Guide for a description of the menus and mouse
+help:controls available.
+init:/vis/open OIWin32
+init:/vis/viewer/set/auxiliaryEdge true
+init:/vis/viewer/set/style wireframe
+init:/vis/viewer/set/style surface
+init:/vis/viewer/set/viewpointThetaPhi 0 0 deg
+init:/vis/drawVolume
+init:/tracking/storeTrajectory 1
+init:/vis/scene/add/trajectories
+init:/vis/scene/endOfEventAction accumulate
+
+
+[OIV]
+# an alternate name for OIX
+include:OIX
+
+[OGLIWin32]
+help:More to come....
+init:/vis/open OGLIWin32
+init:/vis/viewer/set/auxiliaryEdge true
+init:/vis/viewer/set/style wireframe
+init:/vis/viewer/set/style surface
+init:/vis/viewer/set/viewpointThetaPhi -89.9 0 deg
+init:/vis/drawVolume
+init:/tracking/storeTrajectory 1
+init:/vis/scene/add/trajectories
+init:/vis/scene/endOfEventAction accumulate
+
+[Qt]
+include:OGLSQt
+
+[OGLIQt]
+init:/vis/open OGLIQt
+init:/vis/viewer/set/auxiliaryEdge true
+#init:/vis/viewer/set/style wireframe
+init:/vis/viewer/set/style surface
+init:/vis/viewer/set/viewpointThetaPhi 0 0 deg
+init:/vis/drawVolume
+init:/tracking/storeTrajectory 1
+init:/vis/scene/add/trajectories
+init:/vis/scene/endOfEventAction accumulate -1
+init:/vis/viewer/set/hiddenMarker true
+
+[OGLSQt]
+init:/vis/open OGLSQt
+init:/vis/viewer/set/auxiliaryEdge true
+#init:/vis/viewer/set/style wireframe
+init:/vis/viewer/set/style surface
+init:/vis/viewer/set/viewpointThetaPhi 0 0 deg
+init:/vis/drawVolume
+init:/tracking/storeTrajectory 1
+init:/vis/scene/add/trajectories
+init:/vis/scene/endOfEventAction accumulate -1
+init:/vis/viewer/set/hiddenMarker true
+
+[gMocrenFile]
+init:/vis/open gMocrenFile
+init:/vis/viewer/set/auxiliaryEdge true
+#init:/vis/viewer/set/style wireframe
+init:/vis/viewer/set/style surface
+init:/vis/viewer/set/viewpointThetaPhi 0 0 deg
+init:/vis/drawVolume
+init:/tracking/storeTrajectory 1
+init:/vis/scene/add/trajectories
+init:/vis/scene/endOfEventAction accumulate -1
+init:/vis/viewer/set/hiddenMarker true

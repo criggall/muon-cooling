@@ -1,0 +1,80 @@
+=Zcl (2 sec)
+
+=file test054.in 
+physics QGSP 
+beam ascii filename=test054.beam nEvents=3
+# 0
+box B width=100 length=100 height=100
+place B
+# 100
+zntuple format=ASCII z=$Zcl file=test054.Z$Zcl.txt
+place B
+# 200
+zntuple format=ASCII z=$Zcl file=test054.Z$Zcl.txt
+place B z=500
+place B z=2000 coordinates=global
+# 550
+zntuple format=ASCII z=$Zcl file=test054.Z$Zcl.txt
+place B z=$Zcl front=1
+group G
+	place B copies=5
+endgroup
+# 650
+zntuple format=ASCII z=$Zcl file=test054.Z$Zcl.txt
+place B
+# 750
+zntuple format=ASCII z=$Zcl file=test054.Z$Zcl.txt
+place G
+# 1250
+zntuple format=ASCII z=$Zcl file=test054.Z$Zcl.txt
+=file test054.beam 
+#BLTrackFile test054 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 10.000 0.000 200.000 0.375 -13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 10.000 200.000 0.375 -13 2 1 0 2.0000
+=file test054.good 
+#BLTrackFile NTuple/Z100
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 100 0 0 200 0.752251 -13 0 1 0 1
+5 0 100 10 0 200 0.752619 -13 1 1 0 2
+0 5 100 0 10 200 0.752619 -13 2 1 0 2
+#BLTrackFile NTuple/Z1250
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 1250 0 0 200 5.09064 -13 0 1 0 1
+62.5 0 1250 10 0 200 5.09524 -13 1 1 0 2
+0 62.5 1250 0 10 200 5.09524 -13 2 1 0 2
+#BLTrackFile NTuple/Z200
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 200 0 0 200 1.1295 -13 0 1 0 1
+10 0 200 10 0 200 1.13024 -13 1 1 0 2
+0 10 200 0 10 200 1.13024 -13 2 1 0 2
+#BLTrackFile NTuple/Z550
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 550 0 0 200 2.44988 -13 0 1 0 1
+27.5 0 550 10 0 200 2.45191 -13 1 1 0 2
+0 27.5 550 0 10 200 2.45191 -13 2 1 0 2
+#BLTrackFile NTuple/Z650
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 650 0 0 200 2.82713 -13 0 1 0 1
+32.5 0 650 10 0 200 2.82953 -13 1 1 0 2
+0 32.5 650 0 10 200 2.82953 -13 2 1 0 2
+#BLTrackFile NTuple/Z750
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 750 0 0 200 3.20438 -13 0 1 0 1
+37.5 0 750 10 0 200 3.20715 -13 1 1 0 2
+0 37.5 750 0 10 200 3.20715 -13 2 1 0 2
+=run g4bl test054.in 
+=platform LINUX DARWIN
+=run cat test054.Z*.txt >test054.txt
+=platform WINDOWS
+=run copy test054.Z*.txt test054.txt
+=platform
+=compare test054.txt test054.good

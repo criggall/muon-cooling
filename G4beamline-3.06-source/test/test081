@@ -1,0 +1,29 @@
+=veto argument to ntuple command (2 sec)
+
+=file test081.in 
+param histoFile=""  steppingVerbose=0
+physics QGSP doStochastics=0
+beam ascii filename=test081.beam
+cylinder End outerRadius=200 length=1
+place End z=100
+newparticlentuple All format=ascii file=test081.All.txt
+newparticlentuple Electron require=PDGid==11 format=ascii \
+	file=test081.Electron.txt
+ntuple Others detectors=All veto=Electron format=ascii file=test081.txt \
+	perTrack=1
+=file test081.beam 
+#BLTrackFile test081 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.0 -13 0 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 202.000 0.0 -13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 0.000 198.000 0.0 -13 2 1 0 2.0000
+0.000 0.000 0.000 0.000 0.000 200.000 0.0 11 3 1 0 1.0000
+=file test081.good 
+# test081
+#All_x All_y All_z All_Px All_Py All_Pz All_t All_PDGid All_EventID All_TrackID All_ParentID All_Weight
+0 0 0 0 0 200 0 -13 0 1 0 1 
+0 0 0 0 0 202 0 -13 1 1 0 2 
+0 0 0 0 0 198 0 -13 2 1 0 2 
+=run g4bl test081.in 
+=compare test081.txt test081.good 0.02 0.02 0.02 0.03 0.03 0.03 0.005 0.5 0.5 0.5 0.5 0.1

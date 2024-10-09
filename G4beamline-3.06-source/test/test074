@@ -1,0 +1,50 @@
+=pillbox fixed timeOffset (2 sec)
+=require gsl
+
+=file test074.in 
+param histoFile="" steppingFormat="N CLX P STEP VOL PROCESS"
+physics QGSP doStochastics=0
+beam ascii filename=test074.beam nEvents=9
+reference referenceMomentum=200 particle=mu+ beamZ=0.0
+tune Grad z0=100 z1=3000 initial=12 step=0.1 expr=Pz1-210 \
+	tolerance=0.001
+// 201.25 MHz MICE cavity
+pillbox Pbox maxGradient=Grad frequency=0.20125 innerLength=430 \
+	pipeThick=3 wallThick=3 irisRadius=210 collarRadialThick=25 \
+	collarThick=12.5 win1Thick=0.38 win1OuterRadius=140 \
+	win2Thick=0.38 winMat=Be phaseAcc=40 skinDepth=0.1
+place Pbox z=1000 timeOffset=5.4627
+place Pbox timeOffset=7.1752
+place Pbox timeOffset=8.8826
+place Pbox timeOffset=10.5851
+virtualdetector format=BLTrackFile AF radius=200 length=1 \
+	color=1,1,1 file=test074.txt
+place AF z=4000
+=file test074.beam 
+#BLTrackFile test074 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.0 -13 0 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 202.000 0.0 -13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 0.000 198.000 0.0 -13 2 1 0 2.0000
+0.000 0.000 0.000 0.000 0.000 200.000 0.3 -13 0 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 202.000 0.3 -13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 0.000 198.000 0.3 -13 2 1 0 2.0000
+0.000 0.000 0.000 0.000 0.000 200.000 -0.3 -13 0 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 202.000 -0.3 -13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 0.000 198.000 -0.3 -13 2 1 0 2.0000
+=file test074.good 
+#BLTrackFile VirtualDetector/AF
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0.00 0.00 3999.50 0.000 0.000 210.000 14.993 -13 0 1 0 1.0000
+0.00 0.00 3999.50 0.000 0.000 212.282 14.961 -13 1 1 0 2.0000
+0.00 0.00 3999.50 0.000 0.000 207.705 15.026 -13 2 1 0 2.0000
+0.00 0.00 3999.50 0.000 0.000 202.603 15.357 -13 0 1 0 1.0000
+0.00 0.00 3999.50 0.000 0.000 204.955 15.322 -13 1 1 0 2.0000
+0.00 0.00 3999.50 0.000 0.000 200.238 15.393 -13 2 1 0 2.0000
+0.00 0.00 3999.50 0.000 0.000 215.669 14.648 -13 0 1 0 1.0000
+0.00 0.00 3999.50 0.000 0.000 217.846 14.618 -13 1 1 0 2.0000
+0.00 0.00 3999.50 0.000 0.000 213.481 14.679 -13 2 1 0 2.0000
+=run g4bl test074.in 
+=compare test074.txt test074.good 0.02 0.02 0.02 0.03 0.03 0.03 0.005 0.5 0.5 0.5 0.5 0.1

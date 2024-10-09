@@ -1,0 +1,25 @@
+=spin tracking (2 sec)
+
+=file test095.in 
+param histoFile=""
+physics QGSP_BERT spinTracking=1 disable=Decay
+beam ascii filename=test095.beam polarization=0,0,1
+virtualdetector D height=100 width=100 length=0.010 format=asciiExtended file=test095.txt kill=1
+place D z=-0.01 
+box B height=1 width=100000 length=100000
+place B z=0 y=500
+fieldexpr F height=1000 width=100000 length=100000 By=1.4513
+place F z=0
+=file test095.beam 
+#BLTrackFile test095 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 3094.000 0.0 -13 1 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 3094.000 0.0 -11 3 1 0 1.0000
+=file test095.good 
+#BLTrackFile2 D
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight Bx By Bz Ex Ey Ez ProperTime PathLength PolX PolY PolZ InitX InitY InitZ InitT InitKE
+7.96511e-06 0 -0.015 0.0065322 0 3094 149.126 -13 1 1 0 1 0 1.4513 0 0 0 0 5.08962 44680.9 -0.212997 0 0.977053 0 0 0 0 2990.15 
+7.96494e-06 0 -0.015 0.0065322 0 3094 149.04 -11 3 1 0 1 0 1.4513 0 0 0 0 0.0246151 44680.9 -0.134479 0 0.990916 0 0 0 0 3093.49 
+=run g4bl test095.in 
+=compare test095.txt test095.good 1 1 1 1 1 1 1 1 1 1 1 1 .001 .001 .001 .001 .001 .001 .1 .1 0.001 0.001 0.001 0 0 0 0 1

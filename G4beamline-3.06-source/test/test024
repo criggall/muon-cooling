@@ -1,0 +1,39 @@
+=virtualdetector NTuple name test (1 sec)
+
+=file test024.in 
+param histoFile=""
+physics QGSP doStochastics=0
+beam ascii filename=test024.beam nEvents=9
+virtualdetector AF format=BLTrackFile radius=200 length=1 color=1,1,1 
+group test024.
+	place AF
+endgroup
+place test024. z=100
+=file test024.beam 
+#BLTrackFile test024 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 10.000 0.000 200.000 0.375 -13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 10.000 200.000 0.375 -13 2 1 0 2.0000
+0.000 0.000 0.000 10.000 10.000 200.000 0.375 -13 3 1 0 3.0000
+0.000 0.000 0.000 -10.000 0.000 200.000 0.375 -13 4 1 0 2.0000
+0.000 0.000 0.000 0.000 -10.000 200.000 0.375 -13 5 1 0 2.0000
+0.000 0.000 0.000 -10.000 -10.000 200.000 0.375 -13 6 1 0 3.0000
+0.000 0.000 0.000 -10.000 10.000 200.000 0.375 -13 7 1 0 3.0000
+0.000 0.000 0.000 10.000 -10.000 200.000 0.375 -13 8 1 0 3.0000
+=file test024.good 
+#BLTrackFile VirtualDetector/test024.AF
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 99.5 0 0 200 0.750365 -13 0 1 0 1
+4.975 0 99.5 10 0 200 0.750731 -13 1 1 0 2
+0 4.975 99.5 0 10 200 0.750731 -13 2 1 0 2
+4.975 4.975 99.5 10 10 200 0.751098 -13 3 1 0 3
+-4.975 0 99.5 -10 0 200 0.750731 -13 4 1 0 2
+0 -4.975 99.5 0 -10 200 0.750731 -13 5 1 0 2
+-4.975 -4.975 99.5 -10 -10 200 0.751098 -13 6 1 0 3
+-4.975 4.975 99.5 -10 10 200 0.751098 -13 7 1 0 3
+4.975 -4.975 99.5 10 -10 200 0.751098 -13 8 1 0 3
+=run g4bl test024.in 
+=compare test024.AF.txt test024.good

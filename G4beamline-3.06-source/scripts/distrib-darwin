@@ -1,0 +1,112 @@
+#	distrib-Darwin -- construct a distribution for Mac OS X (Intel)
+#
+#	executed from top-level build directory, $1 = VERSION
+
+set -e
+
+if test -z "$1"
+then
+	echo VERSION must be specified
+	exit 1
+fi
+if test ! -x bin/g4bl
+then
+	echo wrong directory!
+	exit 1
+fi
+
+VERSION=$1
+DISTRIB=G4beamline-$1
+
+rm -fr staging $DISTRIB.dmg $DISTRIB.app
+
+# clean up a bit
+rm -fr doc/html doc/doxygen.log *.dat *.hst *.ldd \
+	examples/*.dat examples/*.hst examples/*.out \
+	examples/*.heprep* examples/*.root examples/test*.dir \
+	examples/zap* examples/*.swf examples/*.mov examples/*.avi \
+	*/old */OLD test/*.dir zap* 
+
+# create $DISTRIB dir
+mkdir $DISTRIB.app $DISTRIB.app/Contents $DISTRIB.app/Contents/MacOS \
+	$DISTRIB.app/Contents/Resources
+
+# Destination directory
+DIR=$DISTRIB.app/Contents
+
+cp -Lp share/g4beamline/g4blicon.icns $DIR/Resources/G4beamline.icns
+cp -Lp Resources/qt.conf $DIR/Resources
+cp -Lp bin/g4blgui $DIR/MacOS
+cp -RLp bin doc examples lib plugins share test validation $DIR
+rm -fr $DIR/share/*cache
+if test -d root; then cp -Rp root $DIR; fi
+
+# G4beamline.app Info.plist
+cat >$DIR/Info.plist <<!
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>g4bl</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>G4beamline.icns</string>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>text/g4beamline</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>G4beamline file</string>
+			<key>CFBundleTypeOSTypes</key>
+			<array>
+				<string>g4bl</string>
+			</array>
+			<key>CFBundleTypeRole</key>
+			<string>Simulation</string>
+		</dict>
+	</array>
+	<key>CFBundleExecutable</key>
+	<string>g4blgui</string>
+	<key>CFBundleGetInfoString</key>
+	<string>G4beamline $VERSION</string>
+	<key>CFBundleIconFile</key>
+	<string>G4beamline.icns</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.muonsinc.g4beamline</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>$VERSION</string>
+	<key>CFBundleName</key>
+	<string>G4beamline</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>$VERSION</string>
+	<key>CFBundleSignature</key>
+	<string>Viewer</string>
+	<key>CFBundleVersion</key>
+	<string>$VERSION</string>
+</dict>
+</plist>
+!
+
+echo Creating $DISTRIB.dmg...
+mkdir staging 
+cp -Rp $DISTRIB.app staging
+cp -Rp examples staging/G4beamlineExamples
+cp README.txt staging
+# with root, size is ~ 400MB, so double that to create the disk image 
+# (hdiutil often calculates the size incorrectly and fails).
+# Extra space costs nothing.
+hdiutil create -size 800m \
+	-srcfolder staging \
+	-volname $DISTRIB $DISTRIB.dmg
+rm -fr staging
+
+# leave $DISTRIB.app where it is, as we often use it on tjrob.dhcp.fnal.gov

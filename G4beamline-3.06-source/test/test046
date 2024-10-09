@@ -1,0 +1,109 @@
+=do loops and complex (multi-line) if-s (1 sec)
+
+=file test046.in 
+	physics QGSP
+	beam gaussian
+	box NotEmpty height=1 width=1 length=1
+	place NotEmpty z=0
+	define Macro "param m=$$i"
+	do i 1 5
+		do j 10 1 -2
+			param k=$i,$j
+		enddo
+		Macro
+		if $i==3 "param n=$$j"
+	enddo
+	do i 1 0
+		param k=INVALID
+		do j 10 11 -1
+			param k=INVALID
+			do k 1 10
+				param M=INVALID
+			enddo
+		enddo
+	enddo
+	if 1
+		param M=start
+	endif
+	do i 0 6
+		if $i==1
+			param M=one
+		elseif $i==2
+			if 0 exit
+			param M=two
+		elseif $i==3
+			param M=three
+			if $i!=3
+				param Nested=BAD
+			else
+				param Nested=OK
+			endif
+		elseif $i==4
+			param M=four
+			if $i==4 'param SimpleIf=OK'
+		else
+			param M=other
+			do j 1 3
+				param k=$j
+			enddo
+		endif
+	enddo
+	param n=DONE
+	# quick way to exit without running
+	printfield type=print field=Bz layout=zx drow=20 dcol=20 \
+		nrow=1 ncol=1 exit=1
+=file test046.good 
+param        k             1,10
+param        k             1,8
+param        k             1,6
+param        k             1,4
+param        k             1,2
+param        m             1
+param        k             2,10
+param        k             2,8
+param        k             2,6
+param        k             2,4
+param        k             2,2
+param        m             2
+param        k             3,10
+param        k             3,8
+param        k             3,6
+param        k             3,4
+param        k             3,2
+param        m             3
+param        n             2
+param        k             4,10
+param        k             4,8
+param        k             4,6
+param        k             4,4
+param        k             4,2
+param        m             4
+param        k             5,10
+param        k             5,8
+param        k             5,6
+param        k             5,4
+param        k             5,2
+param        m             5
+param        M             start
+param        M             other
+param        k             1
+param        k             2
+param        k             3
+param        M             one
+param        M             two
+param        M             three
+param        Nested        OK
+param        M             four
+param        SimpleIf      OK
+param        M             other
+param        k             1
+param        k             2
+param        k             3
+param        M             other
+param        k             1
+param        k             2
+param        k             3
+param        n             DONE
+=run g4bl test046.in 
+=grep "^param" g4bl.out test046.tmp
+=compare test046.tmp test046.good 

@@ -1,0 +1,7 @@
+*	bend.g4bl genericbend field lines
+physics QGSP_BERT
+genericbend B1 fieldWidth=500 fieldHeight=200 fieldLength=1000 ironWidth=1000 ironHeight=800 ironLength=1000 By=1 openAperture=1 ironColor=1,0,0,.5
+place B1 z=0
+fieldlines center=0,0,0 radius=2000 square=1 dl=1 nLines=400 exit=1
+fieldexpr F height=200 width=1000 length=2000 By=0.001001
+place F z=0

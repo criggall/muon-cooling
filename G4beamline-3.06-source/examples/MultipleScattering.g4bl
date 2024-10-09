@@ -1,0 +1,31 @@
+*	MultipleScattering.g4bl  TJR  1-FEB-2006  mu+ scattering
+#
+#	Multiple scattering and ionization energy loss in materials.
+#
+#	lengths are mm; momentum is MeV/c, density is gm/cm^3
+
+physics QGSP_BIC
+beam gaussian particle=mu+ meanMomentum=172 nEvents=100000
+trackcuts keep=mu+
+
+#param histoFile=Li
+#material Li A=6.941 Z=3 density=0.53
+#tubs Target outerRadius=100 material=Li length=12.78 color=1,0,0
+
+## material is Be2 because Be is already defined with slightly different density
+#param histoFile=Be
+#material Be2 A=9.012182 Z=4 density=1.85
+#tubs Target outerRadius=100 material=Be2 length=3.73 color=1,0,0
+
+#param histoFile=H2
+#material H2 A=1.00794 Z=1 density=0.0755
+#tubs Target outerRadius=100 material=H2 length=159 color=1,0,0
+
+param histoFile=C
+material C A=12.011 Z=6 density=1.69
+tubs Target outerRadius=100 material=C length=2.5 color=1,0,0
+
+virtualdetector Det radius=1000 color=0,1,0
+
+place Target z=100
+place Det z=200

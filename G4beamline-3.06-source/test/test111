@@ -1,0 +1,11 @@
+=rdecaysource command (2 sec)
+=file test111.in 
+physics FTFP_BERT
+sourceonly file=source.txt
+rdecaysource mode=1 duration=10 nEvents=100 
+param histoFile="" 
+material Pu238 Z=94 A=238.049553 density=19.816
+box B height=10 width=10 length=10 material=Pu238
+place B z=0
+=run  g4bl test111.in 
+=filelines source.txt > 200

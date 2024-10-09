@@ -1,0 +1,44 @@
+=Root input and output (6 sec)
+=require root
+
+=file test038.in1 
+param histoFile="test038"
+physics QGSP doStochastics=0
+beam ascii filename=test038.beam nEvents=9
+virtualdetector Det radius=200 length=1 color=1,1,1 format=root
+place Det z=100
+=file test038.in2 
+param histoFile="" steppingVerbose=1
+physics QGSP doStochastics=0
+beam root filename=test038.root category=VirtualDetector name=Det nEvents=99 beamZ=0.0
+virtualdetector AF format=BLTrackFile radius=200 length=1 filename=test038.txt
+place AF z=100
+=file test038.beam 
+#BLTrackFile test038 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 10.000 0.000 200.000 0.375 -13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 10.000 200.000 0.375 -13 2 1 0 2.0000
+0.000 0.000 0.000 10.000 10.000 200.000 0.375 -13 3 1 0 3.0000
+0.000 0.000 0.000 -10.000 0.000 200.000 0.375 -13 4 1 0 2.0000
+0.000 0.000 0.000 0.000 -10.000 200.000 0.375 -13 5 1 0 2.0000
+0.000 0.000 0.000 -10.000 -10.000 200.000 0.375 -13 6 1 0 3.0000
+0.000 0.000 0.000 -10.000 10.000 200.000 0.375 -13 7 1 0 3.0000
+0.000 0.000 0.000 10.000 -10.000 200.000 0.375 -13 8 1 0 3.0000
+=file test038.good 
+#BLTrackFile VirtualDetector/AF
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 99.5 0 0 200 1.12573 -13 0 1 0 1
+9.95 0 99.5 10 0 200 1.12646 -13 1 1 0 2
+0 9.95 99.5 0 10 200 1.12646 -13 2 1 0 2
+9.95 9.95 99.5 10 10 200 1.1272 -13 3 1 0 3
+-9.95 0 99.5 -10 0 200 1.12646 -13 4 1 0 2
+0 -9.95 99.5 0 -10 200 1.12646 -13 5 1 0 2
+-9.95 -9.95 99.5 -10 -10 200 1.1272 -13 6 1 0 3
+-9.95 9.95 99.5 -10 10 200 1.1272 -13 7 1 0 3
+9.95 -9.95 99.5 10 -10 200 1.1272 -13 8 1 0 3
+=run g4bl test038.in1 
+=run g4bl test038.in2 
+=compare test038.txt test038.good

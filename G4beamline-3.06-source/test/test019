@@ -1,0 +1,44 @@
+=geometrical args on place command (1 sec)
+
+=file test019.in
+param histoFile="" steppingVerbose=1 steppingFormat="TAG CL STEP VOL"
+param maxStep=100
+physics QGSP doStochastics=0
+beam ascii filename=test019.beam nEvents=1
+box Box
+tubs Tubs
+sphere Sphere
+particlefilter Filter radius=1 length=1 decay=pi+ 
+virtualdetector VirtDet radius=1 length=1
+place Box height=100 width=100 length=200 z=100
+place Tubs outerRadius=100 length=200 z=300
+place Sphere innerRadius=100 outerRadius=200 z=600
+place Filter radius=100 length=200 z=900 maxStep=50
+place VirtDet radius=100 length=200 z=1100 format=ascii file=test019.zap
+=file test019.beam 
+#BLTrackFile test019 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 0 1 0 1.0000
+=file test019.good 
+>      0.0      0.0    100.0  0.0000  0.0000   100.00 Box             
+>      0.0      0.0    200.0  0.0000  0.0000   100.00 Box             
+>      0.0      0.0    300.0  0.0000  0.0000   100.00 Tubs            
+>      0.0      0.0    400.0  0.0000  0.0000   100.00 Tubs            
+>      0.0      0.0    500.0  0.0000  0.0000   100.00 Sphere          
+>      0.0      0.0    600.0  0.0000  0.0000   100.00 World           
+>      0.0      0.0    700.0  0.0000  0.0000   100.00 World           
+>      0.0      0.0    800.0  0.0000  0.0000   100.00 Sphere          
+>      0.0      0.0    850.0  0.0000  0.0000    50.00 Filter          
+>      0.0      0.0    900.0  0.0000  0.0000    50.00 Filter          
+>      0.0      0.0    950.0  0.0000  0.0000    50.00 Filter          
+>      0.0      0.0   1000.0  0.0000  0.0000    50.00 Filter          
+>      0.0      0.0   1000.0  0.0000  0.0000     0.00 Filter          
+>      0.0      0.0   1100.0  0.0000  0.0000   100.00 VirtDet         
+>      0.0      0.0   1200.0  0.0000  0.0000   100.00 VirtDet         
+>      0.0      0.0   1300.0  0.0000  0.0000   100.00 World           
+>      0.0      0.0   1400.0  0.0000  0.0000   100.00 World           
+>      0.0      0.0   1500.0  0.0000  0.0000   100.00 World           
+>      0.0      0.0   1500.7  0.0000  0.0000     0.68 World           
+=run g4bl test019.in 
+=fileContainedIn test019.good g4bl.out

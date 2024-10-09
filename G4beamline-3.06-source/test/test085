@@ -1,0 +1,23 @@
+=synchrotron radiation (2 sec)
+
+=file test085.in 
+param histoFile=""  steppingVerbose=1
+physics QGSP_BERT synchrotronRadiation=1 
+beam ascii filename=test085.beam
+fieldexpr Field height=500 width=500 length=500 By=2
+place Field z=250
+box end height=1 width=1 length=1
+place end z=500
+beamlossntuple Loss format=ascii file=test085.txt require=PDGid==22
+=file test085.beam 
+#BLTrackFile test085 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 20000.000 0.0 11 0 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 20000.000 0.0 11 0 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 20000.000 0.0 11 0 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 20000.000 0.0 11 0 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 20000.000 0.0 11 0 1 0 1.0000
+=run g4bl test085.in 
+# check for at least 4 gammas per electron
+=filelines test085.txt > 20

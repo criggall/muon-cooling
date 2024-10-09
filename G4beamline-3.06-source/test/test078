@@ -1,0 +1,25 @@
+=setdecay command (2 sec)
+
+=file test078.in 
+param histoFile=""
+physics QGSP_BERT
+beam gaussian particle=deuteron meanMomentum=10000 nEvents=50
+beam gaussian particle=pi+ meanMomentum=10000 nEvents=100
+virtualdetector tau+ radius=5000 length=1 require=PDGid==-15
+virtualdetector mu+ radius=5000 length=1 require=PDGid==-13
+virtualdetector e+ radius=5000 length=1 require=PDGid==-11
+place tau+ z=10000 format=ascii file=test078.tau
+place mu+ format=ascii file=test078.mu
+place e+ format=ascii file=test078.e
+# change pi+ branching ratios, mu lifetime, and make deuterons decay(!)
+setdecay pi+ mu+,nu_mu=0.5 e+,nu_e=0.5 lifetime=0.1
+setdecay mu+ lifetime=1.0e20
+setdecay deuteron lifetime=0.1 tau+,gamma=1
+setdecay tau+ lifetime=1.0e20
+=file test078.good 
+NTuple tau+                  50 entries
+NTuple mu+                   50 entries
+NTuple e+                    49 entries
+=run g4bl test078.in 
+=grep ^NTuple g4bl.out test078.txt
+=compare test078.txt test078.good -1 -1 5 -1

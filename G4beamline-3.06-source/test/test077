@@ -1,0 +1,33 @@
+=unary minus in expressions (5 sec)
+
+=file test077.in
+physics QGSP doStochastics=0
+beam gaussian
+fieldexpr Field1 width=20 height=20 length=10 Bz=-1.0
+fieldexpr Field2 width=20 height=20 length=10 Bz='-1.0 * -1.0e0'
+fieldexpr Field3 width=20 height=20 length=10 Bz='-1.0--2.0e0^-(2.0e1/-10*-1)'
+fieldexpr Field4 width=20 height=20 length=10 Bz='-1.0 * -2^-2'
+fieldexpr Field5 width=20 height=20 length=10 \
+					Bz='1.0+-1*sin(-3.14159/2)'
+fieldexpr Field6 width=20 height=20 length=10 Bz='-1.0 - -2^-2'
+fieldexpr Field7 width=20 height=20 length=10 Bz='-1.0 * -2^-(2*sin(1.0*-1.5--1.0*-0.14159/2))'
+place Field1 z=5
+place Field2 z=15
+place Field3 z=25
+place Field4 z=35
+place Field5 z=45
+place Field6 z=55
+place Field7 z=65
+printfield type=print field=Bz layout=zx drow=10 dcol=10 \
+	nrow=8 ncol=1 z=5
+=file test077.good 
+z=5.000        -1.0000
+z=15.000        1.0000
+z=25.000       -0.7500
+z=35.000        0.2500
+z=45.000        2.0000
+z=55.000       -0.7500
+z=65.000        4.0000
+z=75.000        0.0000
+=run g4bl test077.in 
+=fileContainedIn test077.good g4bl.out

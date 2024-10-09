@@ -1,0 +1,14 @@
+=mu+ multiple scattering in Aluminum (5 sec)
+=file test004.in 
+param histoFile=""
+physics QGSP disable=Decay
+beam gaussian meanMomentum=400 particle=mu+ nEvents=10000
+box Al height=200 width=200 length=200 material=Al
+place Al z=200
+virtualdetector format=BLTrackFile AF radius=200 length=1 color=1,1,1 file=test004.txt
+place AF z=400
+=file test004.good
+-0.0612551 24.8528 -0.314877 24.2156 399.5 0 -0.309353 18.5084 0.111823 18.1262 278.62 89.8351 
+=run g4bl test004.in 
+=meanAndSigma test004.txt test004.meanandsigma 6
+=compare test004.good test004.meanandsigma 2 2 2 2 2 2 2 2 2 2 5 5

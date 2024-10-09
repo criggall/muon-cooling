@@ -1,0 +1,60 @@
+=tune By of six idealsectorbends (2 sec)
+
+=file test047.in 
+param histoFile="" steppingFormat="STEP GLOBAL CLX SEG B VOL PROCESS"
+param -unset angle=75 radius=500 initial=-1.3340
+physics QGSP doStochastics=0
+beam ascii filename=test047.beam nEvents=9
+reference referenceMomentum=200 particle=mu+ beamZ=0.0
+particlecolor reference=1,1,1
+tune Bfield z0=100 z1=8000 initial=$initial step=0.02 expr=Px1/Pz1 \
+	tolerance=0.00000001
+idealsectorbend B angle=$angle fieldInnerRadius=250 \
+	fieldOuterRadius=750 fieldCenterRadius=$radius fieldHeight=500 \
+	ironInnerRadius=200 ironOuterRadius=1000 ironHeight=1000 \
+	fieldMaterial=Vacuum kill=1 ironColor=1,0,0
+param L=3.14159265359*$angle/180*$radius
+place B z=2000 rename=B1 By=Bfield
+cornerarc C1 z=2000 centerRadius=$radius angle=$angle 
+place B z=2000+$L rename=B2 By=Bfield
+cornerarc C2 z=2000+$L centerRadius=$radius angle=$angle 
+place B z=4000 rename=B3 By=Bfield rotation=Z180
+cornerarc C3 z=4000 centerRadius=$radius angle=-$angle 
+place B z=4000+$L rename=B4 By=Bfield rotation=Z180
+cornerarc C4 z=4000+$L centerRadius=$radius angle=-$angle 
+place B z=6000 rename=B5 By=Bfield 
+cornerarc C5 z=6000 centerRadius=$radius angle=$angle 
+place B z=6000+$L rename=B6 By=Bfield
+cornerarc C6 z=6000+$L centerRadius=$radius angle=$angle 
+virtualdetector format=BLTrackFile AF radius=1000 length=1 \
+	color=0,1,0 file=test047.txt
+place AF z=9000
+=file test047.beam 
+#BLTrackFile test047 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 5.000 0.000 200.000 0.375 -13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 5.000 200.000 0.375 -13 2 1 0 2.0000
+0.000 0.000 0.000 5.000 5.000 200.000 0.375 -13 3 1 0 3.0000
+0.000 0.000 0.000 -5.000 0.000 200.000 0.375 -13 4 1 0 2.0000
+0.000 0.000 0.000 0.000 -5.000 200.000 0.375 -13 5 1 0 2.0000
+0.000 0.000 0.000 -5.000 -5.000 200.000 0.375 -13 6 1 0 3.0000
+0.000 0.000 0.000 -5.000 5.000 200.000 0.375 -13 7 1 0 3.0000
+0.000 0.000 0.000 5.000 -5.000 200.000 0.375 -13 8 1 0 3.0000
+=file test047.good 
+#BLTrackFile VirtualDetector/AF
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0.13 0.00 8999.50 0.004 0.000 200.000 34.324 -13 0 1 0 1.0000
+-553.57 0.00 8999.50 -54.848 0.000 192.397 33.221 -13 1 1 0 2.0000
+-0.38 224.97 8999.50 -0.046 5.000 200.000 34.331 -13 2 1 0 2.0000
+-553.08 217.62 8999.50 -54.801 5.000 192.411 33.230 -13 3 1 0 3.0000
+681.72 0.00 8999.50 61.219 0.000 190.466 36.161 -13 4 1 0 2.0000
+-0.38 -224.97 8999.50 -0.046 -5.000 200.000 34.331 -13 5 1 0 2.0000
+682.83 -237.11 8999.50 61.308 -5.000 190.437 36.173 -13 6 1 0 3.0000
+682.83 237.11 8999.50 61.308 5.000 190.437 36.173 -13 7 1 0 3.0000
+-553.08 -217.62 8999.50 -54.801 -5.000 192.411 33.230 -13 8 1 0 3.0000
+=run g4bl test047.in 
+=grep "tune 'Bfield' complete" g4bl.out 
+=compare test047.txt test047.good 1 1 1 0.1 0.1 0.1 0.1 0.5 0.5 0.5 0.5 0.1

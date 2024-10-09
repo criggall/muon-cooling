@@ -1,0 +1,18 @@
+=emfactor (6 sec)
+
+=file test096.in 
+randomseed Time
+param histoFile=''
+physics QGSP_BERT disable=Decay,muBrems,muPairProd,CoulombScat
+beam gaussian nEvents=10000
+emfactor eLoss=0.1 msc=0.1 deltaRay=0.1 particle=mu+
+box Abs height=1000 width=1000 length=100 material=Al
+place Abs z=0 front=1
+virtualdetector Det format=ascii file=test096.txt height=1000 \
+		width=1000 length=1 require=PDGid==-13
+place Det
+=file test096.good 
+0.00442639 0.509891 0.00240162 0.509623 100 0 0.0175292 1.41679 0.00118076 1.39791 144.91 0.798921 
+=run g4bl test096.in 
+=meanAndSigma test096.txt test096.ms6 6
+=compare test096.ms6 test096.good .5 .5 .5 .5 .01 .01 .2 .2 .2 .2 .1 .1

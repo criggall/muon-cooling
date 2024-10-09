@@ -1,0 +1,48 @@
+=multiple beam commands eventID-s (1 sec)
+
+=file test049.in 
+param histoFile=""
+physics QGSP doStochastics=0
+beam gaussian nEvents=3
+beam gaussian nEvents=3
+beam gaussian nEvents=3 firstEvent=20
+beam gaussian nEvents=3
+beam ascii filename=test049.beam 
+beam gaussian nEvents=3
+beam gaussian firstEvent=200 lastEvent=201
+beam ascii filename=test049.beam  renumber=1
+virtualdetector format=BLTrackFile AF radius=200 length=1 file=test049.txt
+place AF z=100
+=file test049.beam 
+#BLTrackFile test049 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 101 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 119 1 0 1.0000
+=file test049.good 
+#BLTrackFile VirtualDetector/AF
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 99.5 0 0 200 0.375365 -13 1 1 0 1
+0 0 99.5 0 0 200 0.375365 -13 2 1 0 1
+0 0 99.5 0 0 200 0.375365 -13 3 1 0 1
+0 0 99.5 0 0 200 0.375365 -13 4 1 0 1
+0 0 99.5 0 0 200 0.375365 -13 5 1 0 1
+0 0 99.5 0 0 200 0.375365 -13 6 1 0 1
+0 0 99.5 0 0 200 0.375365 -13 20 1 0 1
+0 0 99.5 0 0 200 0.375365 -13 21 1 0 1
+0 0 99.5 0 0 200 0.375365 -13 22 1 0 1
+0 0 99.5 0 0 200 0.375365 -13 23 1 0 1
+0 0 99.5 0 0 200 0.375365 -13 24 1 0 1
+0 0 99.5 0 0 200 0.375365 -13 25 1 0 1
+0 0 99.5 0 0 200 0.750365 -13 101 1 0 1
+0 0 99.5 0 0 200 0.750365 -13 119 1 0 1
+0 0 99.5 0 0 200 0.375365 -13 120 1 0 1
+0 0 99.5 0 0 200 0.375365 -13 121 1 0 1
+0 0 99.5 0 0 200 0.375365 -13 122 1 0 1
+0 0 99.5 0 0 200 0.375365 -13 200 1 0 1
+0 0 99.5 0 0 200 0.375365 -13 201 1 0 1
+0 0 99.5 0 0 200 0.750365 -13 202 1 0 1
+0 0 99.5 0 0 200 0.750365 -13 203 1 0 1
+=run g4bl test049.in 
+=compare test049.txt test049.good

@@ -1,0 +1,43 @@
+=3 nested tune-s (2 sec)
+
+=file test029.in <<-!
+param maxStep=11.356 steppingFormat="GLOBAL CLX STEP VOL PROCESS"
+physics QGSP
+beam gaussian nEvents=1
+reference referenceMomentum=200
+tune XXX z0=100 z1=200 initial=0 step=0.1 expr=XXX-3 tolerance=0.001
+tune YYY z0=101 z1=195 initial=0 step=0.1 expr=YYY-2 tolerance=0.001
+tune ZZZ z0=102 z1=190 initial=0 step=0.1 expr=ZZZ-1 tolerance=0.001
+box End height=100 width=100 length=100
+place End z=1150
+=file test029.good 
+tune         XXX           z0=100 z1=200 initial=0 initialStep=0.1 step=0.1
+tune         YYY           z0=101 z1=195 initial=0 initialStep=0.1 step=0.1
+tune         ZZZ           z0=102 z1=190 initial=0 initialStep=0.1 step=0.1
+tune 'XXX' begun  XXX=0.0000
+tune 'YYY' begun  YYY=0.0000
+tune 'ZZZ' begun  ZZZ=0.0000
+tune 'ZZZ' step 1  ZZZ=0.0000  expr=-1.000000  new ZZZ=0.1000
+tune 'ZZZ' step 2  ZZZ=0.1000  expr=-0.900000  new ZZZ=1.0000
+tune 'ZZZ' complete in 3 steps  expr=0.000000  ZZZ=1.0000
+tune 'YYY' step 1  YYY=0.0000  expr=-2.000000  new YYY=0.1000
+tune 'ZZZ' begun  ZZZ=1.0000
+tune 'ZZZ' complete in 1 steps  expr=0.000000  ZZZ=1.0000
+tune 'YYY' step 2  YYY=0.1000  expr=-1.900000  new YYY=2.0000
+tune 'ZZZ' begun  ZZZ=1.0000
+tune 'ZZZ' complete in 1 steps  expr=0.000000  ZZZ=1.0000
+tune 'YYY' complete in 3 steps  expr=-0.000000  YYY=2.0000
+tune 'XXX' step 1  XXX=0.0000  expr=-3.000000  new XXX=0.1000
+tune 'YYY' begun  YYY=2.0000
+tune 'ZZZ' begun  ZZZ=1.0000
+tune 'ZZZ' complete in 1 steps  expr=0.000000  ZZZ=1.0000
+tune 'YYY' complete in 1 steps  expr=-0.000000  YYY=2.0000
+tune 'XXX' step 2  XXX=0.1000  expr=-2.900000  new XXX=3.0000
+tune 'YYY' begun  YYY=2.0000
+tune 'ZZZ' begun  ZZZ=1.0000
+tune 'ZZZ' complete in 1 steps  expr=0.000000  ZZZ=1.0000
+tune 'YYY' complete in 1 steps  expr=-0.000000  YYY=2.0000
+tune 'XXX' complete in 3 steps  expr=-0.000000  XXX=3.0000
+=run g4bl test029.in 
+=grep "^tune" g4bl.out test029.txt
+=compare test029.txt test029.good

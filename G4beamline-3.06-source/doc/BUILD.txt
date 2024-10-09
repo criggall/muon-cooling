@@ -1,0 +1,455 @@
+				G4beamline 3.06
+		Copyright 2002-2018 by Tom Roberts, Muons, Inc.
+				All Rights reserved.
+
+
+NOTE: The Root libraries issue a bunch of benign error messages upon the start
+of g4bl:
+	Error: ...
+This happens when their dynamic libraries are attached, so it is difficult to
+avoid. Just ignore them for now; g4blgui filters these messages out of the 
+output.
+
+GENERAL
+-------
+
+The builds on Mac and Linux are 64-bit and use static libraries except for 
+Root and Qt; on Windows the build is 32-bit (for Root), and all libraries
+are dynamic.
+
+NOTE: Coin3D has been removed, in favor of OGLSQt. The Qt viewer has essentially
+all of the features of Coin3D, plus some new ones. In particular you can still
+use the mouse to rotate, pan, and zoom the viewer.
+
+The G4beamline build uses CMake, and has these ON/OFF options:
+	G4BL_FFTW	use FFTW (for spacecharge command)
+				uses FFTW_DIR
+	G4BL_GSL	use GSL (for several commands, including coil)
+				uses GSL_DIR
+	G4BL_GUI	build the GUI programs (g4blgui, g4bldata); uses Qt
+				needs Qt 5.X
+	G4BL_MPI	enable MPI (default=OFF)
+				needs MPI.cmake
+	G4BL_ROOT	use Root (for NTuples)
+				uses ROOT_DIR (= ROOTSYS)
+	G4BL_VISUAL	enable visualization (with OGLSQt) - needs G4BL_GUI
+				needs Qt 5.X
+They all default to ON except G4BL_MPI.
+
+You must also specify the directory for each of the libraries (except MPI) --
+if G4BL_MPI=ON you must edit MPI.cmake for the specific MPI configuration of
+the machine on which you are building.
+if G4BL_GUI=OFF and G4BL_VISUAL=OFF, you don't need the Qt libraries (e.g. for
+a supercomputer); you must download the Geant4 data sets manually (no g4bldata).
+
+The following libraries are used:
+	Geant4 - http://geant4.cern.ch
+	Qt - http://www.qt.io/download/   (g4blgui and g4bldata only)
+	Root - http://root.cern.ch
+	Gnu Scientific Library (gsl) - http://www.gnu.org/software/gsl/
+	FFTW - http://www.fftw.org/
+The details and versions vary on the different platforms, so see below for
+details.
+
+First you need to select a place to build. I use $HOME/G4beamline-VERSION,
+which is used below.
+
+Note that Geant4 uses its internal version of CLHEP, expat, and zlib.
+
+Building Libraries:
+The basic idea is that each library gets a directory in $HOME that is
+NAME-VERSION. In most cases when building from source, I create a
+"build" directory under $HOME/NAME-VERSION, build there, and install to
+$HOME/NAME-VERSION. If the source already has a "build" directory, I
+use "build-tjr".
+
+As G4beamline is hosted on a Mac, it is presumed that a new release will be
+built first on Mac OS X. So the CMake files for Darwin construct some "source"
+files used by other OSs: Help.html. It also generates
+G4beamline-VERSION-source.tgz
+
+The G4beamline source is hosted on tjrob.dhcp.fnal.gov in user "g4bl". This
+is a high-end Mac Pro with 8 dual-thread cores, 16 GB ram, 0.5 TB SSD, and 
+6 TB Scratch. It has quintuple geographically diverse back-ups, one of which
+is in the cloud (Dropbox.com) and is updated after every modification to any
+file.
+
+Top-Level directories in $HOME:
+    G4beamline-VERSION		build dir
+    G4beamline-source		source dir
+    G4beamlineDistributions	dir contining distributions (incl old ones)
+    Geant4Data			dir containing downloaded Geant4 Datasets
+    geant4.VERSION		build dir
+    geant4.VERSION-source(-tjr)	Geant4 source with TJR mods
+    				(Geant4.10.05 needs no TJR mods)
+    root-VERSION		Download & build dir
+    (On my Mac: Qt, fftw, and gsl are installed in /usr/local by HomeBrew.)
+
+G4beamline-source top-level files:
+    CMakeLists.txt		the CMake file for the entire project
+    MPI.cmake			CMake file for MPI configuration
+
+G4beamline-source top-level directories:
+    Resources			general resource files
+    bin				scripts: g4bl-setup.sh, g4bl-setup.csh
+    doc				documentation
+    examples			examples
+    finalize			dir used only for installation sequencing
+    g4bl			the g4bl executable
+    g4bldata			the g4bldata executable
+    g4blgui			the g4blgui executable
+    g4blmpi			the g4blmpi executable
+    g4bltest			the g4bltest executable
+    scripts			scripts for building
+    share			shared files
+    test			tests
+    validation			g4bl input files used in validation
+
+Note that G4BLVERSION is defined in the top-level CMakeLists.txt.
+Some scripts use grep & sed to obtain it, so don't change the syntax.
+
+Note that after building the libraries, building G4beamline is quite short.
+
+
+Doxygen
+-------
+If you are building G4beamline to add new code, you'll find the Doxygen
+documentation invaluable:
+	install doxygen
+	cd G4beamline-3.06-source/doc
+	doxygen
+	open in your browser: G4beamline-3.06-source/doc/html/index.html
+
+
+Updating the Documentation
+--------------------------
+
+This is on Mac OS X, using MS Word for Mac 2016 and some shell commands in
+a Terminal window.
+
+G4beamline-source/doc:
+    BUILD.txt			instructions for building G4beamline
+    Doxyfile			doxygen control file
+    G4beamlinePresentation.pdf	an old presentation on G4beamline
+    G4beamlineUsersGuide.pdf	The G4beamline users Guide
+    G4beamlineValidation.pdf	The G4beamline Validation document
+    History.txt			Inverse-chronological update history
+    README.txt			README file (for binary installations)
+    footer			the footer for doxygen pages
+    mainpage.md			the main page for doxygen pages
+
+The sources for the .pdf-s are in ~tjrob/Documents/G4beamline, printed to PDF
+here. The other files are edited in place.
+
+Updating G4beamlineUsersGuide.pdf:
+	open G4beamlineUsersGuide.doc in Word for Mac 
+	update any text that need updating, including the title page
+	Delete the help text in section 4.8 (G4beamline commands by type)
+	In a tmp directory do:
+		echo 'help' | g4bl - >index.txt
+		edit index.txt and delete extraneous lines at top and bottom
+	in Word, insert index.txt using the default encoding
+		(uses Courier 10.5 font, which is OK)
+	Delete the help text in section 5 (G4beamline commands (alphabetical))
+	In a tmp directory do:
+		echo 'help *' | g4bl - >help.txt
+		edit help.txt and delede extraneous lines at top and bottom
+	in Word, insert help.txt using the default encoding
+		(uses Courier 10.5 font, which is OK)
+	in Word, apply the style "Heading 2" to every command line (so they
+		appear in the table of contents).
+	update any appendices that need it.
+	Print the file to PDF into the doc directory.
+
+
+Build - Mac OS X (Darwin)
+-------------------------
+
+This is on Mac OS X High Sierra (10.13.6), native on my Mac Pro.
+The build is 64-bit. This uses the bash shell in a Terminal window.
+Geant4 is statically linked, the rest are dynamically linked.
+
+HomeBrew is used to install several libraries.
+
+NOTE: OpenMotif and XQuartz don't play nice together. This as a primary reason
+to replace Coin3D with the Qt viewer (Coin3D needs OpenMotif).
+
+Qt
+	brew install qt5
+	export PATH=/usr/local/opt/qt5/bin:$PATH
+	# Note brew also installed qt4 and it is still used by other programs.
+	# as long as the correct qmake is in your PATH, cmake will find it.
+
+GSL
+	brew install gsl
+	export GSL_DIR=/usr/local
+
+FFTW
+	brew install fftw
+	export FFTW_DIR=/usr/local
+
+Root
+	Download root_v6.14.06.macosx64-10.13-clang100.tar.gz, untar it in $HOME
+	mv root root_v6.14.06
+	export ROOTSYS=$HOME/root_v6.14.06
+
+Geant4
+	Download geant4.10.05.tar.gz and untar it in $HOME
+	cd geant4.10.05
+	mkdir build; cd build
+	cmake -DCMAKE_INSTALL_PREFIX=$HOME/geant4.10.05 -DGEANT4_USE_QT=ON -DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DGEANT4_BUILD_MUONIC_ATOMS_IN_USE=ON   ..
+	make install  # ignore hundreds of warnings about unused parameters
+	# now ../bin, ../lib, and ../include contain the library files
+	# (static only)
+	export GEANT4_DIR=$HOME/geant4.10.05
+
+G4beamline
+	cd
+	mkdir G4beamline-3.06
+	cd G4beamline-3.06
+	cmake ../G4beamline-source
+	# CMakeLists.txt forces the install prefix to be $PWD
+	make install
+
+Now you should have these products in G4beamline-3.06 (plus a bunch of 
+build files and directories):
+	G4beamline-3.06-source.tgz
+	G4beamline-3.06.app/
+	G4beamline-3.06.dmg
+You can run G4beamline from the .app right there, or you can mount the .dmg 
+and drag the .app into /Applications.
+NOTE: if you run g4blgui directly from the bin directory, its menus may be dead 
+-- this is a "feature" of Qt; run it via the app and all is well.
+
+
+Build - Linux SLF 7.3
+---------------------
+
+This is on the VMware virtual machine "SLF 7.3 Build", on 
+tjrob@tjrob.dhcp.fnal.gov.
+
+The build is 64-bit. This uses the bash shell in a Terminal window.
+All libraries but Root and Qt are statically linked.
+
+NOTE: Geant4.10.05 needs a newer cmake. Download cmake 3.13.2 from cmake.org,
+and install it into /usr/local/cmake-3.13.2-Linux-x86_64 and link its
+programs into /usr/local/bin. Make sure /usr/local/bin is in PATH before
+/usr/bin.
+
+Now build the libraries and G4beamline.
+
+Qt
+	sudo yum install qt5-qtbase-devel.x86_64
+	export PATH=/usr/lib64/qt5/bin:$PATH
+
+GSL
+	sudo yum install gsl-devel
+	export GSL_DIR=/usr
+
+FFTW
+	sudo yum install fftw-devel
+	export FFTW_DIR=/usr
+
+Root
+	#Download root_v6.14.06.Linux-slc5_amd64-gcc4.3.tar.gz 
+	#untar it in $HOME
+	mv root root-5.34.36
+	# now root_v6.14.06/bin, lib, and include contain the library files
+	# (dynamic only)
+	export ROOTSYS=$HOME/root_v6.14.06
+
+Geant4
+	# Download geant4.10.05.tar.gz 
+	# untar it in $HOME
+	mkdir geant4.10.05
+	cd geant4.10.05
+	cmake -DCMAKE_INSTALL_PREFIX=$HOME/geant4.10.05 -DGEANT4_USE_QT=ON -DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DGEANT4_BUILD_MUONIC_ATOMS_IN_USE=ON -DGEANT4_USE_SYSTEM_EXPAT=OFF -DGEANT4_FORCE_QT4=OFF  ..
+	make install  # ignore hundreds of warnings about unused parameters
+	# now ../bin, ../lib64, and ../include contain the library files
+	# (static only)
+	export GEANT4_DIR=$HOME/geant4.10.05
+
+G4beamline
+	cd
+	# be sure the above environment variables for the libraries are set
+	# $HOME/g4bl is a symbolic link to /mnt/hgfs/g4bl/ which is
+	# /Users/g4bl on the Mac.
+	mkdir G4beamline-3.06
+	cd G4beamline-3.06
+	cmake -DCMAKE_INSTALL_PREFIX=$HOME/G4beamline-3.06 -DG4BL_VISUAL=ON -DG4BL_GUI=ON -DG4BL_ROOT=ON -DG4BL_GSL=ON -D G4BL_FFTW=ON -DG4BL_MPI=OFF ../g4bl/G4beamline-source
+	# CMakeLists.txt forces the install prefix to be $PWD (CMAKE_BINARY_DIR)
+	make install # ignore dozens of "shadow" warnings
+
+Now you should have these products in G4beamline-3.06 (plus a bunch of 
+build files and directories):
+	bin, lib, ...
+	G4beamline-3.06-SLF64.tgz
+You can run G4beamline from bin right there, or you can un-tar the .tgz
+and run from its bin directory.
+
+
+Build - Linux Ubuntu 16.04
+--------------------------
+
+This is on the VMware virtual machine "Ubuntu 64-bit 16.04 Build", on 
+tjrob@tjrob.dhcp.fnal.gov.
+
+The build is 64-bit. This uses the bash shell in a Terminal window.
+All libraries but Root and Qt are statically linked.
+
+Now build the libraries and G4beamline.
+
+Qt
+	sudo apt-get install qt5-default
+	# make sure /usr/bin/qmake is qt5
+
+GSL
+	sudo apt-get install libgsl-dev
+	export GSL_DIR=/usr
+
+FFTW
+	sudo apt-get install fftw3-dev
+	export FFTW_DIR=/usr
+
+Root
+	# Download root_v6.14.06.Linux-ubuntu14-x86_64-gcc4.8.tar.gz
+	# untar it in $HOME, verify that it runs
+	mv root root_v6.14.06
+	export ROOTSYS=$HOME/root_v6.14.06
+	# now root_v6.14.06/bin, lib, and include contain the library files
+	# (dynamic only)
+
+Geant4
+	Download geant4.10.05.tar.gz and untar it in $HOME
+	# no TJR edits needed
+	cd geant4.10.05
+	mkdir build
+	cd build
+	cmake -DCMAKE_INSTALL_PREFIX=$HOME/geant4.10.05 -DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DGEANT4_USE_SYSTEM_EXPAT=OFF -DCMAKE_BUILD_TYPE=Release -DGEANT4_USE_RAYTRACER_X11=ON -DGEANT4_USE_OPENGL_X11=ON -DGEANT4_USE_QT=ON  ..
+	make install  # ignore hundreds of warnings about unused parameters
+	export GEANT4_DIR=$HOME/geant4.10.05
+	# now ../bin, ../lib, and ../include contain the library files
+	# (static only)
+
+G4beamline
+	# be sure the above environment variables for the libraries are set
+	# copying G4beamline source to $HOME is no longer needed
+	# cp -a g4blOnMyMac/G4beamline G4beamline-3.06-source
+	mkdir G4beamline-3.06
+	cd G4beamline-3.06
+	cmake ../g4blOnMyMac/G4beamline-source
+	# CMakeLists.txt forces the install prefix to be $PWD (CMAKE_BINARY_DIR)
+	make install
+
+Now you should have these products in G4beamline-3.06 (plus a bunch of 
+build files and directories):
+	bin, lib, ...
+	G4beamline-3.06-Ubuntu64.tgz
+You can run G4beamline from bin right there, or you can un-tar the .tgz
+and run from its bin directory.
+
+
+Build - Windows
+---------------
+
+NEW VERSION for Geant4 10.05 - uses cmd window (not Visual Studio GUI).
+
+This is on the VMware Virtual machine "Windows 10 x64 Build".
+Be sure to do Windows Update.
+
+Download and install Visual Studio 2017 Community edition, including command-
+line tools.
+
+Qt: download Qt 5.12.0 for both 32-bit MSVC2017 and 64-bit. We'll use 32-bit
+(for Root).  Installed in C:\Qt\5.12.0
+*** Update hard-coded path for QT_BIN_DIR in G4beamline-source/CMakeLists.txt.
+
+In start menu, use "Visual Studio/x86 Native Tools Command Prompt for VS2017",
+and then:
+	call C:\Qt\5.12.0\msvc2017\bin\qtenv2.bat
+-- that sets up the 32-bit MS VC++ tools, with 32-bit Qt. Do NOT use any 
+64-bit tools or libs.
+
+Better: use "Visual Studio/x86 Native Tools Command Prompt for VS2017",
+and then:
+	call setup.bat
+-- that sets up Qt and also sets the environment variables for the libraries.
+
+Already Installed:
+	CMake 3.8.0 
+	Qt 5.12.0; its qmake is in PATH
+	$HOME/fftw-3.3.5-32
+	$HOME/gsl-2.3-32
+	$HOME/root_v6.15.06.win32.vc15
+	C:/Program Files (x06)/GnuWin32/bin/bsdtar
+
+Geant4:
+	#download geant4_10_05 source, unpack into geant4_10_05-source
+	# In the above cmd window:
+	cd %HOMEPATH%
+	mkdir geant4_10_05
+	cd geant4_10_05
+	cmake -DCMAKE_INSTALL_PREFIX="%HOMEPATH%\geant4_10_05" \
+	    -DGEANT4_USE_QT=ON -DGEANT4_USE_OPENGL_WIN32=ON \
+	    -DGEANT4_BUILD_MUONIC_ATOMS_IN_USE=ON -DGEANT4_BUILD_MSVC_MP=ON \
+	    "%HOMEPATH%\geant4_10_05-source"
+	cmake --build . --config Release --target install
+	--- took 24 minutes on a 4-CPU virtual machine.
+
+G4beamline:
+	cd %HOMEPATH%
+	Make sure these are set (e.g. by setup.bat):
+		set GEANT4_DIR=/Users/tjrob/geant4_10_05
+		set FFTW_DIR=/Users/tjrob/fftw-3.3.5-32
+		set GSL_DIR=/Users/tjrob/gsl-2.3-32
+		set ROOTSYS=/Users/tjrob/root_v6.15.06.win32.vc15
+	mkdir G4beamline-3.06
+	cd G4beamline-3.06
+	cmake Z:\g4bl\G4beamline-source
+	cmake --build . --config Release --target install
+
+
+Build - edison.nersc.gov
+------------------------
+
+***
+*** NEEDS UPDATING -- this is from G4beamline 3.04
+*** Using geant4_10_05 and G4beamline-3.06 may be the only changes.
+***
+
+Read this carefully -- there are some unusual work-arounds.
+NOTE: I gave up on trying to use Root on Edison. With a later version
+of Root it might be possible, as there is a flag to omit X-Windows (which
+worker nodes don't have and cannot use).
+
+I work in /project/projectdirs/map/Users/tjrob
+scp geant4.10.03-source-tjr.tgz and G4beamline-3.04-source.tgz to edison
+and un-tar them.
+
+source setupToBuild # which does:
+	source compiler gnu
+	module load gsl
+	echo gsl loaded
+	module load fftw
+	echo fftw loaded
+
+Geant4:
+	mkdir G4beamline-3.04
+	cd $_
+	cmake -DCMAKE_INSTALL_PREFIX=$PWD -DBUILD_SHARED_LIBS=OFF -DBUILD_STATIC_LIBS=ON -DGEANT4_USE_SYSTEM_EXPAT=OFF -DCMAKE_BUILD_TYPE=Release -DGEANT4_USE_RAYTRACER_X11=OFF -DGEANT4_USE_QT=OFF ../geant4.10.03-source-tjr
+	make install
+	export GEANT4_DIR=$PWD
+	ln -s lib64 lib # otherwise cmake cannot find Geant4 package
+
+Root:	
+	doesn't link (uses different .so-s)
+
+G4Beamline:
+	# download G4beamline-3.06-source and untar it
+	# make sure GEANT4_DIR is set properly
+	export FFTW_DIR=$FFTW_DIR/.. # module load gives the lib directory
+	mkdir G4beamline-3.04
+	cd $_
+	cmake -DG4BL_VISUAL=OFF -DG4BL_GUI=OFF -DG4BL_MPI=ON -DG4BL_ROOT=OFF ../G4beamline-3.04-source
+	make install
+

@@ -1,0 +1,31 @@
+=timentuple (1 sec)
+
+=file test010.in 
+param histoFile=""
+physics QGSP doStochastics=0
+beam ascii filename=test010.beam nEvents=6
+box End width=100 height=100 length=1
+place End z=100000
+timentuple Time1 time=200 filename=test010.txt format=ascii
+=file test010.beam 
+#BLTrackFile test010 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 100.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 300.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 400.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 500.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 600.000 0.375 -13 0 1 0 1.0000
+=file test010.good 
+# Time1
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+0 0 41200 0 0 99.9994 200 -13 0 1 0 1 
+0 0 53000 0 0 199.999 200 -13 0 1 0 1 
+0 0 56500 0 0 299.999 200 -13 0 1 0 1 
+0 0 57900 0 0 399.999 200 -13 0 1 0 1 
+0 0 58600 0 0 499.999 200 -13 0 1 0 1 
+0 0 59000 0 0 599.999 200 -13 0 1 0 1 
+=run g4bl test010.in 
+=compare test010.txt test010.good 0.02 0.02 0.02 0.005 0.005 0.005 0.005 0.005 0.5 0.5 0.5 0.1

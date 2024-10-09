@@ -1,0 +1,3229 @@
+                        G4beamline HISTORY.txt
+                     (Inverse chronological order)
+
+2019:
+
+01/18:	Root hangs forever during DLL loading. This is insurmountable for
+	now; the Root team says that Roog 4.14.06 is "preview only" on 
+	on Windows, and is not guaranteed to work. So G4beamline-3.06
+	will not have Root on Windows.
+
+01/16:	G4beamline-3.06 now works on Mac and SLF7.3. On bare Mac install
+	the command-line gets some benign Root error messages, which are
+	filtered out in g4blgui; on SLF7.3 even with no g++ installed they
+	do not appear. On both: All Tests Pass with only MPI omitted;
+	Example1 runs and displays, and fieldlines displays.
+	Now for Windows and root_v6.14.06, then Ubuntu....
+
+01/16:	On SLF7.3, there are LOTS of libs required for Qt's xcb platform
+	plugin. So finalize/CMakeLists.txt uses "linux_libraries --all".
+	This copies system libs too, but it works.
+
+01/15:	Finally got root_v6.14.06 to work on Mac. The .dmg mounts and
+	runs on bare Mac OS X High Sierra. Without a C++ compiler installed
+	Root issues some benign error messages. These are now filtered out in
+	g4blgui, but are visible when running g4bl from the command-line.
+	They start "ERROR in cling::CIFactory::createCI [...]" and continue
+	for 11 lines.
+
+01/13:	Switching to root_v6.14.06 -- due to its design, I must include
+	the entire Root directory in the G4beamline distribution (some
+	skinnying down is surely possible, but I don't have time to fuss
+	with it).
+
+01/13:	Windows just will not work with root-5.34.36. It is compiled with
+	an old compiler, but that compiler cannot build Geant4; it is not
+	possible to mix compilers on Windows.
+
+01/09:	Updated the descriptions of the physics lists in 'help physics'.
+	They are much more comprehensive and useful. Updated BUILD.txt.
+	Updated Users Guide.doc and .pdf.
+
+01/08:	Now G4beamline passes all tests on Windows 10, SLF 7.3, and Mac 
+	OS High Sierra, including Root. MPI works on Mac OS.
+	fieldlines works on all 3 OSs.
+
+2018:
+
+12/21:	There are many warnings during compilation, on both Linux and Windows.
+	These should be cleaned up.
+
+12/21:	Minor code changes for Windows: setenv is undefined (Geant4Data.cc),
+	and findstr can only use " for quotes (g4bltest.cc). The Build
+	process on Windows is now quite different, using command-line cmake
+	(see Build.txt for details). All Tests Passed (!). The g4bldata
+	program worked (!).
+
+12/18:	Modified g4bltest to check if a child exited due to ^C, and to 
+	then call exit(2). Works on Mac, SLF 7.3, and Windows. Does not
+	work on Ubuntu (g4bl child returns 2, indistinguishable from 
+	failure).  It is now MUCH easier to make it stop early when run
+	via command-line (except on Ubuntu). Had to be removed, as it can
+	cause g4bltest to exit prematurely.
+
+12/18:	The dataset download problem was due to the CERN webserver using
+	"Transfer-Encoding: gzip" for the .tar.gz files. So the Qt get()
+	un-zipped the data. On the Mac, tar -xzf will accept an unzipped
+	file, but on SLF 7.3 it won't. The solution is to add the
+	header "Accept-Encoding: gzip" to the request so the file is 
+	always gzipped. This also cleared up confusion about download sizes.
+
+12/18:	Root v6.14.06 has problems in that it adds ~ 40 MB to the tarball
+	on SLF 7.3, and fails some tests there. Root v5.34.36 works fine 
+	on both Mac and SLF 7.3, so that's what I'm using for G4beamline 
+	3.06. That is an ancient version that is no longer supported, and
+	evetually its binaries won't link with new compiles -- when that
+	happens I'll have to upgrade to a newer Root, or abandon Root.
+
+12/18:	Now using geant4 10.05. Minor changes to test062, test097, test101,
+	test108, test111. MPI builds and runs on Mac.
+
+12/11:	CERN moved their data files; updated to a completely new way of
+	handling the Geant4 datasets: findGeant4Data() and runG4blData()
+	are replaced with a new class Geant4Data. Describing the datasets
+	is now more obvious, and includes versions. Includes updates to
+	g4bldata. Now three regression tests fail....
+
+08/09:	Fixed these tests to work with the new Geant4 and other changes:
+	test000 test005 test006 test007 test009 test012 test018 test021
+	test023 test025 test027 test029 test032 test034 test035 test044
+	test045 test046 test047 test048 test052 test053 test058 test062
+	test065 test070 test078 test087 test090 test101
+
+08/09:	Updated g4bltest.cc. made =grep run either grep or findstr, so
+	it always works (no need for C++ <regexp>).
+
+08/09:
+	In BLGlobalField.cc, the exception warning that the field extends
+	outside the world gets intrmixed with some data in some tests. So
+	add a call to GetFieldValue() before any tracking starts, to put
+	the exception earlier in g4bl.out.
+
+08/09:
+	BLCMDprintfield.cc reorganized to use printf (not G4cout <<). Somehow
+	G4cout gets duplicates of some lines when exit() is called.
+
+08/09:
+	Geant4.10.04.p02. This uses a different random number generator; it
+	seems to be a better one, but it fails if seeded with 0. So in
+	BLBeam.hh, in setRandomSeedToGenerate() a zero seed is replaced by
+	0x7FFFFFFE (an unlikely event #). Also changes to BLCMDtest.c,
+	BLCMDransomdeed.cc, BLCMDbeam.cc, and g4bl.cc.
+
+08/01:	Geant4 has moved the data files so g4bldata fails. g4bldata is now
+	updated. Also the survey email is getting put into Spam folders
+	much more often, so the note about that is been highlighted in
+	the G4beamlineDownload scripts.
+
+2017:
+
+03/13:	Fixed genericbend generating incorrect geometry-test points.
+
+03/13:	Fixed fieldlines command to display fieldlines using BLMarkers.
+
+03/06:	The coil command gives non-reproducible results. Fixed by
+	changing the initial PRNG seed from the clock to a fixed 0L.
+	This should also make reproducible any other uses of the
+	PRNG before the first event (I don't recall any...).
+	I don't recall why the clock was used (ancient history),
+	but it seems wrong to me now.
+
+03/04:	Release 3.04.
+
+01/06:	detector with kill=1 did not kill tracks in viewer. Fixed.
+
+02/13:	Improved suppression of benign error messages in g4blgui.
+
+02/12:	Add "solid" parameter to the detector command, so one can create a
+	detector using any solid, including sphere, boolean, tessellatedsolid,
+	etc. Added test112 and test113.
+
+02/01:	Fixed BLCMD::genericbend::generatePoints()  to not crash (it did
+	v.erase(v.end()) which is invalid; now v.pop_back()).
+
+01/27:	Completely re-wrote BLCMDparticlecolor.cc so it now works using
+	Geant4 trajectory modeling commands.
+
+01/25:	Fixed label command and BLMarkers to work with OGLSQt viewer.
+	Augmented both the label command and BLMarkers to display markers,
+	text, or a polyline (used for the reference track(s) in viewer).
+
+01/25:	Fixed muminuscapturefix and put it back into the build. NOTE:
+	the Geant4 process has been changed, and they believe this is no
+	longer necessary. (For Mu2E.)
+
+01/24:	All solids now correctly do the geometry test, except for:
+	idealsectorbend, genericsectorbend.
+
+01/06:	Added parameter maxTime to rdecaysource, default is 1E99 ns.
+	Also added test111.
+
+01/06:	virtualdetector with kill=1 did not kill tracks in viewer. Fixed.
+
+01/06:	The geometry test for BLCMDboolean was outrageously wrong (used
+	bounding box!).  It is now fixed, using the Geant4 Inside() and
+	GeneratePointOnSurface(). Need to fix ALL the other solids....
+	Now test110 passes.
+
+01/06:	BLMarkers::displayAll() crashed G4beamline in the OGLSQt viewer.
+	Reported it on the Geant4 visualization forum. John Allison
+	confirmed this was a recent change and fixed it; he sent me a
+	patched G4OpenGLSceneHandler.cc. Now it works.
+
+01/04:	test110 - for boolean op=subtraction, test for overlaps with other
+	solids. It's clear the geometry test is VERY wrong for boolean-s.
+
+01/04:	Add =grep to g4bltest, and update test000 to use all commands at
+	least once (except =require, =echo, =omit, and =debug).
+
+2016:
+
+11/20:	Working on new release 3.03, using Geant4 10.03. rdecaysource works
+	and the Qt viewer works, both on Mac OS X 10.11.6 (El Capitan).
+
+11/20:	rdecaysource works with Geant4 10.03, so I'll use that for the next
+	release.
+
+11/10:	rdecaysource does not work (never finds unstable isotopes). Seems to
+	be a problem in Geant4 10.02.  I created a discussion on the Geant4
+	Hadronic Physics forum. 
+
+11/08:	The Qt viewer now works and looks good on Mac OS X, with most of the
+	buttons that OpenInventor has. Need to try it on Windows and Linux.
+	The missing button is the eyeball, which zooms to show the entire
+	system from the current view direction -- I'm not sure how to
+	implement that.
+
+11/08:	Bug in g4blgui: if directory is nonempty, successive runs create
+	successively deeper directories. Changed to re-use the directory
+	(i.e. the one directly underneath the directory containing the
+	input.file).
+
+11/05:	investigating the Qt viewer (and UI). Looks promising as a replacement
+	for Coin3D (which has become orphaned). Note also that Coin3D does
+	not work on Ubuntu Linux -- at run time it takes a mysterious
+	exception and crashes, EVEN WHEN BUILT COMPLETELY FROM SOURCE ON
+	UBUNTU. Hopefully the Qt viewer will work on all Linux distros....
+
+05/22:	Relesae 3.02.1. Windows only.
+
+05/21:	Modify finish_app so it always copies libXm.so. (This is Linux.)
+
+05/18:	Revised all CMakeLists.txt to use environment variables to find
+	the libraries, rather than hard-coded names.
+
+05/18:	Using Root 6.06.02. Library names are different. Still 5.34.30 on 
+	Windows.
+
+05/17:	Finally got OpenInventor to work on Windows! There is something
+	crazy going on: G4VisAttributes::Invisible (which is static const)
+	gets clobbered by crazy values (e.g. DaughtersInvisible=34 (neither
+	true nor false), red=-1.234E99). This happens AFTER it is initialized
+	but BEFORE the first call to registedCommand() (both of which happen
+	before main() is entered). Note that Mac and Linux do not have this
+	problem. The workaround is to never call
+	G4VisAttributes::GetInvisible(), but rather do
+	new G4VisAttributes(false). I believe that some global constructor
+	is clobbering memory, but have no idea which one, or whether it is
+	in Geant4 or G4beamline. From the signature, I suspect that somebody
+	is calling delete on it (Mac and Linux protect against free() without
+	malloc(), but Windows does not); it might be the viewer constructor.
+
+04/12:	Fixed g4bldata on Windows (did not handle ".exe" correctly).
+	Also added icons on decktop and start menu.
+	Release 3.03a.msi (no need to re-do the .dmg).
+
+04/11:	Release 3.03 on Mac and Windows only (for IIT).
+
+04/11:	Added muonium command to define Mu and basic physics processes for it.
+
+04/11:	Edited Geant4.10.02-source to give SORTED_OBJECT_ADD transparency.
+
+03/1:	In g4bldata: added "Extracting..." status, and increased the
+	extraction timeout from 30 to 120 seconds. Updated dataset sizes.
+
+02/15:	Release 3.02.
+
+01/22:	Completed the sample command, including polygon and required.
+	Added test109. Also added Polygon2D.h and Polygon2D.cc (which check
+	for point inside a polygon, 2-D).
+
+01/20:	After 2 weeks attempting to build a new release, the status is:
+	Mac: Geant4_10_02 works completely after stubbing out the "fallback"
+	     test in G4VisCommandsSceneHandler.cc.
+	Linux: Geant4_10_02 won't build -- needs a newer g++.
+	       Geant4_10.01.p01 works completely.
+	Windows: Geant4_10_02 works without visualization; OpenInventor
+	         gets a signal 11. Geant4_10.01.p01 also works without
+		 visualization, as long as an old cygwin build is used.
+
+01/20:	Added menu Test to g4blgui, with "Do Regression Tests" which just
+	runs g4bltest, with output to the window..
+
+01/08:	Moved the test for MPI into g4blmpi, and removed g4bl-config.
+	g4blmpi is not a C++ program, and g4bl-config has been removed.
+	The only shell scripts are g4bl-setup.* and in test.
+	Note that with an MPI build, users don't need to use g4blmpi,
+	they can do "srun -n 1234 g4bl ..." directly. g4blmpi merely
+	figures out which program (mpirun,aprun,srun) to use, and then
+	runs it.
+
+01/07:	Made obsolete all tests which do compiles (no longer supporting that):
+	test040: BLEvaluator
+	test041: UNUSED
+	test055: BLMinimize
+	test072: g4blmake
+
+01/07:	MPI now works on Mac OS X 10.9.5 (Mavericks). The configuration for
+	MPI is in MPI.cmake, and depends on the specific site used; right
+	now only tjrob.dhcp.fnal.gov is configured.
+
+01/07:	At this time, these are the only shell scripts:
+	g4bl-config, g4bl-setup.csh, g4bl-setup.sh, g4blmpi.
+	g4bl-config is used only in g4blmpi; the intent is to make g4blmpi
+	into a C++ program and remove g4bl-config, so the only scripts are
+	g4bl-setup.* (which only set PATH).
+	
+2015:
+
+12/10:	NOTE: BLCoil.cc has a long-standing bug that somehow did not crash
+	the program: in BLCoil::getUnitField(), G4double f[6] has element
+	6 set to 0 -- reference beyond the end of the array! line 648.
+	Fixed in source for 3.01, but not in older sources -- bug did not
+	crash on Hopper, but does on Cori.
+
+12/2:	Changed the way local coordinates are handled. Now 
+	BLCoordinates::getLocal() knows about them, but the global-to-local
+	BLCoordinateTransform must be set before use. This is for BLTrackNTuple,
+	used in all elements that generate a track NTuple. Implemented local
+	coordinates in sample and virtualdetector (already implemented in
+	detector).
+
+11/30:	Prepend "Stopped:" to the process name in steppingVerbosePrint()
+	when the track has status fStopButAlive.
+
+11/16:	probeField modified to use BLWriteAsciiFile.
+	BLWriteAsciiFile modified to close the file on the last call to
+	fclose, not the first.
+
+06/15:	Implemented viewer=name,100,5 to generate 5 images with 100 ev/image.
+	Works as before if no commas are present. If the third entry is missing,
+	1 is used except for name=best in which case 999999 is used.
+
+06/01:	Started Release 3.01. Completely changed the build process to use
+	Cmake. This includes a complete re-organization of the source
+	directories. The g4bl script becomes the g4bl executable program
+	in C++ (which does everything the script did). The g4blgui and
+	g4bldata programs become C++/Qt (rather than Java) - Java is no
+	longer used at all. The source for release 2.17 is now in
+	G4beamline2. Among other changes, the libraries are no longer
+	included in the G4beamline source, they must be built individually.
+
+03/17:	Fixed BLCMDmaterial when creating an isotope: to compute N it 
+	truncated A rather than rounding it, so it got the wrong N for
+	isotopes like O16 and Co60 for which A is slightly less than N.
+	Verified: For each and every isotope in the NIST database, rounding
+	A gives the correct value for N.
+
+02/26:	Modified BLMPI so that the trace NTuple is written by all ranks,
+	not just rank1. In rank0 the data are buffered per-worker to ensure 
+	that all rows from each track are kept together. The tracks within 
+	an event are NOT kept together, and the order of events is arbitrary.
+	This means that a given event can appear multiple times in the
+	NTuple (different tracks each time). This applies ONLY to the NTuple
+	whose name begins "AllTracks"; and nothing happens if there is no
+	such NTuple. This is needed becuse MuSim relies on AllTracks.txt.
+
+02/25:	Fixed eventcuts -- it would hang forever on the first skipped event.
+	The actual error was in BLCMDbeam.cc. The other beam commands are OK.
+
+02/24:	Add argument print to randomseed: it prints the next RandGauss value in
+	EndOfEventAction(), for checking random number usage between runs.
+
+02/20:	Modify genericbend to accept ironLength<=0, ironWidth<=0, or
+	ironHeight<=0 to omit the iron.
+
+2014:
+
+12/26:	totalenergy was broken, now fixed. It did not include the final
+	step in which the track stopped, did not use track weight, and
+	did not include steps that ended with trackStatus == fSuspend.
+	Also now prints out in MeV and Joules.
+
+12/26:	rdecaysource fixed -- did not apply local2global correctly.
+
+12/16:	test056 fails - tracks traversing an extrusion with kill=1 are not
+	always killed; some never enter the extrusion, even though their
+	step positions are inside it. Inquiry to Geant4 Geometry forum.
+	It fails with geant4.10.0.p02, and succeeds with geant4.9.6.p02.
+	Reported as Geant4 Bug 1703.
+
+12/16:	Trying Geant4 10.1. Had to remove muminuscapturefix and
+	G4WentzelOKandVIxSection.cc. Also some minor changes due to
+	Geant4 code evolution (e.g. particleTable->GetIon(A,Z,E) =>
+	particleTable->GetIonTable()->GetIon(A,Z,E)).
+
+12/16:	Fix syntax error when name= is at end of line.
+
+11/03:	Added isotropicsource command. test108.
+
+09/30:	New command "sourceonly". This command takes over the tracking
+	loop and just generates beam tracks and writes them to a file.
+	Implements format=G4beamline and format=MCNP.  
+
+09/30:	The rdecaysource command now works properly. This includes a special
+	source run that takes over ALL callbacks, and just generates a file 
+	containing source tracks from rdecaysource, as described in its help 
+	text. Configured by calling BLManager::registerSourceRun(this).
+
+08/23:	BIG ERROR in material command: when given Z and A, it looked Z
+	up in the element database and generated a material with the
+	natural abundances of isotopes. Fixed. Now it generates a material
+	with just that one isotope, as expected. This has been in there for
+	a long time...
+
+08/16:	Working on implementing rdecaysource to generate events from
+	radioactive decay. This needs a new type of run....
+
+08/16:	The trackcuts command cannot appear before the physics command (because
+	it needs the G4ParticleTable). If this is false, make it issue an
+	exception, rather than crashing badly with an infinite abort() loop.
+
+08/06:	Fix bug in BLFieldMap.cc CylinderImpl::getFieldValue().
+	Z0 was subtracted from z, then test z<Z0 => z<0.0.
+
+06/17:	In BLManager::trackBeam(), make "No beam registered" a warning,
+	not fatal.
+
+06/16:	Added command extendworld (for MuSim to ensure world is big enough).
+
+05/20:	Fixup idealsectorbend for ironHeight=0.
+
+05/10:	Added arguments height, width, length to boolean. They default to the 
+	values for e1, but the user can correct them if wrong. This permits
+	place using front=1 (required for MuSim %rtube).
+
+02/13:	Fixup genericquad for ironLength<=0.
+
+02/10:	Release 2.16.
+
+02/07:	In BLCommand::stringToRotationMatrix() permit angle-axis notation:
+	Ax,y,z,angle.
+
+02/07:	In tesselltedsolid, permit v, V, and f to have commas instead of
+	spaces.
+
+01/06:	Cannot get Geant4.9.6.p02 to build and run on Windows. I reported two
+	bugs that get it to compile, but it crashes before main. Note that
+	Microsoft debuggers do not permit you to set a breakpoint before main()
+	is entered, and this is VERY difficult to debug. I ended up putting
+	a debugging class into the top of each Geant4 source file; it uses
+	a static initializer to print the filename. But still it crashes
+	before main, and I gave up. For Windows I'm reverting to
+	Geant4.9.5.p01, as in release 2.14. The problem seems to be the
+	old tools I'm using (to support Windows Xp). Windows Xp goes end-
+	of-life in April 2014, so the next release won't need to support it,
+	and I can update my tool set. That ought to fix the problem.
+	I'll call this special Windows-only release 2.15w.
+
+2013:
+
+12/22:	Modified beamlossntuple to not include Tune particle track(s).
+	Description updated. No new test.
+
+12/17:	Release 2.16 status (building as 2.15z): builds and passes all tests
+	on Mac and on  Linux (SLF 5.2 64-bit). MPI passes test097 on Hopper
+	and Mac.
+
+12/16:	CLHEP has two problems on Linux (none on Mac): the build on Hopper
+	fails (in some CLHEP internal MPI code), and on SLF 5.3 (non-MPI)
+	it crashes when closing up. So remove CLHEP as a library and let
+	Geant4 build and use its internal version; remarkably this includes
+	everything G4beamline needs, including Evaluator without unary-minus
+	bugs. Changes to configure, g4bl-config, and test040 (which passes).
+
+12/12:	Fixed ^C handling in test/loop. loop now counts errors over multiple
+	loops, up to 100 errors.
+
+12/12:	Updated Geant4Data versions.
+
+12/07:	changed BLCMDbox to use parent's material if material is not specified
+	(was hard-coded to Vacuum). Also polycone, sphere, tessellatedsolid,
+	torus, trap, tubs.
+
+12/07:	Added command boolean to perform boolean operations between the
+	solids of a pair of elements. Operations are: union, subtraction,
+	and intersection. Works only for simple elements (those having a
+	single solid and no EM field). test107.
+
+12/05:	Added the survey command, which prints the front and rear points of
+	each Element. Included adding BLElement::gtSurveyPoint() and
+	implementing it in every BLElement. test106.
+
+11/27:	Enabled the Geant4 surface check in all G4PVPlacement-s. It does a
+	1-line printf saying it's OK, or generates a warning exception.
+	This means there are two geometry tests, and both generate warnings.
+
+11/27:	Added test105 to test zntuple with all 3 coordinate types.
+
+11/26:	BLCMDphysics now registers G4RadioactiveDecayPhysics to the physics
+	list, which adds G4RadioactiveDecay to GenericIon.
+	*** This may not be correct, but it looks OK. See the PhysicsList forum.
+
+11/26:	The beam command now supports ions as beam particles, except for
+	Root input (a Root NTuple field cannot hold its PDGid). Only
+	fully-ionized ions are supported, and no excited states.
+
+11/26:	When viewer != none, if no beam or reference is defined, the system
+	is displayed without events.
+
+11/25:	A fieldexpr can now be placed with front=1; fieldmap cannot.
+
+11/25:	Fixed reference color in particlecolor.
+
+11/25:	In reference command, P is now a synonym for referenceMomentum.
+
+11/25:	The beam command now issues a warning if nonzero polarization is
+	generated but spinTracking=0 in the physics command.
+
+11/25:	The place command now prints element arguments.
+
+11/25:	The default physics list is changed to FTFP_BERT.
+
+11/19:	Added command label, which displays labels or markers visually.
+	Visual only -- no test.
+
+11/18:	Added detector command. test101 for both perTrack=1 and perTrack=0.
+	Local coordinates are done specially, and work.
+
+11/18:	Changed logic in BLCommand::getMaterial() so ignoreError=true will
+	ignore a "material not found" error. Old version merely replaced
+	a not-found material with Vacuum; now it generates a fatal exception.
+
+11/14:	Added polarization fields to Root input in BLCMDbeam. Updated
+	test100. A Root beam NTuple needs all the BLTrackfile (original)
+	fields, and can optionally have PolX,PolY,PolZ; if they are absent,
+	then polarization comes from the command-line (default is zero).
+
+11/14:	Renamed all tests: testxx becomes test0xx, so we can have more than
+	99 tests. configure modified: test40 => test040 (testing CLHEP).
+
+11/13:	In BLNTuple.cc, for ascii NTuples, if the fields are the same
+	as BLTrackfile or BLTrackFile2, the initial comment line is
+	output as by BLTrackFile itself. This avoids the warning from
+	BLCMDbeam when such a file is read. Updated test86.
+
+11/13:	BLTrackFile format is enhanced to include BLTrackFile2 format,
+	which is the same as the asciiExtended format from NTuples. Both
+	the original and the extended formats can be read and written.
+	When reading BLTrackFile (original), if the file is BLTrackFile2
+	then the extra fields are ignored. When reading BLTrackFile2, if
+	the file is BLTrackFile (original), then the new fields are read
+	as 0.0. BLCMDbeam now reads BLTrackFile2; due to limitations of
+	Geant 4, all of the extended fields except polarization are ignored.
+
+11/13:	BLAsciiFile => BLWriteAsciiFile (more accurate name).
+
+11/11:	Fixed BLCMDemfactor -- the msc process now upates the momentum
+	direction in both AlongStepDoIt and PostStepDoit (previously it
+	only did so in the latter function). test96 now passes without change.
+
+11/05:	Applied Jean-Francois Ostiguy's patch to cornerarc to remove
+	the rotation around z (the beam axis) in the centerline
+	coordinates. Note that before this fix, the following command would
+	rotate all subsequent objects by 90 degrees around z (which it 
+	should NOT do): cornerarc z=100 centerRadius=100 angle=0.01 rotation=Z90
+	Added test99.
+
+11/04:	Added G4SAIDATA to the data sets in Util.java and G4blData.java.
+	Needed for QGSP_BERT in Geant4.9.6.p02. Also updated dataset versions.
+
+11/04:	Added maxTime to BLPhysics, and the physics command appends a
+	TrackTimeLimit process to every particle. This process kills the
+	track when its global time reaches maxTime; it applies both Post
+	Step and At Rest, so there is always a valid process for each.
+	BLCMDtrackcuts has been modified to use it. test73 and test82 are
+	now OK, without change. Note that the Geant4 AtRest stepping
+	permits only one step, calling AtRestDoIt() for the process with
+	the smallest AtRestGPIL().
+
+11/01:	test96 has problems due to errors in emfactor command.
+
+11/01:	Before, with doStochastics=0, a stopping track would just generate
+	a Warning exception; now it does that and then crashes with signal 11.
+	Clearly we need to add a Killer process to AtRest when there are
+	no AtRest processes; move the warning to it. This is test73 and test82.
+
+10/31:	Note the order of muon decay tracks has changed. This requires changes
+	to many tests.  Note also that the new trace command outputs the
+	initial and final steps, which the older command did not (plus
+	additional comments which are ignored by the tests). Modified
+	test09, test11, test13, test25, test42, test43, test50, test70, test82,
+	test83, test84, test90.
+
+10/30:	Move to Geat4.9.6.p02
+
+07/24:	Added axis-angle specification of rotations: "A1,2,3,4" defines
+	a rotation around axis [1,2,3] by 4 degrees. A few simple examples
+	worked correctly visually, but need a real test.
+
+07/22:	Modified BLCMDtrace to annotate the end of each event. For
+	SimulationWorkstation displaying events during simulation.
+	Also added an entry in the trace in PreUserTrackingAction, and
+	in PostUserTrackingAction, as the initial point was not included
+	and the final point was omitted when the track was killed by a
+	process. Updated test11, test13, test25, test42, test43, test50,
+	test84.
+
+07/19:	Modified BLCMDgenericquad to omit physical volumes if
+	ironLength == 0. So LinguaFranca can get quad fields with
+	fringe fields, but without iron.
+
+07/12:	Added BLCMDtessellatedsolid to generate a tessellated solid.
+
+04/23:	Incremental release 2.15b, source only. For Diktis on Hopper.
+
+04/23:	Add argument noBfield to reference command, so RF phasing in ICOOL
+	style can be done. noEfield and noEloss already done.
+
+03/15:	Incremental Release 2.15a. Is a tarball to be expanded in the user's 
+	bin directory. Linux and Linux64 only. For EPIC work.
+
+03/14:	Jean-Francois Ostiguy found a bug in the place command: when front=1
+	is given the rotation is around the element center, not the
+	placement point (which is what is needed, and what was intended long
+	ago). He provided a fix. test98.
+
+03/11:	Fixed emfactor. Original version also affected the bending in
+	magnetic fields (!). Revised code reflects improved understanding
+	of the meanings of the various instances of G4Track (documented
+	in comments).
+
+03/07:	Implement "default" as a valid physics list (= QGSP_BERT).
+	Implement gaussian as default beam type, and P as synonym for
+	meanMomentum.
+
+01/16:	Release 2.14a -- only source is affected.
+
+01/16:	Fix MPI timing problems, mostly during closeup.
+
+01/09:	Have g4blmake append "-$USER" to the version.
+	Have "g4bl-config --include" include -DG4BL_MPI if MPI is configured.
+	Also -DG4BL_VISUAL and -DG4BL_ROOT.
+
+
+2012:
+
+12/20:	Release 2.14
+
+12/17:	Discovered that the worldPhysicalVOlume is 2*maxStep larger than
+	BLGroup::getWorld()  in x, y, and z, because BLGroup::construct()
+	adds it into the G4Box constructor as a safety. Moving that safety
+	to BLGroup::constructWorld() breaks too many tests, so leave it 
+	as is for now.
+
+12/17:	probefield did not work if ouputFile was specified. Fixed.
+
+12/17:	Using FieldVoxels the global bounding box is clipped to the world;
+	the individual bounding boxes are not, so outside the world they
+	differ. In BLGlobalField::addFieldValue(), the first time called,
+	clip all bounding boxes to the world, with warning if any fields
+	extend outside the world.
+
+11/29:	g4bldata, G4blData.java, and Util.java revised. Users can now set 
+	the data directory, and the code is cleaned up. New format of
+	Geant4Data uses g4setenv.sh. $G4BL_DIR/.data now contains the path
+	of the Geant4Data directory (cannot do symbolic link on Windows).
+
+11/21:	Now MPI works correctly for both benchmarks and test97, on both
+	hopper.nersc.gov and tjrob.dhcp.fnal.gov.
+
+11/21:	Implemented abort() in g4beamline.cc (was just for Apple). Converts
+	it to a fatal G4Exception.
+
+11/20:	Update BLManager::UserSteppingAction() for Z-positions to also
+	interpolate the extended attributes of the track: proper time,
+	track length, polarization, local time. Update test84 and test86.
+
+11/20:	Modified both profile and totalenergy to combine all entries
+	into a single array for BLMPI::sumAllWorkers(). Individual messages
+	overwhelm rank 0.
+
+11/20:	Implemented SIGUSR2 to always exit the job; in EndOfEventAction.
+	Most useful in MPI on hopper.nersc.gov (only signals USR1 and USR2
+	get sent to the application, all others kill it immediately).
+
+11/09:	There were two sets of commands to set Geant4 vebosities to 0,
+	one in BLManager::initialize() and one in BLManager::BeginOfRunAction().
+	The latter prevent users for changing them in the input.file, so they
+	have been removed.
+
+11/09	Modified BLManager::Notify to call _exit(0) if a FatalException
+	has a code containing "Exiting".(rather than calling abort()) All
+	commands with an exit parameter now generate such an exception,
+	so they work properly in MPI mode.
+
+11/06:	Fixed bug in BLParam::getInt() where negative ints are reported
+	as non-integers.
+
+10/26:	Change BLCommand::printError() to call G4Exception().
+	Calls to printError() should be migrated to G4Exception(), as
+	information is lost using printError().
+
+10/24:	Add Benchmark1. It is the MICE beamline from December 2007. It is
+	modified to not generate a huge NTuple at the end (too many fields),
+	and to rename the virtualdetector-s as they are placed. This was 
+	chosen as it is not too small, and not too large, and uses most 
+	beamline elements, including tuning. Benchmark2 is Ostiguy's
+	simulation of the FNAL Debuncher.
+
+10/22:	Revise configure's handling of MPI. Remove --force-mpi.
+
+10/19:	Add -O3 to CPPFLAGS in the Makefile (so configure is modified).
+	This speeds it up by a factor of 2.25 on hopper.nersc.gov; by
+	a factor of ~1.5 on a Mac.
+
+10/03:	Add geometrical voxels to BLGlobalField. This speeds up a simulation
+	with 400 magnets by a factor of 8 (!). The size of each voxel is set
+	by fieldVoxels, which defaults to "200,200,200" (must have 3 values;
+	"0,0,0" means use no voxels). A warning is issued if there are more
+	than 1M voxels, or if any voxel has more than 3 fields.
+
+10/03:	idealsectorbend used to have an infinite bounding box; now it has
+	a reasonable one.
+
+09/20:	Modify BLSignal to suppress the stack trace for ^C during input.
+
+09/20:	Added command emfactor to multiply msc and Eloss by factors.
+	Also test96.
+
+09/17:	Add fluct argument to physics command, to independently turn off
+	ionization energy loss fluctuations.
+
+08/30:	Add setupDebug() to g4beamline.cc. It sets up to use a hard-coded
+	input file, does chdir() to the directory containing it, and sets
+	environment variables for $HOME/Geant4Data. This is needed because
+	Mac OS X's instruments.app cannot set those things.
+	
+8/30:	Added test of the result to all calls of fopen().
+
+08/22:	Added --profile to configure, for profiling the code. Includes
+	CLHEP, Geant4, GSL, and FFTW.
+
+07/27	Modified BLCMDreweightprocess.cc to implement all of the virtual
+	functions in G4WrapperProcess. (Discovered to be necessary when
+	wrapping multiple scattering; test93 still passes after implementing 
+	them.)
+
+06/29:	Modified BLCommand.cc so # works as comment to end-of-line.
+	It must be the first character of a token. Added a few to
+	test01; All tests pass.
+
+05/10:	In virtualdetector, add a blank line between tracks if the
+	previous track had 4 or more hits. For plotting ASCII NTuples
+	via gnuplot; no effect on Root files or HistoRoot plots.
+
+04/29:	Release 2.12.
+
+04/23:	Improve G4blData.java to check for presence of each dataset, and
+	update each status appropriately. G4blGui.java now runs G4bldata
+	if Geant4Data is missing; can also (re-)run it via a special link
+	in Help.html.
+
+04/17:	Several minor cosmetic improvements: re-organized the examples;
+	made configure display library versions.
+
+04/15:	Improved probefield: uses positional arguments as input lines, and
+	can write to an outputFile.
+
+04/15:	Added function "if(condition,truevalue,falsevalue)" to BLEvaluator.
+	Added an expression using it to test40. Documented it in Users Guide.
+
+04/14:	Add Bphi to fieldexpr. Required adding Bphi to BLFieldMap for
+	cylindrical maps created with createCylinderMap(). BLFieldMap
+	supports Bphi for maps created with createCylinderMap(), but
+	not when read or written to a file.
+
+04/10:	Geant4.9.5.p01. Still needs workaround for secondary track weighting
+	bug (#1283). Minor update to test14.
+
+04/09:	Moved BLManager::initialize() updating parameters to start of
+	initialize() so BLManager::getSteppingVerbose() is valid during
+	construct(). This is a long-standing bug (related only to printing
+	with steppingVerbose>0); it's now fixed, and all elements that
+	kill tracks now print a message if steppingVerbose > 0.
+
+03/29:	Added kill argument to newparticlentuple. Does not kill track if
+	require test fails.
+
+03/28:	spinTracking is now complete. It includes: tracking the polarization
+	of mu+, mu-, e+, e-, pion decay to polarized muons, and polarized
+	muon decay. Polarized muon decay gives the correct distribution for
+	the electron, but not the neutrinos; all muon decay products are
+	unpolarized.
+
+03/19:	Added spinTracking argument to physics command. Still not complete,
+	but can do g-2 ring and pion decay. Also test95. 
+
+03/13:
+	Added for command and test94.
+
+03/12:	The new build system is now complete. Everything is in the configure
+	script; it constructs a Makefile that builds the libraries and
+	g4beamline. The .config file is bi-lingual, in that it is read
+	by both bash and make -- this makes it impossible to support
+	directories with whitespace in their names.
+
+03/07:
+	Finally got Windows to build. Required reverting to Root 5.24.
+
+01/28:	I reported the secondary track weighting bug as Geant4 problem 1283.
+	I also implemented a work-around in Geant4.9.5-tjrob.
+
+01/25:	Working on a completely new build system and Geant4 9.5.
+	Geant4 9.5 depends on CLHEP >2.1.0.0, which has a unary minus
+	bug in Evaluator that I cannot work around. So I created
+	clhep-2.1.1.0+2.0.4.5 that has Evaluator from CLHEP 2.0.4.5
+	but is otherwise 2.1.1.0. Still have problems: Open Inventor
+	has problems, and there are weight errors in the tests (even
+	though I made the modification to G4VParticleChange)..
+
+01/18:	Using Geant4 9.5. Starting new build system for G4beamline.
+
+01/17:	Modify configure to properly configure Root for macosx/macosx64
+	based on the compiler, not the OS (which has been 64 bits since
+	Leopard). On Linux and Windows it presumably still gets the
+	architecture correct.
+
+01/13:	I found the problem with Root, it is in BLRootNtuple.cc:
+	i!=string.npos is not portable when i is unsigned.
+	unsigned => G4String::size_type. There were a few other instances
+	of this.
+	There are a lot of "for(unsigned i=0; i<vector.size(); ++i)",
+	but this is OK as long as the vector contains fewer than 4
+	billion entries. Now all tests pass in 64-bit mode, on Mac OS X
+	10.7.2 (Lion), except test72 (g4blmake).
+
+01/11:	There are two problems in 64-bit mode: Root hangs when creating
+	a TNtuple, and ~20% of the tests fail. The latter was found to be
+	the use of G4Event::operator=. The code was modified to avoid it, and
+	it was reported as Geant4 problem 1277. Now only 4 tests fail -- the
+	four tests using Root (they hang forever as Root creates a HUGE .root
+	file). Still working on this...
+
+01/10:	Release 2.10a for Mu2E, Linux only. They need the stack trace.
+
+01/09:	Enhance BLSignal to print a stack trace for the first signal received.
+	Modify g4bl_exit() to print it. Prints demangled C++ names.
+	Works on Mac and Linux; doesn't work on Windows (yet ?).
+
+01/04:	Release 2.10, using Geant4 9.4.p03
+
+2011:
+
+12/17:	Use Geant4.9.4.p03. Requires an additional fix to G4VParticleChange.cc,
+	fSetSecondaryWeightByProcess(true) => false. Reported as Geant4 
+	Problem 1273
+
+12/15:	Add BLCMDrfdevice from Kevin Beard. This is an updated pillbox command,
+	but is different enough that the old pillbox is retained and the new
+	one is called rfdevice. Need test(s) for it.
+
+12/15:	Add traceTune argument to the trace command, to permit the user to
+	suppress the Tune particle trace (it gan be enormous with lots of
+	rfdevice-s).
+
+12/15:	Add BLFieldMap::getFieldValueNoTimeNoScale() for Kevin's new
+	rfdevice.
+
+12/08:	Modify BLCommand::getNextCommand() to permit spaces after a \
+	to still continue the line (happens sometimes in Windows, or
+	converting a file Windows->Linux).
+
+11/18:	Remove MICEPhysicsList and LISAPhysicsList. Nobody uses them, and
+	they haven't worked for a long time.
+
+11/18:	Modify BLAlarm.cc to use BLTime::time() instead of ::time(0).
+	For some reason, the latter now fails to compile on Windows; this 
+	is better.  Also fixup portability issues related to NaN in
+	BLCommand.cc, and related to SIGUSR[12] in BLSignal.cc.
+
+11/2:	Build with geant4.9.4.p02.
+
+10/13:	Make --disable-MPI be the default for MAC OS also -- Lion does not
+	have it (can be installed via MacPorts or Fink).
+
+08/30:	Add command reweightprocess, which modifies the cross-section of
+	a physics process, re-weighting tracks appropriately. Also test93.
+
+08/25:	Reported Problem 1243 to the Geant4 collaboration. Weighting of the 
+	parent track is broken. There is a workaround that is in the code,
+	so it works.
+
+08/10:	Reported documentation Problem 1241 to the Geant4 collaboration. The
+	Users Guide does not mention G4PhysListFactory for constructing
+	physics lists. G4beamline already uses it, so this does not affect it.
+
+08/09:	Fixed up some calls to G4ProcessManager::AddProcess; ordering was
+	wrong (3 insead of ordDefault). All Tests Passed.
+
+07/29:	Fixed G4SynchrotronRadiation.cc -- had old-style arguments to
+	GetFieldValue(), twice. Remarkably, using double[3] where double[6] 
+	was expected did not crash. Reported to Geant4 collaboration as 
+	problem 1236.
+
+07/27:	New command lilens, a simple model of a Li lens. Also test92.
+
+07/18:	Reported documentation Problem 1233 to the Geant4 collaboration. The
+	decription of muon decay in the Physics Manual is highly misleading.
+
+07/13:	Made BLManager print the signal # when a signal is received.
+	Also modified BLSignal.hh.
+
+07/13:	Fix setup to handle spaces in directory names. MUST BE TESTED ON
+	ALL OSs.
+
+07/05:	Have tune command print the expression when complete.
+
+07/05:	Have cornerarc update Zcl, so elements can be placed sequentially.
+
+07/03:	Enhance material command to filter tracks. Added arguments
+	keep, kill, require, plus code to implement this. Added test91.
+
+06/13:	Add setCustomHandler() to BLAlarm. Add clear() to BLSignal.
+	Intended to let BLCMDneutrino separate the external genie_interface
+	delay from the event time limit, but that is not yet implemented.
+
+05/16:	Modify Makefile to fail a make wthout a preceeding ./configure.
+
+04/14:	Add union to ntuple command, to union detectors instead of combining
+	them. Added test90.
+
+04/11:	Modified BLNTuple so format=ascii prints the integer fields as ints,
+	avoiding PDGid's like 1.000001E9. Integer fields are: PDGid, EventID,
+	TrackID, ParentID. Now in the ASCII NTuple formats, any EventID should
+	be properly preserved exactly, as long as it fits into a 32-bit
+	unsigned int. Root NTuples still will round off values larger than
+	16,777,215 (all int fields). Modified test01 to use event
+	numbers 1.00010E9 and 800000001.
+
+04/11:	Revised the interface to BLNTuple to use doubles instead of floats.
+	This avoids the problems with integer truncation, which affects
+	both EventID and PDGid. Also made the ASCII prints set to zero any
+	values too small for a float (fabs(data)<1.0E-44) -- affected
+	format=ascii and format=bltrackfile). The 6th significant digit
+	changed in the following tests, forcing minor changes: test86, test64,
+	test54, test50.
+
+04/11:	NOTE: At present, BLMPI is disabled (non-trivial changes are required).
+
+03/29:	pillbox problems -- with stochastics off, still get small run-to-run
+	variations. Seems to be related to starting tuning at 
+	timeOffset=-4.7E21 (!). Fixed by zeroing it before starting tuning.
+	Also fixed bug that DC cavities' E field is not rotated.
+	Also fixed bug where point[] was used instead of local[].
+
+03/15:	Add argument referenceParticle to timentuple, so it can optionally 
+	include the reference Particle in the NTuple.
+
+03/09:	In trackermode, document that its input filename must not be equal to
+	histoFile, and issue an immediate fatal exception if so.
+
+03/08:	In BLRunManager in collective mode, revise adding TimeStepLimiter
+	to all particles to happen before the Tune particle, but with
+	stepTime=DBL_MAX. stepTime is re-set after all beam tracks are obtained.
+	This fixes the crash when disabling processes in collective mode --
+	that was a subtle one!
+
+03/08:	Make disabling physics processes while tracking beam generate a
+	G4Exception(JustWarning), so they get tabulated at end of job. 
+
+03/08:	Make default NTuple format be "" (rather than "root"), so when ROOT
+	is disabled the default becomes "ascii" (via #ifdef in BLNTuple.cc).
+	Affected: trace, zntuple, virtualdetector.
+
+03/07:	Remove obsolete functions G4Step::GetDeltaEnergy() and 
+	GetDeltaMomentum(); replace with obvious differences.
+
+03/04:	Change handling stuck tracks (100 steps in a row, each less than 0.1 
+	micron and 0.1 ps) -- if beta < 0.010, silently stop it, otherwise
+	kill it with an exception printed. Print # Stuck Tracks (stopped)
+	in summary at exit.
+
+03/04:	In BLManager::Notify() print the KE of tracks that generate a
+	G4Exception. Involved adding currentTrack into BLManager.
+
+02/22:	Fixed commands with PostUserTrackingAction() to either work properly
+	in collective mode (BLCMDtotalenergy.cc), or to be documented to not
+	work correctly in collective tracking mode (BLCMDntuple.cc,
+	BLCMDtracker.cc), and throw a fatal G4Exception. The trace command
+	works in collective mode only if oneNtuple is nonzero.
+
+02/22:	Fixed all warnings to use G4Exception(), so they get tallied at the
+	end of the run. Affected: BLCMDcorner.cc BLCMDparam.cc BLCMDplace.cc
+	BLCMDstart.cc BLCMDtotalenergy.cc BLFOR009.cc BLRootNtuple.cc
+	BLTrackFile.cc. This was already done for fatal errors and abort(),
+	for all G4beamline code.
+
+02/22:	Fix probefield -- it erroneously used BLAsciiFile for its input,
+	which caused it to truncate the file, and not work. Add test89.
+
+02/21:	Make beamlossntuple ignore tracks that were suspended (i.e. every
+	time step in collective tracking mode).
+
+02/21:	Added BLSignal::sigusr1() and BLSignal::sigusr2(); make
+	BLManager::EndOfEventAction() call BLNtuple::flushAll() if sigusr1
+	is received (just as for histoUpdate). Now on Linux and Mac you can 
+	do "killall -USR1 g4beamline" to have them update their Root files.
+
+02/12:	Release 2.08, using Geant4 9.4.
+
+02/12:	Add gsl_error_handler() to BLManager. Ignores underflows in GSL
+	functions, and aborts the event for other errors.
+
+02/11:	Added helicalharmonic command, from V. Morozov. Added test88.
+
+02/09:	Added spacecharge and spacechargelw commands. Added test87.
+
+02/03:	Add gammaToMuPair argument to physics command; when set, and add the
+	G4GammaConversionToMuons process to the gamma.
+
+01/18:	Fixed beam command so beamZ does not overwrite the z position
+	for gaussian, rectangular, and ellipse beams (it is added).
+	Still overwrites for root and ascii beams, as documented.
+
+01/18:	Increased grace period for BLAlarm from 2 to 10 seconds. Remember this 
+	is wall-clock time, not CPU time.
+
+01/18:	Modified BLSignal so when reading from stdin in BLCommand, a sigle
+	^C will exit the program.
+
+01/11:	Improved collective command to generate NTuple-s of E and B field
+	values at specified points in space at each time step.
+
+01/07:	Added --debug flag to configure. It sets G4DEBUG and does
+	--disable-visual, --disble-root, and --disable-mpi. Probably
+	doesn't work on Windows (not tested -- works on Mac OS X).
+
+01/06:	Implemented BLAsciiFile that keeps track of the FILE * for each
+	file opened for writing, and returns the same FILE * for multiple
+	opens. Used for all data-output commands. This means that multiple
+	NTuple-s can be sent to a single ASCII file simply by usng the same
+	filename. Ditto for printf-s, etc. Added test86.
+
+01/06:	In BLManager.cc, incremented eventsProcessed in EndOfRunAction
+	for TUNE and REFERENCE. Avoids users being puzzled by "0 Events".
+
+01/05:	Improved BLSignal and BLAlarm. The latter now works on Windows.
+	I also modified G4blGui.java so when the Abort button is pushed it
+	sends a SIGINT to g4beamline and waits 2 seconds before destroying
+	the process and closing the copy to the screen. So on Linux and Mac,
+	^C in g4bl and Abort in g4blgui both close up cleanly.
+	Neither works on Windows for two different reasons:
+	A) in Cygwin, this is a fundamental incompatibility between Cygwin's
+	   bash and non-Cygwin Windows programs (such as g4beamline.exe).
+	   Running g4beamline without bash could work, but is hard.
+	B) in g4blgui, Windows has no way to send a signal from the parent
+	   to the child; alternatives are 'way too cumbersome.
+
+01/03:	Added BLSignal, and improved signal handling in BLManager.
+
+2010:
+
+12/10:	Added argument exactComputation to the coil command, to make it
+	not use a field map, but rather do the Biot-Savart computation
+	at every call. Slows it down considerably, but it remains useful 
+	for drawing field lines.
+
+12/07:	randomseed command: improved error checking. Also add "set" as
+	synonym to "now".
+
+12/06:	New command setdecay to modify particles' lifetime, decay modes, and
+	branching ratios. Can make stable particles decay.
+
+12/06:	idealsectorbend computed its length and width incorrectly.
+	Only mattered if the idealsectorbend determined the world size. 
+	Fixed.
+
+12/03:	Extended the eventcuts command to have both keep and skip files.
+	If the keep file is not empty, only events listed in it are analyzed.
+	Events in the skip file are skipped (even if listed in both).
+
+11/24:	edit Geant4 source, G4OpenInventorSceneHandler.cc, initialize
+	fPreviewAndFull to true, "visible mothers + visible daughters".
+	Also edit G4OpenInventorWinViewer.cc and G4OpenInventorXtViewer.cc
+	to set transparency type to SORTEDOBJECTADD.
+	This means that now by default transparency works, and that
+	daughters are visible.
+
+11/24:	Implemented fieldlines command to draw B field lines.
+
+11/24:	In BLGroup::constructWorld(), make world invisible. Does not affect
+	Open Inventor, but does affect other viewers.
+
+11/20:	Transparency works in Open Inventor, but you must manually use the
+	right button menu to set DrawStyle/TransparencyType to 'sorted
+	object add'. The default type is 'blend', which lets you see some
+	(but not all) objects through others, but not tracks or field lines
+	(depends on drawing order).
+
+11/18:	Fixed totalenergy to include the kinetic energy of tracks that are
+	killed, except for tracks leaving the world.
+
+11/04:	Implemented the alpha parameter in color. Transparency works
+	in viewer=OGLIXm, but not viewer=OIX or viewer=best.
+
+10/12:	Fix ntuple command so newparticlntuple will work with perTrack=1.
+	Required its registerTrackingAction() to be put at the front of
+	the vector, rather than at the back. Modify test81 to test this.
+
+09/29:	beam command ascii will only accept format=BLTrackFile; any
+	other value fails with an assert failure TrackID>=0 (!!). Fixed to
+	give a proper error message.
+
+09/22:	Release 2.06.
+
+09/17:	Fixes/improvements to HistoRoot.C:
+	1. extend limits in NPARTICLES to include Hyperons.
+	2. fix problems with variables and multiple NTuples (again --
+	   this time for sure).
+	3. expand slider limits by 1 part per million in scanForLimits
+	   (don't do this for limits in expr:min:max). Fixes off-by-1
+	   event counts when restoring sliders (related to float==float).
+
+09/15:	In physics command, added argument synchrotronRadiation to add
+	G4SynchrotronRadiation process to e+ and e-. Also added
+	synchrotronRadiationMuon for mu+ and mu- -- NOTE: this is
+	experimental for muons and may not work (the process IsApplicable()
+	only applies to e+ and e-, and commented out Charge()!=0).
+	Added test85 (e- only).
+
+09/15:	In g4blgui, removed the "rm *.root *.hst" when the Run button is 
+	pushed. But still do "rm *.heprep" (images for the HepRep viewer).
+	Also increase NPARTICLES to 8000 so hyperons are listed (no names).
+
+09/14:	Implemented BLTrackNTuple, which replaces most of the UserSteppingAction
+	in commands that generate a track NTuple. It implements the Extended
+	formats that add additional fields to the NTuple. Commands updated:
+	beamlossntuple, newparticlentuple, timentuple, trace, virtualdetector,
+	zntuple. The new fields are appended to the end of the row, so the
+	extended-format NTuples should still be readable by the beam command 
+	(untested). All tests pass, without any changes to them. This replaces
+	BLEvaluator::setTrackVariables(), but that is still needed for other
+	commands (printf, profile, trace, tune). Added test84.
+
+09/13:	Created BLAssert.hh and replaced all assert() with BLAssert(). This
+	makes them call G4Exception() rather than abort() (which hangs for
+	>1 minute on my Mac as it tries to print out the stack).
+
+09/13:	Preparing for revision of track NTuples. Some commands mis-handled
+	the default; fixed.
+
+09/10:	Release 2.04c (for Mu2E).
+
+09/09:	Added muminuscapturefix, which adds extra neutrons to the
+	muMinusCaptureAtRest process. default parameters make it
+	reproduce the MARS neutron spectrum for Al.
+
+09/08:	In BLCMDlist, do handleCallbacks(0) after initializing the BLManager,
+	so commands that change the process list affect the listing.
+
+08/26:	In BLCMDfieldmap, timeOffset was inadvertently ignored.
+	Kevin Beard provided the diagnosis and fix.
+
+07/30:	In BLRunManager, getNextStepTime() has been renamed to getStepTime(),
+	and the comments explain when it returns the current step time and
+	when it returns the next step time. setNextStepTime() => setStepTime().
+
+07/30:	Regularized names to EventID, TrackID, and ParentID in: BLEvaluator.hh
+	BLTrackFile.hh BLCMDprintf.cc BLTrackFile.cc.
+
+07/29:	Added EventID to the variables in particlefilter's require argument.
+	Also renamed TrkId=>TrackID, Parent=>ParentID so they are the same
+	names used elsewhere.
+
+07/29:	reference command noEloss and noEfield did not work properly for
+	multiple reference particles. Also only the first Tune and
+	Reference particles are entered into the traces. Fixed by also
+	requiring lastGen==this. Also, each reference command increments the
+	TrackID of the tune and reference tracks.
+
+07/28:	Code related to G4String::npos is not portable to 64-bit g++.
+	Lots of fixups (unsigned -> G4String::size_type). In principle,
+	all loops like "for(unsigned i=0; i<v.size(); ++i)" should also
+	be fixed up, but there are so many of them that I did not do it;
+	they work on 64-bit g++ and all 32-bit compilers that have been used.
+	On ilcsim2 the custom 64-bit build (--disable-visual --disable-root)
+	ran 20% faster than the distribution 32-bit build (testAUG05.in,
+	using ascii NTuples and pre-computed coil maps). I did not
+	investigate why SoXt and Root failed to build in 64-bit mode.
+	BTW re-building on ilcsim (32-bit) ran 5% faster than the distribution
+	(running on ilcsim2, on which each core is ~2X faster than on ilcsim).
+
+07/28:	In BLNTuple.cc, make defaultFormat be "ascii" if Root is not enabled.
+
+07/26:	Release 2.03. Using Geant4.9.3.patch01.
+
+07/26:	Minor fix to g4bl-config: don't echo --include if the directory
+	does not exist. Fixed test72 (user compiling via g4blmake) to
+	omit itself if the include directory does not exist (was failing).
+
+07/24:	New command fieldntuple, which generates an NTuple of positions and
+	field values, using loops over coordinate values. Makes it easy to
+	plot fields using existing NTuple plotting tools. test82.
+
+07/07:	Added veto argument to ntuple command: veto is a comma-separated
+	list of detector patterns; a hit in any of them prevents the
+	event/track from being entered into the NTuple. Also added
+	filename argument to ntuple command, to make it like the others.
+
+07/06:	Added output command to redirect stdout and stderr to a file.
+	Most useful when histoFile is set to parameter values, so output
+	is redirected to a similarly-named output file. test58.
+
+07/06:	Added printing CreatorProcess for each track when steppingVerbose=1.
+	Also in ZStepLimiter, remove SetProcessOrdering(this,idxAtRest)
+	because it is not needed at rest, and overwrites the actual
+	process name that killed the track.
+
+06/29:	Added test80 to test the particlesource command. It's a very
+	basic test using almost none of the many fatures of the GPS.
+	Also fixed particlesource to properly seed the random number
+	generator.
+
+06/24:	Permit users to select ICOOL-style Tune and Reference particles
+	by adding two new arguments to the reference command:
+	noEloss=1 makes Tune and Reference not experience any ionization
+	energy loss; noEfield=1 makes Tune and Reference not respond to
+	any electric fields. Applies only to this Tune/Reference particle.
+	Added test79.
+
+05/10:	Fixed HistoRoot problem with variables in multiple NTuples.
+
+05/07:	Added argment perTrack to BCLMDntuple -- generates a row in the 
+	NTuple for each track (default is a row for each event).
+
+04/19:	Release 2.02.
+
+04/19:	Bug in BLEvaluator handling unary minus. This is difficult to fix 
+	correctly, which requires complete parsing of the expression.
+	Instead, a scan for an operator followed by - or + is performed,
+	surrounding the unary expression in parens; repeated until no change.
+	The underlying HepTool::Evaluator does handle unary - after a '('.
+	This handles all test cases I threw at it. Added test77.
+
+04/15:	Major restructuring of G4blGui.java in the handling of G4beamline's
+	stderr and stdout. There was a deadlock when enough exceptions were
+	printed to stderr to fill up the pipe -- this caused g4beamline to
+	block writing to stderr, while G4blGui was blocked waiting for a
+	line from stdout. This was much more common on Windows than on Mac.
+	Now there are two threads, one each for stdout and stderr, and a
+	synchronized outputLine(). This causes the exception lines to
+	sometimes interleave in an ugly way with lines from stdout, so
+	BLManager::Notify() was changed to write exception text to stdout
+	(not stderr -- this is better in all respects), EXCEPT when running
+	in MPI (need exceptions written to stderr so they are seen). This is
+	belt and suspenders -- a large amount of text written to stderr
+	doesn't cause the deadlock, and the amount of text written to stderr
+	was greatly reduced.
+
+04/14:	Made g4bl_exit() call exit() (instead of _exit()). Now LisaPhysicsList
+	fails (Mac: un-aligned pointers freed; Windows: general program fault).
+	Omitted test41.
+
+04/14:	Modify BLManager::Notify() to thin out the printing of many similar
+	exceptions. Also add exceptionSummary() to print a summary of all
+	exceptions during handleCallbacks(2). Also convert some printf-s
+	to G4Exception-s in BLCMDbeam and clean up a printf in BLTrackFile.
+
+04/12:	Modified g4bl script for Cygwin to use a mixed path for G4BL_DIR.
+	This fixed test41 for the case when the data directory is copied. 
+	It should have been this way from the start, and I'm surprised no
+	other tests failed. g4blgui already does this OK. Now all tests
+	pass for either a linked or copied data directory (but some are skipped
+	on Cygwin when it is linked).
+
+04/12:	physics command updated for the new physics lists.
+
+04/12:	test41 (LISAPhysicsList) failed on Windows because the prepare script
+	used a Cygwin symbolic link for the data directory. The bash shell
+	understands such links, but G4beamline does not and could not read
+	the dataset. Modified test41 to be omitted if data is a symbolic link.
+
+04/05:	Re-did the handling of event numbers in all ascii formats. Involved
+	mapping ascii->bltrackfile formats for all track NTuple commands,
+	changing %.2f to %.6g formats in BLTrackFile::write(), and fixing up
+	a lot of tests that use ./compare. Now BLTrackFile::read() reads
+	everyting into a double array, and converts from there, so files with
+	event numbers like 1.0e6 will work. It remains true that in Root files
+	event numbers >16,777,215 get truncated, as float-s are used in
+	TNtuple. BLTrackFile format now has a work-around in BLNTuple.cc to
+	avoid EventID truncation, and the following commands map format=ascii
+	to format=bltrackfile: beamlossntuple, newparticlentuple, timentuple,
+	virtualdetector, zntuple. Note that format=ascii in the ntuple command
+	still has 24-bit EventID truncation (there's no obvious way to avoid 
+	it).
+
+04/04:	Re-designed the ntuple command so it uses new callbacks in the
+	BLNTuple class. Cleans up the need to #include "BLCMDntuple.cc"
+	and write special code to be able to include an NTuple in the
+	ntuple command. Now the NTuples from timentuple, newparticlentuple,
+	and beamlossntuple can be used in the ntuple command, and new NTuple
+	commands need do nothing to be included. A side effect is that now
+	an empty NTuple may be created with noSingles=1. test76 added.
+
+03/19:	Added note in the EM Field section of the User's Guide to beware
+	of placing elements with fields such that their bounding boxes
+	share a side. There can be a region in which neither or both are
+	evaluated. All tests were OK, but in theory the possibility exists.
+
+03/19:	Updated G4blGui.java and g4bl to look for all Geant4 data sets.
+	There were typos in G4blGui.java that made this fail; works now.
+
+03/12:	Added the particlesource command to interface to the Geant4 General
+	Particle Source. It inherently uses global coordinates, and for
+	simplicity, no global <-> centerline conversion is done (instead,
+	it is documented to use global coordinates).
+
+03/10:	Improved help text for place and group to highlight the need for
+	rename to begin with "+" when placing into objects or groups.
+	Modified place to issue a warning when multiple placements of the 
+	parent will generate multiple objects with identical names.
+
+03/09:	Need to update physics command for new and obsolete physics lists.
+
+03/09:	Bug in pillbox when wallThick>collarThick -- overall length is too
+	short. Ditto for win1Thick and win2Thick. Fixed.
+
+03/03:	Updated the description in the beam command, and renamed category
+	to directory (with a deprecated synonym "category"). Added meanP as
+	synonym for meanMomentum. HISTOSCOPE has now been removed everywhere
+	(it is no longer supported and no longer works, even on Linux systems).
+
+03/01:	Modified source/GNUmakefile to warn the user if make was run from
+	the wrong directory (i.e. not <install>). Modified <install>/Makefile
+	to do "rsync -av source/* $G4SYSTEM/source" so changes to the source
+	get built.
+
+02/10:	Modified BLParam::getString() to define an undefined parameter from
+	the environment if possible. Especially useful in Grid jobs (e.g.
+	$OSG_WN_TMP in every filename).
+
+02/02:	Fixed bug in BLCoordinates: the correction is invalid in the first
+	segmentRC[], because minZ is -DBL_MAX. Omit the correction in the
+	first segmentRC. This fixed the movie problem in linac.in.
+
+02/01:	test41 (LISAPhysicsList) now works again. No change.
+	Modified g4bl to echo G4BL_DIR later (after special args).
+
+01/29:	Modified BLCMDextrusion to check the traversal of the polygon's
+	vertices, and invert the order if needed. G4ExtrudedSolid makes
+	gross errors if the traversal order is wrong. This was easier and
+	better than trying to document to users how to get the order correct.
+
+01/29:	Put checks for valid expressions into BLCMDfieldexpr.
+
+01/29:	Made BLNTuple with FOR009.DAT format print a non-fatal error message
+	if multiple filenames are given. First one is used.
+
+01/27:	Added kill argument to BLCMDpillbox to kill tracks that hit the
+	pipe, walls, or collars. Added test75.
+
+01/27:	Fixed problem with MaxEvents in Historoot.C. Was a typo in a
+	for loop that executed once too often (<= instead of the correct <).
+	It's not clear why setting MaxEvents triggered the failure (or rather
+	why leaving MaxEvents unset did not fail).
+
+01/27:	Re-did the logic for tuning timeOffset in BLCMDpillbox. Now it
+	does not tune timeOffset when a value is given. Added test74.
+	Fixes bug reported by Yuri Alexahin.
+
+01/26:	Modify GNUmakefile, g4bl-config, and g4beamline.cc so the latter is
+	always compiled, putting version and date into the program (with
+	$USER if not a release build). Removed build.icc and tmp.icc (now
+	it uses -D flags to the compiler).
+
+01/26:	Increase # digits printed in printfield (to micron accuracy).
+	Updated test02, test15.
+
+01/19:	Release 2.01 for Linux. The Mac OS 2.0 distribution does not have
+	the erroneous symbolic links, nor does the Windows installer.
+
+01/19:	Disaster in release 2.0 for Linux (and potentially Mac OS): symbolic 
+	links remain in the tarball -- links to my directories which don't 
+	exist on other systems. Unfortunately, directories with these names DO 
+	exist on my test VMs, so I never noticed this. So:
+		1) add -L to all cp commands in distrib-*
+		   (already done in distrib-WIN32-VC)
+		2) Rename links in test VMs to G4blOnMac (etc.)
+
+01/15:	Changed "Stuck Track" to kill just the track, not the whole event.
+
+01/15:	Implement totalenergy command, which prints the total energy deposited
+	into selected volumes, at the end of run.
+
+01/14:	Remove G4VProcess *clone() from BLCMDbug1021 and BLCMDparticlefilter.
+	These were the only ones that still had it (it is an artifact from
+	an earlier attempt to manage processes in collective tracking).
+	Not to be confused with BLElement::clone(), which remains throughout.
+
+01/10:	Release 2.0
+
+01/09:	Further testing. Everything seems to work.
+
+01/06:	Mac OS X binary distribution installs and runs fine on "Leopard
+	Bare Install" and on "Snow Leopard Bare Install". Does not work on
+	Tiger. Constructing a new test machine "Leopard + XCode" to test
+	building the source distribution.
+
+01/05:	Developed the directories and code to create a Mac OS X installer.
+	There are four directories in the installer .dmg: G4beamline.app,
+	Historoot.app, G4beamlineExamples and G4beamlineDocumentation, plus
+	README.txt. Implemented in distrib-Darwin-g++. Works great!
+	Unfortunately, it does not look like there is a correspondingly
+	simple installer for Linux -- it remains a .tgz file, but setup
+	has been modified to create G4beamline.desktop and Historoot.desktop
+	in $HOME/Desktop (if it exists and is writable). The format of such
+	files is common between KDE and Gnome, so this works for both of them,
+	and will probably work for other window managers.
+
+01/04:	Release 2.0beta now builds on Windows/Cygwin/VC++. The key was
+	adding --with-msvcrt=md to Coin's config. Clearly all libs must use
+	the /MD switch to VC++.
+
+2009:
+
+12/16:	Added HH:MM to the date of the build in GNUmakefile. As g4beamline.cc
+	is always compiled, this sets the displayed date and time for every
+	build.
+
+12/16:	Surrounded all refferences to BLLoad with #ifdef USE_SHARED_OBJECTS
+	-- all that may be removed sometime....
+	Closing in on getting release 2 to build on Windows/Cygwin.
+
+10/23:	2.0beta now builds and runs on:
+	Linux: RedHat 7.3*, SLF 309*, SLF 45, SLF53.
+	MacOSX: Leopard, Snow Leopard.
+	* = use --old-versions in configure.
+	This was a major effort over more than a month to get it to work. 
+	No G4beamline code was involved, the problems were related to
+	selecting library versions that would compile, along with their
+	configure options. Windows has not yet been attempted.
+
+09/26:	Fixed movie command to work in global coordinates.
+
+09/23:	HistoRoot bug: if you use a variable with multiple NTuples, the
+	result is crazy -- it looks like the variable keeps the value from
+	the last event in the first file for the other files. Using just
+	one NTuple works fine, as does writing out the entire expression
+	(without variables) for multiple NTuples.
+
+08/24:	g4blmake now builds an executable, but it fails due to initialization
+	ordering in BLManager. Re-structured BLManager to a) call BLSetParam
+	in its constructor (rather than as static constructors), and b)
+	have a new delayedConstruction() that creates the BLRunManager()
+	(this cannot be done until all static initializers in Geant4 have
+	been executed). Updated g4blmake and test72 (tests g4blmake).
+	Now it all seems to work on Mac OS X.
+
+08/17:	Having trouble building Root with "-j 4". Root developers seem to
+	think there is no problem; it is indeed subtle and statistical.
+	I'm now using "-j 1" for Root, even through it dominates the
+	library build time.
+
+08/17:	Found that shared libraries cause insurmountable problems in Linux.
+	Re-did the build system to use static libraries for all non-standard
+	libraries (coin, soxt, clhep, geant4, gsl), and use sharaed objects
+	only for X-windows and the system. Builds now work on Mac OS X.
+	The G4beamline source will now include the sources for all
+	non-standard libraries, and the top-level makefile will build them.
+	This will make a Supercomputer build rather easy (just configure
+	using --disable-visual --mpi=... and then make it as usual).
+
+08/01:	Moved *.txt into doc, to un-clutter the top directory.
+	Also the .ppt and .pdf.
+
+07/31:	renamed g4bl to g4bl1, and g4bl2 to g4bl. That is, the main g4bl
+	login is now release 2.0.
+
+07/31:	Finally got Geant4 to build properly with shared libraries.
+	The problem was an invalid dependence on the order of static
+	initializers. Reported as Problem 1075. Now g4beamline 2.0a
+	builds and runs with shared libraries; all tests passed.
+	Relies on a workaround that will make the hadronic RPG models fail
+	(not used in QGSP_BIC or QGSP_BERT).
+	This is replaced by the new 2.0 build structure.
+
+07/27:	Forked the source into g4bl2 for the development of release 2.0
+	(et seq). Intent is to:
+	* build using shared objects, so user code can be added easily
+	* abandon support of ancient Linux systems
+	This is replaced by the new 2.0 build structure.
+
+07/22:	Add coordinates argument to movie command, so a movie can use
+	global or centerline coordinates. A reference particle is
+	still needed (used for position panes, but always required).
+
+07/17:	Re-do the handling of trackID and parentID. Created BLTrackInfo,
+	which is put into G4UserTrackInformation. It is derived from
+	BLCoordinates so existing code still works, and contains
+	externalTrackID and externalParentID. Now the assignment of these
+	IDs is correct for usertrackfilter, test70, and all other tests.
+
+07/17:	Added -dir and -sys aguments to g4bl (print $G4BL_DIR and $G4SYSTEM),
+	for shell scripting and Makefile-s. Will need this for the
+	Makefile in UserTrackFilter.
+	Replaced by the g4bl-config command.
+
+07/16:	filtertracks command re-designed, renamed usertrackfilter. 
+	The user code must derive a class from UserTrackFilter
+	with a unique filterName, and link it into a shared object.
+	The input file uses the load command to load the shared object,
+	and then the usertrackfilter command can use the user's class to
+	filter tracks. This is now in line with my intention to split
+	the build into shared-objects, so user code can be added without
+	users having to build the libraries or g4beamline itself.
+	This is replaced by the new 2.0 build structure.
+
+07/16:	load command added. BLLoad revised to provide a list of shared
+	objects. Added WT to steppingFormat, to display the track's weight.
+	This is replaced by the new 2.0 build structure.
+
+07/02:	implemented the new filtertracks command, which permits users
+	to compile a simple C++ function into a shared object; the
+	command loads the .so at runtime and executes user code to
+	filter tracks and/or to create secondaries.
+	This is replaced by the new 2.0 build structure.
+
+07/02:	Modified the beam command to accept integer PDGid-s for the
+	particle argument, as well as particle names. So particle=mu+
+	and particle=-13 are the same.
+
+06/04:	In collective tracking mode, the UserSteppingAction-s are usually
+	not called, because the track status is fSuspend and the BLManager
+	quits its UserSteppingAction early unless status is fAlive.
+	Changed to quit early only if status is fStopAndKill or 
+	fKillTrackAndSecondaries, so now the UserSteppingAction-s are
+	called correctly.
+
+05/29:	In G4blMovie.C add the sideview command to display the apparatus
+	from the side in reference coordinates, with a moving marker showing
+	where the beam currently is. Reads the Movie/Elements NTuple.
+	Add a sideview pad to examples/movie.in.
+
+05/28:	In BLCMDmovie, generate the Movie/Elements NTuple which contains
+	the extent of each visible Element in Reference coords, along with
+	its color. It is quite difficult to draw the elements properly
+	in the movie, but this pad is usually small, so a colored rectangle
+	at each element's location should be good enough. The parent is
+	processed before its daughters, so for a visible parent with visible
+	daughters, the daughters will be drawn on top of the parent, and are
+	thus visible (if they have contrasting colors).
+
+05/27:	In BLCMDmovie, subtract Pref and Zref from Pz and Z of the
+	beam tracks. In G4blMovie.C, add the position command to display
+	the reference Z position. In examples/movie.in replace the
+	Px,Py pad with z,Pz; extend it to lower Pz so the electrons and
+	neutrinos are visible; also add a position pad.
+
+05/27:	Bug in BLFieldMap -- if the E-factor in the time series is omitted,
+	1.0 is used, rather than the value for B-factor as documented. Fixed.
+	This bug affected all releases since 1.0.
+
+05/12:	Add argument keepPrimaries to trackcuts. If nonzero it will keep
+	all tracks with ParentID==0 regardless of the other tests.
+
+04/24:	G4beamline 1.16c has a new version of BMinimize.hh that uses
+	TMinuit instead of the GSL minimizer. Investigating whether
+	this behaves better for fitting tracks....
+
+04/22:	Another fix to TrackID from input beam files.
+	In BLManager::setExternalTrackID() removed
+	assert(primaryTrackID > 0) and replaced it with
+	if(primaryTrackID < 0) primaryTrackID = 0 -- there's no need
+	to abort, just set a legal value and proceed. User input file
+	could have TrackID=0, and that's OK.
+
+04/04:	Shahid found that 1.16 has an assert failure in fitting tracks.
+	Traced to the case of fitting a secondary track -- in
+	BLManager::setExternalTrackID() it is assumed that the parentID
+	is already known, and for this case that is not true. Also would
+	happen if beam read in a secondary from an input file. The fix is
+	if primaryTrackID is set, use it (i.e. beam read in a secondary),
+	otherwise punt and set external TrackID to the internal TrackID.
+
+04/02:	Release 1.16
+
+03/25:	Added the kill argument to virtualdetector. For generating input
+	beam files from an existing simulation.
+
+03/25:	Added noOutputFiles to BLNTuple, to ensure output files are not
+	overwritten in visual mode.
+
+03/25:	Eliminated the hadronic process table dump with a SetVerbose()
+	call in BLmanager. Requested a command in the Geant4 forum.
+
+03/24:	Fixed the assignment of TrackID-s in beam and BLManager and 
+	BLRunManager. Added secondaryTrackID argument to the beam command
+	to let users manage this. Now input TrackID-s are preserved for
+	Root and ASCII input beam files, in both normal and collective
+	tracking modes.
+
+03/23:	tracker2 moved to tracker. The old tracker is removed. (The old
+	tracker required every plane be hit; new one has minHits argument.)
+
+03/23:	The exit() at the end of main() generates malloc errors. Changed
+	to _exit() to eliminate them for now. This did not happen in 
+	geant4.9.2. Reported as Geant4 Problem 1056. Affected help, list
+	pillbox, pillbox2, printfield, BLManager, g4beamline.cc.
+
+03/22:	Modified BLRunManager to maintain a map of "internal trackIDs"
+	and "external trackIDs". It's not all working yet...
+
+03/XX:	Added bin/G4blMovie.C and bin/g4blmovie to use Root to generate
+	a movie from the Movie NTuples. Requires the ability to complie
+	Root macros (ACLiC), and the ffmpeg program to convert a JPEG
+	of each frame to a movie. Added examples/movie.in to generate
+	a movie for example1.in.
+
+03/11:	Added the movie command to genereate an NTuple suitable for the
+	efficient generation of a movie. Also added test70. Still need to
+	write a program to render the movie from the NTuple....
+
+03/11:	Converted all references to G4VisAttributes::Invisible to
+	GetInvisible(). The former is deprecated.
+
+03/10:	Revised BLCMDphysics to use G4PhysListFactory, plus the local 
+	physics lists from MICE and LISA. All tests pass without change.
+
+03/10:	Switched to Geant4 9.2. Minor updates to test09 and test14.
+
+03/10:	Modified genericbend to be able to be a parent (in its aperture,
+	when openAperture=0). Added test69.
+
+03/09:	Added StackingAction support to BLManager, and modified trackcuts
+	to use it instead of TrackingAction. Now tracks killed immediately
+	do not count in the trace command.
+
+03/09:	Modified genericbend and genericquad to accept a comma-separated
+	list of 6 values for their Enge functions.
+
+03/07:	Added section 2.8.1 to the user's guide, Additional Visualization
+	Techniques. It describes
+	* different drawing scales
+	* changing the background color
+	* drawing axes
+	* cut-away and section planes
+	* starting up in wireframe mode
+	* filters
+
+03/07	Added when=4 (visualization) to g4ui.
+
+03/07	Modified genericbend so it can be a parent when openAperture=0.
+
+03/02:	In the GUI, the initial value of # Runs has been changed to 10.
+
+02/25:	Fixed a bug in BLCoordinates that sometimes caused an assert to
+	fail (segmentCL too large).
+
+02/24:	Modified the following to use getList() or splitString() to improve
+	syntax checking and permit expressions in lists of doubles:
+	color, rotation, physics, particlefilter, trackcuts, polycone. 
+	Added test67 and test68.
+
+02/23:	Modify profile, printf, and zntuple to use getList() for z and zloop.
+	This fixed a bug related to more than 3 items in zloop, and improved
+	overall syntax checking. It remains true that any value in z or zloop
+	can be an expression.
+
+02/23:	Added getList() to BLCommand that will parse a delimited list into
+	a vector<double>. Uses BLEvaluator for each value. Changed extrusion
+	to use it, so now any value in the list of vertices can be an
+	expression.
+
+02/23:	In g4blgui, limit the output TextArea to 20,000 lines by deleting the
+	first ~5,000 lines when exceeded. The full output text is kept in 
+	the output file. This fixes a hang and then exception in java for
+	very large outputs. Deleting one line at a time slowed it down greatly.
+
+02/23:	Added the following variables to printf expressions: Bx,By,Bz,Ex,Ey,Ez.
+	test28 now uses Bz.
+
+02/23:	Fixed placing objects into the world at large negative z.
+	Previously, max(z) was used for the world's half-length; now
+	max(fabs(z)) is used for the world's half-length (max(z) is still
+	used for the full length of other expandable groups, which
+	cannot have negative z).
+
+02/18:	Added splitString(), getInt(), and getDouble() to BLCommand. Also
+	improved the syntax checking of vertices in extrusion. Other places
+	that parse a delimited list could benefit from these routines.
+
+02/18:	Added tracker2 command, which is quite similar to tracker, but it
+	has a minHits argument and will fit tracks that don't hit all of
+	the trackerplane-s. tracker2 will replace tracker once it has
+	been tested.
+
+02/18:	Updated help text for: group, param, tracker2,
+
+02/17:	Fixed param command to only print program-control parameters when
+	detailed help is requested.
+
+02/11:	Added description to tracker that the trackerplanes must have
+	unique names. Also added a check for this.
+
+01/20:	Change the default value of kineticEnergyCut to 0 (in trackcuts).
+	The idea is to force users to think about what value makes sense.
+
+01/19:	Added getStochasticsEnabled(), isStochasticProcess(), and
+	getRangeCut() to BLPhysics and BLCMDphysics. This permits space charge
+	computations to efficiently disable stochastics on a per-track
+	per-time-step basis (pre-tracking). Disabling and re-enabling for 100
+	particles times 52 time-steps went from ~28 seconds to ~0.4 seconds.
+
+01/17:	Added kineticEnergyMax to trackcuts.
+
+01/17:	Added cylinder and tube as aliases for the tubs command.
+	Added trackcolor as alias for particlecolor.
+	Added lHe and LHe to the list of known materials.
+	Cleaned up help text a bit.
+
+01/12:	Fix typo in HistoRoot.C handling of MAXEV.
+
+01/12:	Updated g4bl script to properly locate the G4NDL dataset, which
+	changed the environment variable to G4NEUTRONHPDATA. Also
+	updated G4blGui.java and recompiled it. Both of them set both
+	environment variables (G4NEUTRONHPDATA and the old G4NDL).
+
+01/11:	Add rejectCollectiveStep() to BLRunManager, along with the
+	saving and restoring of the tracks and nextStepTime. Update
+	comments in BLCollectiveComputation.hh.
+
+01/09:	Fix BLManager and BLRunManager so the reference particle works
+	when collective mode is selected. The tune and reference particles
+	are tracked normally (not in collective mode, without a TStepLimiter).
+
+01/08:	release 1.15.3
+
+01/08:	BLCoil.cc -- apply Adam Lichtl's fix for detecting change.
+
+01/06:	BLTrackFile.cc - apply Ajit Kurup's fix for reading integers.
+
+01/05:	Add argument innerRadius to trackerplane.
+
+2008:
+
+12/23:	Minor change to the g4beamline.cc opening printout, making it look
+	just like Geant4's. Also change to GNUmakefile.
+
+12/23:	Minor fix to test06 and test45 to exit cleanly (on Windows they would
+	pop up a dialog box about reporting error to Microsoft). Cleanup 
+	an ugliness introduced by the new exception processing.
+
+12/16:	Enhancements to HistoRoot: cleaned up the code, moved the help text
+	to HistoRoot.help, implemented expr:min:max, implemented saveConfig
+	and loadConfig, implemented EditVariables. Updated HistoRoot.help.
+
+11/25:	Fixed the pillbox B field. Was a factor of 1E9 too small (!), a bug
+	inherited from the Beam Tools, so this affected EVERY release of
+	G4beamline until now. Now it agrees to 4 significant figures with a
+	SuperFish output run by Al Moretti. test65 added. Also affects
+	G4MICE (reported to them).
+
+11/04:	Modified g4ui to better prompt the user, and in non-interactive mode
+	to print commands executed and their failure code if they fail.
+
+10/14:	Make "help param" print the pre-defined parameter help (as in "help").
+
+10/14:	Print 3 decimal digits for time in printfield (was just 1).
+
+09/30:	Remove the signal handler for ^C (arguments to G4UIterminal()) in
+	a visualization. This makes it easier and faster to exit via ^C
+	(used to need ^| which can be slow as it may take a core dump).
+
+09/30:	Implement callback type 4: visualization. Handled just after
+	visualization manager is created, before user commands are read.
+	As a test, torus uses it to display 500 little red circles 
+	scattered all over its surface -- GetPointOnSurface() works,
+	including on the inside and the ends.
+
+09/30:	Implement the torus command, plus test 64. Like sphere, it does not
+	participate in the geometry test. I'm looking into 
+	G4VSolid::GetPointOnSurface() for them.
+
+09/12:	Added printf-s to the do command. Prints the command itself,
+	and the new value of its param at the top of each loop.
+
+09/10:	Added particle argument to the list command, to list the
+	PDGid, mass, and processes of named particles.
+
+09/09:	Release 1.15.2. Mac OS X only (for space charge development).
+
+09/09:	Made BLRunManager::beamOnCollective() set the per-event time limit
+	to -1 (no limit). Such a limit makes no sense in collective mode.
+
+09/08:	Implemented a second algorithm for collective tracking: avoid
+	the G4VProcess::clone() and simply re-start tracking at every time
+	step. While this ought to be less CPU-efficient than the original
+	algorithm, in practice the difference is not measurable. This has
+	the MAJOR advantage that no changes to Geant4 source code are
+	needed. And the new algorithm can handle a million tracks (the
+	original floundered with 20,000). Tests comparing the normal tracking 
+	algorithm to the two collective tracking algorithms are summarized
+	in "Validating Collective Tracking.ppt" -- they are statistically
+	indistinguishable. The first collective algorithm has been
+	removed, as has the OMIT_COLLECTIVE_MODE #ifdef.
+
+08/29:	Replaced most calls to abort() and exit() and their associated
+	printf-s, with calls to G4Exception().  This gives a common 
+	look-and-feel for all problems. A few calls to exit(0) remain,
+	such as in list, help, and printfield for exit=1.
+
+08/18:	Fixed bug in fieldexpr that ignored timeOffset.
+
+08/14:	Make event time limit use G4Exception().
+
+08/14:	In Windows installer, added a shortcut to G4beamlineUsersGuide.pdf
+	to the user's desktop. Copied examples to "My Documents\G4beamline 
+	Examples" ("My Documents" => "Documents" on Vista).
+
+08/14:	Changed the way G4blGui.java selects the initial currentDirectory.
+	Now on Linux and Mac it tries user.dir, and on Windows it tries
+	"My Documents" (Xp, etc.), then "Documents" (Vista). In either
+	case if that does not exist, then it uses user.home.
+
+08/12:	Fixed G4blGui.java handling a histo_events file with spaces in the
+	directory name (as on Windows).
+
+08/08:	Improved printf-s in G4Exception handling, proper aborting of runs
+	and events, and printing total counts of eventsAborted and warnings.
+
+08/07:	Found invalid loop on std::vector<> in G4QGSParticipants.cc, of
+	the same type I found before, which works fine in Linux and Mac OS,
+	but crashes in Windows. Reported as Geant4 Problem 1018. Workaround
+	put into G4beamline source.
+
+08/01	Release 1.15 (omitting Windows)
+
+07/27:	Improved checking expressions in historoot, requiring non-empty
+	expression for x, and also for y if not 1d histogram.
+
+07/27:	Fixed all ZSteps taking inordinate amount of time -- caused by
+	a call to Param.getDouble() in BLManager::UserSteppingAction().
+	Moved it to initialize() and sped up tracking by a factor of 
+	10-20 (!). Affects any simulations with any of the following
+	commands: printf, profile, reference (using momentum tuning),
+	tracker, tune, zntuple.
+
+07/27:	Abandoned the attempt to do tracking in a parallel world (code
+	moved to directory ZSTEPWORLD).
+
+07/26:	Improved error message for invalid particle name in beam and
+	reference commands.
+
+07/25:	Added meanP to the output of profile, at the end.
+
+07/23:	In BLGroup::end(), expand the world by 20.1357*cm (was 20.0*cm).
+	This is a workaround for the problem with parallel-world tracking
+	when G4StepLimiter limits a step right at the edge of the world.
+	This does not eliminate it, it just makes it much less likely.
+	Bug reported to Geant4 Bugzilla; hopefully they'll fix it.
+	Fixed up several tests correspondingly.
+
+07/22:	Working on re-doing everything related to Z steps, by using tracking
+	in a parallel world. This will GREATLY speed up tracking when some
+	Z step is used (zntuple, tune, tracker, etc.). A test shows that
+	using zntuples slows tracking by a FACTOR OF TEN OR MORE :-( -- the 
+	new method tracks zntuples about 80-90% the speed of a virtualdetector.
+
+07/21:	Release 1.14.3
+
+07/20:	tracker modified to NOT re-track the true particle -- enhanced the
+	TrackerHit NTuple to include both true and report values of the
+	true track. The problem with re-tracking the true track is that
+	stochastic processes will be different, and histograms of true-fit
+	won't be valid.
+
+07/17:	tracker failed if placed after a corner. Fixed.
+
+07/16:	Fixed error in particlefilter -- nWait was ignored for
+	state==VISUAL.
+
+07/08:	Fixed for009 output in BLCMDtracker to include the reference
+	particle (needed by ecalc9). Still need to handle the timing
+	right, and still need a test of the tracker (in all 3 ways:
+	simple wire planes with no timing or magnet, with magnet, and
+	with good timing).
+
+07/05:	Added for009 output to BLCMDtracker. We need a test of the tracker.
+
+07/05:	Improved error messages and asserts in RootNTuple.cc. On Windows, 
+	when historoot kept the root file open and G4beamline was re-run,
+	the error message was "assert(ntuple!=0&&n==nfields) failed".
+	This is less than useful, and the underlying problem was the failure
+	to open the output .root file (error message earlier, but unlikely
+	to be noticed). Now appendRow() simply returns silently, but
+	flush() and close() and do Summary() give an appropriate message.
+
+06/30:	Removed the missingDataFileMessage() from G4blGui.java, because
+	g4beamline already has it. The Java code was too simplistic, and
+	generated the messasge for other errors, which was confusing.
+
+06/30:	Added default material=Cu to BLCoil.
+
+06/19:	Release 1.14b.
+
+06/10:	Added class BLKillTrack which prints the object that killed the track
+	if steppingVerbose=1. Replaced many copies of KillTrack.
+
+06/10:	Fixed the position error for beam after a corner. Added test59.
+
+06/09:	Added argument openAperture to genericbend. When set nonzero it
+	omits the physical volume in the aperture, so objects can be
+	placed into the parent volume that are inside the aperture.
+	Ditto for multipole and for genericquad when apertureRadius>0 --
+	for the rounded-+ aperture the volume in the aperture is necessary.
+	For genericbend, multipole, and genericquad with apertureRadius>0
+	you can see through the magnet regardless of openAperture; for
+	genericquad with apertureRadius<=0 the aperture is black, and is only
+	visible with "visible daughters" (in the Etc. menu of OpenInventor).
+	Note that omitting the aperture volume means with steppingVerbose=1
+	the magnet does not get listed as a VOL for tracks going through the
+	aperture.
+
+05/14:	On Windows XP, test31 failed due to underflow in a Bessel function.
+	Added a test: if(fabs(arg) < 1.0e-20) arg = 0.0; to fix it.
+
+05/14:	Added #ifndef OMIT_COLLECTIVE_MODE to the relevant parts of
+	BLRunManager.cc so I can compile G4beamline with an unmodified
+	Geant4.9.0.p01 on Windows and Linux.
+
+05/14:	Re-structured the group permissions in ~g4bl to have write permission
+	to group g4bl. Added user tjrob to group g4bl. Now tjrob's virtual
+	machines can access ~g4bl directly and build g4beamline.
+
+05/12:	Added EXT to steppingFormat to toggle extended precision (3 more
+	digits). Mods to BLParam, BLCMDhelp, BLManager. Also added help
+	for program-control Params, including steppingFormat. Mods to
+	all calls to BLSetParam.
+
+05/06:	Fixed initialTheta and finalTheta arguments to sphere -- they
+	had converted TWICE from degrees to internal units. The default
+	final value did not convert properly, so the default worked OK.
+	Phi was OK. It now displays correctly in OpenInventor for varous
+	values of these arguments (in degrees).
+
+05/05:	Added Stainless304 and Stainless316 to materials known by
+	BLCommand::getMaterial().
+
+04/25:	Modified pillbox to skip tuning if maxGradient==0. Was already
+	skipped if frequency<=0.0.
+
+04/25:	Updated HistoRoot.C after getting it to work on Root 5.18.
+	Includes most #includes, and fixes some coding nits (e.g.
+	passing a double to an int argument, avoid reserved word "register").
+	This fixes the crash on ".q", and might fix the intermittent
+	crash when closing a plot window.
+
+04/25:	Modified cornerarc to fail if invalid centerRadius is given.
+
+04/09:	Release 1.14a -- includes the collective mode tracking.
+
+04/04:	Collective mode in BLRunManager now appears to work, sort of.
+	It works for tracking leptons in vacuum, and probably would
+	work for tracking other particles in vacuum. The basic issue is 
+	that every physics process needs to be modified to have the new
+	clone() function, and each processes's clone() must do the right
+	thing for the process; I have done only transportation, decay, and
+	electromagnetic processes.. So far, I've just used default (bitwise) 
+	copy constructors EXCEPT for G4Transportation, which uses the default
+	constructor (i.e. no copy, brand new object). G4Transportation
+	includes a G4ReferenceCountedHandle, and the bitwise copy
+	constructor doesn't work for that. For some unknown reason,
+	the energy loss process doesn't crash, but gets the wrong answer
+	(not yet investigated). The msc process got the correct answer.
+	Note that random numbers are handled differently in normal and
+	collective modes, so comparisons for stochastic processes can only
+	be done statistically -- perhaps that can be fixed. Note this
+	does not implement trajectories or multiple worlds.
+
+04/04:	Added "PART" as value in steppingFormat, to print the particle name.
+	Useful in collective mode.
+
+03/10:	G4beamline command-line parsing has been enhanced to permit commands
+	as arguments (in addition to parameter definitions). This makes it
+	easier for g4blgui to insert an "eventcuts file=histo_event.txt"
+	command into the input stream.
+
+03/08:	Event numbering in BLManager revised again, so multiple /run/beamOn
+	commands (with viewer=best) will not start over numbering at 1
+	and process the same events.
+
+03/08:	Implemented test58 to test the NIST material database.
+
+03/07:	Implemented test57 to test eventcuts command. Required re-structuring
+	BLManager handling of generating events, and also have
+	BeginOfEventAction() and EndOfEventAction() return immediately
+	if endRun or event->IsAborted(). This is all related to Geant4's
+	inability to properly abort an event inside GeneratePrimaries().
+
+03/06:	Implemented EventID in HistoRoot.C to write a file containing EventID-s
+	for events kept by slider cuts in Scan(). Also implemented
+	BLCMDeventcuts in G4beamline that reads a file containing event #s
+	and skips events not in the file; the file is read at the start
+	of each run. Together these implement the capability for a user to
+	select events in HistoScope plots and then look at them in a
+	G4beamline viewer.
+
+02/29:	Release 1.14
+	Has the following known bugs:
+	* LISAPhysicsList compiles but does not execute (code changes
+	  in Geant4).
+	* WIN32 crashes in QGSP for Ptot>12 GeV/c (compiler or WIN32
+	  library bug suspected); Linux and Mac OS versions are OK.
+
+02/29:	Modified G4blGui.java to create $G4BL_DIR/include/bool.h to avoid
+	the bogus "cannot open bool.h" error message when Root is not
+	installed. Also modified setup to do the same.
+
+02/28:	Modified make-help and GNUmakefile to put the version number at
+	the top of Help.html, so g4blgui displays it upon startup.
+
+02/27:	Fixed the G4NistManager: problem was calling GetNistMaterialNames()
+	in the static constructor -- some essential part of G4NistManager
+	was not yet initialized. Moved it to help() and all is well.
+	Implemented aliases for LH2, H2O, Air, Vacuum, and Scintillator.
+	Added error argument to BLCommand::getMaterial(), and then added
+	a call to all necessary command-s to check the material(s) exist,
+	and to permit the user to print the material table with the
+	materials used.
+
+02/26:	In tune command, made maxIter be an argument.
+
+02/26:	Reinstate histoUpdate for Root files. Added "SaveSelf" as argument
+	to AutoSave() so historoot can recover the file. Using histoUpdate
+	increases the Root file size by ~6% in my tests (depends on how
+	many NTuples are present).
+
+02/26:	In virtualdetector and particlefilter, add innerRadius argument
+	for cylidrical solid.
+
+02/20:	Added the extrusion command to construct a G4ExtrudedSolid element.
+	It displays well in Open Inventor.
+
+02/19:	Some tests had intermittent results on all 3 OSs:
+		test21 fails ~10% of the time
+		test18 fails ~10% of the time
+		test20 varies in user CPU time from 10 to 30 seconds, succeeds
+	The common thread is BLCoil. For test20, variations in random points
+	used to test tolerance caused variations in # points in the grid;
+	adding tolerance=0.005 reduced the CPU time to 4-8 sec.
+	Adding "randomseed now 1" just before the coil command(s) eliminated
+	the variability in both success rate and CPU time for all 3 tests.
+
+02/19:	Added type "Now" to randomseed; seeds the PRNG right now with value
+	from an argument, thn acts like "None". This regularizes the
+	result from coilmap tolerance testing (which depends on randomly-
+	plced points near the coil).
+
+02/19:	MAJOR CHANGE to the coil command: the default maxR is changed
+	to be determined from tolerance, rather than be set to innerRadius.
+	This is due to several users getting wrong results for solenoids
+	tilted relative to the beam or each other. This costs a factor of
+	5-10 in memory, but only costs CPU time if there are particles
+	out there, in which case you need it.
+
+02/19:	Revise BLCoil to avoid calling getSheetField() right on a sheet
+	(where it is singular and aborts with a "Domain error").
+	This fix is more general than the previous approach (which
+	occasionally failed).
+
+02/18:	test18 fails intermittently. Increased tolerance of B fields from
+	0.0005 to 0.002. Seems to be fixed. Also fixed test07 by changing
+	the printfield to not include the innerRadius of the solenoid.
+	Also fixed test21 -- avoid 45 degree rotations, which put data
+	points right on a field edge.
+
+02/08:	BLCMDtrace had an error message that claimed it was beamlossntuple.
+	Fixed.
+
+02/07:	There is a problem in BLCoordinates when a track is cut by
+	radiusCut -- some other part of the system tries to call
+	getRotation() which fails assert(segmentCL < segmentCLVector.size()).
+	I tried to add segmentCLRadiusFailure which remembers the segment
+	and effectively makes that segment's radius infinite, but the
+	bomb still happens. Using a different approach to get an answer
+	but I must come back and figure this out....
+
+02/05:	Make the current parameter of the solenoid command be tunable.
+	NOTE: I have built no test for this. Clearly the tune/reference
+	particle cannot go down the axis of the solenoid if its current
+	is to be tuned. NEED TO BUILD A TEST FOR THIS!!!
+
+02/03:	The profile command did not process the particle argument correctly,
+	which made it work only for mu+. It also gives a bogus error message
+	(invalid expression '0') whenever particle is set to some other
+	particle. Fixed.
+
+01/24:	Implement 3 commands: tracker, trackerplane, and trackermode.
+	All 3 are in BLCMDtracker.cc.
+
+01/16:	Implement BLMinimize, a general function minimizer. Uses the
+	Simplex method of the Gnu Scientific Library (minuit and c-minuit
+	proved difficult, as did TMinuit from Root).
+
+01/14:	Implement enhanced run control in BLRunManager. This is not yet the
+	complete collective tracking manager, but it is enough to do the
+	tracker reconstruction desired for MANX simulations.
+
+01/07:	Remove directory argument to BLWindowShape(file) -- it prepended
+	"Windows/" to the filename which is VERY confusing to users.
+	I have no idea how it got designed that way originally.
+
+01/04:	Add weight argument to beam command (default=1.0).
+
+01/03:	In g4blgui, inclrease max ev/run to 9999.
+
+01/02:	Start work on collective tracking manager. BLRunManager started....
+
+01/02:	The place test for sequential placement of 0 length objects was in
+	error, and no 0-length object could be placed into a parent
+	(e.g. a fieldmap). Fixed.
+
+2007:
+
+10/30:	In place command, it is now an error to use front=1 when placing an
+	element with 0 length (e.g. fieldexpr). Before for such elements
+	front=1 was silently ignored (oops!). Ditto for sequential placement
+	along Z.
+
+10/23:	Add parameter Zcl -- set by the place command to the downstream
+	Z position, whenever elements are placed into the world using
+	Centerline coordinates. test54.
+
+10/03:	Fix BLCommand::getLine() to not bomb on a line containing just
+	whitespace. Empty lines are OK. Bug apparently introduced in 1.13.
+	Added such a line to test01.
+
+10/02:	Release 1.14pre.
+
+09/28:	In fieldexpr, made factorB and factorE tunable: test52.
+	In fieldmap, made gradient tunable (current was already tunable):
+	test53.
+
+09/27:	Bug in genericquad fringe field -- for a "rounded +" aperture the
+	fieldRadius was used for the half aperture in the fringe field
+	computation -- changed to poleTipRadius (which is correct).
+
+09/24:	Implemented newparticlentuple command to generate an NTuple
+	for all new particles (incl. beam, but 'require=Parent>0' will
+	omit the beam particles). test51.
+
+09/20:	Release 1.13.
+
+09/20:	Changed the name of zntuple-s to Z100 (was Z=100). This permits
+	zntuples to be used with the ntuple command and have valid C
+	identifiers for the field names (i.e. usable in historoot).
+
+09/18:	Edit the g4bl script so if G4SYSTEM is already set to not change it.
+	Also change the case on WIN32-VC to WIN32-*. This should permit Cygwin
+	users to use g++ rather than MS VC++.
+
+09/18:	"param histoFile=C" evaluated C as an expression, because C is defined
+	as "Coulomb" by setSystemOfUnits(). To avoid this, require at least
+	one operator {+-*/^<>=()!~&%|?} in the value before evaluating it as
+	an expression.
+
+09/06:	Build with Geant4 9.0p01. Looks OK. It has been reported that 9.0
+	fixed the NIST manager, but it didn't. Everything else looks OK.
+	Note the following physics use cases have been removed:
+	LHEP_BIC, LHEP_HP, LHEP_LEAD, LHEP_LEAD_HP, LHEP_PRECO,
+	QGSC_LEAD, QGSC_LEAD_HP, QGSP_HP, LHEP_BIC_HP. All tests pass once
+	LHEP_BIC is replaced with QGSP.
+
+09/06:	The NIST database is not working, so #ifdef it away. The symptom is
+	density=nan and radLength=nan in the printout of the material table;
+	the nan-s cause tracking to hang.
+
+09/03:	Add the Geant4 NIST manager to the material command, so it automatically
+	defines elements with Z<=98, and a bunch of common compounds and
+	mixtures.
+
+08/31:	Fixup the eventID determination in BLCMDbeam. Now the default first
+	eventID is 1 (not 0); 0 is still a valid eventID, but must be 
+	explicitly selected.
+
+08/31:	Fixup loop in BLCMDbeam to skip over events from files that
+	have invalid PDGid. A message is printed to stdout for each one.
+
+08/31:	Change the header of BLTrackFile to emit EvNum instead of Ev#
+	(so historoot will use it as a field name). Updated many tests.
+
+08/29:	Enhance HistoRoot to handle errorbars (1d hist and graph only).
+	Also permit selecting multiple NTuples. Also found that root
+	crashes related to closing windows are mostly fixed in root 5.16
+	and above.
+
+08/21:	Change BLCMDbeam so that beamZ is handled differently: if beamZ
+	is not set, the z value comes from the file (previously was forced
+	to 0.0); if beamZ is set then it is the z value of all tracks.
+	Gaussian and other beams without a file were changed but give the
+	same result as before (beamZ unset gives z=0.0). Updated test38.
+
+08/16:	Re-do the logic for all coordinate transforms checking whether or not
+	they are rotated. Now BLCoordinatesTransform::isRotated() is used
+	throughout. It tests 2 orthogonal vectors for rotation > 1e-8.
+
+08/15:	Fringe field mystery solved: the computation of isRotated for
+	genericbend is WRONG -- it does not detect rotations around Y.
+	This disease also affects: helicaldipole and sectorbend.
+	Fixed.
+
+08/13:	Make BLCMDfieldmap have argument "current" be tunable.
+	Fixed BLEngeFunction::third(). Now plots of the first 3 derivatives of
+	the Enge function look the same as Mathematica's plots.
+
+08/02:	Fixed printf command so coordinates=reference will work. The problem
+	was that it would attempt to use reference coordinates during the
+	tune particle, when they are not valid; require=beam did not work
+	because the coordinates were used before the expression is evaluated.
+	Fixed all uses of reference coordinates to not do anything except
+	while tracking beam. Add test48 for reference coordinates.
+
+07/30:	In BLCoordinates::setGlobal() permit the particle to go into any
+	higher-numbered region, not just the next region. Adjacent
+	idealsesctorbend-s can have a 0-length segment which failed.
+
+07/30:	Add SEG to the steppingVerbose format to print the CL segment #.
+
+07/22:	New command "do" was added (do i 1 10 [1] // cmds ... // enddo)
+	Multi-line if-s were also added (if // elseif // else // endif);
+	the previous single-line if-s remain. (if expr CMD1 CMD2 ...).
+	The BLParam and BLCMDdefine classes have been modified so $$paramname
+	is evaluated when a macro is invoked ($paramname is evaluated as
+	before, when the define comand is parsed). BLCommand was modified so
+	the define command can re-define a macro without error, and also so the
+	if and do commands can read and reposition the input command stream.
+	test46 tests both types of if-s and do-s nested in various ways.
+
+07/06:	Put limit of 90 degrees on corner, cornerarc, and idealsectorbend.
+	Mention in user's guide and help.
+
+06/07	Release 1.12. Minor fixes to test41 and BLTime.cc. Updated
+	BUILD.txt and GNUmakefile to build source-distrib.
+
+06/04:	Fixed problem in historoot when selecting empty NTuple.
+
+05/30:	Working on why Windows gets time() wrong. Fixed enum names in
+	BLTrackFileStatus because of conflict with ERROR in windows.h.
+	Added src/BLTime.cc so functions are not inline (optimization
+	problem?). Added "demo time" which repeatedly displays the time --
+	works fine on Windows and Mac OS.
+
+05/25:	Debugging the Windows version found config problems in Coin and
+	code errors in Geant4 8.3. Now it seems to work. Compiling
+	with g++ works for g4bl, Geant4, and CLHEP, but fails badly
+	for Coin. Back to VC++.  BUILD.txt now has detailed instructions.
+
+05/07:	Cygwin/g++ does not define M_PI, so put a definition of it into
+	several files. Also had to add a workaround mysnprintf.hh and .cc
+	becuase snprintf is missing in Cygwin. Also strcasecmp in
+	BLCMDrandomseed.cc. Added __CYGWIN__ to BLCoil.cc.
+
+05/07:	Windows version still bombs. Cary Yoshikawa made a heroic effort
+	to debug it using VC++ debugger. We found a compiler bug in the
+	2-argument constructor of stc::vector<G4int>, but fixing the code
+	to work-around it did not fix the bomb. It always dies in either
+	malloc() or free(). Trying to re-build using cygwin/g++.
+
+04/04:	Andreas reported a bug in BLFieldMap related to points outside the
+	grid on its lower side (any axis) by less than 1 grid spacing.
+	(int)(x/dx) does not equal (int)floor(x/dx), but the code assumed
+	it does -- fixed by inserting floor() where needed. NEED TO SEARCH
+	THE OTHER CODE FOR THIS!
+
+03/29:	The particlefilter command has a bug in enforcing nWait and
+	referenceWait (values ignored). Fixed.
+
+03/27:	I just noticed that pre-defined parameters cannot be changed with
+	"param -unset". This cannot easily be changed, so I made the param
+	command print unchanged parameters with -unset as "(already defined)".
+
+03/27:	First iteration of reference coordinates now works. Has problem
+	with a "Moire' pattern" between sampling of reference track
+	and beam track -- Px shows unnatural regions of constancy separated
+	by 1-step jumps that correspond to a slip between reference
+	segments. Need to actually interpolate the direction of the
+	reference track between reference steps.
+
+03/20:	Re-arranged BLCoordinates to handle global, centerline, and
+	reference coordinates (the last not yet implemented). Also
+	added coordinates argument to all output commands, and test43
+	to test them.
+
+03/20:	Fixed BLCoordinates: first step in new segment did not recompute
+	centerline coordinates; noticable only in trace. Added test42
+	and minor fix to test13.good.
+
+03/14:	Fixed profile, zntuple, and printf commands processing of zloop
+	-- now either "," or ":" can separate values. Also made all
+	commands with a format argument print the current list of valid
+	formats in their detailed help.
+
+03/07:	Made BLCommannd ignore \r on input, so DOS-formatted input files
+	now work on Linux and Mac OS. Also improved g4blgui to include a
+	list of commands and a list of particles (QGSP) in the help text,
+	and added a Help button to get that screen back after Run.
+
+03/06:	Made help accept multiple arguments. Made both help and list
+	commands accept "-exit" as first argument, and exit when done
+	if it is present. Removed the overview from the help command.
+
+03/06:	Fixed MICEPhysicsList -- bombed because it did not define the
+	Geantino particle.
+
+03/06:	Fixed LISAPhysicsList -- bombed because it included a hard-coded
+	region "sensor" and did not check that it exists.
+
+03/05:	Fixed up G4blGui.java to scroll MUCH better.
+
+03/04:	Edited profile, printf, and zntuple commands so arithmetic can be
+	used in the z (list) and zloop arguments.
+
+03/04:	Added list command: commands, particles, physics, processes, materials.
+	Minor tweaks to physics and help commands to make it work. The
+	particles and process lists are not populated until the physics list
+	is selected. The process list requires a call to BLManager::initialize,
+	which prevents any simulation from being performed.
+
+03/03:	In place, print error message if parent has already been placed.
+
+03/03:	In G4blGui.java check for "file" in lines written to stderr,
+	and output additional help about downloading data files from
+	http://geant4.cern.ch .
+
+03/03:	Fixed BLCoil in Windows to read the cache file correctly. The
+	problem was reading and writing in ascii mode, not binary.
+	Also commented out the lines displaying progress (because they
+	do not overwrite each other in g4blgui and it's difficult to
+	correctly handle lines ending in \r there).
+
+03/01:	Fix zntuple to use Centerline coordinates.
+
+02/07:	Release 1.10. The windows installer works, except it is a trial
+	version and puts up a message box telling the user. Needed a 
+	workaround to install the MS VC++ Runtime DLL-s -- no amount of
+	finagling would either let us use their installer within ours
+	or load the DLL-s as a "private assembly" within our release.
+	So G4blGui.java checks if the installer file is present, and if
+	so it runs it and deletes it. This installs the DLL-s the first
+	time the user runs the GUI program. Building the windows
+	installer is not yet integrated into the build scripts, it must
+	be done manually.
+
+02/05:	Improved G4blGui.java -- better error messages, and put the viewer
+	controls together visually.
+
+01/31:	Now g4blgui works on Windows. needed a workaround to run Wired.bat.
+	Cary Yoshikawa is making progress on the Windows installer.
+
+01/27:	Added g4blgui, a graphical user interface to G4beamline. It includes
+	visualization, using OpenInventor for Linux and Mac OS, and using
+	Wired3 for Windows. Works great on Linux; must be tested on others.
+	Added a "Wired" driver: includes HepRepFile in viewer.def, but
+	runs Wired automatically in g4blgui (which requires that the Wired
+	viewer is istalled into $G4BL_DIR/Wired).
+
+01/27:	The tracking problem was due to the non-portability of the cache
+	files of BLCoil. A windows-written file read on Mac OS caused the
+	problem. A workaround is to delete them before running. BLCoil is
+	now fixed, by using a different MAGIC value for each OS.  
+
+01/26:	Release 1.09 withdrawn. Must investigate tracking problems. 
+
+01/26:	Version 1.10 on Mac OS has serious tracking problems in 
+	example2.in -- yet it passes all tests. 
+
+01/26:	Make viewer=best be OIWin32 on Windows, and OIX on other 
+	platforms. Done in g4beamline.cc, not viewer.def.
+	OIWin32 still takes exceptions for some drawings.
+
+01/22	Windows OpenInventor gets exceptions in malloc or free for
+	example2.in and exampleAUG05.in. These are the more complicated
+	drawings. example1.in and exampleN02.in work fine.
+
+01/18:	Release 1.09. On all 3 platforms.
+
+01/17:	Make root be the default format for all NTuples. Create the
+	"setup" program to setup a fresh install. Note that on Windows
+	it must do chmod 755 on g4beamline.exe, after it is extracted.
+	Also add the historoot command and its HistoRoot.C into the
+	distributions. Make 3 distributions: Linux, Mac OSX, and Windows
+	(Cygwin).
+
+01/14:	HistoScope has died -- a recent update to Fedora Core 5 makes the
+	histo program lock up X-windows. Older versions of Linux can
+	still run it. In response I am writing HistoRoot, which will
+	provide the major capabilities of HistoScope, in Root. A major
+	benefit is that HistoRoot will be portable to every platform
+	supported by Root, including all we are interested in.
+
+01/03:	Fixed BLCMDfieldexpr to use the correct tolerance. This makes
+	test15 execute much faster.
+
+01/03:	All tests passed! On linux, Mac OS X, and WindowsXP/cygwin.
+
+
+2006:
+
+12/30:	Working on portability issues among Linux, Mac OS X, and 
+	WindowsXp/Cygwin. Some code changes, mostly makefile and script
+	changes.
+
+12/23:	Make BLNTuple use case-insensitive compares for type.
+	Make INFINITY and similar go to DBL_MAX, for portability.
+	fmax() => std::max<double> for portability.
+
+12/18:	Release 1.8.
+
+12/18:	Build with the new Geant4 8.2, which has new multiple scattering.
+	The new version reproduces the MuScat experimental data (172 MeV/c
+	muons on liquid hydrogen) much better than previous releases.
+	Go back to static libraries and build a release; test it.
+	Added a USEROOT define in the GNUmakefile and Root code.
+	Put the required Root libraries into g4bl/lib so users don't
+	need to install Root (but if they do, their installed version
+	will be used; see the g4bl script handling of ROOTSYS).
+
+	Modified HistoHandlerLoader and RootHandlerLoader to only register
+	themselves if their formats are not already registered; this permits
+	me to simply move the code from g4bl-histoscope and g4bl-root into
+	the main src directory and not worry about initialization order 
+	(with static libraries this ensures the real implementations are
+	registered).
+
+12/15:	Trying to get it up on Mac OS X 10.4 on my Mac Pro (Intel).
+	Naturally I do not make g4bl-histoscope, but do make g4bl-root.
+	Problems persist....
+
+12/01:	Split Root and HistoScope into separate shared objects.
+	Seprating visualization doesn't work yet, so it's still part of
+	the main program. Added RootHandlerLoader and HistoHandlerLoader
+	into BLNTuple.c -- they load the correct shared object that
+	implements the NTuple.
+
+11/24:	Implemented Root support in BLNTuple.
+
+11/21:	Working on separating g4beamline into multiple shared libraries,
+	so visualization, HistoScope, and Root can be separated from the
+	main program. Users who add new C++ code would only need to build
+	a small shared object with their new code -- BIG WIN!
+	Added the load command to load a shared object; it searches in the
+	usual way, figures out .so/.dylib/.dll from the current OS, and
+	prepends "lib" if necessary.
+
+11/06:	Release 1.07.
+
+11/05:	Use Geant4 8.1 patch-01.
+
+11/2:	Initialized ALL Geant4 verbose prints to 0. This eliminates
+	the large and uninteresting dump of material properties for
+	the eLoss process. Now essentially all that is output are
+	g4bl explicit prints (except for Geant4 errors, of course).
+
+11/1:	Fixed the algorithm for stopping a step at a specified Z
+	position. The old algorithm would occasionally step over a
+	Z position and the corresponding callback would not get called.
+	The new algorithm uses the value of zTolerance to set a minimum
+	step length, and it ALWAYS calls the callback for the step that
+	straddles the Z position, interpolating to the Z position. As there
+	is always a step within zTolerance (2 mm) of the desired Z position,
+	the interpolation is accurate. Applies to printf, profile, and
+	zntuple commands.
+
+10/31:	Enhanced test/comparecols with -v switch to print the failing line 
+	and column #.
+
+10/17:	Replace remaining HepTool::Evaluator declarations with BLEvalauator,
+	to fix unary minus problems. And to make all expression evaluations
+	behave the same (e.g. have floor() and ceil() also).
+
+10/15:	Release 1.06. 
+
+10/13:	Add zntuple command, and zloop argument to printf, profile, and 
+	zntuple. Add emittance and beta to profile command output.
+
+09/30:	Make By of idealsectorbend be tunable. Update G4BeamlineUsersGuide.doc
+	for the recent changes.
+
+09/25:	Add profile command, which prints sigmaX and sigmaY at a list
+	of Z positions. This permits a simple graphical plot of the
+	beam profile (using gnuplot). Put this together with gminuit
+	in examples/triplet.sh that tunes a quad triplet to a
+	point-to-point focus. There are subtleties in doing this
+	(e.g. must disable decays, etc.).
+
+09/18:	In BLCMDreference, added the ability to tune the reference
+	momentum at any Z position.
+
+09/18:	Add BLCMDtune that will tune any tunable arguments based on
+	an expression. Tests for tuning By of genericbend and
+	for maxGradient of pillbox. The new code is significantly
+	simpler than the old tuning in BLCMDpillbox, and can tune
+	other elements. The old tuning is left in for now.
+
+09/17:	In BLManager::UserSteppingAction() move the print for
+	steppingVerbose=1 to the top. Also re-do the way
+	BLCoordinates is updated, so it happens before the print.
+
+09/16:	To BLManager add registerZStep() and the ability to limit the
+	step to the next ZStep registered. For BLCMDtune, BLCMDzntuple,
+	and BLCMDprintf. Add BLCMDprintf, which till do a printf of
+	expressions for tracks at a specified z position. Can be used
+	to generate an output file with any desired precision or format.
+
+09/06:	Add multiple methods of random number seeding for each event,
+	and add randomize command to select them. Still defaults
+	to seeding the PRNG with the event number.
+
+09/03:	Fixup test/all so ./comparecols is used (people without . in
+	their PATH get errors otherwise).
+
+07/23:	Make file be a synonym for filename in BLCMDbeam.cc
+
+07/08:	Release 1.05.
+
+07/01:	Now using geant4 version 8.1. Yes, 1 day after release.
+	It has further changes to multiple scattering that I think
+	we want. No changes to g4bl code were required, and only
+	a minor change to test05.
+
+06/25:	add referenceWait to particlefilter so the reference can be
+	killed after the first turn around a ring but particles can
+	be tracked for more turns.
+
+06/25:	Implement a change in the param command: if the value of a parameter
+	is a valid real expression, the parameter is set to the numerical
+	value of the expression (8 significant digits) rather than to
+	the expression string. This permits one to compute values for
+	rotation angles (and for colors).
+
+06/25:	Fix all the failing tests. This was done by permitting small
+	differences in track values: 20 microns, 5 keV/c, and 5 ps.
+	Some of the means and sigmas of the histogram tests were changed,
+	but none were greater than 0.5 sigma so this is not significant.
+	A minor change in using G4cout.flush() in printfield was also needed.
+
+06/18:	Make g4beamline work with Geant4 8.0p01. This involves re-
+	structuring BLManager so the various constructors of Geant4
+	user classes are not called until after the physics list is
+	set to the RunManager (which now happens in the physics command).
+	Many tests fail because they rely in _exact_ matching between
+	tracking of particles, and when the physics processes change
+	that's unrealistic.
+
+06/14:	Omit tracks that were not tracked from beamlossntuple. These
+	are killed immediately by trackcuts. So if you have trackcuts
+	kill neutrinos, they no longer appear in beamlossntuple (they
+	always had x=0,y=0,z=0 which was confusing).
+
+06/03:	Fix BLCMDpillbox to print the placed name of the cavity, not
+	the generic name. Also add printouts for tuning during Tune
+	particle.
+
+05/25:	Fix virtualdetector so for FOR009.DAT the B and E fields are
+	rotated to centerline coords (not global).
+
+05/21:	release 1.04
+
+05/21:	Have param print parameter definitions as they are done.
+
+05/21:	Fix parameter expansion in arguments to leave $0-$9 and $# alone
+	(for the define command). In the define command, change $$ to $#
+	for the # of macro expansions, and change description to say that
+	$paramname is expanded at define time, not expansion time. Also
+	have define print the defined macro, and invocations print also.
+
+05/21:	Fix BLCoil.cc so it does not keep re-computing the map if the
+	cache file is present. Was a round-off of 40.9999999 to 40 instead 
+	of 41. Bug introduced 5/10.
+
+05/17:	Fix the place command for OFFSET so the offset is kept in the
+	current BLGroup, and applies only to placements into the group
+	(i.e. if parent is non-null it does not apply, nor inside a group 
+	command unless another place OFFSET is given for it). Added
+	test23 to test this.
+
+05/13:	Implement any number of $name parameters in an argument value.
+	So now one can do: param n1=$a$b$c n2="$a $b $c", etc.
+	Parameters are expanded during parsing of the arguments.
+	Also implement expressions for double and int arguments and params.
+	Param expressions are evaluated in getDouble() and getInt();
+	argument expressions are evaluated in argDouble() and argInt().
+	Note: exponentiation is a^2, not a**2; standard math functions are
+	available (even for ints). Added test22 to test all this.
+
+05/10:	Release 1.03
+
+05/10:	Fixed coil so if maxR, maxZ, dR, or dZ are set on the command,
+	the cache file will be rebuilt unless they match the file.
+
+05/08:	Fixed beamlossntuple, created test20 to test it.
+
+04/29:	Added BLNTuple::getType() and an enum for the return value. In
+	BLCMDvirtualdetector arranged it so the center particle is only
+	included in the NTuple if either the new centerParticle arg is nonzero
+	or format is BLNT_FOR009. The FOR009 format needs the center
+	particle, but for other formats it is usually not wanted. This
+	fixes the segfault in BLNTuple for the center particle.
+
+04/20:	Added BLCommand::argChanged() for computations of class fields that are
+	computed from arguments. Most commands won't need it. It can be called
+	multiple times in certain situations. Used in BLCMDpillbox and
+	BLCMDvirtualdetector.
+
+04/18:	Fixed BLCMDcornerarc::command() to not use argv[0] as a name,
+	because argv can be empty (no name is required). That was the
+	first segfault (no idea why it used to work). At least one more,
+	related to the ntuple command.
+
+04/15:	Still testing the major changes. The tests all work, but tracking
+	the MICE beamline does not, segmentation faults.
+
+04/08:	Completely rewrote the way arguments are handled. Now argDouble()
+	has a units argument, and print() uses handleNamedArgs() to print
+	args with the units specified. So now in all cases the class
+	variable for any double argument is in internal units. Also added
+	arguments to set the print format, and permitChanges that is used
+	to prevent changes in the place command (and prints a # in the help
+	to inform the user). Also added test18.
+
+04/02:	Element arguments on the place command are often wrong, or cause
+	errors. Mostly the units are wrong, but in come cases further
+	confusion occurs. This is so because computations done in the
+	command() function are not re-done for Element arguments on the
+	place command-line. I'm re-vamping how units are handled by adding
+	a units argument to argDouble(). I'm also using defineNamedArgs()
+	to printout the arg values, so the units are correct.
+
+03/26:	Release 1.02.
+
+03/26:	Add kill argument to solenoid command.
+
+03/25:	Add require argument to particlefilter. It is an expression in
+	track variables that must evaluate nonzero or the track is killed.
+
+03/25:	Add auto-map facility to fieldexpr so it determines the grid
+	spacing needed to meet tolerance.
+
+03/22:	Fix missing #include <assert.h>
+
+03/18:	Add fieldexpr command to generate E and B fields from expressions.
+	It really needs an auto-map facility to avoid users having to
+	specify the details of the map.
+
+03/18:	Add nWait to particlefilter, so it can be used to limit the #
+	revolutions around a ring.
+
+03/01:	Fixed trace command. B and E were just plain wrong if any corner is
+	present, and there is no way to use global coords. Both fixed.
+
+02/18:	Release 1.01
+
+02/18:	Implement BLCMDmultipole, for dipole thru dodecapole.
+
+02/11:	Fix logic in BLCMDtrace for primaryOnly=1 (previously counted
+	non-primary tracks in nTrace but did not generate a trace).
+	Also fix "name.txt.txt" disease in the filename.
+
+02/10:	in BLCMDparticlefilter add instance# to the ProcessName.
+
+02/10:	Added filename argument to the trace command (for format=ascii).
+	Is either Ev%dTrk%d.txt for oneNTuple=0, or the actual filename for
+	oneNTuple=1.
+
+02/10:	Fix BLFOR009 and BLCMDvirtualdetector to handle the center particle
+	correctly. This was in the old asciifile command and did not get
+	brought forward properly.
+
+02/08:	document # in rename parameter of place.
+	Add BLCMDtimentuple.
+
+02/07:	Fix BLCMDparticlefilter, because its G4VProcess was not being
+	called. Add the process "BLCMDpartiflefilter*" to the list of
+	non-stochastic processes in BLCMDphysics.
+
+02/06:	Release 1.0
+
+02/02:	Major improvements in G4beamlineUsersGuide.doc, and all other
+	documentation files (INSTALL.txt, README.txt, etc.).
+
+01/22:	Reimplement ntuple command to use the new infrastructure.
+	Add trace command to control tracing. Remove param nTrace and
+	code in BLManager specific to tracing. Remove BLTraceNTuple.
+
+02/21:	Reimplement virtualdetecor to include ASCII formats of NTuple-s.
+	Remove asciifile command.
+
+01/19:	Major code restructuring. All commands are now class BLCMDname,
+	in file src/BLCMDname.cc. Infrastructure classes are BLClassname.
+	Exception: BLGroup is both the infrastructure and the command,
+	but the command functions are in BLCMDgroup.cc.
+
+01/04:	Improved BLAlarm to kill the job if an event times out. Made
+	the alarm be 2 sec longer than the kill in UserSteppingAction.
+
+01/02	BLTrackFile now writes using mm (was cm). On reading, mm is the
+	default but a comment containing "cm cm cm" switches to cm, so
+	old files can be read correctly. Also added TrackID to HistoScope
+	NTuples so they are now the same as BLTrackFile (does not affect
+	reading them in the beam command; they were already mm).
+	BLBeam now uses Weight from HistoScope files (already did for
+	BLTrackFile input).
+
+	Added parameter sigmaE to BLBeam, for use in ellipse. If undefined,
+	sigmaP is used. The mean E is computed from meanMomentum.
+
+
+01/01	Made default color in particlefilter be white.
+
+	Added test3, test4, and test5. And a script "all" to run them all.
+
+	Fixed the longitudinal variables in BLBeam type=ellipse.
+
+2005:
+
+12/29	re-vamped test1 and test2; now they are self-contained shell scripts
+	with minimal output.
+
+12/29	Made NTuple::write(filename) not do the write if filename
+	is null (avoids error message if no items).
+
+12/27	Merged BLSteppingAction back into BLManager.
+
+12/20:	Working on segment fault in AUG05 beamline design --
+	three in 100M events have NaN from the hIoni process in
+	a beam pipe. G4 experts are not around until January.
+
+11/??	Made the default color be white for all elements.
+
+10/27:	Release 0.96beta.
+
+10/27:	Changed GNUmakefile so the GSL library is linked statically.
+	(Some systems don't have it installed, and SLES9 dosn't even
+	make it available; this makes it needed only during build.)
+
+10/27:	Fixed handling of quoted arguments on command line (shell eats
+	" and ').
+
+10/26:	Fixed the G4Exception handling for missing physics data.
+
+10/23:	Brought in the BLphysics use-cases source from Geant4 7.2p01.
+	For LHEP_BIC: production from protons on the MICE target looks
+	virtually the same as 0.95beta, but mu+ mscat and Eloss are
+	crazy. Use old snapshot of use-cases for now.
+
+10/18:	Implemented ellipse beam in BLBeam. Note that for now the
+	longitudinal ellipse is in t and Ptot, not Z and Pz -- need to fix 
+	that.
+
+10/09:	Fixed BLFieldMap units for E (used to multiply by megavolt/meter
+	for both values and gradient; now just for values).
+
+10/09:	Changed all NTuple units to mm and MeV.
+
+10/07:	Changed the default color for all physical objects to 1,1,1 (except
+	pillbox, which has several different colors, so leave it red).
+	It's better to see them by default.
+
+10/07:	Fixed errors in copy constructor of BLPillbox and BLPillbox2.
+	The old code set non-arguments to initial values rather than
+	r.values. This caused arguments on the place command to place
+	objects with unphysical values (e.g. overallLength=UNDEFINED
+	which is enormous and negative(!)). Touched numerous other
+	elements' copy constructors (all fixes were copies of solids,
+	which should not affect anything as place happens before solids
+	are generated).
+
+09/10:	Fixed WorldWorld => World as name of the world volume.
+
+09/10:	Fixed maxStep in genericquad with "rounded +" aperture (was OK for
+	circular aperture).
+
+09/10:	Added parameter front to the place command, so you can place
+	objects by specifying z for their front face rather than their center.
+
+09/03:	Fixed up the printing for steppingVerbose. Fixed negative seed
+	in BLBeam.hh. NOTE: format for steppingVerbose is now MUCH
+	different (and better!); everything is on 1 line per step.
+
+08/20:	Change GNUmakefile and g4beamline.cc so the build date is
+	always correct.
+
+08/20:	Move the following to obsolete: BLMappedMagnet, BLMagnetMap,
+	BLSolenoidMapErrorsNTuple.
+
+08/20:	Create source/doc and move documentation files to it. Update
+	Doxyfile.
+
+08/16:	In BLBeam.cc, do not abort on unknown particle type, just print
+	the error message and get the next event.
+
+08/15:	Implement time-dependent fields in BLFieldMap. Still need to be
+	tested.
+
+08/07:	Fix the handling of weights.
+
+08/1:	As of now everything works on Fedora Core 4, as long as I build
+	in the chroot environment for RH 7.3. The gcc 4.0.0 of FC4
+	cannot compile the physics use cases (problem in functor
+	template which is unclear to me).
+
+08/1:	Fix BLParticleColor -- in Geant4 7.1 the allocator for
+	BLTrajectory started causing segfaults. Tracked the problem to
+	the use of BLAllocator -- it allocated sizeof(G4Trajectory)
+	so the extra field in BLTrajectory caused a bomb. Made a
+	G4Allocator specific to BLTrajectory and all is well. This
+	fixed the segfaults in OpenINventor also.
+
+07/25:	Remove /vis/scene/notifyHandlers from all viewer.def sections,
+	as it can cause the detector to be erased. Also re-do the way
+	color strings are turned into G4VisAttributes: now part of
+	BLVisManager (no longer in BLCommand). Now at the end of run
+	OpenInventor comes up properly with detector and events.
+
+07/19:	In BLPhysicsCmd add MICEPhysicsList and LISAPhysicsList.
+	This permits running even if the standard physics lists
+	don't compile.
+
+07/17:	Continue efforts to make g4beamline work on Fedora Core 4.
+	This includes gcc 4.0.0, which cannot compile the physics use
+	cases as they are (changes in functor templates).
+	OpenInventor/Coin segfault sometimes (e.g. on my laptop
+	using nvidia driver) but not others (on my laptop using the
+	nv driver adn an external display). Even version 0.94beta does 
+	this.
+
+05/19:	fix BLPrintField.cc (details forgotten). BLFieldMap.cc and
+	BLSteppingAction.cc were also touched.
+
+04/09:	Add #!/bin/bash to histo script (for tcsh/csh users).
+	Already in g4bl script.
+
+03/17:	Make BLHelicalDipole draw markers along the centerline of the
+	helix, 10 per period.
+
+03/13:	Re-implement the visualization of the center particle. The old
+	method does not work since geant4 v 6.x. Now we save the entire
+	trajectory for each track in state=CENTER, and append them all
+	to the first event with state=VISUAL. Now we can see them again.
+
+03/08:	Implement -unset in BLParam, so defaults can be given in the input
+	file, and overridden on the command line.
+
+02/26:	tweak BLPrintField.cc
+
+02/12:	Update BlHelicalDipole.cc from Katsuya Yonehara. Now model 4 is for
+	300 MeV/c input muons.
+
+01/18:	BLFieldMap units fixed.
+
+
+2004:
+
+12/14:	fieldmap still seems to have a units problem.
+
+12/14:	Implement BLTimeNTuple.
+
+12/04:	Release 0.94beta. The OpenInventor driver has been improved
+	significantly, and the bugs related to invisible objects have
+	been fixed. Those fixes won't be released until Geant4 7, due
+	out in mid December, so this is built with a patched version of
+	Geant4 6.2p02.
+
+11/20:	I'm working in earnest with Geant4 developers on the OpenInventor
+	problem. They are fixing it and I am testing their fixes and
+	suggesting better user interface implementation. This joint
+	effort will really pay off! At long last the OI menus are back,
+	and have useful functions.
+
+11/17:	Update BLFieldMap and BLPillbox. Now they work. Includes the
+	grid data format. The grid block format is not yet implemented.
+
+11/13:	Add BLFieldMap. So far implemented only cylinder map. Ultimately this
+	should replace all field maps in the program, including coil, so it
+	needs to be able to construct a map from a coil and write it, etc.
+
+11/02:	Fixed bug in BLCommand::getVisAttributes() that caused a color
+	beginning with '.' (e.g. ".3,1,0") to be treated as invisible.
+
+09/19:	OpenInventor DISASTER -- all of a sudden some MICE quads are
+	invisible! Posted an inquiry on the user forum.
+
+09/10:	Modify genericquad to always have a sub-volume in the aperture,
+	and fieldMaterial for it.
+
+09/06:	Added showmaterial command, so I can visually verify the vacuum
+	pipes in MICE, etc.
+
+09/04:	Added parameter worldMaterial, so I can set the world to be air.
+
+08/23:	To make it build on Fedora Core 2, I added #include <assert.h> to
+	BLCoil.cc, BLCosmicRayBeam.cc, and BLMagnetMap.cc -- no idea why it
+	is no longer defined. Was OK on FermiLinux 7.3 and on RedHat 9.
+	Also moved CLHEP definition in g4bl.setup so it overwrites the
+	geant4 values (uses version in $PRODUCT).
+
+08/23:	updated 0.92beta
+	Included geant4.6.2.p01-gcc3.2.2 in packages, and fixed g4bl.setup
+	to use it, based on the same grep of libc used in histo. Needed
+	to avoid the dreaded __ctype_b problem of libc versions.
+
+08/22:	Release 0.92beta
+
+08/22:	Minor fixes to compile with Geant 4 6.2p01. The big fix was to
+	remove the visualization of the Center particle, because the new
+	geant segfaults if you switch the energy-loss process eIoni from
+	no-stochastics mode to stochastics mode within a run. I'll have
+	to think up some workaround to do that, but for now it seems to
+	work except for that. Note there are a handful of warnings about
+	IsApplicable() being hidden (they are from the physics use-cases
+	source).
+
+08/18:	fix bug in BLTubs::isWithin() for phi < 0.0. and isOutside().
+
+07/30:	Fixup asciifile for format=for009.dat.
+
+07/22:	Implemented BLFOR009.cc and put format=for009.dat into
+	BLAsciiFile. It's not as useful as I thought, as you really
+	need to impose cuts before running ecalc9f (such as requiring
+	all tracks to hit all asciifile-s). And ecalc9f is obscure....
+
+07/18:	Renamed BLForceDecay to BLParticleFilter, and implemented kill= and
+	keep= arguments (as in trackcuts, but for the volume). Manage
+	maxStep so at least 2 steps happen within the volume.
+
+07/11:	Implemented BLPolycone.
+
+07/11:	Implemented g4ui to permit Geant4 User Interface commands.
+
+07/11:	Implemented BLForceDecay to force a decay when a specified particle
+	enters its physical volume. For some reason it won't set the stepsize
+	to DBL_MIN, so the decay happens one step into the volume; for a
+	thin (1 mm) volume that is when it exits.
+
+07/11:	Updated BLHelicalDipole.cc from Kevin Beard's version 4/27/04.
+
+06/26:	Finished the first draft of G4beamlineUsersGuide.doc. The command
+	descriptions are just the help text, so they should be expanded.
+	It would be nice to have a scriptable way to convert that .doc
+	into a .pdf; for now it must be done manually.
+
+06/26:	minor corrections to ~/g4 and source/g4bl.setup.
+
+06/23:	Make BLVisManager search for viewer.def in $G4BL_DIR if it is not
+	found in the current directory. This avoids the need to keep linking
+	it into every working directory. Also made the g4bl script and
+	source/g4bl.setup set that variable appropriately.
+
+05/30:	Release g4beamline-0.9beta.
+
+05/30:	Complete revision of building and installation. There are now two
+	tarballs: g4beamline-0.9beta.tgz and g4beamline-devel-0.9beta.tgz.
+	The first contains files neded to run the program; the second
+	contains files needed to build the program, including geant4,
+	CLHEP, OpenInventor, and HEPVis. They both work on the following
+	flavors of Linux: RedHat 7.3, RH 8, RH 9, FermiLinux 7.3. Note
+	building requires gcc 3.X (it was not possible to support 2.96
+	because of the numerous library incompatibilities). The histo
+	program is now a shell script that selects a version of the 
+	executable based on glibc version symbols. g4bl.setup also 
+	selects a HistoScope version based on glibc version symbols.
+
+	INSTALL.txt is completely rewritten (and will eventually find
+	its way into an Appendix of G4beamlineUsersGuide.doc).
+
+05/28:	Added BLGeometry to give user control over the geometry test.
+
+05/22:	Started writing G4beamline User's Guide.
+
+05/02:	Release g4beamline-0.8beta. Now working on g4beamline-0.9beta.
+
+05/02:	Fixed bug in BLSolenoid that prevented place parameters from working.
+	In the copy constructor, coil=0 instead of coil=r.coil.
+
+05/01:	added offsets to the place command. This permits one to offset the
+	coordinate system when desired.
+
+04/30:	Added Btot and Etot to BLPrintField.
+
+04/27:	Extended the geometry test to all elements, fixing up minor bugs
+	in getWidth() and getHeight() for BLPillbox and BLSolenoid (whose
+	width and height were set to radius, not 2*radius). Now JAN04f.in
+	has no geometry errors. BLSphere and BLTrap do not participate,
+	and BLIdealSectorBend is only approximate.
+
+04/27:	Added radius parameter to BLGroup, so the group can be implemented
+	with either a Tubs or a Box: the default is Box, but if you explicitly
+	specify radius=0 then a Tubs is used with radius=fmax(width,height)/2;
+	if radius>0 then it is the fixed radius.
+
+04/27:	Set the outer flange radius of Windows/safe480 to 255, so it will
+	fit inside the Focus coil.
+
+04/25:	Fixed a long-standing bug in BLTubs: finalPhi was incorrectly used
+	as if it were (finalPhi-initialPhi) in constructing the solid.
+	It seems nobody is using tubs less than a full circle, and my earlier
+	testing did not catch this.
+
+04/25:	Added BLSphere.cc implementing a sphere; it can have children.
+
+04/24:	Removed the detector= parameter from BLAbsorber, BLTubs, BLBox.
+	Modified BLVirtualDetector so if material is not specified, it uses
+	the material of its parent. Removed BLDetector.cc (deprecated).
+	Now you simply place a virtualdetector into the element (you can also
+	place other objects into them).
+
+04/24:	Implemented BLGroupElement for elements that contain children. Added
+	parent=name parameter to place, which places a child into a parent 
+	BLGroupElement object. To make an element able to contain children:
+	 1. Derive it from BLGroupElement instead of BLElement
+	 2. At the end of construct(), call constructChildren() with the
+	    appropriate LogicalVolume pointer.
+	BLGroup derives from BLGroupElement, but implements its own methods
+	so the group can grow to enclose all children. Nesting limit is 64.
+
+04/18:	Another BLHelicalDipole.cc update from Kevin.
+
+04/17:	Updated BLHelicalDipole.cc with Kevin's latest version.
+	Fixed up print() with units.
+
+04/16:	Enhanced particlecolor with a reference=1,1,1 parameter, and modified
+	BLManager so in visual mode the center particle is tracked, and
+	displayed with that color. Defaults to invisible.
+
+04/14:	Added meanXp and meanYp to BLReference. Also made beamXp and beamYp
+	synonyms for them, in both BLReference and BLBeam. Verified that
+	they really are dx/dz and dy/dz.
+
+04/13:	BLBeam - fix meanXp and meanYp to be correct.
+	BLHelicalDipole - initialize psi in QUADRUPOLEFIELD(), and
+	fix the units of bprime.
+
+04/10	Fixed Roland's BLHelicalDipole, converting the parameters to mm.
+	There is still a problem in QUADRUPOLEFIELD() -- variable psi is
+	used before being initialized.
+	Fixed BLPillbox so it uses the x and y parameters to place, and
+	so it can now be rotated -- used an enclosing LogicalVolume.
+
+04/09:	Replaced BLHelicalDipole with Roland's version. 
+
+04/03:	Fixed bug in BLGenericQuad that applied the parent's material
+	to the iron instead of to the aperture.
+
+03/25:	Modified BLSolenoid so it will not create a coil if length==0.
+	This is for the Tracker field map for MICE.
+
+03/21:	Augmented BLCoil to read a mapFile to define the field. Also
+	generated such a file using opera-2d to model the MICE DecaySolenoid,
+	and put it into Magnets/DecaySolenoid. Note that opera-2d has bugs
+	in its write commands, and you MUST cleanup the file manually.
+
+03/06:	Release g4beamline-0.7beta
+
+03/06:	Fixed a bug in the fringe field computations. Also a bug in
+	BLMagnetMap constructor. The COSY fringe field computation is
+	now reasonably consistent with the Laplace computation I did
+	last May for the RAL Type I Bending Magnet.
+
+03/03:	Implemented genericquad and genericbend, which replace idealquad
+	and idealbend. They add the fringe field computation as used in COSY.
+	To get block fields, set fringe=0. Includes BLEngeFunction.hh.
+
+02/29:	Enhanced idealquad to have the "rounded +" aperture. This uses
+	circles to approximate the "hyperbolic" pole pieces; note that for
+	the DESY Typ QC quads, the hyperbola misses the measured points on
+	the drawing by ~6 mm, and the circle through the measured points
+	looks fine -- without real measurements the circle is probably
+	a better model for the actual magnet aperture than the hyperbola. 
+	The outside profile is still a G4Tubs. The implementation is correct,
+	but the aperture is visualized as an opaque black object so you 
+	cannot see through it (you can see through the circular aperture).
+
+02/22:	Implemented printfield, a command that prints an E or B field
+	component in any coordinate plane. It's quite flexible -- see
+	the code or help text.
+
+01/23:	Implemented the ability to use multiple beam commands, which now
+	create no reference particle. Also implemented the reference command,
+	which generates a reference particle (multiple can be used).
+	Removed param referenceParticle -- a reference particle is tracked
+	iff one or more reference commands are given.
+
+01/22:	Finished implementing Element parameters in the place command.
+	This included adding a clone() function to every element, and
+	modifications to BLPlace. Any parameter to the element can be
+	put on the place command. Note that since this works by cloning
+	the original BLElement instance, it breaks tuning RF cavities
+	(so don't use place parameters for them). If both place and the
+	element have the same parameter name, the place parameter wins.
+
+01/18:	Implemented global bounding boxes in BLGlobalField and most
+	BLElementField-s. This is purely an optimization in computing the
+	global E&M field. For micebeam+det it sped up the tracking by a
+	factor of 15, which surpassed my wildest hopes! 13 ev/sec =>
+	200 ev/sec.
+
+01/17	Added meanXp and meanYp to the beam command. Essentially the same
+	thing can be done with the rotation parameter.
+
+01/17:	fixed g4beamline.cc and ~BLManager() so main() can call exit()
+	(instead of _exit()). Profile the program --  80% of the time is
+	in BLGlobalField::GetFieldValue(), and most of that is in the
+	solenoids (for micebeam+det). rather than implement zmin and zmax
+	(which require a global->centerline coordinate transform), implement
+	a global bounding box for each field, so no global->local transform
+	is needed to determine if a given BLElementField should be evaluated.
+
+01/17:	in BLPillbox, don't require a reference particle if dc or if
+	maxGradient is 0.0.
+
+01/16:	Fixed problems in BLPlace for the situation when placing objects
+	without specifying z (i.e. sequentially along z) with a rotated
+	centerline. Was OK if either z was specified or centerline was not
+	rotated. Now the example2 plot of XvsY for the final detector
+	does not change for any rotation in start, as expected (after setting
+	doStochastics=0 in the physics command).
+
+01/16:	fixed problem computing size of the World when placing an object
+	with a rotated centerline.
+
+01/14:	Implemented rotations in BLAbsorber and BLSolenoid. Still no
+	rotations in BLPillbox (but that's the only one).
+
+01/12:	Started implementing Element parameters in place command. This involves 
+	moving parameter units in the following commands, so new param values 
+	can be applied at place time: BLHelicalDipole, BLIdealBend, BLIdealQuad,
+	BLIdealSectorBend, BLMappedMagnet BLPillbox, BLTubs. Due to
+	difficulties related to tuning, in BLPillbox maxGradient,
+	tuneTolerance, and initialStep cannot be set via a place argument.
+
+01/12:	Modified BLBeam histo to read the virtualdetector output. Sometime
+	earlier I had changed the histoscope NTuple output format. Now
+	format=Study2 reads the old HistoScope file format, any other
+	value (e.g. the default) reads the new format.
+
+01/11:	Release g4beamline-0.6beta
+
+01/11:	Fixed a bug in BLNTuple, BLBeamLossNTuple, and BLNTuple2TrackVertex
+	that references argv[1] instead of argv[0]. Caused intermittent
+	coredumps when those commands are used.
+
+01/08:	Implemented noSingles in virtualdetector.
+
+
+
+2003:
+
+12/21:	Implemented BLIdealSectorMagnet and BLCornerArc.
+
+12/21:	Added cavityMaterial to BLPillbox; default is Vacuum (had been
+	hard-coded to Vacuum).
+
+12/13:	Fixed comments in BLTrackFile.cc
+
+12/3:	Fixed units problems and printouts in BLMaterial.
+
+11/16:	Release g4beamline-0.5beta
+
+11/15:	Resolved issues related to .so-s in different Linux distributions.
+	By building on tjrob.dhcp.fnal.gov (FermiLinux 7.3.1), and by
+	including all graphics .so-s but not System .so-s, the resulting
+	executable+libraries will execute OK on:
+		lx2.hep.uiuc.edu	RedHat 7.3
+		batch at hep.uiuc.edu	RedHat 7.1
+		tjrob.dhcp.fnal.gov	FermiLinux 7.3.1
+		tjrob2 (my laptop)	RedHat 9
+		flxi02.fnal.gov		FermiLinux 7.3
+	These are varied enough that I think this will work on any
+	reasonably-modern Linux system.
+
+11/15:	Cleaned up BLManager to avoid the memory leak of BLCoordinates.
+	Also minor changes in RunAction, TrackAction, and EventAction to
+	clean up event counting, etc.
+
+11/15:	Implemented BLVirtualDetector, deprecated BLDetector.
+	The problem is that the name "detector" implies a real one, which
+	this definitely is not. So I changed it to virtualdetector, the
+	same name used in G4MICE.
+
+11/14:	Implemented BLHelicalDipole.
+
+11/04:	Code cleanup -- fix the last few compiler warnings. There is
+	clearly a compiler bug triggered by the iterator code of
+	BLGlobalField, fixed by indexing the vector rather than iterating
+	over it.  Twice -- changing just the first moves the warning from
+	the first to the second instance of this loop -- but the third
+	instance of the loop never generates a warning. Note no code
+	execution errors occur for any of these variations, and this is
+	just a compilation warning about converting 
+	"const BLElementField *const*const" to "const BLElementField **".
+	AFAICT there is no error. Original code is in "#ifdef ORIG_CODE".
+
+	There are still 4 linker symbol-redefinition warnings in
+	lib/libgcc_s.so.1, and HistoScope's warning about tempnam.
+
+	There are also two warnings in the BLphysics library (not my code).
+
+11/04:	Fixed a bug in BLCoil that caused long and thin solenoids to never
+	converge in finding maxZ.
+
+10/21:	Fixed bug in BLAbsorber that failed every placement with
+	"BLAbsorber does not implement rotation" even for un-rotated
+	placements.
+
+10/16:	release 0.4beta. I'm having difficulty generating a single
+	executable and lib that work on both RH 8.0 and RH9 -- it seems
+	/lib/ld-linux.so.2 is different and core-dumps on RH 8.0 for
+	RH 9 libraries. FermiLinux 7.3.1 behaves like RH 8.0.
+
+10/15:	restructured the distribution directories. Now the version is
+	in both the tarball and the install directory names (e.g.
+	g4beamline-0.4beta). Also got OpenInventor to work again (but
+	there is a bug that makes its menus fail (:-().
+
+10/05:	Re-implemented visualization. It now uses the viewer.def file to
+	define commands for multiple viewers simultaneously, and the user
+	selects one via the viewer=OGLIXm parameter. OpenInventor is
+	problematical, but OGLIXm can rotate, zoom, and pan via mouse
+	commands (but is still MUCH less capable than OpenInventor).
+
+10/04:	Switched to geant4 5.2p02, and gcc 3.2.2 (RedHat 9). On tjrob2
+	it now links in ~6 seconds (used to be ~3 minutes on tjrob).
+	tjrob2 is a Dell i5150 laptop with a 3.0 GHz P4, and 512 MB of
+	333 MHz RAM. The main speedup seems to be in the linker, and
+	from removing OpenInventor (and the factor of 2.5 in memory speed).
+
+08/22	Added random number management to BLManager. It uses the event #
+	as a new seed at the start of each event (the period of the generator
+	is vastly larger than the 4 billion possible event numbers). It also
+	uses the param startEvent to set the initial event #, so parallel
+	jobs won't duplicate events. Also made NTuple and BLAsciiFile add
+	extensions .hst and .txt to extensionless filenames, so their files
+	can be $startEvent (just set startEvent on the command line).
+
+08/12	Added initial support for HepRep files and the WIRED event viewer.
+	This has promise, but the viewer has some bugs that make it less
+	than perfect.
+
+08/11	Reimplemented the ASCII Track file input and output, so it is
+	now in class BLTrackFile.
+
+07/25	Version 0.2beta released.
+
+07/20	Discovered BIG DISASTER in BLBeam --  for histo input all particles
+	are muons! Changed to do the right thing.
+
+07/15	BLAsciiFile.cc added
+
+07/10	Version 0.1 released as beta.

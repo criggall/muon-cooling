@@ -1,0 +1,22 @@
+=MPI (10 sec)
+=require mpi
+=run g4blmpi --check
+=file test097.in 
+physics QGSP_BERT
+beam gaussian sigmaP=-25 sigmaX=100 sigmaY=100 sigmaXp=0.01 \
+		sigmaYp=0.01 nEvents=10000
+box Abs height=1000 width=1000 length=800 material=LH2
+place Abs z=500 
+virtualdetector Det height=1000 width=1000 length=1 format=ascii \
+	file=test097.det
+place Det z=1000
+
+=run g4bl test097.in 
+# in MPI mode the annotations can be different, as is the order
+=run egrep -v '^$|^#' test097.det.txt | sort -g -k 9 >test097.det.g4bl
+
+=run g4blmpi 4 test097.in 
+# in MPI mode the annotations can be different, as is the order
+=run egrep -v '^$|^#' test097.det.txt | sort -g -k 9 >test097.det.g4blmpi
+
+=compare test097.det.g4bl test097.det.g4blmpi 30 30 1 10 10 10 1 1 -1 -1 -1 -1

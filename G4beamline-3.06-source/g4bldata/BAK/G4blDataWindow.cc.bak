@@ -1,0 +1,311 @@
+//	G4blDataWindow.cc
+
+#define BASE_URL "http://geant4-data.web.cern.ch/geant4-data/datasets/"
+
+/**************************************************************************
+ *	List of labels, files, directories., and lengths
+ *	Labels end ":", filenames end "z", directories end "/" and lengths
+ *	end "\d". The list ends with a 0 pointer.
+ *      (Geant4 insists on using THREE DIFFERENT NAMES for each dataset;
+ *       here we don't need the environment name.)
+ **************************************************************************/
+const char *fileList[] = {
+	"Needed by all physics lists (84MB):",
+	"G4PhotonEvaporation.5.2.tar.gz",
+	"PhotonEvaporation5.2/",
+	"10084513",
+	"G4EMLOW.7.3.tar.gz",
+	"G4EMLOW7.3/",
+	"74875087",
+	"G4SAIDDATA.1.1.tar.gz",
+	"G4SAIDDATA1.1/",
+	"25800",
+	"G4RadioactiveDecay.5.2.tar.gz",
+	"RadioactiveDecay5.2/",
+	"1057501",
+	"G4ENSDFSTATE.2.1.tar.gz",
+	"G4ENSDFSTATE2.1/",
+	"290632",
+	"G4NEUTRONXS.1.4.tar.gz",
+	"G4NEUTRONXS1.4/",
+	"2249001",
+
+	"Needed by ABLA lists (0.1MB):",
+	"G4ABLA.3.1.tar.gz",
+	"G4ABLA3.1/",
+	"107286",
+
+	"Needed by specialized hadronic lists (4.1MB):",
+	"G4PII.1.3.tar.gz",
+	"G4PII1.3/",
+	"4293607",
+
+	"Needed by optical photons (127):",
+	"G4RealSurface.2.1.1.tar.gz",
+	"G4RealSurface.2.1.1/",
+	"133386050",
+
+	"Needed by _HP (low-energy neutrons) physics lists (402MB):",
+	"G4NDL.4.5.tar.gz",
+	"G4NDL4.5/",
+	"421710294",
+
+	"Probably not used (558MB):",
+	"G4TENDL.1.3.2.tar.gz",
+	"G4TENDL.1.3.2/",
+	"585100935",
+
+	0
+};
+
+const char *instructions =
+ "This program will download Geant4 datasets from MuonsInc and install them.\n"
+ "Normally the BaseURL and Destination should be left unchanged.\n"
+ "\n"
+ "The physics lists used in your simulations determine which data sets are required.\n"
+ "If you're not sure which you need, and have the space, download them all."
+ "\n";
+
+const char *changeDestinationInstructions =
+ "G4beamline looks for the datasets in $HOME/Geant4Data. On windows it also\n"
+ "looks in C:\\Geant4Data. If there is a file '.data' in the installation "
+ "directory,\nit contains the absolute path of the Geant4Data directory.\n"
+ "\n"
+ "If you use a different location, you must create the '.data' file.\n";
+
+#include <assert.h>
+
+#include <QWidget>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QFormLayout>
+#include <QPushButton>
+#include <QDialog>
+#include <QDir>
+#include <QCoreApplication>
+#include <QProcess>
+#include <QMessageBox>
+
+#include "G4blDataWindow.h"
+#include "Reader.h"
+
+#ifdef WIN32
+#define EXT ".exe"
+#else
+#define EXT ""
+#endif
+
+extern QString g4bl_dir;
+
+G4blDataWindow::G4blDataWindow() : QMainWindow(), checkBoxes(),
+			progressLabels(), currentProgressLabel(0),
+			currentLength(), first(true)
+{
+	connect(QCoreApplication::instance(),SIGNAL(aboutToQuit()), 
+							this,SLOT(abort()));
+	setWindowTitle("g4bldata");
+	QWidget *w = new QWidget;
+	setCentralWidget(w);
+	QVBoxLayout *layout = new QVBoxLayout;
+	w->setLayout(layout);
+	layout->setSpacing(1);
+
+	QLabel *label=new QLabel("g4bldata - Download datasets for G4beamline");
+	label->setStyleSheet("font-weight:bold; font-size:20pt; "
+							"text-align:center;");
+	layout->addWidget(label);
+	notice = new QLabel("");
+	layout->addWidget(notice);
+	label = new QLabel(instructions);
+	layout->addWidget(label);
+
+	QHBoxLayout *lay = new QHBoxLayout;
+	lay->addWidget(new QLabel("    Base URL:"));
+	baseURL = new QLineEdit(BASE_URL);
+	lay->addWidget(baseURL);
+	layout->addLayout(lay);
+
+	lay = new QHBoxLayout;
+	lay->addWidget(new QLabel("Destination:"));
+	destination = new QLabel(qgetenv("HOME")+"/Geant4Data");
+	lay->addWidget(destination);
+	lay->addStretch();
+	QPushButton *b = new QPushButton("Change");
+	connect(b,SIGNAL(clicked()),this,SLOT(changeDestination()));
+	lay->addWidget(b);
+	layout->addLayout(lay);
+
+	QFormLayout *form = new QFormLayout;
+	form->setVerticalSpacing(2);
+	for(const char **p=fileList; (*p)!=0; ++p) {
+		QString s(*p);
+		if(s.endsWith(":")) {
+// less whitespace	form->addRow(new QLabel(""));
+			label = new QLabel(s);
+			label->setStyleSheet("font-weight:bold;");
+			form->addRow(label);
+		} else if(s.endsWith("/")) {
+			directories << s;
+		} else if(s[0].isDigit()) {
+			lengths << s;
+		} else {
+			checkBoxes << new QCheckBox(s);
+			progressLabels << new QLabel("???");
+			checkBoxes.last()->setFixedWidth(300);
+			form->addRow(checkBoxes.last(),progressLabels.last());
+		}
+	}
+	assert(checkBoxes.size() == progressLabels.size());
+	assert(checkBoxes.size() == directories.size());
+	assert(checkBoxes.size() == lengths.size());
+	layout->addLayout(form);
+// less whitespace	layout->addWidget(new QLabel(""));
+
+	lay = new QHBoxLayout;
+	b = new QPushButton("Download and Install Checked Datasets");
+	b->setDefault(true);
+	connect(b,SIGNAL(clicked()),this,SLOT(go()));
+	lay->addWidget(b);
+	cancel = new QPushButton("Cancel");
+	connect(cancel,SIGNAL(clicked()),this,SLOT(abort()));
+	lay->addWidget(cancel);
+	layout->addLayout(lay);
+
+	changeDestination(); // first time no dialog, just scan destination
+
+	resize(100,100);
+	show();
+	raise();
+}
+
+int G4blDataWindow::extractAll(QString filename)
+{
+	// find the tar program
+	QString tar(g4bl_dir+"/bin/bsdtar" EXT);
+	if(!QFile::exists(tar)) tar = g4bl_dir+"/bin/tar" EXT;
+	if(!QFile::exists(tar)) tar = "/bin/tar" EXT;
+	if(!QFile::exists(tar)) tar = "/usr/bin/tar" EXT;
+	// run tar to extract the files
+	QProcess p(this);
+	p.setProcessChannelMode(QProcess::ForwardedChannels);
+	QStringList args;
+	args << "-xzf" << filename;
+	p.start(tar,args);
+	int timeLimit = 300000; // milliseconds
+	if(!p.waitForFinished(timeLimit) || p.exitCode() != 0 ||
+	   			p.exitStatus() != QProcess::NormalExit) {
+		return -1;
+	}
+	return 0;
+}
+
+void G4blDataWindow::go()
+{
+	QString url = baseURL->text();
+	if(!url.endsWith("/")) url += "/";
+	QString dest = destination->text();
+	if(!dest.endsWith("/")) dest += "/";
+	if(!QDir(dest).exists())
+		QDir(dest).mkpath(".");
+	QString current = QDir::currentPath();
+	if(!QDir::setCurrent(dest)) {
+		printf("Cannot cd to '%s'\n",qPrintable(dest));
+		QMessageBox::critical(this,"Error","Cannot cd to '"+dest+"'");
+		return;
+	}
+	for(int i=0; i<checkBoxes.size(); ++i) {
+		if(!checkBoxes[i]->isChecked()) continue;
+		checkBoxes[i]->setChecked(false);
+		currentProgressLabel = progressLabels[i];
+		currentLength = lengths[i];
+		currentProgressLabel->setText("Starting...");
+		QString file = checkBoxes[i]->text();
+		fprintf(stderr,"downloading %s\n",qPrintable(url+file));
+		if(copyUrlToFile(url+file,dest+file,this) != 0) {
+			currentProgressLabel->setText("ERROR DOWNLOADING");
+			continue;
+		}
+		currentProgressLabel->setText("Extracting...");
+		currentProgressLabel->repaint();
+		if(extractAll(dest+file) != 0) {
+			currentProgressLabel->setText("ERROR EXTRACTING");
+			continue;
+		}
+		currentProgressLabel->setText("Complete");
+ 		QFile::remove(dest+file);
+	}
+	QDir::setCurrent(current);
+	currentProgressLabel = 0;
+	cancel->setText("Close");
+}
+
+void G4blDataWindow::progress(qint64 bytes, qint64 total)
+{
+	if(!currentProgressLabel) return;
+	QString v = QString::number(bytes) + "/" + QString::number(total);
+	if(total < 0) v = QString::number(bytes) + "/" + currentLength;
+	currentProgressLabel->setText(v);
+}
+
+void G4blDataWindow::finished()
+{
+	//printf("finished\n");
+}
+
+void G4blDataWindow::changeDestination()
+{
+	if(!first) {
+		QDialog *d = new QDialog(this);
+		d->setWindowTitle("g4bldata - Change Destination");
+		QVBoxLayout *layout = new QVBoxLayout;
+		d->setLayout(layout);
+		layout->addWidget(new QLabel(changeDestinationInstructions));
+		QHBoxLayout *lay = new QHBoxLayout;
+		lay->addWidget(new QLabel("New Destination:"));
+		QLineEdit *newDest = new QLineEdit(destination->text());
+		lay->addWidget(newDest);
+		layout->addLayout(lay);
+		lay = new QHBoxLayout;
+		lay->addStretch();
+		QPushButton *b = new QPushButton("Save");
+		connect(b,SIGNAL(clicked()),d,SLOT(accept()));
+		lay->addWidget(b);
+		b = new QPushButton("Cancel");
+		connect(b,SIGNAL(clicked()),d,SLOT(reject()));
+		lay->addWidget(b);
+		lay->addStretch();
+		layout->addLayout(lay);
+		d->show();
+		if(d->exec() == QDialog::Accepted) {
+			destination->setText(newDest->text());
+		}
+		delete d;
+	}
+	first = false;
+
+	// scan destination for existing dataset directories
+	int n=0;
+	QDir dir(destination->text());
+	for(int i=0; i<checkBoxes.size(); ++i) {
+		if(dir.exists(directories[i])) {
+			progressLabels[i]->setText("Present");
+			checkBoxes[i]->setChecked(false);
+			++n;
+		} else {
+			progressLabels[i]->setText("");
+			bool v = !checkBoxes[i]->text().startsWith("G4TENDL");
+			checkBoxes[i]->setChecked(v);
+		}
+	}
+
+	if(n >= 6) {
+		notice->setText("\nThe Geant4Data directory has been found.\n"
+			"You may not need to download anything.\n");
+		notice->setStyleSheet("font-weight:bold; color:red;");
+	}
+}
+
+void G4blDataWindow::abort()
+{
+	::exit(99);
+}

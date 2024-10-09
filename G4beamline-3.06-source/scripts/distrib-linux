@@ -1,0 +1,80 @@
+#	distrib-Linux -- construct a distribution for Linux (Intel)
+#
+#	executed from top-level build directory, $1 = VERSION
+
+set -e
+
+if test -z "$1"
+then
+	echo VERSION must be specified
+	exit 1
+fi
+if test ! -x bin/g4bl
+then
+	echo distrib-linux: wrong directory!
+	exit 1
+fi
+
+TAG="Linux64"
+if test -r /etc/redhat-release
+then
+	if grep "Scientific Linux" /etc/redhat-release >/dev/null 2>&1
+	then
+		TAG="SLF64"
+	fi
+fi
+if uname -v | grep Ubuntu >/dev/null 2>&1
+then
+	TAG="Ubuntu64"
+fi
+
+VERSION=$1
+DISTRIB=G4beamline-$1-$TAG
+DIR=G4beamline-$1
+
+rm -fr $DISTRIB.tgz $DIR
+
+# clean up a bit
+rm -fr doc/html doc/doxygen.log *.dat *.hst *.ldd *.root \
+	examples/*.dat examples/*.hst examples/*.out \
+	examples/*.heprep* examples/*.root examples/test*.dir \
+	examples/zap* examples/*.swf examples/*.mov examples/*.avi \
+	zap* 
+
+mkdir $DIR $DIR/Resources
+cp -RLp bin doc examples lib plugins README.txt share test validation $DIR
+cp -Lp Resources/qt.conf $DIR/Resources
+rm -fr $DIR/share/*cache
+if test -d root; then cp -Rp root $DIR; fi
+
+### construct g4bl-icon ($ and tabs are preserved)
+if test -x bin/g4blgui
+then
+cat <<\EOF >$DIR/bin/g4bl-icon
+#!/bin/bash
+#	g4bl-icon - construct an icon for G4beamline on the user's Desktop
+#
+#       This works for both Gnome and KDE; it probably works for other
+#       desktop managers.
+
+if test "$G4BL_DIR" = ""
+then
+       G4BL_DIR=`dirname "$('cd' "$(dirname "$BASH_SOURCE")" >/dev/null; pwd)"`
+fi     
+
+cat <<-! >$HOME/Desktop/G4beamline.desktop
+        [Desktop Entry]
+        Exec=$G4BL_DIR/bin/g4blgui %f
+        Icon=$G4BL_DIR/share/g4beamline/g4blicon.png
+        Name=G4beamline
+        Terminal=true
+        Type=Application
+        Path=$HOME
+!
+EOF
+chmod 755 $DIR/bin/g4bl-icon
+fi
+
+echo Creating $DISTRIB.tgz...
+tar -czf $DISTRIB.tgz $DIR
+rm -fr $DIR

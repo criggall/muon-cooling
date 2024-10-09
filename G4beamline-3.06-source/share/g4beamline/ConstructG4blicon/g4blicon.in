@@ -1,0 +1,15 @@
+beam gaussian meanMomentum=200
+physics QGSP
+reference referenceMomentum=200
+particlecolor mu+=1,1,1
+
+genericquad Q fieldLength=200 ironLength=200 ironRadius=100 apertureRadius=50 
+genericbend B fieldWidth=200 fieldHeight=100 fieldLength=200 ironWidth=400 \
+	ironHeight=200 ironLength=200
+
+tune By z0=100 z1=800 initial=-1 initialStep=.1 expr=x1 tolerance=.01
+place Q z=300 ironColor=0,1,0
+place B z=600 By=By ironColor=1,0,0
+corner C z=600 rotation=Y20
+place Q z=900 ironColor=0,0,1
+

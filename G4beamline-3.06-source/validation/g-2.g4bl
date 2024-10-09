@@ -1,0 +1,10 @@
+#	g-2.g4bl - simulate BNL g-2 storage ring, with spin
+param steppingFormat='N GLOBAL KE STEP POLAR VOL PROCESS'
+physics QGSP_BERT spinTracking=1 disable=Decay
+beam gaussian polarization=0,0,1 nEvents=1 particle=mu+ meanMomentum=3094 beamZ=-0.001
+virtualdetector D height=100 width=100 length=0.010 format=extended
+place D z=0 front=1
+box B height=1 width=100000 length=100000
+place B z=0 y=500
+fieldexpr F height=1000 width=100000 length=100000 By=1.4513
+place F z=0

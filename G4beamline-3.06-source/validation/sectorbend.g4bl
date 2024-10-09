@@ -1,0 +1,5 @@
+*	sectorbend.g4bl idealsectorbend field lines
+physics QGSP_BERT
+idealsectorbend B1 angle=90 fieldCenterRadius=500 fieldInnerRadius=300 fieldOuterRadius=700 fieldHeight=400 ironInnerRadius=150 ironOuterRadius=1000 ironHeight=800 ironColor=1,0,0,.5 By=1
+place B1 z=0
+fieldlines center=146,0,353 radius=500 square=1 dl=1 nLines=500 exit=1

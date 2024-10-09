@@ -1,0 +1,38 @@
+=NIST material database, output command (1 sec)
+
+=file test058.in 
+param histoFile="" steppingVerbose=1 \
+	steppingFormat="TAG CL STEP VOL MAT"
+physics QGSP doStochastics=0
+beam ascii filename=test058.beam nEvents=1
+box A height=100 width=100 length=100 material=G4_LITHIUM_HYDRIDE
+place A z=50
+box B height=100 width=100 length=100 material=H2O
+place B
+box C height=100 width=100 length=1 material=Scintillator
+place C
+box D height=100 width=100 length=100 material=Air
+place D
+output test058.second.out
+material
+=file test058.beam 
+#BLTrackFile test058 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 10.000 0.000 200.000 0.375 -13 1 1 0 2.0000
+0.000 0.000 0.000 0.000 10.000 200.000 0.375 -13 2 1 0 2.0000
+0.000 0.000 0.000 10.000 10.000 200.000 0.375 -13 3 1 0 3.0000
+0.000 0.000 0.000 -10.000 0.000 200.000 0.375 -13 4 1 0 2.0000
+0.000 0.000 0.000 0.000 -10.000 200.000 0.375 -13 5 1 0 2.0000
+0.000 0.000 0.000 -10.000 -10.000 200.000 0.375 -13 6 1 0 3.0000
+0.000 0.000 0.000 -10.000 10.000 200.000 0.375 -13 7 1 0 3.0000
+0.000 0.000 0.000 10.000 -10.000 200.000 0.375 -13 8 1 0 3.0000
+=run g4bl test058.in 
+=grep redirected g4bl.out 
+=grep "^>" test058.second.out 
+=grep LITHIUM_HYDRIDE test058.second.out 
+=grep WATER test058.second.out 
+=grep Scintillator test058.second.out 
+=grep AIR test058.second.out 
+=grep Vacuum test058.second.out 

@@ -1,0 +1,25 @@
+=totalenergy (2 sec)
+
+=file test073.in 
+param histoFile="" 
+physics QGSP doStochastics=0
+beam ascii filename=test073.beam nEvents=3
+totalenergy ancestors=1 file=test073.txt
+box Outer height=200 width=200 length=200 material=H2O
+box Inner height=100 width=100 length=100 material=C
+place Inner parent=Outer z=0
+place Outer z=200
+=file test073.beam 
+#BLTrackFile test073 beam
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#cm cm cm MeV/c MeV/c MeV/c ns - - - - -
+0.000 0.000 0.000 0.000 0.000 200.000 0.375 -13 0 1 0 1.0000
+0.000 0.000 0.000 0.000 0.000 2000.000 0.375 -13 0 2 0 1.0000
+0.000 0.000 0.000 0.000 0.000 20.000 0.375 -13 0 3 0 1.0000
+=file test073.good 
+# Total energy deposited in selected volumes (MeV):
+World	128.420
+Outer	128.420
+OuterInner	80.332
+=run g4bl test073.in 
+=compare test073.txt test073.good -1 0.2
