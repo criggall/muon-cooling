@@ -26,11 +26,20 @@ for j in range(len(icool_df.values)-1):
     for k in range(len(valsICOOL)):
         valsICOOL[k] = float(valsICOOL[k])
 
-    # Remove events with low event weight:
+    # Determine particle type:
+    particleID = valsICOOL[2]
+    if particleID == 2:
+        pdgID = 13 # muon
+    elif particleID == 1:
+        pdgID = 11 # electron
+    elif particleID == 3:
+        pdgID = 211 # charged pion
+
+    # Filter by event weight:
     eventWeight = valsICOOL[5]
     eventWeightOrder = math.floor(math.log(eventWeight, 10))
     if eventWeightOrder >= 0:
-
+        
         # Rearrange and convert units to BLTrackFile format:
         valsBL = []
         valsBL.append(valsICOOL[6]*100) # x (m -> cm)
@@ -40,7 +49,7 @@ for j in range(len(icool_df.values)-1):
         valsBL.append(valsICOOL[10]*1000) # Py (GeV/c -> MeV/c)
         valsBL.append(valsICOOL[11]*1000) # Pz (GeV/c -> MeV/c)
         valsBL.append(valsICOOL[4]*10**9) # t (s -> ns)
-        valsBL.append(13.0) # PDGid (13 = muon)
+        valsBL.append(pdgID) # PDGid
         valsBL.append(valsICOOL[0]) # EventID
         valsBL.append(trackCount) # TrackId (count)
         trackCount += 1.0
