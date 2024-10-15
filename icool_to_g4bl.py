@@ -17,6 +17,9 @@ f.write("#BLTrackFile\n")
 f.write("#x y z Px Py Pz t PDGid EventID TrackId ParentID Weight\n")
 f.write("#cm cm cm MeV/c MeV/c MeV/c ns - - - - -\n")
 
+electronCount = 0
+pionCount = 0
+totalCount = 0
 trackCount = 1.0
 for j in range(len(icool_df.values)-1):
 
@@ -32,13 +35,16 @@ for j in range(len(icool_df.values)-1):
         pdgID = 13 # muon
     elif particleID == 1:
         pdgID = 11 # electron
+        electronCount += 1
     elif particleID == 3:
         pdgID = 211 # charged pion
+        pionCount += 1
+    totalCount += 1
 
     # Filter by event weight:
     eventWeight = valsICOOL[5]
     eventWeightOrder = math.floor(math.log(eventWeight, 10))
-    if eventWeightOrder >= 0:
+    if eventWeightOrder >= 0 and particleID == 2: # only muons with weight of order 1
         
         # Rearrange and convert units to BLTrackFile format:
         valsBL = []
@@ -59,6 +65,9 @@ for j in range(len(icool_df.values)-1):
         # Write to txt:
         valsStr = [str(x) for x in valsBL]
         f.write(' '.join(valsStr) + '\n')
+
+# print("Fraction of electrons: "+str(electronCount/totalCount))
+# print("Fraction of pions: "+str(pionCount/totalCount))
 
 f.close()
 
