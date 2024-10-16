@@ -1,42 +1,55 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
+# RF period (325 MHz frequency):
+T = 1/(325*10**6)*10**9 # ns
+
 # Load data from output txt files:
-initial_data = np.loadtxt('out3.txt') # out1.txt and out2.txt empty - use out3.txt for now
+initial_data = np.loadtxt('out1.txt')
 final_data = np.loadtxt('out31.txt')
 
 # Values for inital detector:
 xi = []; yi = []; zi = []
 pxi = []; pyi = []; pzi = []; ptotali = []
-ti = []
+ti = []; mod_ti = []
 for i in range(initial_data.shape[0]):
     xi.append(initial_data[i][0]/10) # mm -> cm
     yi.append(initial_data[i][1]/10)
     zi.append(initial_data[i][2]/10)
-    pxi.append(initial_data[i][3]) # MeV/c
-    pyi.append(initial_data[i][4])
-    pzi.append(initial_data[i][5])
-    ptotali.append(initial_data[i][3]+initial_data[i][4]+initial_data[i][5])
-    ti.append(initial_data[i][6]) # ns
+    px = initial_data[i][3]; py = initial_data[i][4]; pz = initial_data[i][5]
+    pxi.append(px) # MeV/c
+    pyi.append(py)
+    pzi.append(pz)
+    ptotali.append(np.sqrt(px**2+py**2+pz**2))
+    t = initial_data[i][6]
+    ti.append(t) # ns
+    mod_ti.append(t % T)
+    del px, py, pz, t
 
 # Values for final detector:
 xf = []; yf = []; zf = []
 pxf = []; pyf = []; pzf = []; ptotalf = []
-tf = []
+tf = []; mod_tf = []
 for i in range(final_data.shape[0]):
     xf.append(final_data[i][0]/10) # mm -> cm
     yf.append(final_data[i][1]/10)
     zf.append(final_data[i][2]/10)
-    pxf.append(final_data[i][3]) # MeV/c
-    pyf.append(final_data[i][4])
-    pzf.append(final_data[i][5])
-    ptotalf.append(final_data[i][3]+final_data[i][4]+final_data[i][5])
-    tf.append(final_data[i][6]) # ns
+    px = final_data[i][3]; py = final_data[i][4]; pz = final_data[i][5]
+    pxf.append(px) # MeV/c
+    pyf.append(py)
+    pzf.append(pz)
+    ptotalf.append(np.sqrt(px**2+py**2+pz**2))
+    t = final_data[i][6]
+    tf.append(t) # ns
+    mod_tf.append(t % T)
+    del px, py, pz, t
 
 # Plot px vs x:
 plt.figure(1)
-plt.scatter(pxi,xi,color='blue',label='initial')
-plt.scatter(pxf,xf,color='red',label='final')
+point_size = 5
+plt.scatter(xi,pxi,color='blue',label='initial',s=point_size)
+plt.scatter(xf,pxf,color='red',label='final',s=point_size)
+# plt.ylim(-100,100)
 plt.xlabel('x (cm)')
 plt.ylabel('p_x (MeV/c)')
 plt.legend()
@@ -45,8 +58,9 @@ plt.savefig('px_vs_x.png',dpi=300)
 
 # Plot py vs y:
 plt.figure(2)
-plt.scatter(pyi,yi,color='blue',label='initial')
-plt.scatter(pyf,yf,color='red',label='final')
+plt.scatter(yi,pyi,color='blue',label='initial',s=point_size)
+plt.scatter(yf,pyf,color='red',label='final',s=point_size)
+# plt.ylim(-100,100)
 plt.xlabel('y (cm)')
 plt.ylabel('p_y (MeV/c)')
 plt.legend()
@@ -55,13 +69,13 @@ plt.savefig('py_vs_y.png',dpi=300)
 
 # Plot total p vs t:
 plt.figure(3)
-plt.scatter(ptotali,ti,color='blue',label='initial')
-plt.scatter(ptotalf,tf,color='red',label='final')
-plt.xlabel('t (ns)')
+plt.scatter(mod_ti,ptotali,color='blue',label='initial',s=point_size)
+plt.scatter(mod_tf,ptotalf,color='red',label='final',s=point_size)
+plt.xlabel('mod(t,T_RF)')
 plt.ylabel('p_total (MeV/c)')
 plt.legend()
-plt.title('p_total vs t')
-plt.savefig('ptotal_vs_t.png',dpi=300)
+plt.title('p_total vs mod(t,T_RF)')
+plt.savefig('ptotal_vs_modtT.png',dpi=300)
 
 #######################################################
 
