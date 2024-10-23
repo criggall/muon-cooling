@@ -1,5 +1,6 @@
 import numpy as np
 from matplotlib import pyplot as plt
+import math
 
 # RF period (325 MHz frequency):
 T = 1/(325*10**6)*10**9 # ns
@@ -21,9 +22,15 @@ for i in range(initial_data.shape[0]):
     pyi.append(py)
     pzi.append(pz)
     ptotali.append(np.sqrt(px**2+py**2+pz**2))
+    # ptotali.append(np.sqrt(px**2+py**2))
     t = initial_data[i][6]
     ti.append(t) # ns
-    mod_ti.append(t % T)
+    mod_t = t % T
+    if mod_t > T/2:
+        mod_ti.append(mod_t-3.0)
+    else:
+        mod_ti.append(mod_t)
+    # mod_ti.append(mod_t)
     del px, py, pz, t
 
 # Values for final detector:
@@ -39,9 +46,15 @@ for i in range(final_data.shape[0]):
     pyf.append(py)
     pzf.append(pz)
     ptotalf.append(np.sqrt(px**2+py**2+pz**2))
+    # ptotalf.append(np.sqrt(px**2+py**2))
     t = final_data[i][6]
     tf.append(t) # ns
-    mod_tf.append(t % T)
+    mod_t = t % T
+    if mod_t > T/2:
+        mod_tf.append(mod_t-3.0)
+    else:
+        mod_tf.append(mod_t)
+    # mod_tf.append(mod_t)
     del px, py, pz, t
 
 # Plot px vs x:
@@ -49,7 +62,8 @@ plt.figure(1)
 point_size = 5
 plt.scatter(xi,pxi,color='blue',label='initial',s=point_size)
 plt.scatter(xf,pxf,color='red',label='final',s=point_size)
-# plt.ylim(-100,100)
+plt.xlim(-30,30)
+plt.ylim(-100,100)
 plt.xlabel('x (cm)')
 plt.ylabel('p_x (MeV/c)')
 plt.legend()
@@ -60,7 +74,8 @@ plt.savefig('px_vs_x.png',dpi=300)
 plt.figure(2)
 plt.scatter(yi,pyi,color='blue',label='initial',s=point_size)
 plt.scatter(yf,pyf,color='red',label='final',s=point_size)
-# plt.ylim(-100,100)
+plt.xlim(-30,30)
+plt.ylim(-100,100)
 plt.xlabel('y (cm)')
 plt.ylabel('p_y (MeV/c)')
 plt.legend()
@@ -71,6 +86,7 @@ plt.savefig('py_vs_y.png',dpi=300)
 plt.figure(3)
 plt.scatter(mod_ti,ptotali,color='blue',label='initial',s=point_size)
 plt.scatter(mod_tf,ptotalf,color='red',label='final',s=point_size)
+plt.ylim(100,400)
 plt.xlabel('mod(t,T_RF)')
 plt.ylabel('p_total (MeV/c)')
 plt.legend()
