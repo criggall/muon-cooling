@@ -12,10 +12,9 @@ param period=4200 # HFOFO period
 
 param beamstart=-700 # from the rotator solenoid exit at z=0
 # beam ascii file=initial.dat beamZ=$beamstart # user provided file with particle data
-# beam gaussian particle=mu+ nEvents=100 beamZ=-700.0 \
+beam gaussian particle=mu+ nEvents=100 beamZ=-700.0 \
     sigmaX=10.0 sigmaY=10.0 sigmaXp=0.100 sigmaYp=0.100 \
     meanMomentum=200.0 sigmaP=4.0 meanT=0.0 sigmaT=0.0
-beam ascii file=output.dat beamZ=$beamstart # file from Diktys (converted from ICOOL)
 
 param beamtime=-0.671 # average time of mu+ in initial.dat modulo RF period TRF
 # if there is no mu+ take mu- and add TRF/2
