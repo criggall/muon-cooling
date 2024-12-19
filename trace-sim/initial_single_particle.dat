@@ -1,0 +1,4 @@
+#BLTrackFile with mu+ and pi+ initial conditions ...
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight 
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - - 
+0.0 0.0 0.0 49.323 14.997 252.92 411.74 -13 1 1 0 6.3150E-01
