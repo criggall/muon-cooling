@@ -1,19 +1,11 @@
 G4BL_DIR=/Applications/G4beamline-3.08.app/Contents
 LD_LIBRARY_PATH='/Applications/G4beamline-3.08.app/Contents/lib:'
-G4ABLADATA=/Users/criggall/Geant4Data/G4ABLA3.1
 G4LEDATA=/Users/criggall/Geant4Data/G4EMLOW8.0
 G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
-G4INCLDATA=/Users/criggall/Geant4Data/G4INCL1.0
-G4NEUTRONHPDATA=/Users/criggall/Geant4Data/G4NDL4.6
 G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
-G4PIIDATA=/Users/criggall/Geant4Data/G4PII1.3
 G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
-G4REALSURFACEDATA=/Users/criggall/Geant4Data/RealSurface2.2
-G4SAIDXSDATA=/Users/criggall/Geant4Data/G4SAIDDATA2.0
-G4TENDLDATA=/Users/criggall/Geant4Data/G4TENDL1.4
-G4LENDDATA=/Users/criggall/Geant4Data/LEND_GND1.3_ENDF.BVII.1
-G4beamline Process ID 57911
+G4beamline Process ID 45902
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -53,33 +45,182 @@ param        zshift        60
 param        period        4200
 param        beamstart     -700
 beam    ASCII   nEvents=2147483647 firstEvent=-1 lastEvent=2147483647 beamZ=-700.0 maxR=1000000.0 renumber=0 weight=1.000000 
-		filename=initial_single_particle.dat format=BLTrackFile 
+		filename=initial.dat format=BLTrackFile 
 		
-reference                  particle=mu+ beamX=0 beamY=0 beamZ=0 beamT=0
-                           rotation= referenceMomentum=248 beamXp=0 beamYp=0
-                           meanMomentum=248 meanXp=0 meanYp=0 tuneZ=-3.7e+21
-                           tuneMomentum=-3.7e+21 tolerance=0.001 noEfield=0
-                           noBfield=0 noEloss=0 P=248
-param        beamtime      -0.671
-param        toffs0        1.7962431
-param        toffs1        1.7501431
-param        toffs2        1.8270431
-param        toffs3        1.8270431
-param        toffs4        1.8270431
-param        toffs5        1.8190431
-param        toffs6        1.8190431
+param        beamtime      3.0769231e-09
+param        toffs0        2.4672431
+param        toffs1        2.4211431
+param        toffs2        2.4980431
+param        toffs3        2.4980431
+param        toffs4        2.4980431
+param        toffs5        2.4900431
+param        toffs6        2.4900431
 trackcuts                  kill= keep=mu+,mu-,pi+,pi- killSecondaries=0
                            kineticEnergyCut=50 kineticEnergyMax=1.798e+308
                            maxTime=1e+06 keepPrimaries=0 steppingVerbose=0
 param        maxStep       10.0
+param        nTrace        0
 param        steppingVerbose 0
-trace                      nTrace=1 format=asciiTrace oneNTuple=0
-                           primaryOnly=0 traceTune=1
-                           filename=/Users/criggall/Library/Mobile
-                           Documents/com~apple~CloudDocs/muon-cooling/trace-sim/trace_output.txt
-                           file=/Users/criggall/Library/Mobile
-                           Documents/com~apple~CloudDocs/muon-cooling/trace-sim/trace_output.txt
-                           require= coordinates=Centerline
+virtualdetector Det1       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out1
+                           file=out1 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det2       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out2
+                           file=out2 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det3       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out3
+                           file=out3 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det4       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out4
+                           file=out4 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det5       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out5
+                           file=out5 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det6       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out6
+                           file=out6 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det7       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out7
+                           file=out7 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det8       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out8
+                           file=out8 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det9       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out9
+                           file=out9 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det10      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out10
+                           file=out10 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det11      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out11
+                           file=out11 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det12      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out12
+                           file=out12 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det13      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out13
+                           file=out13 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det14      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out14
+                           file=out14 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det15      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out15
+                           file=out15 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det16      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out16
+                           file=out16 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det17      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out17
+                           file=out17 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det18      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out18
+                           file=out18 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det19      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out19
+                           file=out19 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det20      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out20
+                           file=out20 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det21      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out21
+                           file=out21 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det22      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out22
+                           file=out22 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det23      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out23
+                           file=out23 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det24      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out24
+                           file=out24 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det25      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out25
+                           file=out25 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det26      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out26
+                           file=out26 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det27      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out27
+                           file=out27 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det28      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out28
+                           file=out28 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det29      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out29
+                           file=out29 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det30      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out30
+                           file=out30 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector Det31      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=out31
+                           file=out31 require= referenceParticle=0
+                           coordinates=Centerline kill=0
+virtualdetector DetLast    radius=300 innerRadius=0 height=600 width=600
+                           length=0.001 maxStep=10 material=Vacuum color=0,1,0
+                           noSingles=0 format=bltrackfile filename=outlast
+                           file=outlast require= referenceParticle=0
+                           coordinates=Centerline kill=0
 coil    kat0    innerRadius=360.0 outerRadius=500.0 length=6000.0 material=Cu 
 		tolerance=0.003 nSheets=10 
 		maxR=360.0 maxZ=9000.0 dR=20.0 dZ=20.0 filename=kat0.dat 
@@ -194,6 +335,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=1550.0
 place   abtube  copies=1 x=0.0 y=0.0 z=2250.0 
 place   abtube  copies=1 x=0.0 y=0.0 z=2950.0 
 place   abtube  copies=1 x=0.0 y=0.0 z=3650.0 
+place   Det1    copies=1 x=0.0 y=0.0 z=4250.2 
 place   abtube  copies=1 x=0.0 y=0.0 z=4350.0 
 place   abtube  copies=1 x=0.0 y=0.0 z=5050.0 
 place   abtube  copies=1 x=0.0 y=0.0 z=5750.0 
@@ -206,6 +348,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=7150.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=7850.0 rotation='Y90,Z573.0'
                 lowerWidth=58.239
 place   abtube  copies=1 x=0.0 y=0.0 z=7850.0 
+place   Det2    copies=1 x=0.0 y=0.0 z=8450.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=8550.0 rotation='Y90,Z-26.97'
                 lowerWidth=57.694
 place   abtube  copies=1 x=0.0 y=0.0 z=8550.0 
@@ -224,6 +367,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=11350.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=12050.0 rotation='Y90,Z573.0'
                 lowerWidth=54.990
 place   abtube  copies=1 x=0.0 y=0.0 z=12050.0 
+place   Det3    copies=1 x=0.0 y=0.0 z=12650.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=12750.0 rotation='Y90,Z-26.97'
                 lowerWidth=54.457
 place   abtube  copies=1 x=0.0 y=0.0 z=12750.0 
@@ -242,6 +386,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=15550.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=16250.0 rotation='Y90,Z573.0'
                 lowerWidth=51.856
 place   abtube  copies=1 x=0.0 y=0.0 z=16250.0 
+place   Det4    copies=1 x=0.0 y=0.0 z=16850.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=16950.0 rotation='Y90,Z-26.97'
                 lowerWidth=51.351
 place   abtube  copies=1 x=0.0 y=0.0 z=16950.0 
@@ -260,6 +405,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=19750.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=20450.0 rotation='Y90,Z573.0'
                 lowerWidth=48.913
 place   abtube  copies=1 x=0.0 y=0.0 z=20450.0 
+place   Det5    copies=1 x=0.0 y=0.0 z=21050.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=21150.0 rotation='Y90,Z-26.97'
                 lowerWidth=48.444
 place   abtube  copies=1 x=0.0 y=0.0 z=21150.0 
@@ -278,6 +424,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=23950.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=24650.0 rotation='Y90,Z573.0'
                 lowerWidth=46.201
 place   abtube  copies=1 x=0.0 y=0.0 z=24650.0 
+place   Det6    copies=1 x=0.0 y=0.0 z=25250.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=25350.0 rotation='Y90,Z-26.97'
                 lowerWidth=45.773
 place   abtube  copies=1 x=0.0 y=0.0 z=25350.0 
@@ -296,6 +443,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=28150.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=28850.0 rotation='Y90,Z573.0'
                 lowerWidth=43.737
 place   abtube  copies=1 x=0.0 y=0.0 z=28850.0 
+place   Det7    copies=1 x=0.0 y=0.0 z=29450.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=29550.0 rotation='Y90,Z-26.97'
                 lowerWidth=43.350
 place   abtube  copies=1 x=0.0 y=0.0 z=29550.0 
@@ -314,6 +462,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=32350.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=33050.0 rotation='Y90,Z573.0'
                 lowerWidth=41.519
 place   abtube  copies=1 x=0.0 y=0.0 z=33050.0 
+place   Det8    copies=1 x=0.0 y=0.0 z=33650.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=33750.0 rotation='Y90,Z-26.97'
                 lowerWidth=41.173
 place   abtube  copies=1 x=0.0 y=0.0 z=33750.0 
@@ -332,6 +481,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=36550.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=37250.0 rotation='Y90,Z573.0'
                 lowerWidth=39.541
 place   abtube  copies=1 x=0.0 y=0.0 z=37250.0 
+place   Det9    copies=1 x=0.0 y=0.0 z=37850.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=37950.0 rotation='Y90,Z-26.97'
                 lowerWidth=39.233
 place   abtube  copies=1 x=0.0 y=0.0 z=37950.0 
@@ -350,6 +500,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=40750.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=41450.0 rotation='Y90,Z573.0'
                 lowerWidth=37.786
 place   abtube  copies=1 x=0.0 y=0.0 z=41450.0 
+place   Det10   copies=1 x=0.0 y=0.0 z=42050.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=42150.0 rotation='Y90,Z-26.97'
                 lowerWidth=37.514
 place   abtube  copies=1 x=0.0 y=0.0 z=42150.0 
@@ -368,6 +519,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=44950.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=45650.0 rotation='Y90,Z573.0'
                 lowerWidth=36.238
 place   abtube  copies=1 x=0.0 y=0.0 z=45650.0 
+place   Det11   copies=1 x=0.0 y=0.0 z=46250.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=46350.0 rotation='Y90,Z-26.97'
                 lowerWidth=35.999
 place   abtube  copies=1 x=0.0 y=0.0 z=46350.0 
@@ -386,6 +538,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=49150.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=49850.0 rotation='Y90,Z573.0'
                 lowerWidth=34.879
 place   abtube  copies=1 x=0.0 y=0.0 z=49850.0 
+place   Det12   copies=1 x=0.0 y=0.0 z=50450.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=50550.0 rotation='Y90,Z-26.97'
                 lowerWidth=34.670
 place   abtube  copies=1 x=0.0 y=0.0 z=50550.0 
@@ -404,6 +557,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=53350.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=54050.0 rotation='Y90,Z573.0'
                 lowerWidth=33.690
 place   abtube  copies=1 x=0.0 y=0.0 z=54050.0 
+place   Det13   copies=1 x=0.0 y=0.0 z=54650.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=54750.0 rotation='Y90,Z-26.97'
                 lowerWidth=33.507
 place   abtube  copies=1 x=0.0 y=0.0 z=54750.0 
@@ -422,6 +576,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=57550.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=58250.0 rotation='Y90,Z573.0'
                 lowerWidth=32.652
 place   abtube  copies=1 x=0.0 y=0.0 z=58250.0 
+place   Det14   copies=1 x=0.0 y=0.0 z=58850.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=58950.0 rotation='Y90,Z-26.97'
                 lowerWidth=32.493
 place   abtube  copies=1 x=0.0 y=0.0 z=58950.0 
@@ -440,6 +595,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=61750.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=62450.0 rotation='Y90,Z573.0'
                 lowerWidth=31.749
 place   abtube  copies=1 x=0.0 y=0.0 z=62450.0 
+place   Det15   copies=1 x=0.0 y=0.0 z=63050.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=63150.0 rotation='Y90,Z-26.97'
                 lowerWidth=31.611
 place   abtube  copies=1 x=0.0 y=0.0 z=63150.0 
@@ -458,6 +614,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=65950.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=66650.0 rotation='Y90,Z573.0'
                 lowerWidth=30.967
 place   abtube  copies=1 x=0.0 y=0.0 z=66650.0 
+place   Det16   copies=1 x=0.0 y=0.0 z=67250.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=67350.0 rotation='Y90,Z-26.97'
                 lowerWidth=30.847
 place   abtube  copies=1 x=0.0 y=0.0 z=67350.0 
@@ -476,6 +633,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=70150.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=70850.0 rotation='Y90,Z573.0'
                 lowerWidth=30.289
 place   abtube  copies=1 x=0.0 y=0.0 z=70850.0 
+place   Det17   copies=1 x=0.0 y=0.0 z=71450.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=71550.0 rotation='Y90,Z-26.97'
                 lowerWidth=30.185
 place   abtube  copies=1 x=0.0 y=0.0 z=71550.0 
@@ -494,6 +652,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=74350.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=75050.0 rotation='Y90,Z573.0'
                 lowerWidth=29.704
 place   abtube  copies=1 x=0.0 y=0.0 z=75050.0 
+place   Det18   copies=1 x=0.0 y=0.0 z=75650.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=75750.0 rotation='Y90,Z-26.97'
                 lowerWidth=29.614
 place   abtube  copies=1 x=0.0 y=0.0 z=75750.0 
@@ -512,6 +671,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=78550.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=79250.0 rotation='Y90,Z573.0'
                 lowerWidth=29.200
 place   abtube  copies=1 x=0.0 y=0.0 z=79250.0 
+place   Det19   copies=1 x=0.0 y=0.0 z=79850.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=79950.0 rotation='Y90,Z-26.97'
                 lowerWidth=29.123
 place   abtube  copies=1 x=0.0 y=0.0 z=79950.0 
@@ -530,6 +690,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=82750.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=83450.0 rotation='Y90,Z573.0'
                 lowerWidth=28.766
 place   abtube  copies=1 x=0.0 y=0.0 z=83450.0 
+place   Det20   copies=1 x=0.0 y=0.0 z=84050.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=84150.0 rotation='Y90,Z-26.97'
                 lowerWidth=28.700
 place   abtube  copies=1 x=0.0 y=0.0 z=84150.0 
@@ -548,6 +709,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=86950.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=87650.0 rotation='Y90,Z573.0'
                 lowerWidth=28.394
 place   abtube  copies=1 x=0.0 y=0.0 z=87650.0 
+place   Det21   copies=1 x=0.0 y=0.0 z=88250.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=88350.0 rotation='Y90,Z-26.97'
                 lowerWidth=28.338
 place   abtube  copies=1 x=0.0 y=0.0 z=88350.0 
@@ -566,6 +728,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=91150.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=91850.0 rotation='Y90,Z573.0'
                 lowerWidth=28.076
 place   abtube  copies=1 x=0.0 y=0.0 z=91850.0 
+place   Det22   copies=1 x=0.0 y=0.0 z=92450.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=92550.0 rotation='Y90,Z-26.97'
                 lowerWidth=28.027
 place   abtube  copies=1 x=0.0 y=0.0 z=92550.0 
@@ -584,6 +747,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=95350.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=96050.0 rotation='Y90,Z573.0'
                 lowerWidth=27.804
 place   abtube  copies=1 x=0.0 y=0.0 z=96050.0 
+place   Det23   copies=1 x=0.0 y=0.0 z=96650.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=96750.0 rotation='Y90,Z-26.97'
                 lowerWidth=27.763
 place   abtube  copies=1 x=0.0 y=0.0 z=96750.0 
@@ -602,6 +766,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=99550.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=100250.0 rotation='Y90,Z573.0'
                 lowerWidth=27.572
 place   abtube  copies=1 x=0.0 y=0.0 z=100250.0 
+place   Det24   copies=1 x=0.0 y=0.0 z=100850.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=100950.0 rotation='Y90,Z-26.97'
                 lowerWidth=27.537
 place   abtube  copies=1 x=0.0 y=0.0 z=100950.0 
@@ -620,6 +785,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=103750.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=104450.0 rotation='Y90,Z573.0'
                 lowerWidth=27.375
 place   abtube  copies=1 x=0.0 y=0.0 z=104450.0 
+place   Det25   copies=1 x=0.0 y=0.0 z=105050.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=105150.0 rotation='Y90,Z-26.97'
                 lowerWidth=27.346
 place   abtube  copies=1 x=0.0 y=0.0 z=105150.0 
@@ -638,6 +804,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=107950.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=108650.0 rotation='Y90,Z573.0'
                 lowerWidth=27.209
 place   abtube  copies=1 x=0.0 y=0.0 z=108650.0 
+place   Det26   copies=1 x=0.0 y=0.0 z=109250.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=109350.0 rotation='Y90,Z-26.97'
                 lowerWidth=27.183
 place   abtube  copies=1 x=0.0 y=0.0 z=109350.0 
@@ -656,6 +823,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=112150.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=112850.0 rotation='Y90,Z573.0'
                 lowerWidth=27.068
 place   abtube  copies=1 x=0.0 y=0.0 z=112850.0 
+place   Det27   copies=1 x=0.0 y=0.0 z=113450.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=113550.0 rotation='Y90,Z-26.97'
                 lowerWidth=27.046
 place   abtube  copies=1 x=0.0 y=0.0 z=113550.0 
@@ -674,6 +842,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=116350.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=117050.0 rotation='Y90,Z573.0'
                 lowerWidth=26.949
 place   abtube  copies=1 x=0.0 y=0.0 z=117050.0 
+place   Det28   copies=1 x=0.0 y=0.0 z=117650.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=117750.0 rotation='Y90,Z-26.97'
                 lowerWidth=26.931
 place   abtube  copies=1 x=0.0 y=0.0 z=117750.0 
@@ -692,6 +861,7 @@ place   abtube  copies=1 x=0.0 y=0.0 z=120550.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=121250.0 rotation='Y90,Z573.0'
                 lowerWidth=26.849
 place   abtube  copies=1 x=0.0 y=0.0 z=121250.0 
+place   Det29   copies=1 x=0.0 y=0.0 z=121850.2 
 place   wedge0  copies=1 x=-79.1 y=-155.4 z=121950.0 rotation='Y90,Z-26.97'
                 lowerWidth=26.834
 place   abtube  copies=1 x=0.0 y=0.0 z=121950.0 
@@ -710,770 +880,772 @@ place   abtube  copies=1 x=0.0 y=0.0 z=124750.0
 place   wedge0  copies=1 x=-95.0 y=146.2 z=125450.0 rotation='Y90,Z573.0'
                 lowerWidth=26.766
 place   abtube  copies=1 x=0.0 y=0.0 z=125450.0 
+place   Det30   copies=1 x=0.0 y=0.0 z=126050.2 
 place   abtube  copies=1 x=0.0 y=0.0 z=126150.0 
 place   abtube  copies=1 x=0.0 y=0.0 z=126850.0 
 place   abtube  copies=1 x=0.0 y=0.0 z=127550.0 
 place   abtube  copies=1 x=0.0 y=0.0 z=128250.0 
 place   abtube  copies=1 x=0.0 y=0.0 z=128950.0 
 place   abtube  copies=1 x=0.0 y=0.0 z=129650.0 
+place   Det31   copies=1 x=0.0 y=0.0 z=130250.2 
 place   RFC0    copies=1 x=0.0 y=0.0 z=-425.0 
-                timeOffset=1.7962431-0.77123842
+                timeOffset=2.4672431-0.77123842
 place   RFC0    copies=1 x=0.0 y=0.0 z=-175.0 
-                timeOffset=1.7962431+0.13491993
+                timeOffset=2.4672431+0.13491993
 place   RFC0    copies=1 x=0.0 y=0.0 z=75.0 
-                timeOffset=1.7962431+1.0410783
+                timeOffset=2.4672431+1.0410783
 place   RFC0    copies=1 x=0.0 y=0.0 z=325.0 
-                timeOffset=1.7962431+1.9472366
+                timeOffset=2.4672431+1.9472366
 place   RFC0    copies=1 x=0.0 y=0.0 z=575.0 
-                timeOffset=1.7962431+2.853395
+                timeOffset=2.4672431+2.853395
 place   RFC     copies=1 x=0.0 y=0.0 z=1075.0 
-                timeOffset=1.7501431+4.6712809
+                timeOffset=2.4211431+4.6712809
 place   RFC     copies=1 x=0.0 y=0.0 z=1325.0 
-                timeOffset=1.7501431+5.5805068
+                timeOffset=2.4211431+5.5805068
 place   RFC     copies=1 x=0.0 y=0.0 z=1775.0 
-                timeOffset=1.7501431+7.2180941
+                timeOffset=2.4211431+7.2180941
 place   RFC     copies=1 x=0.0 y=0.0 z=2025.0 
-                timeOffset=1.7501431+8.1284101
+                timeOffset=2.4211431+8.1284101
 place   RFC     copies=1 x=0.0 y=0.0 z=2475.0 
-                timeOffset=1.7501431+9.7679614
+                timeOffset=2.4211431+9.7679614
 place   RFC     copies=1 x=0.0 y=0.0 z=2725.0 
-                timeOffset=1.7501431+10.679369
+                timeOffset=2.4211431+10.679369
 place   RFC     copies=1 x=0.0 y=0.0 z=3175.0 
-                timeOffset=1.7501431+12.320888
+                timeOffset=2.4211431+12.320888
 place   RFC     copies=1 x=0.0 y=0.0 z=3425.0 
-                timeOffset=1.7501431+13.23339
+                timeOffset=2.4211431+13.23339
 place   RFC     copies=1 x=0.0 y=0.0 z=3875.0 
-                timeOffset=1.7501431+14.876879
+                timeOffset=2.4211431+14.876879
 place   RFC     copies=1 x=0.0 y=0.0 z=4125.0 
-                timeOffset=1.7501431+15.790477
+                timeOffset=2.4211431+15.790477
 place   RFC     copies=1 x=0.0 y=0.0 z=4575.0 
-                timeOffset=1.7501431+17.43594
+                timeOffset=2.4211431+17.43594
 place   RFC     copies=1 x=0.0 y=0.0 z=4825.0 
-                timeOffset=1.7501431+18.350636
+                timeOffset=2.4211431+18.350636
 place   RFC     copies=1 x=0.0 y=0.0 z=5275.0 
-                timeOffset=1.7501431+19.998077
+                timeOffset=2.4211431+19.998077
 place   RFC     copies=1 x=0.0 y=0.0 z=5525.0 
-                timeOffset=1.7501431+20.913873
+                timeOffset=2.4211431+20.913873
 place   RFC     copies=1 x=0.0 y=0.0 z=5975.0 
-                timeOffset=1.7501431+22.563296
+                timeOffset=2.4211431+22.563296
 place   RFC     copies=1 x=0.0 y=0.0 z=6225.0 
-                timeOffset=1.7501431+23.480193
+                timeOffset=2.4211431+23.480193
 place   RFC     copies=1 x=0.0 y=0.0 z=6675.0 
-                timeOffset=1.8270431+25.132058
+                timeOffset=2.4980431+25.132058
 place   RFC     copies=1 x=0.0 y=0.0 z=6925.0 
-                timeOffset=1.8270431+26.049908
+                timeOffset=2.4980431+26.049908
 place   RFC     copies=1 x=0.0 y=0.0 z=7375.0 
-                timeOffset=1.8270431+27.702303
+                timeOffset=2.4980431+27.702303
 place   RFC     copies=1 x=0.0 y=0.0 z=7625.0 
-                timeOffset=1.8270431+28.620446
+                timeOffset=2.4980431+28.620446
 place   RFC     copies=1 x=0.0 y=0.0 z=8075.0 
-                timeOffset=1.8270431+30.273366
+                timeOffset=2.4980431+30.273366
 place   RFC     copies=1 x=0.0 y=0.0 z=8325.0 
-                timeOffset=1.8270431+31.191799
+                timeOffset=2.4980431+31.191799
 place   RFC     copies=1 x=0.0 y=0.0 z=8775.0 
-                timeOffset=1.8270431+32.845237
+                timeOffset=2.4980431+32.845237
 place   RFC     copies=1 x=0.0 y=0.0 z=9025.0 
-                timeOffset=1.8270431+33.763957
+                timeOffset=2.4980431+33.763957
 place   RFC     copies=1 x=0.0 y=0.0 z=9475.0 
-                timeOffset=1.8270431+35.417908
+                timeOffset=2.4980431+35.417908
 place   RFC     copies=1 x=0.0 y=0.0 z=9725.0 
-                timeOffset=1.8270431+36.33691
+                timeOffset=2.4980431+36.33691
 place   RFC     copies=1 x=0.0 y=0.0 z=10175.0 
-                timeOffset=1.8270431+37.991367
+                timeOffset=2.4980431+37.991367
 place   RFC     copies=1 x=0.0 y=0.0 z=10425.0 
-                timeOffset=1.8270431+38.910649
+                timeOffset=2.4980431+38.910649
 place   RFC     copies=1 x=0.0 y=0.0 z=10875.0 
-                timeOffset=1.8270431+40.565607
+                timeOffset=2.4980431+40.565607
 place   RFC     copies=1 x=0.0 y=0.0 z=11125.0 
-                timeOffset=1.8270431+41.485166
+                timeOffset=2.4980431+41.485166
 place   RFC     copies=1 x=0.0 y=0.0 z=11575.0 
-                timeOffset=1.8270431+43.140618
+                timeOffset=2.4980431+43.140618
 place   RFC     copies=1 x=0.0 y=0.0 z=11825.0 
-                timeOffset=1.8270431+44.06045
+                timeOffset=2.4980431+44.06045
 place   RFC     copies=1 x=0.0 y=0.0 z=12275.0 
-                timeOffset=1.8270431+45.716392
+                timeOffset=2.4980431+45.716392
 place   RFC     copies=1 x=0.0 y=0.0 z=12525.0 
-                timeOffset=1.8270431+46.636494
+                timeOffset=2.4980431+46.636494
 place   RFC     copies=1 x=0.0 y=0.0 z=12975.0 
-                timeOffset=1.8270431+48.292919
+                timeOffset=2.4980431+48.292919
 place   RFC     copies=1 x=0.0 y=0.0 z=13225.0 
-                timeOffset=1.8270431+49.213288
+                timeOffset=2.4980431+49.213288
 place   RFC     copies=1 x=0.0 y=0.0 z=13675.0 
-                timeOffset=1.8270431+50.870191
+                timeOffset=2.4980431+50.870191
 place   RFC     copies=1 x=0.0 y=0.0 z=13925.0 
-                timeOffset=1.8270431+51.790824
+                timeOffset=2.4980431+51.790824
 place   RFC     copies=1 x=0.0 y=0.0 z=14375.0 
-                timeOffset=1.8270431+53.448199
+                timeOffset=2.4980431+53.448199
 place   RFC     copies=1 x=0.0 y=0.0 z=14625.0 
-                timeOffset=1.8270431+54.369092
+                timeOffset=2.4980431+54.369092
 place   RFC     copies=1 x=0.0 y=0.0 z=15075.0 
-                timeOffset=1.8270431+56.026934
+                timeOffset=2.4980431+56.026934
 place   RFC     copies=1 x=0.0 y=0.0 z=15325.0 
-                timeOffset=1.8270431+56.948086
+                timeOffset=2.4980431+56.948086
 place   RFC     copies=1 x=0.0 y=0.0 z=15775.0 
-                timeOffset=1.8270431+58.606389
+                timeOffset=2.4980431+58.606389
 place   RFC     copies=1 x=0.0 y=0.0 z=16025.0 
-                timeOffset=1.8270431+59.527795
+                timeOffset=2.4980431+59.527795
 place   RFC     copies=1 x=0.0 y=0.0 z=16475.0 
-                timeOffset=1.8270431+61.186555
+                timeOffset=2.4980431+61.186555
 place   RFC     copies=1 x=0.0 y=0.0 z=16725.0 
-                timeOffset=1.8270431+62.108213
+                timeOffset=2.4980431+62.108213
 place   RFC     copies=1 x=0.0 y=0.0 z=17175.0 
-                timeOffset=1.8270431+63.767423
+                timeOffset=2.4980431+63.767423
 place   RFC     copies=1 x=0.0 y=0.0 z=17425.0 
-                timeOffset=1.8270431+64.689331
+                timeOffset=2.4980431+64.689331
 place   RFC     copies=1 x=0.0 y=0.0 z=17875.0 
-                timeOffset=1.8270431+66.348986
+                timeOffset=2.4980431+66.348986
 place   RFC     copies=1 x=0.0 y=0.0 z=18125.0 
-                timeOffset=1.8270431+67.27114
+                timeOffset=2.4980431+67.27114
 place   RFC     copies=1 x=0.0 y=0.0 z=18575.0 
-                timeOffset=1.8270431+68.931236
+                timeOffset=2.4980431+68.931236
 place   RFC     copies=1 x=0.0 y=0.0 z=18825.0 
-                timeOffset=1.8270431+69.853633
+                timeOffset=2.4980431+69.853633
 place   RFC     copies=1 x=0.0 y=0.0 z=19275.0 
-                timeOffset=1.8270431+71.514164
+                timeOffset=2.4980431+71.514164
 place   RFC     copies=1 x=0.0 y=0.0 z=19525.0 
-                timeOffset=1.8270431+72.436802
+                timeOffset=2.4980431+72.436802
 place   RFC     copies=1 x=0.0 y=0.0 z=19975.0 
-                timeOffset=1.8270431+74.097764
+                timeOffset=2.4980431+74.097764
 place   RFC     copies=1 x=0.0 y=0.0 z=20225.0 
-                timeOffset=1.8270431+75.020639
+                timeOffset=2.4980431+75.020639
 place   RFC     copies=1 x=0.0 y=0.0 z=20675.0 
-                timeOffset=1.8270431+76.682026
+                timeOffset=2.4980431+76.682026
 place   RFC     copies=1 x=0.0 y=0.0 z=20925.0 
-                timeOffset=1.8270431+77.605136
+                timeOffset=2.4980431+77.605136
 place   RFC     copies=1 x=0.0 y=0.0 z=21375.0 
-                timeOffset=1.8270431+79.266944
+                timeOffset=2.4980431+79.266944
 place   RFC     copies=1 x=0.0 y=0.0 z=21625.0 
-                timeOffset=1.8270431+80.190286
+                timeOffset=2.4980431+80.190286
 place   RFC     copies=1 x=0.0 y=0.0 z=22075.0 
-                timeOffset=1.8270431+81.85251
+                timeOffset=2.4980431+81.85251
 place   RFC     copies=1 x=0.0 y=0.0 z=22325.0 
-                timeOffset=1.8270431+82.776082
+                timeOffset=2.4980431+82.776082
 place   RFC     copies=1 x=0.0 y=0.0 z=22775.0 
-                timeOffset=1.8270431+84.438717
+                timeOffset=2.4980431+84.438717
 place   RFC     copies=1 x=0.0 y=0.0 z=23025.0 
-                timeOffset=1.8270431+85.362516
+                timeOffset=2.4980431+85.362516
 place   RFC     copies=1 x=0.0 y=0.0 z=23475.0 
-                timeOffset=1.8270431+87.025556
+                timeOffset=2.4980431+87.025556
 place   RFC     copies=1 x=0.0 y=0.0 z=23725.0 
-                timeOffset=1.8270431+87.94958
+                timeOffset=2.4980431+87.94958
 place   RFC     copies=1 x=0.0 y=0.0 z=24175.0 
-                timeOffset=1.8270431+89.613022
+                timeOffset=2.4980431+89.613022
 place   RFC     copies=1 x=0.0 y=0.0 z=24425.0 
-                timeOffset=1.8270431+90.537267
+                timeOffset=2.4980431+90.537267
 place   RFC     copies=1 x=0.0 y=0.0 z=24875.0 
-                timeOffset=1.8270431+92.201106
+                timeOffset=2.4980431+92.201106
 place   RFC     copies=1 x=0.0 y=0.0 z=25125.0 
-                timeOffset=1.8270431+93.12557
+                timeOffset=2.4980431+93.12557
 place   RFC     copies=1 x=0.0 y=0.0 z=25575.0 
-                timeOffset=1.8270431+94.789802
+                timeOffset=2.4980431+94.789802
 place   RFC     copies=1 x=0.0 y=0.0 z=25825.0 
-                timeOffset=1.8270431+95.714483
+                timeOffset=2.4980431+95.714483
 place   RFC     copies=1 x=0.0 y=0.0 z=26275.0 
-                timeOffset=1.8270431+97.379102
+                timeOffset=2.4980431+97.379102
 place   RFC     copies=1 x=0.0 y=0.0 z=26525.0 
-                timeOffset=1.8270431+98.303998
+                timeOffset=2.4980431+98.303998
 place   RFC     copies=1 x=0.0 y=0.0 z=26975.0 
-                timeOffset=1.8270431+99.969
+                timeOffset=2.4980431+99.969
 place   RFC     copies=1 x=0.0 y=0.0 z=27225.0 
-                timeOffset=1.8270431+100.89411
+                timeOffset=2.4980431+100.89411
 place   RFC     copies=1 x=0.0 y=0.0 z=27675.0 
-                timeOffset=1.8270431+102.55949
+                timeOffset=2.4980431+102.55949
 place   RFC     copies=1 x=0.0 y=0.0 z=27925.0 
-                timeOffset=1.8270431+103.48481
+                timeOffset=2.4980431+103.48481
 place   RFC     copies=1 x=0.0 y=0.0 z=28375.0 
-                timeOffset=1.8270431+105.15056
+                timeOffset=2.4980431+105.15056
 place   RFC     copies=1 x=0.0 y=0.0 z=28625.0 
-                timeOffset=1.8270431+106.07609
+                timeOffset=2.4980431+106.07609
 place   RFC     copies=1 x=0.0 y=0.0 z=29075.0 
-                timeOffset=1.8270431+107.74221
+                timeOffset=2.4980431+107.74221
 place   RFC     copies=1 x=0.0 y=0.0 z=29325.0 
-                timeOffset=1.8270431+108.66794
+                timeOffset=2.4980431+108.66794
 place   RFC     copies=1 x=0.0 y=0.0 z=29775.0 
-                timeOffset=1.8270431+110.33443
+                timeOffset=2.4980431+110.33443
 place   RFC     copies=1 x=0.0 y=0.0 z=30025.0 
-                timeOffset=1.8270431+111.26036
+                timeOffset=2.4980431+111.26036
 place   RFC     copies=1 x=0.0 y=0.0 z=30475.0 
-                timeOffset=1.8270431+112.92722
+                timeOffset=2.4980431+112.92722
 place   RFC     copies=1 x=0.0 y=0.0 z=30725.0 
-                timeOffset=1.8270431+113.85335
+                timeOffset=2.4980431+113.85335
 place   RFC     copies=1 x=0.0 y=0.0 z=31175.0 
-                timeOffset=1.8270431+115.52056
+                timeOffset=2.4980431+115.52056
 place   RFC     copies=1 x=0.0 y=0.0 z=31425.0 
-                timeOffset=1.8270431+116.44689
+                timeOffset=2.4980431+116.44689
 place   RFC     copies=1 x=0.0 y=0.0 z=31875.0 
-                timeOffset=1.8270431+118.11445
+                timeOffset=2.4980431+118.11445
 place   RFC     copies=1 x=0.0 y=0.0 z=32125.0 
-                timeOffset=1.8270431+119.04098
+                timeOffset=2.4980431+119.04098
 place   RFC     copies=1 x=0.0 y=0.0 z=32575.0 
-                timeOffset=1.8270431+120.70889
+                timeOffset=2.4980431+120.70889
 place   RFC     copies=1 x=0.0 y=0.0 z=32825.0 
-                timeOffset=1.8270431+121.63561
+                timeOffset=2.4980431+121.63561
 place   RFC     copies=1 x=0.0 y=0.0 z=33275.0 
-                timeOffset=1.8270431+123.30387
+                timeOffset=2.4980431+123.30387
 place   RFC     copies=1 x=0.0 y=0.0 z=33525.0 
-                timeOffset=1.8270431+124.23077
+                timeOffset=2.4980431+124.23077
 place   RFC     copies=1 x=0.0 y=0.0 z=33975.0 
-                timeOffset=1.8270431+125.89938
+                timeOffset=2.4980431+125.89938
 place   RFC     copies=1 x=0.0 y=0.0 z=34225.0 
-                timeOffset=1.8270431+126.82647
+                timeOffset=2.4980431+126.82647
 place   RFC     copies=1 x=0.0 y=0.0 z=34675.0 
-                timeOffset=1.8270431+128.49541
+                timeOffset=2.4980431+128.49541
 place   RFC     copies=1 x=0.0 y=0.0 z=34925.0 
-                timeOffset=1.8270431+129.42269
+                timeOffset=2.4980431+129.42269
 place   RFC     copies=1 x=0.0 y=0.0 z=35375.0 
-                timeOffset=1.8270431+131.09197
+                timeOffset=2.4980431+131.09197
 place   RFC     copies=1 x=0.0 y=0.0 z=35625.0 
-                timeOffset=1.8270431+132.01943
+                timeOffset=2.4980431+132.01943
 place   RFC     copies=1 x=0.0 y=0.0 z=36075.0 
-                timeOffset=1.8270431+133.68904
+                timeOffset=2.4980431+133.68904
 place   RFC     copies=1 x=0.0 y=0.0 z=36325.0 
-                timeOffset=1.8270431+134.61669
+                timeOffset=2.4980431+134.61669
 place   RFC     copies=1 x=0.0 y=0.0 z=36775.0 
-                timeOffset=1.8270431+136.28662
+                timeOffset=2.4980431+136.28662
 place   RFC     copies=1 x=0.0 y=0.0 z=37025.0 
-                timeOffset=1.8270431+137.21445
+                timeOffset=2.4980431+137.21445
 place   RFC     copies=1 x=0.0 y=0.0 z=37475.0 
-                timeOffset=1.8270431+138.8847
+                timeOffset=2.4980431+138.8847
 place   RFC     copies=1 x=0.0 y=0.0 z=37725.0 
-                timeOffset=1.8270431+139.8127
+                timeOffset=2.4980431+139.8127
 place   RFC     copies=1 x=0.0 y=0.0 z=38175.0 
-                timeOffset=1.8270431+141.48328
+                timeOffset=2.4980431+141.48328
 place   RFC     copies=1 x=0.0 y=0.0 z=38425.0 
-                timeOffset=1.8270431+142.41146
+                timeOffset=2.4980431+142.41146
 place   RFC     copies=1 x=0.0 y=0.0 z=38875.0 
-                timeOffset=1.8270431+144.08234
+                timeOffset=2.4980431+144.08234
 place   RFC     copies=1 x=0.0 y=0.0 z=39125.0 
-                timeOffset=1.8270431+145.0107
+                timeOffset=2.4980431+145.0107
 place   RFC     copies=1 x=0.0 y=0.0 z=39575.0 
-                timeOffset=1.8270431+146.6819
+                timeOffset=2.4980431+146.6819
 place   RFC     copies=1 x=0.0 y=0.0 z=39825.0 
-                timeOffset=1.8270431+147.61043
+                timeOffset=2.4980431+147.61043
 place   RFC     copies=1 x=0.0 y=0.0 z=40275.0 
-                timeOffset=1.8270431+149.28193
+                timeOffset=2.4980431+149.28193
 place   RFC     copies=1 x=0.0 y=0.0 z=40525.0 
-                timeOffset=1.8270431+150.21063
+                timeOffset=2.4980431+150.21063
 place   RFC     copies=1 x=0.0 y=0.0 z=40975.0 
-                timeOffset=1.8270431+151.88244
+                timeOffset=2.4980431+151.88244
 place   RFC     copies=1 x=0.0 y=0.0 z=41225.0 
-                timeOffset=1.8270431+152.81131
+                timeOffset=2.4980431+152.81131
 place   RFC     copies=1 x=0.0 y=0.0 z=41675.0 
-                timeOffset=1.8270431+154.48342
+                timeOffset=2.4980431+154.48342
 place   RFC     copies=1 x=0.0 y=0.0 z=41925.0 
-                timeOffset=1.8270431+155.41245
+                timeOffset=2.4980431+155.41245
 place   RFC1    copies=1 x=0.0 y=0.0 z=42375.0 
-                timeOffset=1.8270431+157.08608
+                timeOffset=2.4980431+157.08608
 place   RFC1    copies=1 x=0.0 y=0.0 z=42625.0 
-                timeOffset=1.8270431+158.01528
+                timeOffset=2.4980431+158.01528
 place   RFC1    copies=1 x=0.0 y=0.0 z=43075.0 
-                timeOffset=1.8270431+159.68798
+                timeOffset=2.4980431+159.68798
 place   RFC1    copies=1 x=0.0 y=0.0 z=43325.0 
-                timeOffset=1.8270431+160.61734
+                timeOffset=2.4980431+160.61734
 place   RFC1    copies=1 x=0.0 y=0.0 z=43775.0 
-                timeOffset=1.8270431+162.29033
+                timeOffset=2.4980431+162.29033
 place   RFC1    copies=1 x=0.0 y=0.0 z=44025.0 
-                timeOffset=1.8270431+163.21985
+                timeOffset=2.4980431+163.21985
 place   RFC1    copies=1 x=0.0 y=0.0 z=44475.0 
-                timeOffset=1.8270431+164.89313
+                timeOffset=2.4980431+164.89313
 place   RFC1    copies=1 x=0.0 y=0.0 z=44725.0 
-                timeOffset=1.8270431+165.82281
+                timeOffset=2.4980431+165.82281
 place   RFC1    copies=1 x=0.0 y=0.0 z=45175.0 
-                timeOffset=1.8270431+167.49637
+                timeOffset=2.4980431+167.49637
 place   RFC1    copies=1 x=0.0 y=0.0 z=45425.0 
-                timeOffset=1.8270431+168.42621
+                timeOffset=2.4980431+168.42621
 place   RFC1    copies=1 x=0.0 y=0.0 z=45875.0 
-                timeOffset=1.8270431+170.10005
+                timeOffset=2.4980431+170.10005
 place   RFC1    copies=1 x=0.0 y=0.0 z=46125.0 
-                timeOffset=1.8270431+171.03004
+                timeOffset=2.4980431+171.03004
 place   RFC1    copies=1 x=0.0 y=0.0 z=46575.0 
-                timeOffset=1.8270431+172.70416
+                timeOffset=2.4980431+172.70416
 place   RFC1    copies=1 x=0.0 y=0.0 z=46825.0 
-                timeOffset=1.8270431+173.6343
+                timeOffset=2.4980431+173.6343
 place   RFC1    copies=1 x=0.0 y=0.0 z=47275.0 
-                timeOffset=1.8270431+175.3087
+                timeOffset=2.4980431+175.3087
 place   RFC1    copies=1 x=0.0 y=0.0 z=47525.0 
-                timeOffset=1.8270431+176.23899
+                timeOffset=2.4980431+176.23899
 place   RFC1    copies=1 x=0.0 y=0.0 z=47975.0 
-                timeOffset=1.8270431+177.91366
+                timeOffset=2.4980431+177.91366
 place   RFC1    copies=1 x=0.0 y=0.0 z=48225.0 
-                timeOffset=1.8270431+178.8441
+                timeOffset=2.4980431+178.8441
 place   RFC1    copies=1 x=0.0 y=0.0 z=48675.0 
-                timeOffset=1.8270431+180.51904
+                timeOffset=2.4980431+180.51904
 place   RFC1    copies=1 x=0.0 y=0.0 z=48925.0 
-                timeOffset=1.8270431+181.44963
+                timeOffset=2.4980431+181.44963
 place   RFC1    copies=1 x=0.0 y=0.0 z=49375.0 
-                timeOffset=1.8270431+183.12483
+                timeOffset=2.4980431+183.12483
 place   RFC1    copies=1 x=0.0 y=0.0 z=49625.0 
-                timeOffset=1.8270431+184.05557
+                timeOffset=2.4980431+184.05557
 place   RFC1    copies=1 x=0.0 y=0.0 z=50075.0 
-                timeOffset=1.8270431+185.73103
+                timeOffset=2.4980431+185.73103
 place   RFC1    copies=1 x=0.0 y=0.0 z=50325.0 
-                timeOffset=1.8270431+186.66191
+                timeOffset=2.4980431+186.66191
 place   RFC1    copies=1 x=0.0 y=0.0 z=50775.0 
-                timeOffset=1.8270431+188.33763
+                timeOffset=2.4980431+188.33763
 place   RFC1    copies=1 x=0.0 y=0.0 z=51025.0 
-                timeOffset=1.8270431+189.26866
+                timeOffset=2.4980431+189.26866
 place   RFC1    copies=1 x=0.0 y=0.0 z=51475.0 
-                timeOffset=1.8270431+190.94463
+                timeOffset=2.4980431+190.94463
 place   RFC1    copies=1 x=0.0 y=0.0 z=51725.0 
-                timeOffset=1.8270431+191.8758
+                timeOffset=2.4980431+191.8758
 place   RFC1    copies=1 x=0.0 y=0.0 z=52175.0 
-                timeOffset=1.8270431+193.55203
+                timeOffset=2.4980431+193.55203
 place   RFC1    copies=1 x=0.0 y=0.0 z=52425.0 
-                timeOffset=1.8270431+194.48333
+                timeOffset=2.4980431+194.48333
 place   RFC1    copies=1 x=0.0 y=0.0 z=52875.0 
-                timeOffset=1.8270431+196.15981
+                timeOffset=2.4980431+196.15981
 place   RFC1    copies=1 x=0.0 y=0.0 z=53125.0 
-                timeOffset=1.8270431+197.09126
+                timeOffset=2.4980431+197.09126
 place   RFC1    copies=1 x=0.0 y=0.0 z=53575.0 
-                timeOffset=1.8270431+198.76798
+                timeOffset=2.4980431+198.76798
 place   RFC1    copies=1 x=0.0 y=0.0 z=53825.0 
-                timeOffset=1.8270431+199.69956
+                timeOffset=2.4980431+199.69956
 place   RFC1    copies=1 x=0.0 y=0.0 z=54275.0 
-                timeOffset=1.8270431+201.37653
+                timeOffset=2.4980431+201.37653
 place   RFC1    copies=1 x=0.0 y=0.0 z=54525.0 
-                timeOffset=1.8270431+202.30825
+                timeOffset=2.4980431+202.30825
 place   RFC1    copies=1 x=0.0 y=0.0 z=54975.0 
-                timeOffset=1.8270431+203.98546
+                timeOffset=2.4980431+203.98546
 place   RFC1    copies=1 x=0.0 y=0.0 z=55225.0 
-                timeOffset=1.8270431+204.91731
+                timeOffset=2.4980431+204.91731
 place   RFC1    copies=1 x=0.0 y=0.0 z=55675.0 
-                timeOffset=1.8270431+206.59476
+                timeOffset=2.4980431+206.59476
 place   RFC1    copies=1 x=0.0 y=0.0 z=55925.0 
-                timeOffset=1.8270431+207.52674
+                timeOffset=2.4980431+207.52674
 place   RFC1    copies=1 x=0.0 y=0.0 z=56375.0 
-                timeOffset=1.8270431+209.20442
+                timeOffset=2.4980431+209.20442
 place   RFC1    copies=1 x=0.0 y=0.0 z=56625.0 
-                timeOffset=1.8270431+210.13653
+                timeOffset=2.4980431+210.13653
 place   RFC1    copies=1 x=0.0 y=0.0 z=57075.0 
-                timeOffset=1.8270431+211.81445
+                timeOffset=2.4980431+211.81445
 place   RFC1    copies=1 x=0.0 y=0.0 z=57325.0 
-                timeOffset=1.8270431+212.74669
+                timeOffset=2.4980431+212.74669
 place   RFC1    copies=1 x=0.0 y=0.0 z=57775.0 
-                timeOffset=1.8270431+214.42484
+                timeOffset=2.4980431+214.42484
 place   RFC1    copies=1 x=0.0 y=0.0 z=58025.0 
-                timeOffset=1.8270431+215.35721
+                timeOffset=2.4980431+215.35721
 place   RFC1    copies=1 x=0.0 y=0.0 z=58475.0 
-                timeOffset=1.8270431+217.03558
+                timeOffset=2.4980431+217.03558
 place   RFC1    copies=1 x=0.0 y=0.0 z=58725.0 
-                timeOffset=1.8270431+217.96807
+                timeOffset=2.4980431+217.96807
 place   RFC1    copies=1 x=0.0 y=0.0 z=59175.0 
-                timeOffset=1.8270431+219.64667
+                timeOffset=2.4980431+219.64667
 place   RFC1    copies=1 x=0.0 y=0.0 z=59425.0 
-                timeOffset=1.8270431+220.57929
+                timeOffset=2.4980431+220.57929
 place   RFC1    copies=1 x=0.0 y=0.0 z=59875.0 
-                timeOffset=1.8270431+222.25811
+                timeOffset=2.4980431+222.25811
 place   RFC1    copies=1 x=0.0 y=0.0 z=60125.0 
-                timeOffset=1.8270431+223.19086
+                timeOffset=2.4980431+223.19086
 place   RFC1    copies=1 x=0.0 y=0.0 z=60575.0 
-                timeOffset=1.8270431+224.8699
+                timeOffset=2.4980431+224.8699
 place   RFC1    copies=1 x=0.0 y=0.0 z=60825.0 
-                timeOffset=1.8270431+225.80276
+                timeOffset=2.4980431+225.80276
 place   RFC1    copies=1 x=0.0 y=0.0 z=61275.0 
-                timeOffset=1.8270431+227.48202
+                timeOffset=2.4980431+227.48202
 place   RFC1    copies=1 x=0.0 y=0.0 z=61525.0 
-                timeOffset=1.8270431+228.415
+                timeOffset=2.4980431+228.415
 place   RFC1    copies=1 x=0.0 y=0.0 z=61975.0 
-                timeOffset=1.8270431+230.09448
+                timeOffset=2.4980431+230.09448
 place   RFC1    copies=1 x=0.0 y=0.0 z=62225.0 
-                timeOffset=1.8270431+231.02758
+                timeOffset=2.4980431+231.02758
 place   RFC1    copies=1 x=0.0 y=0.0 z=62675.0 
-                timeOffset=1.8270431+232.70726
+                timeOffset=2.4980431+232.70726
 place   RFC1    copies=1 x=0.0 y=0.0 z=62925.0 
-                timeOffset=1.8270431+233.64048
+                timeOffset=2.4980431+233.64048
 place   RFC1    copies=1 x=0.0 y=0.0 z=63375.0 
-                timeOffset=1.8270431+235.32038
+                timeOffset=2.4980431+235.32038
 place   RFC1    copies=1 x=0.0 y=0.0 z=63625.0 
-                timeOffset=1.8270431+236.25371
+                timeOffset=2.4980431+236.25371
 place   RFC1    copies=1 x=0.0 y=0.0 z=64075.0 
-                timeOffset=1.8270431+237.93382
+                timeOffset=2.4980431+237.93382
 place   RFC1    copies=1 x=0.0 y=0.0 z=64325.0 
-                timeOffset=1.8270431+238.86727
+                timeOffset=2.4980431+238.86727
 place   RFC1    copies=1 x=0.0 y=0.0 z=64775.0 
-                timeOffset=1.8270431+240.54757
+                timeOffset=2.4980431+240.54757
 place   RFC1    copies=1 x=0.0 y=0.0 z=65025.0 
-                timeOffset=1.8270431+241.48114
+                timeOffset=2.4980431+241.48114
 place   RFC1    copies=1 x=0.0 y=0.0 z=65475.0 
-                timeOffset=1.8270431+243.16165
+                timeOffset=2.4980431+243.16165
 place   RFC1    copies=1 x=0.0 y=0.0 z=65725.0 
-                timeOffset=1.8270431+244.09532
+                timeOffset=2.4980431+244.09532
 place   RFC1    copies=1 x=0.0 y=0.0 z=66175.0 
-                timeOffset=1.8270431+245.77603
+                timeOffset=2.4980431+245.77603
 place   RFC1    copies=1 x=0.0 y=0.0 z=66425.0 
-                timeOffset=1.8270431+246.70982
+                timeOffset=2.4980431+246.70982
 place   RFC1    copies=1 x=0.0 y=0.0 z=66875.0 
-                timeOffset=1.8270431+248.39073
+                timeOffset=2.4980431+248.39073
 place   RFC1    copies=1 x=0.0 y=0.0 z=67125.0 
-                timeOffset=1.8270431+249.32462
+                timeOffset=2.4980431+249.32462
 place   RFC1    copies=1 x=0.0 y=0.0 z=67575.0 
-                timeOffset=1.8270431+251.00573
+                timeOffset=2.4980431+251.00573
 place   RFC1    copies=1 x=0.0 y=0.0 z=67825.0 
-                timeOffset=1.8270431+251.93973
+                timeOffset=2.4980431+251.93973
 place   RFC1    copies=1 x=0.0 y=0.0 z=68275.0 
-                timeOffset=1.8270431+253.62103
+                timeOffset=2.4980431+253.62103
 place   RFC1    copies=1 x=0.0 y=0.0 z=68525.0 
-                timeOffset=1.8270431+254.55514
+                timeOffset=2.4980431+254.55514
 place   RFC1    copies=1 x=0.0 y=0.0 z=68975.0 
-                timeOffset=1.8270431+256.23663
+                timeOffset=2.4980431+256.23663
 place   RFC1    copies=1 x=0.0 y=0.0 z=69225.0 
-                timeOffset=1.8270431+257.17084
+                timeOffset=2.4980431+257.17084
 place   RFC1    copies=1 x=0.0 y=0.0 z=69675.0 
-                timeOffset=1.8270431+258.85252
+                timeOffset=2.4980431+258.85252
 place   RFC1    copies=1 x=0.0 y=0.0 z=69925.0 
-                timeOffset=1.8270431+259.78684
+                timeOffset=2.4980431+259.78684
 place   RFC1    copies=1 x=0.0 y=0.0 z=70375.0 
-                timeOffset=1.8270431+261.46871
+                timeOffset=2.4980431+261.46871
 place   RFC1    copies=1 x=0.0 y=0.0 z=70625.0 
-                timeOffset=1.8270431+262.40313
+                timeOffset=2.4980431+262.40313
 place   RFC1    copies=1 x=0.0 y=0.0 z=71075.0 
-                timeOffset=1.8270431+264.08518
+                timeOffset=2.4980431+264.08518
 place   RFC1    copies=1 x=0.0 y=0.0 z=71325.0 
-                timeOffset=1.8270431+265.0197
+                timeOffset=2.4980431+265.0197
 place   RFC1    copies=1 x=0.0 y=0.0 z=71775.0 
-                timeOffset=1.8270431+266.70194
+                timeOffset=2.4980431+266.70194
 place   RFC1    copies=1 x=0.0 y=0.0 z=72025.0 
-                timeOffset=1.8270431+267.63656
+                timeOffset=2.4980431+267.63656
 place   RFC1    copies=1 x=0.0 y=0.0 z=72475.0 
-                timeOffset=1.8270431+269.31898
+                timeOffset=2.4980431+269.31898
 place   RFC1    copies=1 x=0.0 y=0.0 z=72725.0 
-                timeOffset=1.8270431+270.2537
+                timeOffset=2.4980431+270.2537
 place   RFC1    copies=1 x=0.0 y=0.0 z=73175.0 
-                timeOffset=1.8270431+271.93629
+                timeOffset=2.4980431+271.93629
 place   RFC1    copies=1 x=0.0 y=0.0 z=73425.0 
-                timeOffset=1.8270431+272.87111
+                timeOffset=2.4980431+272.87111
 place   RFC1    copies=1 x=0.0 y=0.0 z=73875.0 
-                timeOffset=1.8270431+274.55388
+                timeOffset=2.4980431+274.55388
 place   RFC1    copies=1 x=0.0 y=0.0 z=74125.0 
-                timeOffset=1.8270431+275.4888
+                timeOffset=2.4980431+275.4888
 place   RFC1    copies=1 x=0.0 y=0.0 z=74575.0 
-                timeOffset=1.8270431+277.17175
+                timeOffset=2.4980431+277.17175
 place   RFC1    copies=1 x=0.0 y=0.0 z=74825.0 
-                timeOffset=1.8270431+278.10676
+                timeOffset=2.4980431+278.10676
 place   RFC1    copies=1 x=0.0 y=0.0 z=75275.0 
-                timeOffset=1.8270431+279.78988
+                timeOffset=2.4980431+279.78988
 place   RFC1    copies=1 x=0.0 y=0.0 z=75525.0 
-                timeOffset=1.8270431+280.72499
+                timeOffset=2.4980431+280.72499
 place   RFC1    copies=1 x=0.0 y=0.0 z=75975.0 
-                timeOffset=1.8270431+282.40827
+                timeOffset=2.4980431+282.40827
 place   RFC1    copies=1 x=0.0 y=0.0 z=76225.0 
-                timeOffset=1.8270431+283.34348
+                timeOffset=2.4980431+283.34348
 place   RFC1    copies=1 x=0.0 y=0.0 z=76675.0 
-                timeOffset=1.8270431+285.02693
+                timeOffset=2.4980431+285.02693
 place   RFC1    copies=1 x=0.0 y=0.0 z=76925.0 
-                timeOffset=1.8270431+285.96223
+                timeOffset=2.4980431+285.96223
 place   RFC1    copies=1 x=0.0 y=0.0 z=77375.0 
-                timeOffset=1.8270431+287.64585
+                timeOffset=2.4980431+287.64585
 place   RFC1    copies=1 x=0.0 y=0.0 z=77625.0 
-                timeOffset=1.8270431+288.58124
+                timeOffset=2.4980431+288.58124
 place   RFC1    copies=1 x=0.0 y=0.0 z=78075.0 
-                timeOffset=1.8270431+290.26502
+                timeOffset=2.4980431+290.26502
 place   RFC1    copies=1 x=0.0 y=0.0 z=78325.0 
-                timeOffset=1.8270431+291.2005
+                timeOffset=2.4980431+291.2005
 place   RFC1    copies=1 x=0.0 y=0.0 z=78775.0 
-                timeOffset=1.8270431+292.88445
+                timeOffset=2.4980431+292.88445
 place   RFC1    copies=1 x=0.0 y=0.0 z=79025.0 
-                timeOffset=1.8270431+293.82002
+                timeOffset=2.4980431+293.82002
 place   RFC1    copies=1 x=0.0 y=0.0 z=79475.0 
-                timeOffset=1.8270431+295.50412
+                timeOffset=2.4980431+295.50412
 place   RFC1    copies=1 x=0.0 y=0.0 z=79725.0 
-                timeOffset=1.8270431+296.43978
+                timeOffset=2.4980431+296.43978
 place   RFC1    copies=1 x=0.0 y=0.0 z=80175.0 
-                timeOffset=1.8270431+298.12405
+                timeOffset=2.4980431+298.12405
 place   RFC1    copies=1 x=0.0 y=0.0 z=80425.0 
-                timeOffset=1.8270431+299.05979
+                timeOffset=2.4980431+299.05979
 place   RFC1    copies=1 x=0.0 y=0.0 z=80875.0 
-                timeOffset=1.8270431+300.74421
+                timeOffset=2.4980431+300.74421
 place   RFC1    copies=1 x=0.0 y=0.0 z=81125.0 
-                timeOffset=1.8270431+301.68005
+                timeOffset=2.4980431+301.68005
 place   RFC1    copies=1 x=0.0 y=0.0 z=81575.0 
-                timeOffset=1.8270431+303.36462
+                timeOffset=2.4980431+303.36462
 place   RFC1    copies=1 x=0.0 y=0.0 z=81825.0 
-                timeOffset=1.8270431+304.30054
+                timeOffset=2.4980431+304.30054
 place   RFC1    copies=1 x=0.0 y=0.0 z=82275.0 
-                timeOffset=1.8270431+305.98527
+                timeOffset=2.4980431+305.98527
 place   RFC1    copies=1 x=0.0 y=0.0 z=82525.0 
-                timeOffset=1.8270431+306.92127
+                timeOffset=2.4980431+306.92127
 place   RFC1    copies=1 x=0.0 y=0.0 z=82975.0 
-                timeOffset=1.8270431+308.60616
+                timeOffset=2.4980431+308.60616
 place   RFC1    copies=1 x=0.0 y=0.0 z=83225.0 
-                timeOffset=1.8270431+309.54224
+                timeOffset=2.4980431+309.54224
 place   RFC1    copies=1 x=0.0 y=0.0 z=83675.0 
-                timeOffset=1.8270431+311.22727
+                timeOffset=2.4980431+311.22727
 place   RFC1    copies=1 x=0.0 y=0.0 z=83925.0 
-                timeOffset=1.8270431+312.16344
+                timeOffset=2.4980431+312.16344
 place   RFC2    copies=1 x=0.0 y=0.0 z=84375.0 
-                timeOffset=1.8270431+313.85048
+                timeOffset=2.4980431+313.85048
 place   RFC2    copies=1 x=0.0 y=0.0 z=84625.0 
-                timeOffset=1.8270431+314.78673
+                timeOffset=2.4980431+314.78673
 place   RFC2    copies=1 x=0.0 y=0.0 z=85075.0 
-                timeOffset=1.8270431+316.47206
+                timeOffset=2.4980431+316.47206
 place   RFC2    copies=1 x=0.0 y=0.0 z=85325.0 
-                timeOffset=1.8270431+317.40839
+                timeOffset=2.4980431+317.40839
 place   RFC2    copies=1 x=0.0 y=0.0 z=85775.0 
-                timeOffset=1.8270431+319.09386
+                timeOffset=2.4980431+319.09386
 place   RFC2    copies=1 x=0.0 y=0.0 z=86025.0 
-                timeOffset=1.8270431+320.03027
+                timeOffset=2.4980431+320.03027
 place   RFC2    copies=1 x=0.0 y=0.0 z=86475.0 
-                timeOffset=1.8270431+321.71588
+                timeOffset=2.4980431+321.71588
 place   RFC2    copies=1 x=0.0 y=0.0 z=86725.0 
-                timeOffset=1.8270431+322.65237
+                timeOffset=2.4980431+322.65237
 place   RFC2    copies=1 x=0.0 y=0.0 z=87175.0 
-                timeOffset=1.8270431+324.33813
+                timeOffset=2.4980431+324.33813
 place   RFC2    copies=1 x=0.0 y=0.0 z=87425.0 
-                timeOffset=1.8270431+325.27469
+                timeOffset=2.4980431+325.27469
 place   RFC2    copies=1 x=0.0 y=0.0 z=87875.0 
-                timeOffset=1.8270431+326.96059
+                timeOffset=2.4980431+326.96059
 place   RFC2    copies=1 x=0.0 y=0.0 z=88125.0 
-                timeOffset=1.8270431+327.89723
+                timeOffset=2.4980431+327.89723
 place   RFC2    copies=1 x=0.0 y=0.0 z=88575.0 
-                timeOffset=1.8270431+329.58326
+                timeOffset=2.4980431+329.58326
 place   RFC2    copies=1 x=0.0 y=0.0 z=88825.0 
-                timeOffset=1.8270431+330.51998
+                timeOffset=2.4980431+330.51998
 place   RFC2    copies=1 x=0.0 y=0.0 z=89275.0 
-                timeOffset=1.8270431+332.20615
+                timeOffset=2.4980431+332.20615
 place   RFC2    copies=1 x=0.0 y=0.0 z=89525.0 
-                timeOffset=1.8270431+333.14295
+                timeOffset=2.4980431+333.14295
 place   RFC2    copies=1 x=0.0 y=0.0 z=89975.0 
-                timeOffset=1.8270431+334.82925
+                timeOffset=2.4980431+334.82925
 place   RFC2    copies=1 x=0.0 y=0.0 z=90225.0 
-                timeOffset=1.8270431+335.76612
+                timeOffset=2.4980431+335.76612
 place   RFC2    copies=1 x=0.0 y=0.0 z=90675.0 
-                timeOffset=1.8270431+337.45255
+                timeOffset=2.4980431+337.45255
 place   RFC2    copies=1 x=0.0 y=0.0 z=90925.0 
-                timeOffset=1.8270431+338.3895
+                timeOffset=2.4980431+338.3895
 place   RFC2    copies=1 x=0.0 y=0.0 z=91375.0 
-                timeOffset=1.8270431+340.07606
+                timeOffset=2.4980431+340.07606
 place   RFC2    copies=1 x=0.0 y=0.0 z=91625.0 
-                timeOffset=1.8270431+341.01308
+                timeOffset=2.4980431+341.01308
 place   RFC2    copies=1 x=0.0 y=0.0 z=92075.0 
-                timeOffset=1.8270431+342.69978
+                timeOffset=2.4980431+342.69978
 place   RFC2    copies=1 x=0.0 y=0.0 z=92325.0 
-                timeOffset=1.8270431+343.63686
+                timeOffset=2.4980431+343.63686
 place   RFC2    copies=1 x=0.0 y=0.0 z=92775.0 
-                timeOffset=1.8270431+345.32369
+                timeOffset=2.4980431+345.32369
 place   RFC2    copies=1 x=0.0 y=0.0 z=93025.0 
-                timeOffset=1.8270431+346.26085
+                timeOffset=2.4980431+346.26085
 place   RFC2    copies=1 x=0.0 y=0.0 z=93475.0 
-                timeOffset=1.8270431+347.9478
+                timeOffset=2.4980431+347.9478
 place   RFC2    copies=1 x=0.0 y=0.0 z=93725.0 
-                timeOffset=1.8270431+348.88503
+                timeOffset=2.4980431+348.88503
 place   RFC2    copies=1 x=0.0 y=0.0 z=94175.0 
-                timeOffset=1.8270431+350.57211
+                timeOffset=2.4980431+350.57211
 place   RFC2    copies=1 x=0.0 y=0.0 z=94425.0 
-                timeOffset=1.8270431+351.50941
+                timeOffset=2.4980431+351.50941
 place   RFC2    copies=1 x=0.0 y=0.0 z=94875.0 
-                timeOffset=1.8270431+353.19661
+                timeOffset=2.4980431+353.19661
 place   RFC2    copies=1 x=0.0 y=0.0 z=95125.0 
-                timeOffset=1.8270431+354.13397
+                timeOffset=2.4980431+354.13397
 place   RFC2    copies=1 x=0.0 y=0.0 z=95575.0 
-                timeOffset=1.8270431+355.8213
+                timeOffset=2.4980431+355.8213
 place   RFC2    copies=1 x=0.0 y=0.0 z=95825.0 
-                timeOffset=1.8270431+356.75873
+                timeOffset=2.4980431+356.75873
 place   RFC2    copies=1 x=0.0 y=0.0 z=96275.0 
-                timeOffset=1.8270431+358.44618
+                timeOffset=2.4980431+358.44618
 place   RFC2    copies=1 x=0.0 y=0.0 z=96525.0 
-                timeOffset=1.8270431+359.38368
+                timeOffset=2.4980431+359.38368
 place   RFC2    copies=1 x=0.0 y=0.0 z=96975.0 
-                timeOffset=1.8270431+361.07124
+                timeOffset=2.4980431+361.07124
 place   RFC2    copies=1 x=0.0 y=0.0 z=97225.0 
-                timeOffset=1.8270431+362.00881
+                timeOffset=2.4980431+362.00881
 place   RFC2    copies=1 x=0.0 y=0.0 z=97675.0 
-                timeOffset=1.8270431+363.69649
+                timeOffset=2.4980431+363.69649
 place   RFC2    copies=1 x=0.0 y=0.0 z=97925.0 
-                timeOffset=1.8270431+364.63413
+                timeOffset=2.4980431+364.63413
 place   RFC2    copies=1 x=0.0 y=0.0 z=98375.0 
-                timeOffset=1.8270431+366.32193
+                timeOffset=2.4980431+366.32193
 place   RFC2    copies=1 x=0.0 y=0.0 z=98625.0 
-                timeOffset=1.8270431+367.25962
+                timeOffset=2.4980431+367.25962
 place   RFC2    copies=1 x=0.0 y=0.0 z=99075.0 
-                timeOffset=1.8270431+368.94754
+                timeOffset=2.4980431+368.94754
 place   RFC2    copies=1 x=0.0 y=0.0 z=99325.0 
-                timeOffset=1.8270431+369.8853
+                timeOffset=2.4980431+369.8853
 place   RFC2    copies=1 x=0.0 y=0.0 z=99775.0 
-                timeOffset=1.8270431+371.57333
+                timeOffset=2.4980431+371.57333
 place   RFC2    copies=1 x=0.0 y=0.0 z=100025.0 
-                timeOffset=1.8270431+372.51115
+                timeOffset=2.4980431+372.51115
 place   RFC2    copies=1 x=0.0 y=0.0 z=100475.0 
-                timeOffset=1.8270431+374.1993
+                timeOffset=2.4980431+374.1993
 place   RFC2    copies=1 x=0.0 y=0.0 z=100725.0 
-                timeOffset=1.8270431+375.13718
+                timeOffset=2.4980431+375.13718
 place   RFC2    copies=1 x=0.0 y=0.0 z=101175.0 
-                timeOffset=1.8270431+376.82544
+                timeOffset=2.4980431+376.82544
 place   RFC2    copies=1 x=0.0 y=0.0 z=101425.0 
-                timeOffset=1.8270431+377.76339
+                timeOffset=2.4980431+377.76339
 place   RFC2    copies=1 x=0.0 y=0.0 z=101875.0 
-                timeOffset=1.8270431+379.45175
+                timeOffset=2.4980431+379.45175
 place   RFC2    copies=1 x=0.0 y=0.0 z=102125.0 
-                timeOffset=1.8270431+380.38976
+                timeOffset=2.4980431+380.38976
 place   RFC2    copies=1 x=0.0 y=0.0 z=102575.0 
-                timeOffset=1.8270431+382.07823
+                timeOffset=2.4980431+382.07823
 place   RFC2    copies=1 x=0.0 y=0.0 z=102825.0 
-                timeOffset=1.8270431+383.0163
+                timeOffset=2.4980431+383.0163
 place   RFC2    copies=1 x=0.0 y=0.0 z=103275.0 
-                timeOffset=1.8270431+384.70488
+                timeOffset=2.4980431+384.70488
 place   RFC2    copies=1 x=0.0 y=0.0 z=103525.0 
-                timeOffset=1.8270431+385.64301
+                timeOffset=2.4980431+385.64301
 place   RFC2    copies=1 x=0.0 y=0.0 z=103975.0 
-                timeOffset=1.8270431+387.3317
+                timeOffset=2.4980431+387.3317
 place   RFC2    copies=1 x=0.0 y=0.0 z=104225.0 
-                timeOffset=1.8270431+388.26989
+                timeOffset=2.4980431+388.26989
 place   RFC2    copies=1 x=0.0 y=0.0 z=104675.0 
-                timeOffset=1.8270431+389.95868
+                timeOffset=2.4980431+389.95868
 place   RFC2    copies=1 x=0.0 y=0.0 z=104925.0 
-                timeOffset=1.8270431+390.89693
+                timeOffset=2.4980431+390.89693
 place   RFC2    copies=1 x=0.0 y=0.0 z=105375.0 
-                timeOffset=1.8270431+392.58582
+                timeOffset=2.4980431+392.58582
 place   RFC2    copies=1 x=0.0 y=0.0 z=105625.0 
-                timeOffset=1.8270431+393.52413
+                timeOffset=2.4980431+393.52413
 place   RFC2    copies=1 x=0.0 y=0.0 z=106075.0 
-                timeOffset=1.8270431+395.21312
+                timeOffset=2.4980431+395.21312
 place   RFC2    copies=1 x=0.0 y=0.0 z=106325.0 
-                timeOffset=1.8270431+396.15148
+                timeOffset=2.4980431+396.15148
 place   RFC2    copies=1 x=0.0 y=0.0 z=106775.0 
-                timeOffset=1.8270431+397.84058
+                timeOffset=2.4980431+397.84058
 place   RFC2    copies=1 x=0.0 y=0.0 z=107025.0 
-                timeOffset=1.8270431+398.779
+                timeOffset=2.4980431+398.779
 place   RFC2    copies=1 x=0.0 y=0.0 z=107475.0 
-                timeOffset=1.8270431+400.4682
+                timeOffset=2.4980431+400.4682
 place   RFC2    copies=1 x=0.0 y=0.0 z=107725.0 
-                timeOffset=1.8270431+401.40667
+                timeOffset=2.4980431+401.40667
 place   RFC2    copies=1 x=0.0 y=0.0 z=108175.0 
-                timeOffset=1.8270431+403.09597
+                timeOffset=2.4980431+403.09597
 place   RFC2    copies=1 x=0.0 y=0.0 z=108425.0 
-                timeOffset=1.8270431+404.0345
+                timeOffset=2.4980431+404.0345
 place   RFC2    copies=1 x=0.0 y=0.0 z=108875.0 
-                timeOffset=1.8270431+405.7239
+                timeOffset=2.4980431+405.7239
 place   RFC2    copies=1 x=0.0 y=0.0 z=109125.0 
-                timeOffset=1.8270431+406.66248
+                timeOffset=2.4980431+406.66248
 place   RFC2    copies=1 x=0.0 y=0.0 z=109575.0 
-                timeOffset=1.8270431+408.35197
+                timeOffset=2.4980431+408.35197
 place   RFC2    copies=1 x=0.0 y=0.0 z=109825.0 
-                timeOffset=1.8270431+409.29061
+                timeOffset=2.4980431+409.29061
 place   RFC2    copies=1 x=0.0 y=0.0 z=110275.0 
-                timeOffset=1.8270431+410.9802
+                timeOffset=2.4980431+410.9802
 place   RFC2    copies=1 x=0.0 y=0.0 z=110525.0 
-                timeOffset=1.8270431+411.91889
+                timeOffset=2.4980431+411.91889
 place   RFC2    copies=1 x=0.0 y=0.0 z=110975.0 
-                timeOffset=1.8270431+413.60857
+                timeOffset=2.4980431+413.60857
 place   RFC2    copies=1 x=0.0 y=0.0 z=111225.0 
-                timeOffset=1.8270431+414.54731
+                timeOffset=2.4980431+414.54731
 place   RFC2    copies=1 x=0.0 y=0.0 z=111675.0 
-                timeOffset=1.8270431+416.23709
+                timeOffset=2.4980431+416.23709
 place   RFC2    copies=1 x=0.0 y=0.0 z=111925.0 
-                timeOffset=1.8270431+417.17588
+                timeOffset=2.4980431+417.17588
 place   RFC2    copies=1 x=0.0 y=0.0 z=112375.0 
-                timeOffset=1.8270431+418.86575
+                timeOffset=2.4980431+418.86575
 place   RFC2    copies=1 x=0.0 y=0.0 z=112625.0 
-                timeOffset=1.8270431+419.80459
+                timeOffset=2.4980431+419.80459
 place   RFC2    copies=1 x=0.0 y=0.0 z=113075.0 
-                timeOffset=1.8270431+421.49456
+                timeOffset=2.4980431+421.49456
 place   RFC2    copies=1 x=0.0 y=0.0 z=113325.0 
-                timeOffset=1.8270431+422.43345
+                timeOffset=2.4980431+422.43345
 place   RFC2    copies=1 x=0.0 y=0.0 z=113775.0 
-                timeOffset=1.8270431+424.1235
+                timeOffset=2.4980431+424.1235
 place   RFC2    copies=1 x=0.0 y=0.0 z=114025.0 
-                timeOffset=1.8270431+425.06244
+                timeOffset=2.4980431+425.06244
 place   RFC2    copies=1 x=0.0 y=0.0 z=114475.0 
-                timeOffset=1.8270431+426.75259
+                timeOffset=2.4980431+426.75259
 place   RFC2    copies=1 x=0.0 y=0.0 z=114725.0 
-                timeOffset=1.8270431+427.69158
+                timeOffset=2.4980431+427.69158
 place   RFC2    copies=1 x=0.0 y=0.0 z=115175.0 
-                timeOffset=1.8270431+429.38181
+                timeOffset=2.4980431+429.38181
 place   RFC2    copies=1 x=0.0 y=0.0 z=115425.0 
-                timeOffset=1.8270431+430.32085
+                timeOffset=2.4980431+430.32085
 place   RFC2    copies=1 x=0.0 y=0.0 z=115875.0 
-                timeOffset=1.8270431+432.01116
+                timeOffset=2.4980431+432.01116
 place   RFC2    copies=1 x=0.0 y=0.0 z=116125.0 
-                timeOffset=1.8270431+432.95025
+                timeOffset=2.4980431+432.95025
 place   RFC2    copies=1 x=0.0 y=0.0 z=116575.0 
-                timeOffset=1.8270431+434.64066
+                timeOffset=2.4980431+434.64066
 place   RFC2    copies=1 x=0.0 y=0.0 z=116825.0 
-                timeOffset=1.8270431+435.57979
+                timeOffset=2.4980431+435.57979
 place   RFC2    copies=1 x=0.0 y=0.0 z=117275.0 
-                timeOffset=1.8270431+437.27028
+                timeOffset=2.4980431+437.27028
 place   RFC2    copies=1 x=0.0 y=0.0 z=117525.0 
-                timeOffset=1.8270431+438.20946
+                timeOffset=2.4980431+438.20946
 place   RFC2    copies=1 x=0.0 y=0.0 z=117975.0 
-                timeOffset=1.8270431+439.90004
+                timeOffset=2.4980431+439.90004
 place   RFC2    copies=1 x=0.0 y=0.0 z=118225.0 
-                timeOffset=1.8270431+440.83927
+                timeOffset=2.4980431+440.83927
 place   RFC2    copies=1 x=0.0 y=0.0 z=118675.0 
-                timeOffset=1.8270431+442.52992
+                timeOffset=2.4980431+442.52992
 place   RFC2    copies=1 x=0.0 y=0.0 z=118925.0 
-                timeOffset=1.8270431+443.4692
+                timeOffset=2.4980431+443.4692
 place   RFC2    copies=1 x=0.0 y=0.0 z=119375.0 
-                timeOffset=1.8270431+445.15993
+                timeOffset=2.4980431+445.15993
 place   RFC2    copies=1 x=0.0 y=0.0 z=119625.0 
-                timeOffset=1.8270431+446.09926
+                timeOffset=2.4980431+446.09926
 place   RFC2    copies=1 x=0.0 y=0.0 z=120075.0 
-                timeOffset=1.8270431+447.79007
+                timeOffset=2.4980431+447.79007
 place   RFC2    copies=1 x=0.0 y=0.0 z=120325.0 
-                timeOffset=1.8270431+448.72944
+                timeOffset=2.4980431+448.72944
 place   RFC2    copies=1 x=0.0 y=0.0 z=120775.0 
-                timeOffset=1.8270431+450.42034
+                timeOffset=2.4980431+450.42034
 place   RFC2    copies=1 x=0.0 y=0.0 z=121025.0 
-                timeOffset=1.8270431+451.35975
+                timeOffset=2.4980431+451.35975
 place   RFC2    copies=1 x=0.0 y=0.0 z=121475.0 
-                timeOffset=1.8270431+453.05073
+                timeOffset=2.4980431+453.05073
 place   RFC2    copies=1 x=0.0 y=0.0 z=121725.0 
-                timeOffset=1.8270431+453.99018
+                timeOffset=2.4980431+453.99018
 place   RFC2    copies=1 x=0.0 y=0.0 z=122175.0 
-                timeOffset=1.8270431+455.68124
+                timeOffset=2.4980431+455.68124
 place   RFC2    copies=1 x=0.0 y=0.0 z=122425.0 
-                timeOffset=1.8270431+456.62073
+                timeOffset=2.4980431+456.62073
 place   RFC2    copies=1 x=0.0 y=0.0 z=122875.0 
-                timeOffset=1.8270431+458.31187
+                timeOffset=2.4980431+458.31187
 place   RFC2    copies=1 x=0.0 y=0.0 z=123125.0 
-                timeOffset=1.8270431+459.25141
+                timeOffset=2.4980431+459.25141
 place   RFC2    copies=1 x=0.0 y=0.0 z=123575.0 
-                timeOffset=1.8270431+460.94262
+                timeOffset=2.4980431+460.94262
 place   RFC2    copies=1 x=0.0 y=0.0 z=123825.0 
-                timeOffset=1.8270431+461.8822
+                timeOffset=2.4980431+461.8822
 place   RFC2    copies=1 x=0.0 y=0.0 z=124275.0 
-                timeOffset=1.8270431+463.57349
+                timeOffset=2.4980431+463.57349
 place   RFC2    copies=1 x=0.0 y=0.0 z=124525.0 
-                timeOffset=1.8270431+464.51311
+                timeOffset=2.4980431+464.51311
 place   RFC2    copies=1 x=0.0 y=0.0 z=124975.0 
-                timeOffset=1.8270431+466.20447
+                timeOffset=2.4980431+466.20447
 place   RFC2    copies=1 x=0.0 y=0.0 z=125225.0 
-                timeOffset=1.8270431+467.14414
+                timeOffset=2.4980431+467.14414
 place   RFC2    copies=1 x=0.0 y=0.0 z=125675.0 
-                timeOffset=1.8270431+468.83557
+                timeOffset=2.4980431+468.83557
 place   RFC2    copies=1 x=0.0 y=0.0 z=125925.0 
-                timeOffset=1.8270431+469.77528
+                timeOffset=2.4980431+469.77528
 place   RFC2    copies=1 x=0.0 y=0.0 z=126375.0 
-                timeOffset=1.8190431+471.47549
+                timeOffset=2.4900431+471.47549
 place   RFC2    copies=1 x=0.0 y=0.0 z=126625.0 
-                timeOffset=1.8190431+472.41522
+                timeOffset=2.4900431+472.41522
 place   RFC2    copies=1 x=0.0 y=0.0 z=127075.0 
-                timeOffset=1.8190431+474.10672
+                timeOffset=2.4900431+474.10672
 place   RFC2    copies=1 x=0.0 y=0.0 z=127325.0 
-                timeOffset=1.8190431+475.04645
+                timeOffset=2.4900431+475.04645
 place   RFC2    copies=1 x=0.0 y=0.0 z=127775.0 
-                timeOffset=1.8190431+476.73795
+                timeOffset=2.4900431+476.73795
 place   RFC2    copies=1 x=0.0 y=0.0 z=128025.0 
-                timeOffset=1.8190431+477.67768
+                timeOffset=2.4900431+477.67768
 place   RFC2    copies=1 x=0.0 y=0.0 z=128475.0 
-                timeOffset=1.8190431+479.36919
+                timeOffset=2.4900431+479.36919
 place   RFC2    copies=1 x=0.0 y=0.0 z=128725.0 
-                timeOffset=1.8190431+480.30891
+                timeOffset=2.4900431+480.30891
 place   RFC2    copies=1 x=0.0 y=0.0 z=129175.0 
-                timeOffset=1.8190431+482.00042
+                timeOffset=2.4900431+482.00042
 place   RFC2    copies=1 x=0.0 y=0.0 z=129425.0 
-                timeOffset=1.8190431+482.94015
+                timeOffset=2.4900431+482.94015
 place   RFC2    copies=1 x=0.0 y=0.0 z=129875.0 
-                timeOffset=1.8190431+484.63165
+                timeOffset=2.4900431+484.63165
 place   RFC2    copies=1 x=0.0 y=0.0 z=130125.0 
-                timeOffset=1.8190431+485.57138
+                timeOffset=2.4900431+485.57138
 place   RFC2    copies=1 x=0.0 y=0.0 z=130575.0 
-                timeOffset=1.8190431+487.26288
+                timeOffset=2.4900431+487.26288
 place   RFC2    copies=1 x=0.0 y=0.0 z=130825.0 
-                timeOffset=1.8190431+488.20261
+                timeOffset=2.4900431+488.20261
 place   RFC2    copies=1 x=0.0 y=0.0 z=131275.0 
-                timeOffset=1.8190431+489.89412
+                timeOffset=2.4900431+489.89412
 place   RFC2    copies=1 x=0.0 y=0.0 z=131525.0 
-                timeOffset=1.8190431+490.83384
+                timeOffset=2.4900431+490.83384
 place   RotSol  copies=1 x=0.0 y=0.0 z=-3000.0 
 place   SolPos  copies=1 x=0.0 y=0.0 z=500.0 
                 current=48.54258
@@ -1845,6 +2017,7 @@ place   SolNeg  copies=1 x=0.0 y=0.0 z=130000.0
 place   SolPos  copies=1 x=0.0 y=0.0 z=130700.0 
                 current=44.47526
 place   RotSol  copies=1 x=0.0 y=0.0 z=134250.0 
+place   DetLast copies=1 x=0.0 y=0.0 z=131750.0 
 place   terminus copies=1 x=0.0 y=0.0 z=-1000.0 
 place   terminus copies=1 x=0.0 y=0.0 z=131752.0 
 
@@ -1856,7 +2029,7 @@ PARAMETERS:
           Grad0=20
             Zcl=131752
       beamstart=-700
-       beamtime=-0.671
+       beamtime=3.0769231e-09
            cur0=94.6094
            cur1=48.54258
            cur2=-79.09169
@@ -1881,6 +2054,7 @@ deltaIntersection=0.1
     histoUpdate=0
         maxStep=10.0
         minStep=0.01
+         nTrace=0
              np=31
          period=4200
              pi=3.1415926
@@ -1915,13 +2089,13 @@ deltaIntersection=0.1
           roll9=-96.958445
  steppingFormat=N GLOBAL CL KE STEP VOL PROCESS
 steppingVerbose=0
-         toffs0=1.7962431
-         toffs1=1.7501431
-         toffs2=1.8270431
-         toffs3=1.8270431
-         toffs4=1.8270431
-         toffs5=1.8190431
-         toffs6=1.8190431
+         toffs0=2.4672431
+         toffs1=2.4211431
+         toffs2=2.4980431
+         toffs3=2.4980431
+         toffs4=2.4980431
+         toffs5=2.4900431
+         toffs6=2.4900431
          viewer=none
  wallClockLimit=-1
   worldMaterial=GH2
@@ -1946,6 +2120,8 @@ BLCMDtubs::Construct abtube parent= relZ=2950.0 globZ=2950.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=3650.0 globZ=3650.0
 	zmin=3570.0 zmax=3730.0 kill=1
+Checking overlaps for volume Det1:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det1 parent= relZ=4250.2 globZ=4250.2
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=4350.0 globZ=4350.0
 	zmin=4270.0 zmax=4430.0 kill=1
@@ -1973,6 +2149,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=7850.0 globZ=7850.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=7850.0 globZ=7850.0
 	zmin=7770.0 zmax=7930.0 kill=1
+Checking overlaps for volume Det2:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det2 parent= relZ=8450.2 globZ=8450.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=8550.0 globZ=8550.0
 	zmin=8200.0 zmax=8900.0 kill=0
@@ -2009,6 +2187,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=12050.0 globZ=12050.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=12050.0 globZ=12050.0
 	zmin=11970.0 zmax=12130.0 kill=1
+Checking overlaps for volume Det3:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det3 parent= relZ=12650.2 globZ=12650.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=12750.0 globZ=12750.0
 	zmin=12400.0 zmax=13100.0 kill=0
@@ -2045,6 +2225,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=16250.0 globZ=16250.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=16250.0 globZ=16250.0
 	zmin=16170.0 zmax=16330.0 kill=1
+Checking overlaps for volume Det4:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det4 parent= relZ=16850.2 globZ=16850.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=16950.0 globZ=16950.0
 	zmin=16600.0 zmax=17300.0 kill=0
@@ -2081,6 +2263,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=20450.0 globZ=20450.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=20450.0 globZ=20450.0
 	zmin=20370.0 zmax=20530.0 kill=1
+Checking overlaps for volume Det5:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det5 parent= relZ=21050.2 globZ=21050.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=21150.0 globZ=21150.0
 	zmin=20800.0 zmax=21500.0 kill=0
@@ -2117,6 +2301,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=24650.0 globZ=24650.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=24650.0 globZ=24650.0
 	zmin=24570.0 zmax=24730.0 kill=1
+Checking overlaps for volume Det6:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det6 parent= relZ=25250.2 globZ=25250.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=25350.0 globZ=25350.0
 	zmin=25000.0 zmax=25700.0 kill=0
@@ -2153,6 +2339,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=28850.0 globZ=28850.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=28850.0 globZ=28850.0
 	zmin=28770.0 zmax=28930.0 kill=1
+Checking overlaps for volume Det7:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det7 parent= relZ=29450.2 globZ=29450.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=29550.0 globZ=29550.0
 	zmin=29200.0 zmax=29900.0 kill=0
@@ -2189,6 +2377,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=33050.0 globZ=33050.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=33050.0 globZ=33050.0
 	zmin=32970.0 zmax=33130.0 kill=1
+Checking overlaps for volume Det8:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det8 parent= relZ=33650.2 globZ=33650.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=33750.0 globZ=33750.0
 	zmin=33400.0 zmax=34100.0 kill=0
@@ -2225,6 +2415,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=37250.0 globZ=37250.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=37250.0 globZ=37250.0
 	zmin=37170.0 zmax=37330.0 kill=1
+Checking overlaps for volume Det9:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det9 parent= relZ=37850.2 globZ=37850.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=37950.0 globZ=37950.0
 	zmin=37600.0 zmax=38300.0 kill=0
@@ -2261,6 +2453,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=41450.0 globZ=41450.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=41450.0 globZ=41450.0
 	zmin=41370.0 zmax=41530.0 kill=1
+Checking overlaps for volume Det10:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det10 parent= relZ=42050.2 globZ=42050.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=42150.0 globZ=42150.0
 	zmin=41800.0 zmax=42500.0 kill=0
@@ -2297,6 +2491,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=45650.0 globZ=45650.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=45650.0 globZ=45650.0
 	zmin=45570.0 zmax=45730.0 kill=1
+Checking overlaps for volume Det11:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det11 parent= relZ=46250.2 globZ=46250.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=46350.0 globZ=46350.0
 	zmin=46000.0 zmax=46700.0 kill=0
@@ -2333,6 +2529,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=49850.0 globZ=49850.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=49850.0 globZ=49850.0
 	zmin=49770.0 zmax=49930.0 kill=1
+Checking overlaps for volume Det12:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det12 parent= relZ=50450.2 globZ=50450.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=50550.0 globZ=50550.0
 	zmin=50200.0 zmax=50900.0 kill=0
@@ -2369,6 +2567,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=54050.0 globZ=54050.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=54050.0 globZ=54050.0
 	zmin=53970.0 zmax=54130.0 kill=1
+Checking overlaps for volume Det13:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det13 parent= relZ=54650.2 globZ=54650.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=54750.0 globZ=54750.0
 	zmin=54400.0 zmax=55100.0 kill=0
@@ -2405,6 +2605,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=58250.0 globZ=58250.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=58250.0 globZ=58250.0
 	zmin=58170.0 zmax=58330.0 kill=1
+Checking overlaps for volume Det14:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det14 parent= relZ=58850.2 globZ=58850.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=58950.0 globZ=58950.0
 	zmin=58600.0 zmax=59300.0 kill=0
@@ -2441,6 +2643,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=62450.0 globZ=62450.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=62450.0 globZ=62450.0
 	zmin=62370.0 zmax=62530.0 kill=1
+Checking overlaps for volume Det15:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det15 parent= relZ=63050.2 globZ=63050.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=63150.0 globZ=63150.0
 	zmin=62800.0 zmax=63500.0 kill=0
@@ -2477,6 +2681,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=66650.0 globZ=66650.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=66650.0 globZ=66650.0
 	zmin=66570.0 zmax=66730.0 kill=1
+Checking overlaps for volume Det16:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det16 parent= relZ=67250.2 globZ=67250.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=67350.0 globZ=67350.0
 	zmin=67000.0 zmax=67700.0 kill=0
@@ -2513,6 +2719,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=70850.0 globZ=70850.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=70850.0 globZ=70850.0
 	zmin=70770.0 zmax=70930.0 kill=1
+Checking overlaps for volume Det17:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det17 parent= relZ=71450.2 globZ=71450.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=71550.0 globZ=71550.0
 	zmin=71200.0 zmax=71900.0 kill=0
@@ -2549,6 +2757,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=75050.0 globZ=75050.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=75050.0 globZ=75050.0
 	zmin=74970.0 zmax=75130.0 kill=1
+Checking overlaps for volume Det18:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det18 parent= relZ=75650.2 globZ=75650.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=75750.0 globZ=75750.0
 	zmin=75400.0 zmax=76100.0 kill=0
@@ -2585,6 +2795,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=79250.0 globZ=79250.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=79250.0 globZ=79250.0
 	zmin=79170.0 zmax=79330.0 kill=1
+Checking overlaps for volume Det19:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det19 parent= relZ=79850.2 globZ=79850.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=79950.0 globZ=79950.0
 	zmin=79600.0 zmax=80300.0 kill=0
@@ -2621,6 +2833,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=83450.0 globZ=83450.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=83450.0 globZ=83450.0
 	zmin=83370.0 zmax=83530.0 kill=1
+Checking overlaps for volume Det20:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det20 parent= relZ=84050.2 globZ=84050.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=84150.0 globZ=84150.0
 	zmin=83800.0 zmax=84500.0 kill=0
@@ -2657,6 +2871,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=87650.0 globZ=87650.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=87650.0 globZ=87650.0
 	zmin=87570.0 zmax=87730.0 kill=1
+Checking overlaps for volume Det21:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det21 parent= relZ=88250.2 globZ=88250.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=88350.0 globZ=88350.0
 	zmin=88000.0 zmax=88700.0 kill=0
@@ -2693,6 +2909,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=91850.0 globZ=91850.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=91850.0 globZ=91850.0
 	zmin=91770.0 zmax=91930.0 kill=1
+Checking overlaps for volume Det22:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det22 parent= relZ=92450.2 globZ=92450.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=92550.0 globZ=92550.0
 	zmin=92200.0 zmax=92900.0 kill=0
@@ -2729,6 +2947,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=96050.0 globZ=96050.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=96050.0 globZ=96050.0
 	zmin=95970.0 zmax=96130.0 kill=1
+Checking overlaps for volume Det23:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det23 parent= relZ=96650.2 globZ=96650.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=96750.0 globZ=96750.0
 	zmin=96400.0 zmax=97100.0 kill=0
@@ -2765,6 +2985,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=100250.0 globZ=100250.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=100250.0 globZ=100250.0
 	zmin=100170.0 zmax=100330.0 kill=1
+Checking overlaps for volume Det24:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det24 parent= relZ=100850.2 globZ=100850.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=100950.0 globZ=100950.0
 	zmin=100600.0 zmax=101300.0 kill=0
@@ -2801,6 +3023,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=104450.0 globZ=104450.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=104450.0 globZ=104450.0
 	zmin=104370.0 zmax=104530.0 kill=1
+Checking overlaps for volume Det25:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det25 parent= relZ=105050.2 globZ=105050.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=105150.0 globZ=105150.0
 	zmin=104800.0 zmax=105500.0 kill=0
@@ -2837,6 +3061,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=108650.0 globZ=108650.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=108650.0 globZ=108650.0
 	zmin=108570.0 zmax=108730.0 kill=1
+Checking overlaps for volume Det26:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det26 parent= relZ=109250.2 globZ=109250.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=109350.0 globZ=109350.0
 	zmin=109000.0 zmax=109700.0 kill=0
@@ -2873,6 +3099,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=112850.0 globZ=112850.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=112850.0 globZ=112850.0
 	zmin=112770.0 zmax=112930.0 kill=1
+Checking overlaps for volume Det27:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det27 parent= relZ=113450.2 globZ=113450.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=113550.0 globZ=113550.0
 	zmin=113200.0 zmax=113900.0 kill=0
@@ -2909,6 +3137,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=117050.0 globZ=117050.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=117050.0 globZ=117050.0
 	zmin=116970.0 zmax=117130.0 kill=1
+Checking overlaps for volume Det28:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det28 parent= relZ=117650.2 globZ=117650.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=117750.0 globZ=117750.0
 	zmin=117400.0 zmax=118100.0 kill=0
@@ -2945,6 +3175,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=121250.0 globZ=121250.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=121250.0 globZ=121250.0
 	zmin=121170.0 zmax=121330.0 kill=1
+Checking overlaps for volume Det29:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det29 parent= relZ=121850.2 globZ=121850.2
 Checking overlaps for volume wedge0:0 (G4Trap) ... OK! 
 BLCMDtrap::Construct wedge0 parent= relZ=121950.0 globZ=121950.0
 	zmin=121600.0 zmax=122300.0 kill=0
@@ -2981,6 +3213,8 @@ BLCMDtrap::Construct wedge0 parent= relZ=125450.0 globZ=125450.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=125450.0 globZ=125450.0
 	zmin=125370.0 zmax=125530.0 kill=1
+Checking overlaps for volume Det30:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det30 parent= relZ=126050.2 globZ=126050.2
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=126150.0 globZ=126150.0
 	zmin=126070.0 zmax=126230.0 kill=1
@@ -2999,6 +3233,8 @@ BLCMDtubs::Construct abtube parent= relZ=128950.0 globZ=128950.0
 Checking overlaps for volume abtube:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct abtube parent= relZ=129650.0 globZ=129650.0
 	zmin=129570.0 zmax=129730.0 kill=1
+Checking overlaps for volume Det31:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det31 parent= relZ=130250.2 globZ=130250.2
 Checking overlaps for volume RFC0Pipe:0 (G4Tubs) ... OK! 
 Checking overlaps for volume RFC0UsWall:0 (G4Tubs) ... OK! 
 Checking overlaps for volume RFC0DsWall:0 (G4Tubs) ... OK! 
@@ -7167,7 +7403,9 @@ BLCMDsolenoid::Construct SolNeg parent= relZ=130000.0 globZ=130000.0
 BLCMDsolenoid::Construct SolPos parent= relZ=130700.0 globZ=130700.0
 	global pos=0.0,0.0,130700.0  Checking overlaps for volume RotSol:0 (G4Tubs) ... OK! 
 BLCMDsolenoid::Construct RotSol parent= relZ=134250.0 globZ=134250.0
-	global pos=0.0,0.0,134250.0  Checking overlaps for volume terminus:0 (G4Tubs) ... OK! 
+	global pos=0.0,0.0,134250.0  Checking overlaps for volume DetLast:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct DetLast parent= relZ=131750.0 globZ=131750.0
+Checking overlaps for volume terminus:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct terminus parent= relZ=-1000.0 globZ=-1000.0
 	zmin=-1000.5 zmax=-999.5 kill=1
 Checking overlaps for volume terminus:0 (G4Tubs) ... OK! 
@@ -7179,14 +7417,15 @@ Geometry test nPoints=100 tolerance=0.002 mm:
 Testing geometry for children of group 'World':
 Total geometry errors = 0  1 seconds
 
-================= Prepare Tune Particle(s) ===========
-================= Begin Tune Particle(s) =============
+================== Prepare Tracking Beam ==================
+Stochastic processes are enabled.
+================== Begin Tracking Beam ===============
 **************************************************************************
 *** G4Exception: EM Field Extends Outside World
 ***    severity: Warning
 ***   issued by: BLGlobalField
 *** description: May give inaccurate tracking near world boundary.
-***     EventID: -2     TrackID: 1   mu+  KE=163.9 MeV
+***     EventID: 1     TrackID: 1   mu+  KE=173.3 MeV
 **************************************************************************
 fieldVoxels: nx=6 ny=6 nz=747, 26892 voxels, 568 fields
 fieldVoxels: max field count is 20 fields, # voxels >5: 24624, >10: 23524, >20: 0
@@ -7195,19 +7434,80 @@ fieldVoxels: max field count is 20 fields, # voxels >5: 24624, >10: 23524, >20: 
 ***    severity: Warning
 ***   issued by: BLGlobalField
 *** description: nVoxels = 26892, max fields/voxel = 20
-***     EventID: -2     TrackID: 1   mu+  KE=163.9 MeV
+***     EventID: 1     TrackID: 1   mu+  KE=173.3 MeV
 **************************************************************************
-Run complete  1 Events  0 seconds
-================== Begin Reference Particle(s) ===============
-Run complete  1 Events  0 seconds
-================== Prepare Tracking Beam ==================
-Stochastic processes are enabled.
-================== Begin Tracking Beam ===============
 Event 1 Completed  1 events  realTime=1 sec  1.0 ev/sec
-Run complete  1 Events  0 seconds
-NTuple TuneParticle        5705 entries
-NTuple ReferenceParticle     5705 entries
-NTuple /Users/criggall/Library/Mobile Documents/com~apple~CloudDocs/muon-cooling/trace-sim/trace_output.txt     6838 entries
+Event 2 Completed  2 events  realTime=1 sec  2.0 ev/sec
+Event 3 Completed  3 events  realTime=1 sec  3.0 ev/sec
+Event 7 Completed  4 events  realTime=1 sec  4.0 ev/sec
+Event 8 Completed  5 events  realTime=1 sec  5.0 ev/sec
+Event 10 Completed  6 events  realTime=1 sec  6.0 ev/sec
+Event 12 Completed  7 events  realTime=1 sec  7.0 ev/sec
+Event 14 Completed  8 events  realTime=1 sec  8.0 ev/sec
+Event 15 Completed  9 events  realTime=1 sec  9.0 ev/sec
+Event 17 Completed  10 events  realTime=1 sec  10.0 ev/sec
+Event 46 Completed  20 events  realTime=1 sec  20.0 ev/sec
+Event 71 Completed  30 events  realTime=1 sec  30.0 ev/sec
+Event 82 Completed  40 events  realTime=2 sec  20.0 ev/sec
+Event 96 Completed  50 events  realTime=3 sec  16.7 ev/sec
+Event 110 Completed  60 events  realTime=3 sec  20.0 ev/sec
+Event 127 Completed  70 events  realTime=4 sec  17.5 ev/sec
+Event 145 Completed  80 events  realTime=4 sec  20.0 ev/sec
+Event 158 Completed  90 events  realTime=5 sec  18.0 ev/sec
+Event 175 Completed  100 events  realTime=6 sec  16.7 ev/sec
+Event 346 Completed  200 events  realTime=11 sec  18.2 ev/sec
+Event 509 Completed  300 events  realTime=16 sec  18.8 ev/sec
+Event 691 Completed  400 events  realTime=22 sec  18.2 ev/sec
+Event 861 Completed  500 events  realTime=29 sec  17.2 ev/sec
+Event 1027 Completed  600 events  realTime=33 sec  18.2 ev/sec
+Event 1210 Completed  700 events  realTime=40 sec  17.5 ev/sec
+Event 1396 Completed  800 events  realTime=45 sec  17.8 ev/sec
+Event 1562 Completed  900 events  realTime=51 sec  17.6 ev/sec
+Event 1725 Completed  1000 events  realTime=57 sec  17.5 ev/sec
+Event 3412 Completed  2000 events  realTime=119 sec  16.8 ev/sec
+Event 5113 Completed  3000 events  realTime=181 sec  16.6 ev/sec
+Event 6760 Completed  4000 events  realTime=243 sec  16.5 ev/sec
+Event 8555 Completed  5000 events  realTime=304 sec  16.4 ev/sec
+Event 10266 Completed  6000 events  realTime=363 sec  16.5 ev/sec
+Event 12004 Completed  7000 events  realTime=428 sec  16.4 ev/sec
+Event 13637 Completed  8000 events  realTime=490 sec  16.3 ev/sec
+Event 15375 Completed  9000 events  realTime=552 sec  16.3 ev/sec
+Event 17028 Completed  10000 events  realTime=615 sec  16.3 ev/sec
+Event 18725 Completed  11000 events  realTime=678 sec  16.2 ev/sec
+Event 7459 Completed  12000 events  realTime=738 sec  16.3 ev/sec
+Run complete  12471 Events  762 seconds
+NTuple Det1               12024 entries
+NTuple Det2               11257 entries
+NTuple Det3                9631 entries
+NTuple Det4                7938 entries
+NTuple Det5                6961 entries
+NTuple Det6                6371 entries
+NTuple Det7                6062 entries
+NTuple Det8                5768 entries
+NTuple Det9                5518 entries
+NTuple Det10               5258 entries
+NTuple Det11               4938 entries
+NTuple Det12               4668 entries
+NTuple Det13               4400 entries
+NTuple Det14               4214 entries
+NTuple Det15               4046 entries
+NTuple Det16               3875 entries
+NTuple Det17               3705 entries
+NTuple Det18               3565 entries
+NTuple Det19               3426 entries
+NTuple Det20               3303 entries
+NTuple Det21               3143 entries
+NTuple Det22               3035 entries
+NTuple Det23               2933 entries
+NTuple Det24               2853 entries
+NTuple Det25               2764 entries
+NTuple Det26               2677 entries
+NTuple Det27               2603 entries
+NTuple Det28               2542 entries
+NTuple Det29               2488 entries
+NTuple Det30               2429 entries
+NTuple Det31               2381 entries
+NTuple DetLast             2367 entries
 
 Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 2 Warnings
       1 times: Check number of field voxels

@@ -10,12 +10,11 @@ physics QGSP_BIC
 param zshift=60
 param period=4200 # HFOFO period
 
-#param beamstart=-700 # from the rotator solenoid exit at z=0
-param zoffset=125
-param beamstart=-700+$zoffset # from the rotator solenoid exit at z=0 + additional offset of zoffset
+param beamstart=-700 # from the rotator solenoid exit at z=0
 beam ascii file=initial.dat beamZ=$beamstart
 
-param beamtime=-0.671 # average time of mu+ in initial.dat modulo RF period TRF
+#param beamtime=-0.671 # average time of mu+ in initial.dat modulo RF period TRF
+param beamtime=3.076923076923077e-09 # RF period
 # if there is no mu+ take mu- and add TRF/2
 
 param toffs0=$beamtime-$beamstart/275.89-.07 # time needed to travel from beamZ to 0

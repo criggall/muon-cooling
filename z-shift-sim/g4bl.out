@@ -1,19 +1,11 @@
 G4BL_DIR=/Applications/G4beamline-3.08.app/Contents
 LD_LIBRARY_PATH='/Applications/G4beamline-3.08.app/Contents/lib:'
-G4ABLADATA=/Users/criggall/Geant4Data/G4ABLA3.1
 G4LEDATA=/Users/criggall/Geant4Data/G4EMLOW8.0
 G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
-G4INCLDATA=/Users/criggall/Geant4Data/G4INCL1.0
-G4NEUTRONHPDATA=/Users/criggall/Geant4Data/G4NDL4.6
 G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
-G4PIIDATA=/Users/criggall/Geant4Data/G4PII1.3
 G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
-G4REALSURFACEDATA=/Users/criggall/Geant4Data/RealSurface2.2
-G4SAIDXSDATA=/Users/criggall/Geant4Data/G4SAIDDATA2.0
-G4TENDLDATA=/Users/criggall/Geant4Data/G4TENDL1.4
-G4LENDDATA=/Users/criggall/Geant4Data/LEND_GND1.3_ENDF.BVII.1
-G4beamline Process ID 33242
+G4beamline Process ID 45390
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -51,6 +43,7 @@ physics      QGSP_BIC      disable= inactivate= deactivate= doStochastics=1
                            synchrotronRadiationMuon=0 maxTime=1e+06
 param        zshift        60
 param        period        4200
+param        zoffset       125
 param        beamstart     -575
 beam    ASCII   nEvents=2147483647 firstEvent=-1 lastEvent=2147483647 beamZ=-575.0 maxR=1000000.0 renumber=0 weight=1.000000 
 		filename=initial.dat format=BLTrackFile 
@@ -2109,6 +2102,7 @@ steppingVerbose=0
   worldMaterial=GH2
      zTolerance=2.0
         zlastRF=131650
+        zoffset=125
          zshift=60
 Checking overlaps for volume presswall:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct presswall parent= relZ=850.0 globZ=850.0
@@ -7452,38 +7446,38 @@ Event 8 Completed  5 events  realTime=1 sec  5.0 ev/sec
 Event 10 Completed  6 events  realTime=1 sec  6.0 ev/sec
 Event 12 Completed  7 events  realTime=1 sec  7.0 ev/sec
 Event 14 Completed  8 events  realTime=1 sec  8.0 ev/sec
-Event 15 Completed  9 events  realTime=2 sec  4.5 ev/sec
-Event 17 Completed  10 events  realTime=2 sec  5.0 ev/sec
-Event 46 Completed  20 events  realTime=3 sec  6.7 ev/sec
-Event 71 Completed  30 events  realTime=5 sec  6.0 ev/sec
-Event 82 Completed  40 events  realTime=6 sec  6.7 ev/sec
-Event 96 Completed  50 events  realTime=8 sec  6.2 ev/sec
-Event 110 Completed  60 events  realTime=10 sec  6.0 ev/sec
-Event 127 Completed  70 events  realTime=11 sec  6.4 ev/sec
-Event 145 Completed  80 events  realTime=13 sec  6.2 ev/sec
-Event 158 Completed  90 events  realTime=14 sec  6.4 ev/sec
-Event 175 Completed  100 events  realTime=15 sec  6.7 ev/sec
-Event 346 Completed  200 events  realTime=29 sec  6.9 ev/sec
-Event 509 Completed  300 events  realTime=45 sec  6.7 ev/sec
-Event 691 Completed  400 events  realTime=60 sec  6.7 ev/sec
-Event 861 Completed  500 events  realTime=75 sec  6.7 ev/sec
-Event 1027 Completed  600 events  realTime=89 sec  6.7 ev/sec
-Event 1210 Completed  700 events  realTime=105 sec  6.7 ev/sec
-Event 1396 Completed  800 events  realTime=121 sec  6.6 ev/sec
-Event 1562 Completed  900 events  realTime=136 sec  6.6 ev/sec
-Event 1725 Completed  1000 events  realTime=150 sec  6.7 ev/sec
-Event 3412 Completed  2000 events  realTime=303 sec  6.6 ev/sec
-Event 5113 Completed  3000 events  realTime=448 sec  6.7 ev/sec
-Event 6760 Completed  4000 events  realTime=604 sec  6.6 ev/sec
-Event 8555 Completed  5000 events  realTime=750 sec  6.7 ev/sec
-Event 10266 Completed  6000 events  realTime=906 sec  6.6 ev/sec
-Event 12004 Completed  7000 events  realTime=1061 sec  6.6 ev/sec
-Event 13637 Completed  8000 events  realTime=1213 sec  6.6 ev/sec
-Event 15375 Completed  9000 events  realTime=1364 sec  6.6 ev/sec
-Event 17028 Completed  10000 events  realTime=1516 sec  6.6 ev/sec
-Event 18725 Completed  11000 events  realTime=1666 sec  6.6 ev/sec
-Event 7459 Completed  12000 events  realTime=1804 sec  6.7 ev/sec
-Run complete  12471 Events  1842 seconds
+Event 15 Completed  9 events  realTime=1 sec  9.0 ev/sec
+Event 17 Completed  10 events  realTime=1 sec  10.0 ev/sec
+Event 46 Completed  20 events  realTime=2 sec  10.0 ev/sec
+Event 71 Completed  30 events  realTime=2 sec  15.0 ev/sec
+Event 82 Completed  40 events  realTime=3 sec  13.3 ev/sec
+Event 96 Completed  50 events  realTime=5 sec  10.0 ev/sec
+Event 110 Completed  60 events  realTime=6 sec  10.0 ev/sec
+Event 127 Completed  70 events  realTime=6 sec  11.7 ev/sec
+Event 145 Completed  80 events  realTime=7 sec  11.4 ev/sec
+Event 158 Completed  90 events  realTime=9 sec  10.0 ev/sec
+Event 175 Completed  100 events  realTime=9 sec  11.1 ev/sec
+Event 346 Completed  200 events  realTime=19 sec  10.5 ev/sec
+Event 509 Completed  300 events  realTime=29 sec  10.3 ev/sec
+Event 691 Completed  400 events  realTime=39 sec  10.3 ev/sec
+Event 861 Completed  500 events  realTime=49 sec  10.2 ev/sec
+Event 1027 Completed  600 events  realTime=58 sec  10.3 ev/sec
+Event 1210 Completed  700 events  realTime=69 sec  10.1 ev/sec
+Event 1396 Completed  800 events  realTime=79 sec  10.1 ev/sec
+Event 1562 Completed  900 events  realTime=89 sec  10.1 ev/sec
+Event 1725 Completed  1000 events  realTime=98 sec  10.2 ev/sec
+Event 3412 Completed  2000 events  realTime=200 sec  10.0 ev/sec
+Event 5113 Completed  3000 events  realTime=296 sec  10.1 ev/sec
+Event 6760 Completed  4000 events  realTime=399 sec  10.0 ev/sec
+Event 8555 Completed  5000 events  realTime=495 sec  10.1 ev/sec
+Event 10266 Completed  6000 events  realTime=596 sec  10.1 ev/sec
+Event 12004 Completed  7000 events  realTime=700 sec  10.0 ev/sec
+Event 13637 Completed  8000 events  realTime=800 sec  10.0 ev/sec
+Event 15375 Completed  9000 events  realTime=900 sec  10.0 ev/sec
+Event 17028 Completed  10000 events  realTime=1000 sec  10.0 ev/sec
+Event 18725 Completed  11000 events  realTime=1098 sec  10.0 ev/sec
+Event 7459 Completed  12000 events  realTime=1189 sec  10.1 ev/sec
+Run complete  12471 Events  1217 seconds
 NTuple Det1               12033 entries
 NTuple Det2               11648 entries
 NTuple Det3               11169 entries
