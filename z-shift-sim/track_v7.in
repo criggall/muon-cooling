@@ -11,7 +11,7 @@ param zshift=60
 param period=4200 # HFOFO period
 
 #param beamstart=-700 # from the rotator solenoid exit at z=0
-param zoffset=125
+param zoffset=50
 param beamstart=-700+$zoffset # from the rotator solenoid exit at z=0 + additional offset of zoffset
 beam ascii file=initial.dat beamZ=$beamstart
 

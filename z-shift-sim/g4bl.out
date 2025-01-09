@@ -5,7 +5,7 @@ G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
 G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
 G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
-G4beamline Process ID 45390
+G4beamline Process ID 49205
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -43,19 +43,19 @@ physics      QGSP_BIC      disable= inactivate= deactivate= doStochastics=1
                            synchrotronRadiationMuon=0 maxTime=1e+06
 param        zshift        60
 param        period        4200
-param        zoffset       125
-param        beamstart     -575
-beam    ASCII   nEvents=2147483647 firstEvent=-1 lastEvent=2147483647 beamZ=-575.0 maxR=1000000.0 renumber=0 weight=1.000000 
+param        zoffset       50
+param        beamstart     -650
+beam    ASCII   nEvents=2147483647 firstEvent=-1 lastEvent=2147483647 beamZ=-650.0 maxR=1000000.0 renumber=0 weight=1.000000 
 		filename=initial.dat format=BLTrackFile 
 		
 param        beamtime      -0.671
-param        toffs0        1.343164
-param        toffs1        1.297064
-param        toffs2        1.373964
-param        toffs3        1.373964
-param        toffs4        1.373964
-param        toffs5        1.365964
-param        toffs6        1.365964
+param        toffs0        1.6150115
+param        toffs1        1.5689115
+param        toffs2        1.6458115
+param        toffs3        1.6458115
+param        toffs4        1.6458115
+param        toffs5        1.6378115
+param        toffs6        1.6378115
 trackcuts                  kill= keep=mu+,mu-,pi+,pi- killSecondaries=0
                            kineticEnergyCut=50 kineticEnergyMax=1.798e+308
                            maxTime=1e+06 keepPrimaries=0 steppingVerbose=0
@@ -890,763 +890,763 @@ place   abtube  copies=1 x=0.0 y=0.0 z=128950.0
 place   abtube  copies=1 x=0.0 y=0.0 z=129650.0 
 place   Det31   copies=1 x=0.0 y=0.0 z=130250.2 
 place   RFC0    copies=1 x=0.0 y=0.0 z=-425.0 
-                timeOffset=1.343164-0.77123842
+                timeOffset=1.6150115-0.77123842
 place   RFC0    copies=1 x=0.0 y=0.0 z=-175.0 
-                timeOffset=1.343164+0.13491993
+                timeOffset=1.6150115+0.13491993
 place   RFC0    copies=1 x=0.0 y=0.0 z=75.0 
-                timeOffset=1.343164+1.0410783
+                timeOffset=1.6150115+1.0410783
 place   RFC0    copies=1 x=0.0 y=0.0 z=325.0 
-                timeOffset=1.343164+1.9472366
+                timeOffset=1.6150115+1.9472366
 place   RFC0    copies=1 x=0.0 y=0.0 z=575.0 
-                timeOffset=1.343164+2.853395
+                timeOffset=1.6150115+2.853395
 place   RFC     copies=1 x=0.0 y=0.0 z=1075.0 
-                timeOffset=1.297064+4.6712809
+                timeOffset=1.5689115+4.6712809
 place   RFC     copies=1 x=0.0 y=0.0 z=1325.0 
-                timeOffset=1.297064+5.5805068
+                timeOffset=1.5689115+5.5805068
 place   RFC     copies=1 x=0.0 y=0.0 z=1775.0 
-                timeOffset=1.297064+7.2180941
+                timeOffset=1.5689115+7.2180941
 place   RFC     copies=1 x=0.0 y=0.0 z=2025.0 
-                timeOffset=1.297064+8.1284101
+                timeOffset=1.5689115+8.1284101
 place   RFC     copies=1 x=0.0 y=0.0 z=2475.0 
-                timeOffset=1.297064+9.7679614
+                timeOffset=1.5689115+9.7679614
 place   RFC     copies=1 x=0.0 y=0.0 z=2725.0 
-                timeOffset=1.297064+10.679369
+                timeOffset=1.5689115+10.679369
 place   RFC     copies=1 x=0.0 y=0.0 z=3175.0 
-                timeOffset=1.297064+12.320888
+                timeOffset=1.5689115+12.320888
 place   RFC     copies=1 x=0.0 y=0.0 z=3425.0 
-                timeOffset=1.297064+13.23339
+                timeOffset=1.5689115+13.23339
 place   RFC     copies=1 x=0.0 y=0.0 z=3875.0 
-                timeOffset=1.297064+14.876879
+                timeOffset=1.5689115+14.876879
 place   RFC     copies=1 x=0.0 y=0.0 z=4125.0 
-                timeOffset=1.297064+15.790477
+                timeOffset=1.5689115+15.790477
 place   RFC     copies=1 x=0.0 y=0.0 z=4575.0 
-                timeOffset=1.297064+17.43594
+                timeOffset=1.5689115+17.43594
 place   RFC     copies=1 x=0.0 y=0.0 z=4825.0 
-                timeOffset=1.297064+18.350636
+                timeOffset=1.5689115+18.350636
 place   RFC     copies=1 x=0.0 y=0.0 z=5275.0 
-                timeOffset=1.297064+19.998077
+                timeOffset=1.5689115+19.998077
 place   RFC     copies=1 x=0.0 y=0.0 z=5525.0 
-                timeOffset=1.297064+20.913873
+                timeOffset=1.5689115+20.913873
 place   RFC     copies=1 x=0.0 y=0.0 z=5975.0 
-                timeOffset=1.297064+22.563296
+                timeOffset=1.5689115+22.563296
 place   RFC     copies=1 x=0.0 y=0.0 z=6225.0 
-                timeOffset=1.297064+23.480193
+                timeOffset=1.5689115+23.480193
 place   RFC     copies=1 x=0.0 y=0.0 z=6675.0 
-                timeOffset=1.373964+25.132058
+                timeOffset=1.6458115+25.132058
 place   RFC     copies=1 x=0.0 y=0.0 z=6925.0 
-                timeOffset=1.373964+26.049908
+                timeOffset=1.6458115+26.049908
 place   RFC     copies=1 x=0.0 y=0.0 z=7375.0 
-                timeOffset=1.373964+27.702303
+                timeOffset=1.6458115+27.702303
 place   RFC     copies=1 x=0.0 y=0.0 z=7625.0 
-                timeOffset=1.373964+28.620446
+                timeOffset=1.6458115+28.620446
 place   RFC     copies=1 x=0.0 y=0.0 z=8075.0 
-                timeOffset=1.373964+30.273366
+                timeOffset=1.6458115+30.273366
 place   RFC     copies=1 x=0.0 y=0.0 z=8325.0 
-                timeOffset=1.373964+31.191799
+                timeOffset=1.6458115+31.191799
 place   RFC     copies=1 x=0.0 y=0.0 z=8775.0 
-                timeOffset=1.373964+32.845237
+                timeOffset=1.6458115+32.845237
 place   RFC     copies=1 x=0.0 y=0.0 z=9025.0 
-                timeOffset=1.373964+33.763957
+                timeOffset=1.6458115+33.763957
 place   RFC     copies=1 x=0.0 y=0.0 z=9475.0 
-                timeOffset=1.373964+35.417908
+                timeOffset=1.6458115+35.417908
 place   RFC     copies=1 x=0.0 y=0.0 z=9725.0 
-                timeOffset=1.373964+36.33691
+                timeOffset=1.6458115+36.33691
 place   RFC     copies=1 x=0.0 y=0.0 z=10175.0 
-                timeOffset=1.373964+37.991367
+                timeOffset=1.6458115+37.991367
 place   RFC     copies=1 x=0.0 y=0.0 z=10425.0 
-                timeOffset=1.373964+38.910649
+                timeOffset=1.6458115+38.910649
 place   RFC     copies=1 x=0.0 y=0.0 z=10875.0 
-                timeOffset=1.373964+40.565607
+                timeOffset=1.6458115+40.565607
 place   RFC     copies=1 x=0.0 y=0.0 z=11125.0 
-                timeOffset=1.373964+41.485166
+                timeOffset=1.6458115+41.485166
 place   RFC     copies=1 x=0.0 y=0.0 z=11575.0 
-                timeOffset=1.373964+43.140618
+                timeOffset=1.6458115+43.140618
 place   RFC     copies=1 x=0.0 y=0.0 z=11825.0 
-                timeOffset=1.373964+44.06045
+                timeOffset=1.6458115+44.06045
 place   RFC     copies=1 x=0.0 y=0.0 z=12275.0 
-                timeOffset=1.373964+45.716392
+                timeOffset=1.6458115+45.716392
 place   RFC     copies=1 x=0.0 y=0.0 z=12525.0 
-                timeOffset=1.373964+46.636494
+                timeOffset=1.6458115+46.636494
 place   RFC     copies=1 x=0.0 y=0.0 z=12975.0 
-                timeOffset=1.373964+48.292919
+                timeOffset=1.6458115+48.292919
 place   RFC     copies=1 x=0.0 y=0.0 z=13225.0 
-                timeOffset=1.373964+49.213288
+                timeOffset=1.6458115+49.213288
 place   RFC     copies=1 x=0.0 y=0.0 z=13675.0 
-                timeOffset=1.373964+50.870191
+                timeOffset=1.6458115+50.870191
 place   RFC     copies=1 x=0.0 y=0.0 z=13925.0 
-                timeOffset=1.373964+51.790824
+                timeOffset=1.6458115+51.790824
 place   RFC     copies=1 x=0.0 y=0.0 z=14375.0 
-                timeOffset=1.373964+53.448199
+                timeOffset=1.6458115+53.448199
 place   RFC     copies=1 x=0.0 y=0.0 z=14625.0 
-                timeOffset=1.373964+54.369092
+                timeOffset=1.6458115+54.369092
 place   RFC     copies=1 x=0.0 y=0.0 z=15075.0 
-                timeOffset=1.373964+56.026934
+                timeOffset=1.6458115+56.026934
 place   RFC     copies=1 x=0.0 y=0.0 z=15325.0 
-                timeOffset=1.373964+56.948086
+                timeOffset=1.6458115+56.948086
 place   RFC     copies=1 x=0.0 y=0.0 z=15775.0 
-                timeOffset=1.373964+58.606389
+                timeOffset=1.6458115+58.606389
 place   RFC     copies=1 x=0.0 y=0.0 z=16025.0 
-                timeOffset=1.373964+59.527795
+                timeOffset=1.6458115+59.527795
 place   RFC     copies=1 x=0.0 y=0.0 z=16475.0 
-                timeOffset=1.373964+61.186555
+                timeOffset=1.6458115+61.186555
 place   RFC     copies=1 x=0.0 y=0.0 z=16725.0 
-                timeOffset=1.373964+62.108213
+                timeOffset=1.6458115+62.108213
 place   RFC     copies=1 x=0.0 y=0.0 z=17175.0 
-                timeOffset=1.373964+63.767423
+                timeOffset=1.6458115+63.767423
 place   RFC     copies=1 x=0.0 y=0.0 z=17425.0 
-                timeOffset=1.373964+64.689331
+                timeOffset=1.6458115+64.689331
 place   RFC     copies=1 x=0.0 y=0.0 z=17875.0 
-                timeOffset=1.373964+66.348986
+                timeOffset=1.6458115+66.348986
 place   RFC     copies=1 x=0.0 y=0.0 z=18125.0 
-                timeOffset=1.373964+67.27114
+                timeOffset=1.6458115+67.27114
 place   RFC     copies=1 x=0.0 y=0.0 z=18575.0 
-                timeOffset=1.373964+68.931236
+                timeOffset=1.6458115+68.931236
 place   RFC     copies=1 x=0.0 y=0.0 z=18825.0 
-                timeOffset=1.373964+69.853633
+                timeOffset=1.6458115+69.853633
 place   RFC     copies=1 x=0.0 y=0.0 z=19275.0 
-                timeOffset=1.373964+71.514164
+                timeOffset=1.6458115+71.514164
 place   RFC     copies=1 x=0.0 y=0.0 z=19525.0 
-                timeOffset=1.373964+72.436802
+                timeOffset=1.6458115+72.436802
 place   RFC     copies=1 x=0.0 y=0.0 z=19975.0 
-                timeOffset=1.373964+74.097764
+                timeOffset=1.6458115+74.097764
 place   RFC     copies=1 x=0.0 y=0.0 z=20225.0 
-                timeOffset=1.373964+75.020639
+                timeOffset=1.6458115+75.020639
 place   RFC     copies=1 x=0.0 y=0.0 z=20675.0 
-                timeOffset=1.373964+76.682026
+                timeOffset=1.6458115+76.682026
 place   RFC     copies=1 x=0.0 y=0.0 z=20925.0 
-                timeOffset=1.373964+77.605136
+                timeOffset=1.6458115+77.605136
 place   RFC     copies=1 x=0.0 y=0.0 z=21375.0 
-                timeOffset=1.373964+79.266944
+                timeOffset=1.6458115+79.266944
 place   RFC     copies=1 x=0.0 y=0.0 z=21625.0 
-                timeOffset=1.373964+80.190286
+                timeOffset=1.6458115+80.190286
 place   RFC     copies=1 x=0.0 y=0.0 z=22075.0 
-                timeOffset=1.373964+81.85251
+                timeOffset=1.6458115+81.85251
 place   RFC     copies=1 x=0.0 y=0.0 z=22325.0 
-                timeOffset=1.373964+82.776082
+                timeOffset=1.6458115+82.776082
 place   RFC     copies=1 x=0.0 y=0.0 z=22775.0 
-                timeOffset=1.373964+84.438717
+                timeOffset=1.6458115+84.438717
 place   RFC     copies=1 x=0.0 y=0.0 z=23025.0 
-                timeOffset=1.373964+85.362516
+                timeOffset=1.6458115+85.362516
 place   RFC     copies=1 x=0.0 y=0.0 z=23475.0 
-                timeOffset=1.373964+87.025556
+                timeOffset=1.6458115+87.025556
 place   RFC     copies=1 x=0.0 y=0.0 z=23725.0 
-                timeOffset=1.373964+87.94958
+                timeOffset=1.6458115+87.94958
 place   RFC     copies=1 x=0.0 y=0.0 z=24175.0 
-                timeOffset=1.373964+89.613022
+                timeOffset=1.6458115+89.613022
 place   RFC     copies=1 x=0.0 y=0.0 z=24425.0 
-                timeOffset=1.373964+90.537267
+                timeOffset=1.6458115+90.537267
 place   RFC     copies=1 x=0.0 y=0.0 z=24875.0 
-                timeOffset=1.373964+92.201106
+                timeOffset=1.6458115+92.201106
 place   RFC     copies=1 x=0.0 y=0.0 z=25125.0 
-                timeOffset=1.373964+93.12557
+                timeOffset=1.6458115+93.12557
 place   RFC     copies=1 x=0.0 y=0.0 z=25575.0 
-                timeOffset=1.373964+94.789802
+                timeOffset=1.6458115+94.789802
 place   RFC     copies=1 x=0.0 y=0.0 z=25825.0 
-                timeOffset=1.373964+95.714483
+                timeOffset=1.6458115+95.714483
 place   RFC     copies=1 x=0.0 y=0.0 z=26275.0 
-                timeOffset=1.373964+97.379102
+                timeOffset=1.6458115+97.379102
 place   RFC     copies=1 x=0.0 y=0.0 z=26525.0 
-                timeOffset=1.373964+98.303998
+                timeOffset=1.6458115+98.303998
 place   RFC     copies=1 x=0.0 y=0.0 z=26975.0 
-                timeOffset=1.373964+99.969
+                timeOffset=1.6458115+99.969
 place   RFC     copies=1 x=0.0 y=0.0 z=27225.0 
-                timeOffset=1.373964+100.89411
+                timeOffset=1.6458115+100.89411
 place   RFC     copies=1 x=0.0 y=0.0 z=27675.0 
-                timeOffset=1.373964+102.55949
+                timeOffset=1.6458115+102.55949
 place   RFC     copies=1 x=0.0 y=0.0 z=27925.0 
-                timeOffset=1.373964+103.48481
+                timeOffset=1.6458115+103.48481
 place   RFC     copies=1 x=0.0 y=0.0 z=28375.0 
-                timeOffset=1.373964+105.15056
+                timeOffset=1.6458115+105.15056
 place   RFC     copies=1 x=0.0 y=0.0 z=28625.0 
-                timeOffset=1.373964+106.07609
+                timeOffset=1.6458115+106.07609
 place   RFC     copies=1 x=0.0 y=0.0 z=29075.0 
-                timeOffset=1.373964+107.74221
+                timeOffset=1.6458115+107.74221
 place   RFC     copies=1 x=0.0 y=0.0 z=29325.0 
-                timeOffset=1.373964+108.66794
+                timeOffset=1.6458115+108.66794
 place   RFC     copies=1 x=0.0 y=0.0 z=29775.0 
-                timeOffset=1.373964+110.33443
+                timeOffset=1.6458115+110.33443
 place   RFC     copies=1 x=0.0 y=0.0 z=30025.0 
-                timeOffset=1.373964+111.26036
+                timeOffset=1.6458115+111.26036
 place   RFC     copies=1 x=0.0 y=0.0 z=30475.0 
-                timeOffset=1.373964+112.92722
+                timeOffset=1.6458115+112.92722
 place   RFC     copies=1 x=0.0 y=0.0 z=30725.0 
-                timeOffset=1.373964+113.85335
+                timeOffset=1.6458115+113.85335
 place   RFC     copies=1 x=0.0 y=0.0 z=31175.0 
-                timeOffset=1.373964+115.52056
+                timeOffset=1.6458115+115.52056
 place   RFC     copies=1 x=0.0 y=0.0 z=31425.0 
-                timeOffset=1.373964+116.44689
+                timeOffset=1.6458115+116.44689
 place   RFC     copies=1 x=0.0 y=0.0 z=31875.0 
-                timeOffset=1.373964+118.11445
+                timeOffset=1.6458115+118.11445
 place   RFC     copies=1 x=0.0 y=0.0 z=32125.0 
-                timeOffset=1.373964+119.04098
+                timeOffset=1.6458115+119.04098
 place   RFC     copies=1 x=0.0 y=0.0 z=32575.0 
-                timeOffset=1.373964+120.70889
+                timeOffset=1.6458115+120.70889
 place   RFC     copies=1 x=0.0 y=0.0 z=32825.0 
-                timeOffset=1.373964+121.63561
+                timeOffset=1.6458115+121.63561
 place   RFC     copies=1 x=0.0 y=0.0 z=33275.0 
-                timeOffset=1.373964+123.30387
+                timeOffset=1.6458115+123.30387
 place   RFC     copies=1 x=0.0 y=0.0 z=33525.0 
-                timeOffset=1.373964+124.23077
+                timeOffset=1.6458115+124.23077
 place   RFC     copies=1 x=0.0 y=0.0 z=33975.0 
-                timeOffset=1.373964+125.89938
+                timeOffset=1.6458115+125.89938
 place   RFC     copies=1 x=0.0 y=0.0 z=34225.0 
-                timeOffset=1.373964+126.82647
+                timeOffset=1.6458115+126.82647
 place   RFC     copies=1 x=0.0 y=0.0 z=34675.0 
-                timeOffset=1.373964+128.49541
+                timeOffset=1.6458115+128.49541
 place   RFC     copies=1 x=0.0 y=0.0 z=34925.0 
-                timeOffset=1.373964+129.42269
+                timeOffset=1.6458115+129.42269
 place   RFC     copies=1 x=0.0 y=0.0 z=35375.0 
-                timeOffset=1.373964+131.09197
+                timeOffset=1.6458115+131.09197
 place   RFC     copies=1 x=0.0 y=0.0 z=35625.0 
-                timeOffset=1.373964+132.01943
+                timeOffset=1.6458115+132.01943
 place   RFC     copies=1 x=0.0 y=0.0 z=36075.0 
-                timeOffset=1.373964+133.68904
+                timeOffset=1.6458115+133.68904
 place   RFC     copies=1 x=0.0 y=0.0 z=36325.0 
-                timeOffset=1.373964+134.61669
+                timeOffset=1.6458115+134.61669
 place   RFC     copies=1 x=0.0 y=0.0 z=36775.0 
-                timeOffset=1.373964+136.28662
+                timeOffset=1.6458115+136.28662
 place   RFC     copies=1 x=0.0 y=0.0 z=37025.0 
-                timeOffset=1.373964+137.21445
+                timeOffset=1.6458115+137.21445
 place   RFC     copies=1 x=0.0 y=0.0 z=37475.0 
-                timeOffset=1.373964+138.8847
+                timeOffset=1.6458115+138.8847
 place   RFC     copies=1 x=0.0 y=0.0 z=37725.0 
-                timeOffset=1.373964+139.8127
+                timeOffset=1.6458115+139.8127
 place   RFC     copies=1 x=0.0 y=0.0 z=38175.0 
-                timeOffset=1.373964+141.48328
+                timeOffset=1.6458115+141.48328
 place   RFC     copies=1 x=0.0 y=0.0 z=38425.0 
-                timeOffset=1.373964+142.41146
+                timeOffset=1.6458115+142.41146
 place   RFC     copies=1 x=0.0 y=0.0 z=38875.0 
-                timeOffset=1.373964+144.08234
+                timeOffset=1.6458115+144.08234
 place   RFC     copies=1 x=0.0 y=0.0 z=39125.0 
-                timeOffset=1.373964+145.0107
+                timeOffset=1.6458115+145.0107
 place   RFC     copies=1 x=0.0 y=0.0 z=39575.0 
-                timeOffset=1.373964+146.6819
+                timeOffset=1.6458115+146.6819
 place   RFC     copies=1 x=0.0 y=0.0 z=39825.0 
-                timeOffset=1.373964+147.61043
+                timeOffset=1.6458115+147.61043
 place   RFC     copies=1 x=0.0 y=0.0 z=40275.0 
-                timeOffset=1.373964+149.28193
+                timeOffset=1.6458115+149.28193
 place   RFC     copies=1 x=0.0 y=0.0 z=40525.0 
-                timeOffset=1.373964+150.21063
+                timeOffset=1.6458115+150.21063
 place   RFC     copies=1 x=0.0 y=0.0 z=40975.0 
-                timeOffset=1.373964+151.88244
+                timeOffset=1.6458115+151.88244
 place   RFC     copies=1 x=0.0 y=0.0 z=41225.0 
-                timeOffset=1.373964+152.81131
+                timeOffset=1.6458115+152.81131
 place   RFC     copies=1 x=0.0 y=0.0 z=41675.0 
-                timeOffset=1.373964+154.48342
+                timeOffset=1.6458115+154.48342
 place   RFC     copies=1 x=0.0 y=0.0 z=41925.0 
-                timeOffset=1.373964+155.41245
+                timeOffset=1.6458115+155.41245
 place   RFC1    copies=1 x=0.0 y=0.0 z=42375.0 
-                timeOffset=1.373964+157.08608
+                timeOffset=1.6458115+157.08608
 place   RFC1    copies=1 x=0.0 y=0.0 z=42625.0 
-                timeOffset=1.373964+158.01528
+                timeOffset=1.6458115+158.01528
 place   RFC1    copies=1 x=0.0 y=0.0 z=43075.0 
-                timeOffset=1.373964+159.68798
+                timeOffset=1.6458115+159.68798
 place   RFC1    copies=1 x=0.0 y=0.0 z=43325.0 
-                timeOffset=1.373964+160.61734
+                timeOffset=1.6458115+160.61734
 place   RFC1    copies=1 x=0.0 y=0.0 z=43775.0 
-                timeOffset=1.373964+162.29033
+                timeOffset=1.6458115+162.29033
 place   RFC1    copies=1 x=0.0 y=0.0 z=44025.0 
-                timeOffset=1.373964+163.21985
+                timeOffset=1.6458115+163.21985
 place   RFC1    copies=1 x=0.0 y=0.0 z=44475.0 
-                timeOffset=1.373964+164.89313
+                timeOffset=1.6458115+164.89313
 place   RFC1    copies=1 x=0.0 y=0.0 z=44725.0 
-                timeOffset=1.373964+165.82281
+                timeOffset=1.6458115+165.82281
 place   RFC1    copies=1 x=0.0 y=0.0 z=45175.0 
-                timeOffset=1.373964+167.49637
+                timeOffset=1.6458115+167.49637
 place   RFC1    copies=1 x=0.0 y=0.0 z=45425.0 
-                timeOffset=1.373964+168.42621
+                timeOffset=1.6458115+168.42621
 place   RFC1    copies=1 x=0.0 y=0.0 z=45875.0 
-                timeOffset=1.373964+170.10005
+                timeOffset=1.6458115+170.10005
 place   RFC1    copies=1 x=0.0 y=0.0 z=46125.0 
-                timeOffset=1.373964+171.03004
+                timeOffset=1.6458115+171.03004
 place   RFC1    copies=1 x=0.0 y=0.0 z=46575.0 
-                timeOffset=1.373964+172.70416
+                timeOffset=1.6458115+172.70416
 place   RFC1    copies=1 x=0.0 y=0.0 z=46825.0 
-                timeOffset=1.373964+173.6343
+                timeOffset=1.6458115+173.6343
 place   RFC1    copies=1 x=0.0 y=0.0 z=47275.0 
-                timeOffset=1.373964+175.3087
+                timeOffset=1.6458115+175.3087
 place   RFC1    copies=1 x=0.0 y=0.0 z=47525.0 
-                timeOffset=1.373964+176.23899
+                timeOffset=1.6458115+176.23899
 place   RFC1    copies=1 x=0.0 y=0.0 z=47975.0 
-                timeOffset=1.373964+177.91366
+                timeOffset=1.6458115+177.91366
 place   RFC1    copies=1 x=0.0 y=0.0 z=48225.0 
-                timeOffset=1.373964+178.8441
+                timeOffset=1.6458115+178.8441
 place   RFC1    copies=1 x=0.0 y=0.0 z=48675.0 
-                timeOffset=1.373964+180.51904
+                timeOffset=1.6458115+180.51904
 place   RFC1    copies=1 x=0.0 y=0.0 z=48925.0 
-                timeOffset=1.373964+181.44963
+                timeOffset=1.6458115+181.44963
 place   RFC1    copies=1 x=0.0 y=0.0 z=49375.0 
-                timeOffset=1.373964+183.12483
+                timeOffset=1.6458115+183.12483
 place   RFC1    copies=1 x=0.0 y=0.0 z=49625.0 
-                timeOffset=1.373964+184.05557
+                timeOffset=1.6458115+184.05557
 place   RFC1    copies=1 x=0.0 y=0.0 z=50075.0 
-                timeOffset=1.373964+185.73103
+                timeOffset=1.6458115+185.73103
 place   RFC1    copies=1 x=0.0 y=0.0 z=50325.0 
-                timeOffset=1.373964+186.66191
+                timeOffset=1.6458115+186.66191
 place   RFC1    copies=1 x=0.0 y=0.0 z=50775.0 
-                timeOffset=1.373964+188.33763
+                timeOffset=1.6458115+188.33763
 place   RFC1    copies=1 x=0.0 y=0.0 z=51025.0 
-                timeOffset=1.373964+189.26866
+                timeOffset=1.6458115+189.26866
 place   RFC1    copies=1 x=0.0 y=0.0 z=51475.0 
-                timeOffset=1.373964+190.94463
+                timeOffset=1.6458115+190.94463
 place   RFC1    copies=1 x=0.0 y=0.0 z=51725.0 
-                timeOffset=1.373964+191.8758
+                timeOffset=1.6458115+191.8758
 place   RFC1    copies=1 x=0.0 y=0.0 z=52175.0 
-                timeOffset=1.373964+193.55203
+                timeOffset=1.6458115+193.55203
 place   RFC1    copies=1 x=0.0 y=0.0 z=52425.0 
-                timeOffset=1.373964+194.48333
+                timeOffset=1.6458115+194.48333
 place   RFC1    copies=1 x=0.0 y=0.0 z=52875.0 
-                timeOffset=1.373964+196.15981
+                timeOffset=1.6458115+196.15981
 place   RFC1    copies=1 x=0.0 y=0.0 z=53125.0 
-                timeOffset=1.373964+197.09126
+                timeOffset=1.6458115+197.09126
 place   RFC1    copies=1 x=0.0 y=0.0 z=53575.0 
-                timeOffset=1.373964+198.76798
+                timeOffset=1.6458115+198.76798
 place   RFC1    copies=1 x=0.0 y=0.0 z=53825.0 
-                timeOffset=1.373964+199.69956
+                timeOffset=1.6458115+199.69956
 place   RFC1    copies=1 x=0.0 y=0.0 z=54275.0 
-                timeOffset=1.373964+201.37653
+                timeOffset=1.6458115+201.37653
 place   RFC1    copies=1 x=0.0 y=0.0 z=54525.0 
-                timeOffset=1.373964+202.30825
+                timeOffset=1.6458115+202.30825
 place   RFC1    copies=1 x=0.0 y=0.0 z=54975.0 
-                timeOffset=1.373964+203.98546
+                timeOffset=1.6458115+203.98546
 place   RFC1    copies=1 x=0.0 y=0.0 z=55225.0 
-                timeOffset=1.373964+204.91731
+                timeOffset=1.6458115+204.91731
 place   RFC1    copies=1 x=0.0 y=0.0 z=55675.0 
-                timeOffset=1.373964+206.59476
+                timeOffset=1.6458115+206.59476
 place   RFC1    copies=1 x=0.0 y=0.0 z=55925.0 
-                timeOffset=1.373964+207.52674
+                timeOffset=1.6458115+207.52674
 place   RFC1    copies=1 x=0.0 y=0.0 z=56375.0 
-                timeOffset=1.373964+209.20442
+                timeOffset=1.6458115+209.20442
 place   RFC1    copies=1 x=0.0 y=0.0 z=56625.0 
-                timeOffset=1.373964+210.13653
+                timeOffset=1.6458115+210.13653
 place   RFC1    copies=1 x=0.0 y=0.0 z=57075.0 
-                timeOffset=1.373964+211.81445
+                timeOffset=1.6458115+211.81445
 place   RFC1    copies=1 x=0.0 y=0.0 z=57325.0 
-                timeOffset=1.373964+212.74669
+                timeOffset=1.6458115+212.74669
 place   RFC1    copies=1 x=0.0 y=0.0 z=57775.0 
-                timeOffset=1.373964+214.42484
+                timeOffset=1.6458115+214.42484
 place   RFC1    copies=1 x=0.0 y=0.0 z=58025.0 
-                timeOffset=1.373964+215.35721
+                timeOffset=1.6458115+215.35721
 place   RFC1    copies=1 x=0.0 y=0.0 z=58475.0 
-                timeOffset=1.373964+217.03558
+                timeOffset=1.6458115+217.03558
 place   RFC1    copies=1 x=0.0 y=0.0 z=58725.0 
-                timeOffset=1.373964+217.96807
+                timeOffset=1.6458115+217.96807
 place   RFC1    copies=1 x=0.0 y=0.0 z=59175.0 
-                timeOffset=1.373964+219.64667
+                timeOffset=1.6458115+219.64667
 place   RFC1    copies=1 x=0.0 y=0.0 z=59425.0 
-                timeOffset=1.373964+220.57929
+                timeOffset=1.6458115+220.57929
 place   RFC1    copies=1 x=0.0 y=0.0 z=59875.0 
-                timeOffset=1.373964+222.25811
+                timeOffset=1.6458115+222.25811
 place   RFC1    copies=1 x=0.0 y=0.0 z=60125.0 
-                timeOffset=1.373964+223.19086
+                timeOffset=1.6458115+223.19086
 place   RFC1    copies=1 x=0.0 y=0.0 z=60575.0 
-                timeOffset=1.373964+224.8699
+                timeOffset=1.6458115+224.8699
 place   RFC1    copies=1 x=0.0 y=0.0 z=60825.0 
-                timeOffset=1.373964+225.80276
+                timeOffset=1.6458115+225.80276
 place   RFC1    copies=1 x=0.0 y=0.0 z=61275.0 
-                timeOffset=1.373964+227.48202
+                timeOffset=1.6458115+227.48202
 place   RFC1    copies=1 x=0.0 y=0.0 z=61525.0 
-                timeOffset=1.373964+228.415
+                timeOffset=1.6458115+228.415
 place   RFC1    copies=1 x=0.0 y=0.0 z=61975.0 
-                timeOffset=1.373964+230.09448
+                timeOffset=1.6458115+230.09448
 place   RFC1    copies=1 x=0.0 y=0.0 z=62225.0 
-                timeOffset=1.373964+231.02758
+                timeOffset=1.6458115+231.02758
 place   RFC1    copies=1 x=0.0 y=0.0 z=62675.0 
-                timeOffset=1.373964+232.70726
+                timeOffset=1.6458115+232.70726
 place   RFC1    copies=1 x=0.0 y=0.0 z=62925.0 
-                timeOffset=1.373964+233.64048
+                timeOffset=1.6458115+233.64048
 place   RFC1    copies=1 x=0.0 y=0.0 z=63375.0 
-                timeOffset=1.373964+235.32038
+                timeOffset=1.6458115+235.32038
 place   RFC1    copies=1 x=0.0 y=0.0 z=63625.0 
-                timeOffset=1.373964+236.25371
+                timeOffset=1.6458115+236.25371
 place   RFC1    copies=1 x=0.0 y=0.0 z=64075.0 
-                timeOffset=1.373964+237.93382
+                timeOffset=1.6458115+237.93382
 place   RFC1    copies=1 x=0.0 y=0.0 z=64325.0 
-                timeOffset=1.373964+238.86727
+                timeOffset=1.6458115+238.86727
 place   RFC1    copies=1 x=0.0 y=0.0 z=64775.0 
-                timeOffset=1.373964+240.54757
+                timeOffset=1.6458115+240.54757
 place   RFC1    copies=1 x=0.0 y=0.0 z=65025.0 
-                timeOffset=1.373964+241.48114
+                timeOffset=1.6458115+241.48114
 place   RFC1    copies=1 x=0.0 y=0.0 z=65475.0 
-                timeOffset=1.373964+243.16165
+                timeOffset=1.6458115+243.16165
 place   RFC1    copies=1 x=0.0 y=0.0 z=65725.0 
-                timeOffset=1.373964+244.09532
+                timeOffset=1.6458115+244.09532
 place   RFC1    copies=1 x=0.0 y=0.0 z=66175.0 
-                timeOffset=1.373964+245.77603
+                timeOffset=1.6458115+245.77603
 place   RFC1    copies=1 x=0.0 y=0.0 z=66425.0 
-                timeOffset=1.373964+246.70982
+                timeOffset=1.6458115+246.70982
 place   RFC1    copies=1 x=0.0 y=0.0 z=66875.0 
-                timeOffset=1.373964+248.39073
+                timeOffset=1.6458115+248.39073
 place   RFC1    copies=1 x=0.0 y=0.0 z=67125.0 
-                timeOffset=1.373964+249.32462
+                timeOffset=1.6458115+249.32462
 place   RFC1    copies=1 x=0.0 y=0.0 z=67575.0 
-                timeOffset=1.373964+251.00573
+                timeOffset=1.6458115+251.00573
 place   RFC1    copies=1 x=0.0 y=0.0 z=67825.0 
-                timeOffset=1.373964+251.93973
+                timeOffset=1.6458115+251.93973
 place   RFC1    copies=1 x=0.0 y=0.0 z=68275.0 
-                timeOffset=1.373964+253.62103
+                timeOffset=1.6458115+253.62103
 place   RFC1    copies=1 x=0.0 y=0.0 z=68525.0 
-                timeOffset=1.373964+254.55514
+                timeOffset=1.6458115+254.55514
 place   RFC1    copies=1 x=0.0 y=0.0 z=68975.0 
-                timeOffset=1.373964+256.23663
+                timeOffset=1.6458115+256.23663
 place   RFC1    copies=1 x=0.0 y=0.0 z=69225.0 
-                timeOffset=1.373964+257.17084
+                timeOffset=1.6458115+257.17084
 place   RFC1    copies=1 x=0.0 y=0.0 z=69675.0 
-                timeOffset=1.373964+258.85252
+                timeOffset=1.6458115+258.85252
 place   RFC1    copies=1 x=0.0 y=0.0 z=69925.0 
-                timeOffset=1.373964+259.78684
+                timeOffset=1.6458115+259.78684
 place   RFC1    copies=1 x=0.0 y=0.0 z=70375.0 
-                timeOffset=1.373964+261.46871
+                timeOffset=1.6458115+261.46871
 place   RFC1    copies=1 x=0.0 y=0.0 z=70625.0 
-                timeOffset=1.373964+262.40313
+                timeOffset=1.6458115+262.40313
 place   RFC1    copies=1 x=0.0 y=0.0 z=71075.0 
-                timeOffset=1.373964+264.08518
+                timeOffset=1.6458115+264.08518
 place   RFC1    copies=1 x=0.0 y=0.0 z=71325.0 
-                timeOffset=1.373964+265.0197
+                timeOffset=1.6458115+265.0197
 place   RFC1    copies=1 x=0.0 y=0.0 z=71775.0 
-                timeOffset=1.373964+266.70194
+                timeOffset=1.6458115+266.70194
 place   RFC1    copies=1 x=0.0 y=0.0 z=72025.0 
-                timeOffset=1.373964+267.63656
+                timeOffset=1.6458115+267.63656
 place   RFC1    copies=1 x=0.0 y=0.0 z=72475.0 
-                timeOffset=1.373964+269.31898
+                timeOffset=1.6458115+269.31898
 place   RFC1    copies=1 x=0.0 y=0.0 z=72725.0 
-                timeOffset=1.373964+270.2537
+                timeOffset=1.6458115+270.2537
 place   RFC1    copies=1 x=0.0 y=0.0 z=73175.0 
-                timeOffset=1.373964+271.93629
+                timeOffset=1.6458115+271.93629
 place   RFC1    copies=1 x=0.0 y=0.0 z=73425.0 
-                timeOffset=1.373964+272.87111
+                timeOffset=1.6458115+272.87111
 place   RFC1    copies=1 x=0.0 y=0.0 z=73875.0 
-                timeOffset=1.373964+274.55388
+                timeOffset=1.6458115+274.55388
 place   RFC1    copies=1 x=0.0 y=0.0 z=74125.0 
-                timeOffset=1.373964+275.4888
+                timeOffset=1.6458115+275.4888
 place   RFC1    copies=1 x=0.0 y=0.0 z=74575.0 
-                timeOffset=1.373964+277.17175
+                timeOffset=1.6458115+277.17175
 place   RFC1    copies=1 x=0.0 y=0.0 z=74825.0 
-                timeOffset=1.373964+278.10676
+                timeOffset=1.6458115+278.10676
 place   RFC1    copies=1 x=0.0 y=0.0 z=75275.0 
-                timeOffset=1.373964+279.78988
+                timeOffset=1.6458115+279.78988
 place   RFC1    copies=1 x=0.0 y=0.0 z=75525.0 
-                timeOffset=1.373964+280.72499
+                timeOffset=1.6458115+280.72499
 place   RFC1    copies=1 x=0.0 y=0.0 z=75975.0 
-                timeOffset=1.373964+282.40827
+                timeOffset=1.6458115+282.40827
 place   RFC1    copies=1 x=0.0 y=0.0 z=76225.0 
-                timeOffset=1.373964+283.34348
+                timeOffset=1.6458115+283.34348
 place   RFC1    copies=1 x=0.0 y=0.0 z=76675.0 
-                timeOffset=1.373964+285.02693
+                timeOffset=1.6458115+285.02693
 place   RFC1    copies=1 x=0.0 y=0.0 z=76925.0 
-                timeOffset=1.373964+285.96223
+                timeOffset=1.6458115+285.96223
 place   RFC1    copies=1 x=0.0 y=0.0 z=77375.0 
-                timeOffset=1.373964+287.64585
+                timeOffset=1.6458115+287.64585
 place   RFC1    copies=1 x=0.0 y=0.0 z=77625.0 
-                timeOffset=1.373964+288.58124
+                timeOffset=1.6458115+288.58124
 place   RFC1    copies=1 x=0.0 y=0.0 z=78075.0 
-                timeOffset=1.373964+290.26502
+                timeOffset=1.6458115+290.26502
 place   RFC1    copies=1 x=0.0 y=0.0 z=78325.0 
-                timeOffset=1.373964+291.2005
+                timeOffset=1.6458115+291.2005
 place   RFC1    copies=1 x=0.0 y=0.0 z=78775.0 
-                timeOffset=1.373964+292.88445
+                timeOffset=1.6458115+292.88445
 place   RFC1    copies=1 x=0.0 y=0.0 z=79025.0 
-                timeOffset=1.373964+293.82002
+                timeOffset=1.6458115+293.82002
 place   RFC1    copies=1 x=0.0 y=0.0 z=79475.0 
-                timeOffset=1.373964+295.50412
+                timeOffset=1.6458115+295.50412
 place   RFC1    copies=1 x=0.0 y=0.0 z=79725.0 
-                timeOffset=1.373964+296.43978
+                timeOffset=1.6458115+296.43978
 place   RFC1    copies=1 x=0.0 y=0.0 z=80175.0 
-                timeOffset=1.373964+298.12405
+                timeOffset=1.6458115+298.12405
 place   RFC1    copies=1 x=0.0 y=0.0 z=80425.0 
-                timeOffset=1.373964+299.05979
+                timeOffset=1.6458115+299.05979
 place   RFC1    copies=1 x=0.0 y=0.0 z=80875.0 
-                timeOffset=1.373964+300.74421
+                timeOffset=1.6458115+300.74421
 place   RFC1    copies=1 x=0.0 y=0.0 z=81125.0 
-                timeOffset=1.373964+301.68005
+                timeOffset=1.6458115+301.68005
 place   RFC1    copies=1 x=0.0 y=0.0 z=81575.0 
-                timeOffset=1.373964+303.36462
+                timeOffset=1.6458115+303.36462
 place   RFC1    copies=1 x=0.0 y=0.0 z=81825.0 
-                timeOffset=1.373964+304.30054
+                timeOffset=1.6458115+304.30054
 place   RFC1    copies=1 x=0.0 y=0.0 z=82275.0 
-                timeOffset=1.373964+305.98527
+                timeOffset=1.6458115+305.98527
 place   RFC1    copies=1 x=0.0 y=0.0 z=82525.0 
-                timeOffset=1.373964+306.92127
+                timeOffset=1.6458115+306.92127
 place   RFC1    copies=1 x=0.0 y=0.0 z=82975.0 
-                timeOffset=1.373964+308.60616
+                timeOffset=1.6458115+308.60616
 place   RFC1    copies=1 x=0.0 y=0.0 z=83225.0 
-                timeOffset=1.373964+309.54224
+                timeOffset=1.6458115+309.54224
 place   RFC1    copies=1 x=0.0 y=0.0 z=83675.0 
-                timeOffset=1.373964+311.22727
+                timeOffset=1.6458115+311.22727
 place   RFC1    copies=1 x=0.0 y=0.0 z=83925.0 
-                timeOffset=1.373964+312.16344
+                timeOffset=1.6458115+312.16344
 place   RFC2    copies=1 x=0.0 y=0.0 z=84375.0 
-                timeOffset=1.373964+313.85048
+                timeOffset=1.6458115+313.85048
 place   RFC2    copies=1 x=0.0 y=0.0 z=84625.0 
-                timeOffset=1.373964+314.78673
+                timeOffset=1.6458115+314.78673
 place   RFC2    copies=1 x=0.0 y=0.0 z=85075.0 
-                timeOffset=1.373964+316.47206
+                timeOffset=1.6458115+316.47206
 place   RFC2    copies=1 x=0.0 y=0.0 z=85325.0 
-                timeOffset=1.373964+317.40839
+                timeOffset=1.6458115+317.40839
 place   RFC2    copies=1 x=0.0 y=0.0 z=85775.0 
-                timeOffset=1.373964+319.09386
+                timeOffset=1.6458115+319.09386
 place   RFC2    copies=1 x=0.0 y=0.0 z=86025.0 
-                timeOffset=1.373964+320.03027
+                timeOffset=1.6458115+320.03027
 place   RFC2    copies=1 x=0.0 y=0.0 z=86475.0 
-                timeOffset=1.373964+321.71588
+                timeOffset=1.6458115+321.71588
 place   RFC2    copies=1 x=0.0 y=0.0 z=86725.0 
-                timeOffset=1.373964+322.65237
+                timeOffset=1.6458115+322.65237
 place   RFC2    copies=1 x=0.0 y=0.0 z=87175.0 
-                timeOffset=1.373964+324.33813
+                timeOffset=1.6458115+324.33813
 place   RFC2    copies=1 x=0.0 y=0.0 z=87425.0 
-                timeOffset=1.373964+325.27469
+                timeOffset=1.6458115+325.27469
 place   RFC2    copies=1 x=0.0 y=0.0 z=87875.0 
-                timeOffset=1.373964+326.96059
+                timeOffset=1.6458115+326.96059
 place   RFC2    copies=1 x=0.0 y=0.0 z=88125.0 
-                timeOffset=1.373964+327.89723
+                timeOffset=1.6458115+327.89723
 place   RFC2    copies=1 x=0.0 y=0.0 z=88575.0 
-                timeOffset=1.373964+329.58326
+                timeOffset=1.6458115+329.58326
 place   RFC2    copies=1 x=0.0 y=0.0 z=88825.0 
-                timeOffset=1.373964+330.51998
+                timeOffset=1.6458115+330.51998
 place   RFC2    copies=1 x=0.0 y=0.0 z=89275.0 
-                timeOffset=1.373964+332.20615
+                timeOffset=1.6458115+332.20615
 place   RFC2    copies=1 x=0.0 y=0.0 z=89525.0 
-                timeOffset=1.373964+333.14295
+                timeOffset=1.6458115+333.14295
 place   RFC2    copies=1 x=0.0 y=0.0 z=89975.0 
-                timeOffset=1.373964+334.82925
+                timeOffset=1.6458115+334.82925
 place   RFC2    copies=1 x=0.0 y=0.0 z=90225.0 
-                timeOffset=1.373964+335.76612
+                timeOffset=1.6458115+335.76612
 place   RFC2    copies=1 x=0.0 y=0.0 z=90675.0 
-                timeOffset=1.373964+337.45255
+                timeOffset=1.6458115+337.45255
 place   RFC2    copies=1 x=0.0 y=0.0 z=90925.0 
-                timeOffset=1.373964+338.3895
+                timeOffset=1.6458115+338.3895
 place   RFC2    copies=1 x=0.0 y=0.0 z=91375.0 
-                timeOffset=1.373964+340.07606
+                timeOffset=1.6458115+340.07606
 place   RFC2    copies=1 x=0.0 y=0.0 z=91625.0 
-                timeOffset=1.373964+341.01308
+                timeOffset=1.6458115+341.01308
 place   RFC2    copies=1 x=0.0 y=0.0 z=92075.0 
-                timeOffset=1.373964+342.69978
+                timeOffset=1.6458115+342.69978
 place   RFC2    copies=1 x=0.0 y=0.0 z=92325.0 
-                timeOffset=1.373964+343.63686
+                timeOffset=1.6458115+343.63686
 place   RFC2    copies=1 x=0.0 y=0.0 z=92775.0 
-                timeOffset=1.373964+345.32369
+                timeOffset=1.6458115+345.32369
 place   RFC2    copies=1 x=0.0 y=0.0 z=93025.0 
-                timeOffset=1.373964+346.26085
+                timeOffset=1.6458115+346.26085
 place   RFC2    copies=1 x=0.0 y=0.0 z=93475.0 
-                timeOffset=1.373964+347.9478
+                timeOffset=1.6458115+347.9478
 place   RFC2    copies=1 x=0.0 y=0.0 z=93725.0 
-                timeOffset=1.373964+348.88503
+                timeOffset=1.6458115+348.88503
 place   RFC2    copies=1 x=0.0 y=0.0 z=94175.0 
-                timeOffset=1.373964+350.57211
+                timeOffset=1.6458115+350.57211
 place   RFC2    copies=1 x=0.0 y=0.0 z=94425.0 
-                timeOffset=1.373964+351.50941
+                timeOffset=1.6458115+351.50941
 place   RFC2    copies=1 x=0.0 y=0.0 z=94875.0 
-                timeOffset=1.373964+353.19661
+                timeOffset=1.6458115+353.19661
 place   RFC2    copies=1 x=0.0 y=0.0 z=95125.0 
-                timeOffset=1.373964+354.13397
+                timeOffset=1.6458115+354.13397
 place   RFC2    copies=1 x=0.0 y=0.0 z=95575.0 
-                timeOffset=1.373964+355.8213
+                timeOffset=1.6458115+355.8213
 place   RFC2    copies=1 x=0.0 y=0.0 z=95825.0 
-                timeOffset=1.373964+356.75873
+                timeOffset=1.6458115+356.75873
 place   RFC2    copies=1 x=0.0 y=0.0 z=96275.0 
-                timeOffset=1.373964+358.44618
+                timeOffset=1.6458115+358.44618
 place   RFC2    copies=1 x=0.0 y=0.0 z=96525.0 
-                timeOffset=1.373964+359.38368
+                timeOffset=1.6458115+359.38368
 place   RFC2    copies=1 x=0.0 y=0.0 z=96975.0 
-                timeOffset=1.373964+361.07124
+                timeOffset=1.6458115+361.07124
 place   RFC2    copies=1 x=0.0 y=0.0 z=97225.0 
-                timeOffset=1.373964+362.00881
+                timeOffset=1.6458115+362.00881
 place   RFC2    copies=1 x=0.0 y=0.0 z=97675.0 
-                timeOffset=1.373964+363.69649
+                timeOffset=1.6458115+363.69649
 place   RFC2    copies=1 x=0.0 y=0.0 z=97925.0 
-                timeOffset=1.373964+364.63413
+                timeOffset=1.6458115+364.63413
 place   RFC2    copies=1 x=0.0 y=0.0 z=98375.0 
-                timeOffset=1.373964+366.32193
+                timeOffset=1.6458115+366.32193
 place   RFC2    copies=1 x=0.0 y=0.0 z=98625.0 
-                timeOffset=1.373964+367.25962
+                timeOffset=1.6458115+367.25962
 place   RFC2    copies=1 x=0.0 y=0.0 z=99075.0 
-                timeOffset=1.373964+368.94754
+                timeOffset=1.6458115+368.94754
 place   RFC2    copies=1 x=0.0 y=0.0 z=99325.0 
-                timeOffset=1.373964+369.8853
+                timeOffset=1.6458115+369.8853
 place   RFC2    copies=1 x=0.0 y=0.0 z=99775.0 
-                timeOffset=1.373964+371.57333
+                timeOffset=1.6458115+371.57333
 place   RFC2    copies=1 x=0.0 y=0.0 z=100025.0 
-                timeOffset=1.373964+372.51115
+                timeOffset=1.6458115+372.51115
 place   RFC2    copies=1 x=0.0 y=0.0 z=100475.0 
-                timeOffset=1.373964+374.1993
+                timeOffset=1.6458115+374.1993
 place   RFC2    copies=1 x=0.0 y=0.0 z=100725.0 
-                timeOffset=1.373964+375.13718
+                timeOffset=1.6458115+375.13718
 place   RFC2    copies=1 x=0.0 y=0.0 z=101175.0 
-                timeOffset=1.373964+376.82544
+                timeOffset=1.6458115+376.82544
 place   RFC2    copies=1 x=0.0 y=0.0 z=101425.0 
-                timeOffset=1.373964+377.76339
+                timeOffset=1.6458115+377.76339
 place   RFC2    copies=1 x=0.0 y=0.0 z=101875.0 
-                timeOffset=1.373964+379.45175
+                timeOffset=1.6458115+379.45175
 place   RFC2    copies=1 x=0.0 y=0.0 z=102125.0 
-                timeOffset=1.373964+380.38976
+                timeOffset=1.6458115+380.38976
 place   RFC2    copies=1 x=0.0 y=0.0 z=102575.0 
-                timeOffset=1.373964+382.07823
+                timeOffset=1.6458115+382.07823
 place   RFC2    copies=1 x=0.0 y=0.0 z=102825.0 
-                timeOffset=1.373964+383.0163
+                timeOffset=1.6458115+383.0163
 place   RFC2    copies=1 x=0.0 y=0.0 z=103275.0 
-                timeOffset=1.373964+384.70488
+                timeOffset=1.6458115+384.70488
 place   RFC2    copies=1 x=0.0 y=0.0 z=103525.0 
-                timeOffset=1.373964+385.64301
+                timeOffset=1.6458115+385.64301
 place   RFC2    copies=1 x=0.0 y=0.0 z=103975.0 
-                timeOffset=1.373964+387.3317
+                timeOffset=1.6458115+387.3317
 place   RFC2    copies=1 x=0.0 y=0.0 z=104225.0 
-                timeOffset=1.373964+388.26989
+                timeOffset=1.6458115+388.26989
 place   RFC2    copies=1 x=0.0 y=0.0 z=104675.0 
-                timeOffset=1.373964+389.95868
+                timeOffset=1.6458115+389.95868
 place   RFC2    copies=1 x=0.0 y=0.0 z=104925.0 
-                timeOffset=1.373964+390.89693
+                timeOffset=1.6458115+390.89693
 place   RFC2    copies=1 x=0.0 y=0.0 z=105375.0 
-                timeOffset=1.373964+392.58582
+                timeOffset=1.6458115+392.58582
 place   RFC2    copies=1 x=0.0 y=0.0 z=105625.0 
-                timeOffset=1.373964+393.52413
+                timeOffset=1.6458115+393.52413
 place   RFC2    copies=1 x=0.0 y=0.0 z=106075.0 
-                timeOffset=1.373964+395.21312
+                timeOffset=1.6458115+395.21312
 place   RFC2    copies=1 x=0.0 y=0.0 z=106325.0 
-                timeOffset=1.373964+396.15148
+                timeOffset=1.6458115+396.15148
 place   RFC2    copies=1 x=0.0 y=0.0 z=106775.0 
-                timeOffset=1.373964+397.84058
+                timeOffset=1.6458115+397.84058
 place   RFC2    copies=1 x=0.0 y=0.0 z=107025.0 
-                timeOffset=1.373964+398.779
+                timeOffset=1.6458115+398.779
 place   RFC2    copies=1 x=0.0 y=0.0 z=107475.0 
-                timeOffset=1.373964+400.4682
+                timeOffset=1.6458115+400.4682
 place   RFC2    copies=1 x=0.0 y=0.0 z=107725.0 
-                timeOffset=1.373964+401.40667
+                timeOffset=1.6458115+401.40667
 place   RFC2    copies=1 x=0.0 y=0.0 z=108175.0 
-                timeOffset=1.373964+403.09597
+                timeOffset=1.6458115+403.09597
 place   RFC2    copies=1 x=0.0 y=0.0 z=108425.0 
-                timeOffset=1.373964+404.0345
+                timeOffset=1.6458115+404.0345
 place   RFC2    copies=1 x=0.0 y=0.0 z=108875.0 
-                timeOffset=1.373964+405.7239
+                timeOffset=1.6458115+405.7239
 place   RFC2    copies=1 x=0.0 y=0.0 z=109125.0 
-                timeOffset=1.373964+406.66248
+                timeOffset=1.6458115+406.66248
 place   RFC2    copies=1 x=0.0 y=0.0 z=109575.0 
-                timeOffset=1.373964+408.35197
+                timeOffset=1.6458115+408.35197
 place   RFC2    copies=1 x=0.0 y=0.0 z=109825.0 
-                timeOffset=1.373964+409.29061
+                timeOffset=1.6458115+409.29061
 place   RFC2    copies=1 x=0.0 y=0.0 z=110275.0 
-                timeOffset=1.373964+410.9802
+                timeOffset=1.6458115+410.9802
 place   RFC2    copies=1 x=0.0 y=0.0 z=110525.0 
-                timeOffset=1.373964+411.91889
+                timeOffset=1.6458115+411.91889
 place   RFC2    copies=1 x=0.0 y=0.0 z=110975.0 
-                timeOffset=1.373964+413.60857
+                timeOffset=1.6458115+413.60857
 place   RFC2    copies=1 x=0.0 y=0.0 z=111225.0 
-                timeOffset=1.373964+414.54731
+                timeOffset=1.6458115+414.54731
 place   RFC2    copies=1 x=0.0 y=0.0 z=111675.0 
-                timeOffset=1.373964+416.23709
+                timeOffset=1.6458115+416.23709
 place   RFC2    copies=1 x=0.0 y=0.0 z=111925.0 
-                timeOffset=1.373964+417.17588
+                timeOffset=1.6458115+417.17588
 place   RFC2    copies=1 x=0.0 y=0.0 z=112375.0 
-                timeOffset=1.373964+418.86575
+                timeOffset=1.6458115+418.86575
 place   RFC2    copies=1 x=0.0 y=0.0 z=112625.0 
-                timeOffset=1.373964+419.80459
+                timeOffset=1.6458115+419.80459
 place   RFC2    copies=1 x=0.0 y=0.0 z=113075.0 
-                timeOffset=1.373964+421.49456
+                timeOffset=1.6458115+421.49456
 place   RFC2    copies=1 x=0.0 y=0.0 z=113325.0 
-                timeOffset=1.373964+422.43345
+                timeOffset=1.6458115+422.43345
 place   RFC2    copies=1 x=0.0 y=0.0 z=113775.0 
-                timeOffset=1.373964+424.1235
+                timeOffset=1.6458115+424.1235
 place   RFC2    copies=1 x=0.0 y=0.0 z=114025.0 
-                timeOffset=1.373964+425.06244
+                timeOffset=1.6458115+425.06244
 place   RFC2    copies=1 x=0.0 y=0.0 z=114475.0 
-                timeOffset=1.373964+426.75259
+                timeOffset=1.6458115+426.75259
 place   RFC2    copies=1 x=0.0 y=0.0 z=114725.0 
-                timeOffset=1.373964+427.69158
+                timeOffset=1.6458115+427.69158
 place   RFC2    copies=1 x=0.0 y=0.0 z=115175.0 
-                timeOffset=1.373964+429.38181
+                timeOffset=1.6458115+429.38181
 place   RFC2    copies=1 x=0.0 y=0.0 z=115425.0 
-                timeOffset=1.373964+430.32085
+                timeOffset=1.6458115+430.32085
 place   RFC2    copies=1 x=0.0 y=0.0 z=115875.0 
-                timeOffset=1.373964+432.01116
+                timeOffset=1.6458115+432.01116
 place   RFC2    copies=1 x=0.0 y=0.0 z=116125.0 
-                timeOffset=1.373964+432.95025
+                timeOffset=1.6458115+432.95025
 place   RFC2    copies=1 x=0.0 y=0.0 z=116575.0 
-                timeOffset=1.373964+434.64066
+                timeOffset=1.6458115+434.64066
 place   RFC2    copies=1 x=0.0 y=0.0 z=116825.0 
-                timeOffset=1.373964+435.57979
+                timeOffset=1.6458115+435.57979
 place   RFC2    copies=1 x=0.0 y=0.0 z=117275.0 
-                timeOffset=1.373964+437.27028
+                timeOffset=1.6458115+437.27028
 place   RFC2    copies=1 x=0.0 y=0.0 z=117525.0 
-                timeOffset=1.373964+438.20946
+                timeOffset=1.6458115+438.20946
 place   RFC2    copies=1 x=0.0 y=0.0 z=117975.0 
-                timeOffset=1.373964+439.90004
+                timeOffset=1.6458115+439.90004
 place   RFC2    copies=1 x=0.0 y=0.0 z=118225.0 
-                timeOffset=1.373964+440.83927
+                timeOffset=1.6458115+440.83927
 place   RFC2    copies=1 x=0.0 y=0.0 z=118675.0 
-                timeOffset=1.373964+442.52992
+                timeOffset=1.6458115+442.52992
 place   RFC2    copies=1 x=0.0 y=0.0 z=118925.0 
-                timeOffset=1.373964+443.4692
+                timeOffset=1.6458115+443.4692
 place   RFC2    copies=1 x=0.0 y=0.0 z=119375.0 
-                timeOffset=1.373964+445.15993
+                timeOffset=1.6458115+445.15993
 place   RFC2    copies=1 x=0.0 y=0.0 z=119625.0 
-                timeOffset=1.373964+446.09926
+                timeOffset=1.6458115+446.09926
 place   RFC2    copies=1 x=0.0 y=0.0 z=120075.0 
-                timeOffset=1.373964+447.79007
+                timeOffset=1.6458115+447.79007
 place   RFC2    copies=1 x=0.0 y=0.0 z=120325.0 
-                timeOffset=1.373964+448.72944
+                timeOffset=1.6458115+448.72944
 place   RFC2    copies=1 x=0.0 y=0.0 z=120775.0 
-                timeOffset=1.373964+450.42034
+                timeOffset=1.6458115+450.42034
 place   RFC2    copies=1 x=0.0 y=0.0 z=121025.0 
-                timeOffset=1.373964+451.35975
+                timeOffset=1.6458115+451.35975
 place   RFC2    copies=1 x=0.0 y=0.0 z=121475.0 
-                timeOffset=1.373964+453.05073
+                timeOffset=1.6458115+453.05073
 place   RFC2    copies=1 x=0.0 y=0.0 z=121725.0 
-                timeOffset=1.373964+453.99018
+                timeOffset=1.6458115+453.99018
 place   RFC2    copies=1 x=0.0 y=0.0 z=122175.0 
-                timeOffset=1.373964+455.68124
+                timeOffset=1.6458115+455.68124
 place   RFC2    copies=1 x=0.0 y=0.0 z=122425.0 
-                timeOffset=1.373964+456.62073
+                timeOffset=1.6458115+456.62073
 place   RFC2    copies=1 x=0.0 y=0.0 z=122875.0 
-                timeOffset=1.373964+458.31187
+                timeOffset=1.6458115+458.31187
 place   RFC2    copies=1 x=0.0 y=0.0 z=123125.0 
-                timeOffset=1.373964+459.25141
+                timeOffset=1.6458115+459.25141
 place   RFC2    copies=1 x=0.0 y=0.0 z=123575.0 
-                timeOffset=1.373964+460.94262
+                timeOffset=1.6458115+460.94262
 place   RFC2    copies=1 x=0.0 y=0.0 z=123825.0 
-                timeOffset=1.373964+461.8822
+                timeOffset=1.6458115+461.8822
 place   RFC2    copies=1 x=0.0 y=0.0 z=124275.0 
-                timeOffset=1.373964+463.57349
+                timeOffset=1.6458115+463.57349
 place   RFC2    copies=1 x=0.0 y=0.0 z=124525.0 
-                timeOffset=1.373964+464.51311
+                timeOffset=1.6458115+464.51311
 place   RFC2    copies=1 x=0.0 y=0.0 z=124975.0 
-                timeOffset=1.373964+466.20447
+                timeOffset=1.6458115+466.20447
 place   RFC2    copies=1 x=0.0 y=0.0 z=125225.0 
-                timeOffset=1.373964+467.14414
+                timeOffset=1.6458115+467.14414
 place   RFC2    copies=1 x=0.0 y=0.0 z=125675.0 
-                timeOffset=1.373964+468.83557
+                timeOffset=1.6458115+468.83557
 place   RFC2    copies=1 x=0.0 y=0.0 z=125925.0 
-                timeOffset=1.373964+469.77528
+                timeOffset=1.6458115+469.77528
 place   RFC2    copies=1 x=0.0 y=0.0 z=126375.0 
-                timeOffset=1.365964+471.47549
+                timeOffset=1.6378115+471.47549
 place   RFC2    copies=1 x=0.0 y=0.0 z=126625.0 
-                timeOffset=1.365964+472.41522
+                timeOffset=1.6378115+472.41522
 place   RFC2    copies=1 x=0.0 y=0.0 z=127075.0 
-                timeOffset=1.365964+474.10672
+                timeOffset=1.6378115+474.10672
 place   RFC2    copies=1 x=0.0 y=0.0 z=127325.0 
-                timeOffset=1.365964+475.04645
+                timeOffset=1.6378115+475.04645
 place   RFC2    copies=1 x=0.0 y=0.0 z=127775.0 
-                timeOffset=1.365964+476.73795
+                timeOffset=1.6378115+476.73795
 place   RFC2    copies=1 x=0.0 y=0.0 z=128025.0 
-                timeOffset=1.365964+477.67768
+                timeOffset=1.6378115+477.67768
 place   RFC2    copies=1 x=0.0 y=0.0 z=128475.0 
-                timeOffset=1.365964+479.36919
+                timeOffset=1.6378115+479.36919
 place   RFC2    copies=1 x=0.0 y=0.0 z=128725.0 
-                timeOffset=1.365964+480.30891
+                timeOffset=1.6378115+480.30891
 place   RFC2    copies=1 x=0.0 y=0.0 z=129175.0 
-                timeOffset=1.365964+482.00042
+                timeOffset=1.6378115+482.00042
 place   RFC2    copies=1 x=0.0 y=0.0 z=129425.0 
-                timeOffset=1.365964+482.94015
+                timeOffset=1.6378115+482.94015
 place   RFC2    copies=1 x=0.0 y=0.0 z=129875.0 
-                timeOffset=1.365964+484.63165
+                timeOffset=1.6378115+484.63165
 place   RFC2    copies=1 x=0.0 y=0.0 z=130125.0 
-                timeOffset=1.365964+485.57138
+                timeOffset=1.6378115+485.57138
 place   RFC2    copies=1 x=0.0 y=0.0 z=130575.0 
-                timeOffset=1.365964+487.26288
+                timeOffset=1.6378115+487.26288
 place   RFC2    copies=1 x=0.0 y=0.0 z=130825.0 
-                timeOffset=1.365964+488.20261
+                timeOffset=1.6378115+488.20261
 place   RFC2    copies=1 x=0.0 y=0.0 z=131275.0 
-                timeOffset=1.365964+489.89412
+                timeOffset=1.6378115+489.89412
 place   RFC2    copies=1 x=0.0 y=0.0 z=131525.0 
-                timeOffset=1.365964+490.83384
+                timeOffset=1.6378115+490.83384
 place   RotSol  copies=1 x=0.0 y=0.0 z=-3000.0 
 place   SolPos  copies=1 x=0.0 y=0.0 z=500.0 
                 current=48.54258
@@ -2029,7 +2029,7 @@ PARAMETERS:
            Grad=25
           Grad0=20
             Zcl=131752
-      beamstart=-575
+      beamstart=-650
        beamtime=-0.671
            cur0=94.6094
            cur1=48.54258
@@ -2090,19 +2090,19 @@ deltaIntersection=0.1
           roll9=-96.958445
  steppingFormat=N GLOBAL CL KE STEP VOL PROCESS
 steppingVerbose=0
-         toffs0=1.343164
-         toffs1=1.297064
-         toffs2=1.373964
-         toffs3=1.373964
-         toffs4=1.373964
-         toffs5=1.365964
-         toffs6=1.365964
+         toffs0=1.6150115
+         toffs1=1.5689115
+         toffs2=1.6458115
+         toffs3=1.6458115
+         toffs4=1.6458115
+         toffs5=1.6378115
+         toffs6=1.6378115
          viewer=none
  wallClockLimit=-1
   worldMaterial=GH2
      zTolerance=2.0
         zlastRF=131650
-        zoffset=125
+        zoffset=50
          zshift=60
 Checking overlaps for volume presswall:0 (G4Tubs) ... OK! 
 BLCMDtubs::Construct presswall parent= relZ=850.0 globZ=850.0
@@ -7449,69 +7449,82 @@ Event 14 Completed  8 events  realTime=1 sec  8.0 ev/sec
 Event 15 Completed  9 events  realTime=1 sec  9.0 ev/sec
 Event 17 Completed  10 events  realTime=1 sec  10.0 ev/sec
 Event 46 Completed  20 events  realTime=2 sec  10.0 ev/sec
-Event 71 Completed  30 events  realTime=2 sec  15.0 ev/sec
-Event 82 Completed  40 events  realTime=3 sec  13.3 ev/sec
+Event 71 Completed  30 events  realTime=3 sec  10.0 ev/sec
+Event 82 Completed  40 events  realTime=4 sec  10.0 ev/sec
 Event 96 Completed  50 events  realTime=5 sec  10.0 ev/sec
 Event 110 Completed  60 events  realTime=6 sec  10.0 ev/sec
-Event 127 Completed  70 events  realTime=6 sec  11.7 ev/sec
-Event 145 Completed  80 events  realTime=7 sec  11.4 ev/sec
+Event 127 Completed  70 events  realTime=7 sec  10.0 ev/sec
+Event 145 Completed  80 events  realTime=8 sec  10.0 ev/sec
 Event 158 Completed  90 events  realTime=9 sec  10.0 ev/sec
-Event 175 Completed  100 events  realTime=9 sec  11.1 ev/sec
-Event 346 Completed  200 events  realTime=19 sec  10.5 ev/sec
+Event 175 Completed  100 events  realTime=10 sec  10.0 ev/sec
+Event 346 Completed  200 events  realTime=20 sec  10.0 ev/sec
 Event 509 Completed  300 events  realTime=29 sec  10.3 ev/sec
 Event 691 Completed  400 events  realTime=39 sec  10.3 ev/sec
-Event 861 Completed  500 events  realTime=49 sec  10.2 ev/sec
+Event 861 Completed  500 events  realTime=48 sec  10.4 ev/sec
 Event 1027 Completed  600 events  realTime=58 sec  10.3 ev/sec
-Event 1210 Completed  700 events  realTime=69 sec  10.1 ev/sec
-Event 1396 Completed  800 events  realTime=79 sec  10.1 ev/sec
-Event 1562 Completed  900 events  realTime=89 sec  10.1 ev/sec
-Event 1725 Completed  1000 events  realTime=98 sec  10.2 ev/sec
+Event 1210 Completed  700 events  realTime=70 sec  10.0 ev/sec
+Event 1396 Completed  800 events  realTime=80 sec  10.0 ev/sec
+Event 1562 Completed  900 events  realTime=90 sec  10.0 ev/sec
+Event 1725 Completed  1000 events  realTime=100 sec  10.0 ev/sec
 Event 3412 Completed  2000 events  realTime=200 sec  10.0 ev/sec
 Event 5113 Completed  3000 events  realTime=296 sec  10.1 ev/sec
-Event 6760 Completed  4000 events  realTime=399 sec  10.0 ev/sec
-Event 8555 Completed  5000 events  realTime=495 sec  10.1 ev/sec
-Event 10266 Completed  6000 events  realTime=596 sec  10.1 ev/sec
-Event 12004 Completed  7000 events  realTime=700 sec  10.0 ev/sec
-Event 13637 Completed  8000 events  realTime=800 sec  10.0 ev/sec
-Event 15375 Completed  9000 events  realTime=900 sec  10.0 ev/sec
-Event 17028 Completed  10000 events  realTime=1000 sec  10.0 ev/sec
-Event 18725 Completed  11000 events  realTime=1098 sec  10.0 ev/sec
-Event 7459 Completed  12000 events  realTime=1189 sec  10.1 ev/sec
-Run complete  12471 Events  1217 seconds
-NTuple Det1               12033 entries
-NTuple Det2               11648 entries
-NTuple Det3               11169 entries
-NTuple Det4               10796 entries
-NTuple Det5               10465 entries
-NTuple Det6                9984 entries
-NTuple Det7                9532 entries
-NTuple Det8                9196 entries
-NTuple Det9                8842 entries
-NTuple Det10               8527 entries
-NTuple Det11               8150 entries
-NTuple Det12               7890 entries
-NTuple Det13               7622 entries
-NTuple Det14               7420 entries
+Event 6760 Completed  4000 events  realTime=424 sec  9.4 ev/sec
+Event 8555 Completed  5000 events  realTime=520 sec  9.6 ev/sec
+Event 10266 Completed  6000 events  realTime=623 sec  9.6 ev/sec
+Event 12004 Completed  7000 events  realTime=724 sec  9.7 ev/sec
+Event 13637 Completed  8000 events  realTime=824 sec  9.7 ev/sec
+**************************************************************************
+*** G4Exception: Event Time Limit
+***    severity: Event must be Aborted
+***   issued by: BLManager
+***     EventID: 14404     TrackID: 1   mu+  KE=124.1 MeV
+**************************************************************************
+Event 15378 Completed  9000 events  realTime=1120 sec  8.0 ev/sec
+**************************************************************************
+*** G4Exception: Event Time Limit
+***    severity: Event must be Aborted
+***   issued by: BLManager
+***     EventID: 16781     TrackID: 1   mu+  KE=138.4 MeV
+**************************************************************************
+Event 17032 Completed  10000 events  realTime=1309 sec  7.6 ev/sec
+Event 18729 Completed  11000 events  realTime=1406 sec  7.8 ev/sec
+Event 7494 Completed  12000 events  realTime=1496 sec  8.0 ev/sec
+Run complete  12469 Events  1521 seconds
+NTuple Det1               12035 entries
+NTuple Det2               11642 entries
+NTuple Det3               11158 entries
+NTuple Det4               10780 entries
+NTuple Det5               10404 entries
+NTuple Det6                9900 entries
+NTuple Det7                9490 entries
+NTuple Det8                9140 entries
+NTuple Det9                8772 entries
+NTuple Det10               8488 entries
+NTuple Det11               8162 entries
+NTuple Det12               7872 entries
+NTuple Det13               7655 entries
+NTuple Det14               7413 entries
 NTuple Det15               7216 entries
-NTuple Det16               7027 entries
-NTuple Det17               6846 entries
-NTuple Det18               6673 entries
-NTuple Det19               6524 entries
-NTuple Det20               6373 entries
-NTuple Det21               6183 entries
-NTuple Det22               6056 entries
-NTuple Det23               5957 entries
-NTuple Det24               5843 entries
-NTuple Det25               5750 entries
-NTuple Det26               5664 entries
-NTuple Det27               5583 entries
-NTuple Det28               5499 entries
-NTuple Det29               5423 entries
-NTuple Det30               5370 entries
-NTuple Det31               5306 entries
-NTuple DetLast             5285 entries
+NTuple Det16               7050 entries
+NTuple Det17               6885 entries
+NTuple Det18               6706 entries
+NTuple Det19               6567 entries
+NTuple Det20               6395 entries
+NTuple Det21               6231 entries
+NTuple Det22               6092 entries
+NTuple Det23               5989 entries
+NTuple Det24               5870 entries
+NTuple Det25               5761 entries
+NTuple Det26               5681 entries
+NTuple Det27               5602 entries
+NTuple Det28               5530 entries
+NTuple Det29               5469 entries
+NTuple Det30               5422 entries
+NTuple Det31               5367 entries
+NTuple DetLast             5349 entries
 
-Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 2 Warnings
+Exceptions: 0 Fatal, 2 Events Aborted, 0 Stuck Tracks (stopped), 2 Warnings
       1 times: Check number of field voxels
       1 times: EM Field Extends Outside World
+      2 times: Event Time Limit
 g4beamline: simulation complete
