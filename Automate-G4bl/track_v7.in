@@ -1,8 +1,5 @@
 #  30 periods HFOFO + 1 period matching + exit solenoid
 
-param zoffset=-700
-param toffset=-0.671
-
 material GH2 Z=1 A=1.01 density=0.014
 param worldMaterial=GH2
 
@@ -13,11 +10,8 @@ physics QGSP_BIC
 param zshift=60
 param period=4200 # HFOFO period
 
-param beamstart=-500
-# beam ascii file=initial.dat beamZ=$beamstart # user provided file with particle data
-beam gaussian particle=mu+ nEvents=100 beamZ=-700.0 \
-    sigmaX=10.0 sigmaY=10.0 sigmaXp=0.100 sigmaYp=0.100 \
-    meanMomentum=200.0 sigmaP=4.0 meanT=0.0 sigmaT=0.0
+param beamstart=-700
+beam ascii file=/Users/criggall/Documents/muon-cooling/Automate-G4bl/initial.dat beamZ=$beamstart
 
 param beamtime=-0.671
 # if there is no mu+ take mu- and add TRF/2
