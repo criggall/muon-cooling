@@ -35,7 +35,7 @@ param maxStep=10.0 steppingVerbose=0
 
 ### trace particle
 
-trace nTrace=1 format=ascii file="/Users/criggall/Library/Mobile Documents/com~apple~CloudDocs/muon-cooling/trace-sim/trace_output.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/trace-sim/trace_output.txt"
 
 ### Mag Field
 
