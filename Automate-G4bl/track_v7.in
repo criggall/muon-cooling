@@ -48,7 +48,8 @@ tolerance=0.003
 
 
 param pitch=-0.0025*180/$pi
-param BLS=21.4 delf=0
+param BLS=21.4
+param delf=0
 param cur0=4.421*$BLS
 param curpl=$cur0*(1+$delf/2) curmn=-$cur0*(1-$delf/2) 
 param cur1=4.421*10.98 cur2=-4.421*17.89 cur3=4.421*19.64 cur4=-4.421*21.12 # entrance
