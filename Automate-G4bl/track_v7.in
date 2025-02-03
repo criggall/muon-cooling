@@ -107,3 +107,5 @@ place terminus z=-1000 # to stop reflected particles
 place terminus z=$zlastRF+102
 
 
+
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"

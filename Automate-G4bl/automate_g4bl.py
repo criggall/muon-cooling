@@ -8,19 +8,18 @@ file_for_g4bl = '"'+file+'"'
 det_file = dir+'detectors.txt'
 beam_file = dir+'initial.dat'
 
+# Specify whether to simulate a reference particle:
+ref_particle = True
+
 # Set values to scan over:
-### bls = np.arange(10,31)
-# bls = [10,21.4]
-bls = [15, 25, 30]
-# bls = 20
+bls = np.arange(10,31)
 
 for j in range(len(bls)):
 
     print(f"Now running simulation {j+1}...")
 
     # Define output directory:
-    ### out_dir = dir+f'g4bl-output-sim{j+1}/'
-    out_dir = dir+f'g4bl-output-sim{j+3}/'
+    out_dir = dir+f'g4bl-output-sim{j+1}/'
 
     # Set configurable parameters:
     parameters = {
@@ -62,6 +61,10 @@ for j in range(len(bls)):
                     lines[i] = f"material GH2 Z=1 A=1.01 density={parameters['density']}\n"
                 elif 'param BLS' in line:
                     lines[i] = f"param BLS={parameters['BLS']}\n"
+                
+            # Add reference particle if True:
+            if ref_particle == True:
+                lines.append(f'trace nTrace=1 format=ascii file="{dir}ref_particle_out.txt"\n')
             
         with open(file, 'w') as f:
             f.writelines(lines)
