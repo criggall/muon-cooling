@@ -48,7 +48,7 @@ tolerance=0.003
 
 
 param pitch=-0.0025*180/$pi
-param BLS=21.4
+param BLS=10
 param delf=0
 param cur0=4.421*$BLS
 param curpl=$cur0*(1+$delf/2) curmn=-$cur0*(1-$delf/2) 
@@ -108,4 +108,47 @@ place terminus z=$zlastRF+102
 
 
 
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
+trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
 trace nTrace=1 format=ascii file="/Users/criggall/Documents/muon-cooling/Automate-G4bl/ref_particle_out.txt"
