@@ -4,7 +4,7 @@ import os
 import imageio.v2 as imageio
 
 # Input parameter space:
-bls = np.arange(10,31)
+bls = np.arange(18, 21, 0.1)
 
 # Name of parameter scan is over:
 param_label = 'BLS'
@@ -28,7 +28,11 @@ len_period = 4.2 # m
 def plot_trajectory(x_vals, y_vals, z_vals, param_label, param_val, dir):
     plt.plot(z_vals,x_vals,color='red',label='x')
     plt.plot(z_vals,y_vals,color='blue',label='y')
-    plt.title(f'{param_label} = {param_val}')
+    # plt.plot(z_vals[0:end_period],x_vals[0:end_period],color='red',label='x') # for first period only
+    # plt.plot(z_vals[0:end_period],y_vals[0:end_period],color='blue',label='y')
+    plt.title(f'{param_label} = {round(param_val,1)}')
+    # plt.ylim(-15,15)
+    plt.ylim(-0.8,0.8)
     plt.xlabel('z (m)')
     plt.ylabel('x, y (cm)')
     plt.legend(loc='upper left')
@@ -37,13 +41,15 @@ def plot_trajectory(x_vals, y_vals, z_vals, param_label, param_val, dir):
 
 # Define function to plot B field:
 def plot_B_field(x_vals, y_vals, z_vals, Bx_vals, By_vals, Bz_vals, end_period, param_label, param_val, dir):
-    # plt.plot(z_vals[0:end_period],Bx_vals[0:end_period],color='green',label='200*Bx') # for first period only
-    # plt.plot(z_vals[0:end_period],By_vals[0:end_period],color='blue',label='200*By')
-    # plt.plot(z_vals[0:end_period],Bz_vals[0:end_period],color='red',label='Bz')
     plt.plot(z_vals,Bx_vals,color='green',label='200*Bx')
     plt.plot(z_vals,By_vals,color='blue',label='200*By')
     plt.plot(z_vals,Bz_vals,color='red',label='Bz')
-    plt.title(f'{param_label} = {param_val}')
+    # plt.plot(z_vals[0:end_period],Bx_vals[0:end_period],color='green',label='200*Bx') # for first period only
+    # plt.plot(z_vals[0:end_period],By_vals[0:end_period],color='blue',label='200*By')
+    # plt.plot(z_vals[0:end_period],Bz_vals[0:end_period],color='red',label='Bz')
+    plt.title(f'{param_label} = {round(param_val,1)}')
+    # plt.ylim(-200,200)
+    plt.ylim(-10,10)
     plt.xlabel('z (m)')
     plt.ylabel('B (T)')
     plt.legend(loc='upper left')
@@ -73,7 +79,7 @@ for j in range(iterations):
         px_vals = []; py_vals = []; pz_vals = []; ptotal_vals = []
         t_vals = []; mod_t_vals = []
         Bx_vals = []; By_vals = []; Bz_vals = []
-        count = 0
+        count = 0; count2 = 0
         for i in range(data.shape[0]):
             x_vals.append(data[i][0]*0.1) # mm -> cm
             y_vals.append(data[i][1]*0.1)
@@ -110,7 +116,7 @@ for j in range(iterations):
         plot_B_field(x_vals, y_vals, z_vals, Bx_vals, By_vals, Bz_vals, end_period, param_label, bls[j], dir)
 
     # if beam == True:
-        
+
 
 ##### ANIMATIONS #####
 
@@ -130,20 +136,7 @@ for i in range(iterations):
 # Create animations:
 xy_images = [imageio.imread(img) for img in xy_plot_paths]
 B_images = [imageio.imread(img) for img in B_plot_paths]
-imageio.mimsave(main_dir+'xy_animation.gif', xy_images, duration=100, loop=0)
-imageio.mimsave(main_dir+'B_animation.gif', B_images, duration=100, loop=0)
-
-# For ONLY configs where particle made it through the full channel:
-
-# List of plot files:
-xy_plot_paths = []
-B_plot_paths = []
-for i in full_channel_indices:
-    xy_plot_paths.append(out_dirs[i]+'/xy_trajectory.png')
-    B_plot_paths.append(out_dirs[i]+'/B_field.png')
-
-# Create animations:
-xy_images = [imageio.imread(img) for img in xy_plot_paths]
-B_images = [imageio.imread(img) for img in B_plot_paths]
-imageio.mimsave(main_dir+'xy_animation_full_channel.gif', xy_images, duration=1000, loop=0)
-imageio.mimsave(main_dir+'B_animation_full_channel.gif', B_images, duration=1000, loop=0)
+imageio.mimsave(main_dir+'xy_animation.gif', xy_images, duration=300, loop=0)
+imageio.mimsave(main_dir+'B_animation.gif', B_images, duration=300, loop=0)
+# imageio.mimsave(main_dir+'xy_animation_first_period.gif', xy_images, duration=100, loop=0)
+# imageio.mimsave(main_dir+'B_animation_first_period.gif', B_images, duration=100, loop=0)

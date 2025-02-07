@@ -28,7 +28,7 @@ density = 0.014 # GH2 density
 ref_p = 248 # reference particle momentum
 
 # Define range for parameters to scan over:
-bls = np.arange(10,31) # impacts solenoid current
+bls = np.arange(18, 21, 0.1) # impacts solenoid current
 
 # Set number of loops based on parameter scan space:
 iterations = len(bls) # <-- Adding a second parameter to scan over will require a second loop below
@@ -169,6 +169,7 @@ for j in range(iterations):
         mv_ref_file(g4bl_dir, out_dir)
     if beam == False:
         rm_det_out(out_dir)
+        print(f'Removing detector files from directory {out_dir}')
     
     if stderr:
             print("Error running simulation:", stderr)
