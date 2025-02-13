@@ -10,7 +10,7 @@ physics QGSP_BIC
 param zshift=60
 param period=4200 # HFOFO period
 
-param beamstart=0
+param beamstart=-100
 beam gaussian particle=mu+ nEvents=100 beamZ=-700.0 sigmaX=10.0 sigmaY=10.0 sigmaXp=0.100 sigmaYp=0.100 meanMomentum=200.0 sigmaP=4.0 meanT=0.0 sigmaT=0.0
 
 
@@ -34,7 +34,7 @@ param maxStep=10.0 steppingVerbose=0 nTrace=0
 ### detector
 
 include /Users/criggall/Documents/muon-cooling/Automate-G4bl/detectors.txt
-virtualdetector DetLast file=/Users/criggall/Documents/muon-cooling/Automate-G4bl/g4bl-output-sim8/outlast format=ascii radius=300 color=0,1,0 length=0.001 material=Vacuum
+virtualdetector DetLast file=/Users/criggall/Documents/muon-cooling/Automate-G4bl/g4bl-output-sim7/outlast format=ascii radius=300 color=0,1,0 length=0.001 material=Vacuum
 
 ### Mag Field
 

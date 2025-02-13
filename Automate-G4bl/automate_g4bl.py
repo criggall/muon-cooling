@@ -22,16 +22,18 @@ ref_particle = True
 beam = False
 
 # Set constant parameters:
-beamstart = -700 # beam initial z offset
+# beamstart = -700 # beam initial z offset
 beamtime = -0.671 # beam initial time offset
 density = 0.014 # GH2 density
 ref_p = 248 # reference particle momentum
+bls = 21.4 # impacts solenoid current
 
 # Define range for parameters to scan over:
-bls = np.arange(18, 21, 0.1) # impacts solenoid current
+# bls = np.arange(18, 21, 0.1) # impacts solenoid current
+beamstart = np.arange(-700,100,100) # beam initial z offset
 
 # Set number of loops based on parameter scan space:
-iterations = len(bls) # <-- Adding a second parameter to scan over will require a second loop below
+iterations = len(beamstart) # <-- Adding a second parameter to scan over will require a second loop below
 
 ##### FUNCTION DEFINITIONS #####
 
@@ -153,11 +155,13 @@ for j in range(iterations):
 
     # Set configurable parameters:
     parameters = {
-        'beamstart' : beamstart,
+        # 'beamstart' : beamstart,
+        'beamstart' : beamstart[j],
         'beamtime' : beamtime,
         'density' : density,
         'ref_p' : ref_p,
-        'BLS' : bls[j]
+        # 'BLS' : bls[j]
+        'BLS' : bls
     }
 
     # Execute functions:

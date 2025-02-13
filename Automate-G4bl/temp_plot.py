@@ -3,18 +3,28 @@ from matplotlib import pyplot as plt
 import os
 import imageio.v2 as imageio
 
-# Input parameter space:
-bls = np.arange(18, 21, 0.1)
+##### INPUTS #####
 
 # Name of parameter scan is over:
-param_label = 'BLS'
+# param_label = 'BLS'
+param_label = 'initial z offset'
+
+# Parameter space scanned:
+# bls = np.arange(18, 21, 0.1)
+beamstart = np.arange(-700,100,100)
+
+# Number of steps in scan:
+# iterations = len(bls)
+iterations = len(beamstart)
 
 # Specify whether reference particle, beam, or both:
 ref_particle = True
 beam = False
 
-# Number of steps in scan:
-iterations = len(bls)
+# Region to plot:
+# plot_option = 'full channel'
+# plot_option = 'first period'
+plot_option = 'second period'
 
 # RF period (325 MHz frequency):
 T = 1/(325*10**6)*10**9 # ns
@@ -26,16 +36,19 @@ len_period = 4.2 # m
 
 # Define function to plot xy trajectory:
 def plot_trajectory(x_vals, y_vals, z_vals, param_label, param_val, dir):
-    plt.plot(z_vals,x_vals,color='red',label='x')
-    plt.plot(z_vals,y_vals,color='blue',label='y')
-    # plt.plot(z_vals[0:end_period],x_vals[0:end_period],color='red',label='x') # for first period only
-    # plt.plot(z_vals[0:end_period],y_vals[0:end_period],color='blue',label='y')
-    # plt.plot(z_vals[end_period:end_period2],x_vals[end_period:end_period2],color='red',label='x') # for second period only
-    # plt.plot(z_vals[end_period:end_period2],y_vals[end_period:end_period2],color='blue',label='y')
-    # plt.title(f'{param_label} = {round(param_val,1)}')
-    plt.ylim(-15,15)
-    # plt.ylim(-0.8,0.8)
-    # plt.ylim(-2,2)
+    if plot_option == 'full channel':
+        plt.plot(z_vals,x_vals,color='red',label='x')
+        plt.plot(z_vals,y_vals,color='blue',label='y')
+        plt.ylim(-15,15)
+    elif plot_option == 'first period':
+        plt.plot(z_vals[0:end_period],x_vals[0:end_period],color='red',label='x')
+        plt.plot(z_vals[0:end_period],y_vals[0:end_period],color='blue',label='y')
+        plt.ylim(-0.8,0.8)
+    elif plot_option == 'second period':
+        plt.plot(z_vals[end_period:end_period2],x_vals[end_period:end_period2],color='red',label='x')
+        plt.plot(z_vals[end_period:end_period2],y_vals[end_period:end_period2],color='blue',label='y')
+        plt.ylim(-2,2)
+    plt.title(f'{param_label} = {round(param_val,1)}')
     plt.xlabel('z (m)')
     plt.ylabel('x, y (cm)')
     plt.legend(loc='upper left')
@@ -44,19 +57,22 @@ def plot_trajectory(x_vals, y_vals, z_vals, param_label, param_val, dir):
 
 # Define function to plot B field:
 def plot_B_field(x_vals, y_vals, z_vals, Bx_vals, By_vals, Bz_vals, end_period, param_label, param_val, dir):
-    plt.plot(z_vals,Bx_vals,color='green',label='200*Bx')
-    plt.plot(z_vals,By_vals,color='blue',label='200*By')
-    plt.plot(z_vals,Bz_vals,color='red',label='Bz')
-    # plt.plot(z_vals[0:end_period],Bx_vals[0:end_period],color='green',label='200*Bx') # for first period only
-    # plt.plot(z_vals[0:end_period],By_vals[0:end_period],color='blue',label='200*By')
-    # plt.plot(z_vals[0:end_period],Bz_vals[0:end_period],color='red',label='Bz')
-    # plt.plot(z_vals[end_period:end_period2],Bx_vals[end_period:end_period2],color='green',label='200*Bx') # for second period only
-    # plt.plot(z_vals[end_period:end_period2],By_vals[end_period:end_period2],color='blue',label='200*By')
-    # plt.plot(z_vals[end_period:end_period2],Bz_vals[end_period:end_period2],color='red',label='Bz')
+    if plot_option == 'full channel':
+        plt.plot(z_vals,Bx_vals,color='green',label='200*Bx')
+        plt.plot(z_vals,By_vals,color='blue',label='200*By')
+        plt.plot(z_vals,Bz_vals,color='red',label='Bz')
+        plt.ylim(-200,200)
+    elif plot_option == 'first period':
+        plt.plot(z_vals[0:end_period],Bx_vals[0:end_period],color='green',label='200*Bx')
+        plt.plot(z_vals[0:end_period],By_vals[0:end_period],color='blue',label='200*By')
+        plt.plot(z_vals[0:end_period],Bz_vals[0:end_period],color='red',label='Bz')
+        plt.ylim(-10,10)
+    elif plot_option == 'second period':
+        plt.plot(z_vals[end_period:end_period2],Bx_vals[end_period:end_period2],color='green',label='200*Bx')
+        plt.plot(z_vals[end_period:end_period2],By_vals[end_period:end_period2],color='blue',label='200*By')
+        plt.plot(z_vals[end_period:end_period2],Bz_vals[end_period:end_period2],color='red',label='Bz')
+        plt.ylim(-35,35)
     plt.title(f'{param_label} = {round(param_val,1)}')
-    plt.ylim(-200,200)
-    # plt.ylim(-10,10)
-    # plt.ylim(-35,35)
     plt.xlabel('z (m)')
     plt.ylabel('B (T)')
     plt.legend(loc='upper left')
@@ -77,8 +93,8 @@ for j in range(iterations):
     if ref_particle == True:
 
         # Import data:
-        # dir = f'/Users/criggall/Documents/muon-cooling/Automate-G4bl/g4bl-output-sim{j+1}/'
-        dir = f'/Users/criggall/Documents/muon-cooling/Automate-G4bl/BLS_fine_scan/g4bl-output-sim{j+1}/'
+        dir = f'/Users/criggall/Documents/muon-cooling/Automate-G4bl/g4bl-output-sim{j+1}/'
+        # dir = f'/Users/criggall/Documents/muon-cooling/Automate-G4bl/BLS_fine_scan/g4bl-output-sim{j+1}/'
         file = f'{dir}ReferenceParticle.txt'
         data = np.loadtxt(file)
 
@@ -108,7 +124,7 @@ for j in range(iterations):
             Bz_vals.append(Bz)
             del px, py, pz, t, Bx, By, Bz
 
-            # Find index for last value in first period:
+            # Find index for last value in first and second periods:
             if z > len_period and count == 0:
                 end_period = i
                 count += 1
@@ -122,9 +138,11 @@ for j in range(iterations):
 
         # Plot:
         plt.clf()
-        plot_trajectory(x_vals, y_vals, z_vals, param_label, bls[j], dir)
+        # plot_trajectory(x_vals, y_vals, z_vals, param_label, bls[j], dir)
+        plot_trajectory(x_vals, y_vals, z_vals, param_label, beamstart[j], dir)
         plt.clf()
-        plot_B_field(x_vals, y_vals, z_vals, Bx_vals, By_vals, Bz_vals, end_period, param_label, bls[j], dir)
+        # plot_B_field(x_vals, y_vals, z_vals, Bx_vals, By_vals, Bz_vals, end_period, param_label, bls[j], dir)
+        plot_B_field(x_vals, y_vals, z_vals, Bx_vals, By_vals, Bz_vals, end_period, param_label, beamstart[j], dir)
 
     # if beam == True:
 
@@ -132,8 +150,8 @@ for j in range(iterations):
 ##### ANIMATIONS #####
 
 # Main directory:
-# main_dir = '/Users/criggall/Documents/muon-cooling/Automate-G4bl/'
-main_dir = '/Users/criggall/Documents/muon-cooling/Automate-G4bl/BLS_fine_scan/'
+main_dir = '/Users/criggall/Documents/muon-cooling/Automate-G4bl/'
+# main_dir = '/Users/criggall/Documents/muon-cooling/Automate-G4bl/BLS_fine_scan/'
 
 # List of sim directories:
 out_dirs = [main_dir+f'g4bl-output-sim{i+1}' for i in range(iterations)]
@@ -148,9 +166,14 @@ for i in range(iterations):
 # Create animations:
 xy_images = [imageio.imread(img) for img in xy_plot_paths]
 B_images = [imageio.imread(img) for img in B_plot_paths]
-imageio.mimsave(main_dir+'xy_animation.gif', xy_images, duration=300, loop=0)
-imageio.mimsave(main_dir+'B_animation.gif', B_images, duration=300, loop=0)
-# imageio.mimsave(main_dir+'xy_animation_first_period.gif', xy_images, duration=100, loop=0)
-# imageio.mimsave(main_dir+'B_animation_first_period.gif', B_images, duration=100, loop=0)
-# imageio.mimsave(main_dir+'xy_animation_second_period.gif', xy_images, duration=100, loop=0)
-# imageio.mimsave(main_dir+'B_animation_second_period.gif', B_images, duration=100, loop=0)
+frame_duration = 500 # for coarse scans
+# frame_duration = 100 # for fine scans
+if plot_option == 'full channel':
+    imageio.mimsave(main_dir+'xy_animation.gif', xy_images, duration=frame_duration, loop=0)
+    imageio.mimsave(main_dir+'B_animation.gif', B_images, duration=frame_duration, loop=0)
+elif plot_option == 'first period':
+    imageio.mimsave(main_dir+'xy_animation_first_period.gif', xy_images, duration=frame_duration, loop=0)
+    imageio.mimsave(main_dir+'B_animation_first_period.gif', B_images, duration=frame_duration, loop=0)
+elif plot_option == 'second period':
+    imageio.mimsave(main_dir+'xy_animation_second_period.gif', xy_images, duration=frame_duration, loop=0)
+    imageio.mimsave(main_dir+'B_animation_second_period.gif', B_images, duration=frame_duration, loop=0)
