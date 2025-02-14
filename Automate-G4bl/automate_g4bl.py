@@ -30,7 +30,7 @@ bls = 21.4 # impacts solenoid current
 
 # Define range for parameters to scan over:
 # bls = np.arange(18, 21, 0.1) # impacts solenoid current
-beamstart = np.arange(-700,100,100) # beam initial z offset
+beamstart = np.arange(-300,10,10) # beam initial z offset
 
 # Set number of loops based on parameter scan space:
 iterations = len(beamstart) # <-- Adding a second parameter to scan over will require a second loop below

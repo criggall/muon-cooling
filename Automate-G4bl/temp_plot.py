@@ -10,8 +10,8 @@ import imageio.v2 as imageio
 param_label = 'initial z offset'
 
 # Parameter space scanned:
-# bls = np.arange(18, 21, 0.1)
-beamstart = np.arange(-700,100,100)
+# bls = np.arange(10,31)
+beamstart = np.arange(-300,10,10)
 
 # Number of steps in scan:
 # iterations = len(bls)
@@ -94,7 +94,7 @@ for j in range(iterations):
 
         # Import data:
         dir = f'/Users/criggall/Documents/muon-cooling/Automate-G4bl/g4bl-output-sim{j+1}/'
-        # dir = f'/Users/criggall/Documents/muon-cooling/Automate-G4bl/BLS_fine_scan/g4bl-output-sim{j+1}/'
+        # dir = f'/Users/criggall/Documents/muon-cooling/Automate-G4bl/BLS_coarse_scan/g4bl-output-sim{j+1}/'
         file = f'{dir}ReferenceParticle.txt'
         data = np.loadtxt(file)
 
@@ -151,7 +151,7 @@ for j in range(iterations):
 
 # Main directory:
 main_dir = '/Users/criggall/Documents/muon-cooling/Automate-G4bl/'
-# main_dir = '/Users/criggall/Documents/muon-cooling/Automate-G4bl/BLS_fine_scan/'
+# main_dir = '/Users/criggall/Documents/muon-cooling/Automate-G4bl/BLS_coarse_scan/'
 
 # List of sim directories:
 out_dirs = [main_dir+f'g4bl-output-sim{i+1}' for i in range(iterations)]
@@ -166,8 +166,8 @@ for i in range(iterations):
 # Create animations:
 xy_images = [imageio.imread(img) for img in xy_plot_paths]
 B_images = [imageio.imread(img) for img in B_plot_paths]
-frame_duration = 500 # for coarse scans
-# frame_duration = 100 # for fine scans
+# frame_duration = 500 # for coarse scans
+frame_duration = 100 # for fine scans
 if plot_option == 'full channel':
     imageio.mimsave(main_dir+'xy_animation.gif', xy_images, duration=frame_duration, loop=0)
     imageio.mimsave(main_dir+'B_animation.gif', B_images, duration=frame_duration, loop=0)
