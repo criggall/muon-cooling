@@ -1,4 +1,4 @@
-# /Users/criggall/Library/Mobile Documents/com~apple~CloudDocs/muon-cooling/trace-sim/trace_output.txt
+# /Users/criggall/Documents/muon-cooling/trace-sim/trace_output.txt
 #x y z Px Py Pz t PDGid EventID TrackID ParentID Weight Bx By Bz Ex Ey Ez
 # Event 1 Track 1
 0 0 -700 49.323 14.997 252.92 411.74 -13 1 1 0 0.6315 2.24028e-07 -3.62295e-05 1.98271 0 0 0 

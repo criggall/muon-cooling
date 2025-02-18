@@ -1,19 +1,11 @@
 G4BL_DIR=/Applications/G4beamline-3.08.app/Contents
 LD_LIBRARY_PATH='/Applications/G4beamline-3.08.app/Contents/lib:'
-G4ABLADATA=/Users/criggall/Geant4Data/G4ABLA3.1
 G4LEDATA=/Users/criggall/Geant4Data/G4EMLOW8.0
 G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
-G4INCLDATA=/Users/criggall/Geant4Data/G4INCL1.0
-G4NEUTRONHPDATA=/Users/criggall/Geant4Data/G4NDL4.6
 G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
-G4PIIDATA=/Users/criggall/Geant4Data/G4PII1.3
 G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
-G4REALSURFACEDATA=/Users/criggall/Geant4Data/RealSurface2.2
-G4SAIDXSDATA=/Users/criggall/Geant4Data/G4SAIDDATA2.0
-G4TENDLDATA=/Users/criggall/Geant4Data/G4TENDL1.4
-G4LENDDATA=/Users/criggall/Geant4Data/LEND_GND1.3_ENDF.BVII.1
-G4beamline Process ID 57911
+G4beamline Process ID 37041
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -75,10 +67,8 @@ param        maxStep       10.0
 param        steppingVerbose 0
 trace                      nTrace=1 format=asciiTrace oneNTuple=0
                            primaryOnly=0 traceTune=1
-                           filename=/Users/criggall/Library/Mobile
-                           Documents/com~apple~CloudDocs/muon-cooling/trace-sim/trace_output.txt
-                           file=/Users/criggall/Library/Mobile
-                           Documents/com~apple~CloudDocs/muon-cooling/trace-sim/trace_output.txt
+                           filename=/Users/criggall/Documents/muon-cooling/trace-sim/trace_output.txt
+                           file=/Users/criggall/Documents/muon-cooling/trace-sim/trace_output.txt
                            require= coordinates=Centerline
 coil    kat0    innerRadius=360.0 outerRadius=500.0 length=6000.0 material=Cu 
 		tolerance=0.003 nSheets=10 
@@ -7204,10 +7194,10 @@ Run complete  1 Events  0 seconds
 Stochastic processes are enabled.
 ================== Begin Tracking Beam ===============
 Event 1 Completed  1 events  realTime=1 sec  1.0 ev/sec
-Run complete  1 Events  0 seconds
+Run complete  1 Events  1 seconds
 NTuple TuneParticle        5705 entries
 NTuple ReferenceParticle     5705 entries
-NTuple /Users/criggall/Library/Mobile Documents/com~apple~CloudDocs/muon-cooling/trace-sim/trace_output.txt     6838 entries
+NTuple /Users/criggall/Documents/muon-cooling/trace-sim/trace_output.txt     6838 entries
 
 Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 2 Warnings
       1 times: Check number of field voxels
