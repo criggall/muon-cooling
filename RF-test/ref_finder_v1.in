@@ -10,13 +10,16 @@ physics QGSP_BIC doStochastics=0
 param zshift=60
 param period=4200 # HFOFO period
 
+param TRF=1/325*1000 # RF period (ns)
+
 param beamstart=-700 # from the rotator solenoid exit at z=0
 # beam ascii file=initial.dat beamZ=$beamstart # user provided file with particle data
-beam gaussian particle=mu+ nEvents=10 beamZ=-700.0 \
-    sigmaX=0.0 sigmaY=0.0 sigmaXp=0.00 sigmaYp=0.00 \
-    meanMomentum=210.0 sigmaP=0.0 meanT=0.0 sigmaT=0.0
+beam gaussian particle=mu+ nEvents=10000 beamZ=-700.0 \
+    sigmaX=100.0 sigmaY=100.0 sigmaXp=0.00 sigmaYp=0.00 \
+    meanMomentum=250.0 sigmaP=0.0 meanT=0.0 sigmaT=$TRF
+reference referenceMomentum=250 particle=mu+ beamZ=0.0
 
-trace nTrace=2 format=ascii oneNTuple=1
+#trace nTrace=2 format=ascii oneNTuple=1
 
 param beamtime=-0.671 # average time of mu+ in initial.dat modulo RF period TRF
 # if there is no mu+ take mu- and add TRF/2
