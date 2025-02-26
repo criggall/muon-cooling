@@ -14,12 +14,16 @@ param TRF=1/325*1000 # RF period (ns)
 
 param beamstart=-700 # from the rotator solenoid exit at z=0
 # beam ascii file=initial.dat beamZ=$beamstart # user provided file with particle data
-beam gaussian particle=mu+ nEvents=10000 beamZ=-700.0 \
+# beam gaussian particle=mu+ nEvents=10000 beamZ=-700.0 \
     sigmaX=100.0 sigmaY=100.0 sigmaXp=0.00 sigmaYp=0.00 \
-    meanMomentum=250.0 sigmaP=0.0 meanT=0.0 sigmaT=$TRF
-reference referenceMomentum=250 particle=mu+ beamZ=0.0
+    meanMomentum=250.0 sigmaP=0.0 meanT=0.0 sigmaT=0
+beam gaussian particle=mu+ nEvents=10 beamZ=-700.0 \
+    sigmaX=100.0 sigmaY=100.0 sigmaXp=0.00 sigmaYp=0.00 \
+    meanMomentum=250.0 sigmaP=0.0 meanT=0.0 sigmaT=0
+reference referenceMomentum=225 particle=mu+ beamZ=0.0
 
-#trace nTrace=2 format=ascii oneNTuple=1
+#trace nTrace=1 format=ascii oneNTuple=1
+trace nTrace=1 format=ascii
 
 param beamtime=-0.671 # average time of mu+ in initial.dat modulo RF period TRF
 # if there is no mu+ take mu- and add TRF/2
@@ -40,7 +44,7 @@ param maxStep=10.0 steppingVerbose=0 nTrace=0
 
 ### detector
 
-include detectors.txt
+include /Users/criggall/Documents/muon-cooling/RF-test/detectors.txt
 virtualdetector DetLast file=outlast format=ascii radius=300 color=0,1,0 length=0.001 material=Vacuum
 
 ### Mag Field
@@ -62,8 +66,8 @@ param curpl=$cur0*(1+$delf/2) curmn=-$cur0*(1-$delf/2)
 param cur1=4.421*10.98 cur2=-4.421*17.89 cur3=4.421*19.64 cur4=-4.421*21.12 # entrance
 param cur5=4.421*10.06 cur6=-4.421*16.03 cur7=4.421*17.81 cur8=-4.421*19.17 cur9=4.421*19.20 # exit
 
-include solangles1.dat
-include solangles2.dat
+include /Users/criggall/Documents/muon-cooling/RF-test/solangles1.dat
+include /Users/criggall/Documents/muon-cooling/RF-test/solangles2.dat
 
 solenoid SolPos coilName=kat11 current=$curpl kill=1 color=invisible # color=1,0,1  
 solenoid SolNeg coilName=kat11 current=$curmn kill=1 color=invisible # color=0,0,1  
@@ -105,9 +109,9 @@ winMat=Vacuum irisRadius=200 win2Thick=0.07 wallThick=0.4 pipeThick=0.4 cavityMa
 param np=31 # number of snake periods
 param zlastRF=$np*$period+1450
 
-include abs_place7_31.txt
-include RFplace7_31.txt
-include sol_place7_31.txt
+include /Users/criggall/Documents/muon-cooling/RF-test/abs_place7_31.txt
+include /Users/criggall/Documents/muon-cooling/RF-test/RFplace7_31.txt
+include /Users/criggall/Documents/muon-cooling/RF-test/sol_place7_31.txt
 
 place DetLast z=$zlastRF+100
 place terminus z=-1000 # to stop reflected particles

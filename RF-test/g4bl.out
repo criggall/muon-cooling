@@ -1,19 +1,11 @@
 G4BL_DIR=/Applications/G4beamline-3.08.app/Contents
 LD_LIBRARY_PATH='/Applications/G4beamline-3.08.app/Contents/lib:'
-G4ABLADATA=/Users/criggall/Geant4Data/G4ABLA3.1
 G4LEDATA=/Users/criggall/Geant4Data/G4EMLOW8.0
 G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
-G4INCLDATA=/Users/criggall/Geant4Data/G4INCL1.0
-G4NEUTRONHPDATA=/Users/criggall/Geant4Data/G4NDL4.6
 G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
-G4PIIDATA=/Users/criggall/Geant4Data/G4PII1.3
 G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
-G4REALSURFACEDATA=/Users/criggall/Geant4Data/RealSurface2.2
-G4SAIDXSDATA=/Users/criggall/Geant4Data/G4SAIDDATA2.0
-G4TENDLDATA=/Users/criggall/Geant4Data/G4TENDL1.4
-G4LENDDATA=/Users/criggall/Geant4Data/LEND_GND1.3_ENDF.BVII.1
-G4beamline Process ID 41991
+G4beamline Process ID 15082
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -53,15 +45,15 @@ param        zshift        60
 param        period        4200
 param        TRF           3.0769231
 param        beamstart     -700
-beam    GAUSSIAN particle=mu+ nEvents=10000 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=-700.0 maxR=1000000.0 
+beam    GAUSSIAN particle=mu+ nEvents=10 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=-700.0 maxR=1000000.0 
 		meanMomentum=250.0 weight=1.000000 
 		sigmaX=100.0 sigmaY=100.0 sigmaZ=0.0 sigmaXp=0.00000 sigmaYp=0.00000 
-		sigmaP=0.0 sigmaT=3.077 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
+		sigmaP=0.0 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
 reference                  particle=mu+ beamX=0 beamY=0 beamZ=0 beamT=0
-                           rotation= referenceMomentum=250 beamXp=0 beamYp=0
-                           meanMomentum=250 meanXp=0 meanYp=0 tuneZ=-3.7e+21
+                           rotation= referenceMomentum=230 beamXp=0 beamYp=0
+                           meanMomentum=230 meanXp=0 meanYp=0 tuneZ=-3.7e+21
                            tuneMomentum=-3.7e+21 tolerance=0.001 noEfield=0
-                           noBfield=0 noEloss=0 P=250
+                           noBfield=0 noEloss=0 P=230
 param        beamtime      -0.671
 param        toffs0        1.7962431
 param        toffs1        1.7501431
@@ -7430,7 +7422,7 @@ BLCMDtubs::Construct terminus parent= relZ=131752.0 globZ=131752.0
 
 Geometry test nPoints=100 tolerance=0.002 mm:
 Testing geometry for children of group 'World':
-Total geometry errors = 0  2 seconds
+Total geometry errors = 0  1 seconds
 
 ================= Prepare Tune Particle(s) ===========
 ================= Begin Tune Particle(s) =============
@@ -7439,7 +7431,7 @@ Total geometry errors = 0  2 seconds
 ***    severity: Warning
 ***   issued by: BLGlobalField
 *** description: May give inaccurate tracking near world boundary.
-***     EventID: -2     TrackID: 1   mu+  KE=165.8 MeV
+***     EventID: -2     TrackID: 1   mu+  KE=147.4 MeV
 **************************************************************************
 fieldVoxels: nx=6 ny=6 nz=747, 26892 voxels, 568 fields
 fieldVoxels: max field count is 20 fields, # voxels >5: 24624, >10: 23524, >20: 0
@@ -7448,9 +7440,9 @@ fieldVoxels: max field count is 20 fields, # voxels >5: 24624, >10: 23524, >20: 
 ***    severity: Warning
 ***   issued by: BLGlobalField
 *** description: nVoxels = 26892, max fields/voxel = 20
-***     EventID: -2     TrackID: 1   mu+  KE=165.8 MeV
+***     EventID: -2     TrackID: 1   mu+  KE=147.4 MeV
 **************************************************************************
-Run complete  1 Events  1 seconds
+Run complete  1 Events  0 seconds
 ================== Begin Reference Particle(s) ===============
 Run complete  1 Events  0 seconds
 ================== Prepare Tracking Beam ==================
@@ -7470,66 +7462,39 @@ Event 7 Completed  7 events  realTime=1 sec  7.0 ev/sec
 Event 8 Completed  8 events  realTime=1 sec  8.0 ev/sec
 Event 9 Completed  9 events  realTime=1 sec  9.0 ev/sec
 Event 10 Completed  10 events  realTime=1 sec  10.0 ev/sec
-Event 20 Completed  20 events  realTime=2 sec  10.0 ev/sec
-Event 30 Completed  30 events  realTime=4 sec  7.5 ev/sec
-Event 40 Completed  40 events  realTime=5 sec  8.0 ev/sec
-Event 50 Completed  50 events  realTime=6 sec  8.3 ev/sec
-Event 60 Completed  60 events  realTime=8 sec  7.5 ev/sec
-Event 70 Completed  70 events  realTime=10 sec  7.0 ev/sec
-Event 80 Completed  80 events  realTime=11 sec  7.3 ev/sec
-Event 90 Completed  90 events  realTime=13 sec  6.9 ev/sec
-Event 100 Completed  100 events  realTime=14 sec  7.1 ev/sec
-Event 200 Completed  200 events  realTime=29 sec  6.9 ev/sec
-Event 300 Completed  300 events  realTime=44 sec  6.8 ev/sec
-Event 400 Completed  400 events  realTime=60 sec  6.7 ev/sec
-Event 500 Completed  500 events  realTime=74 sec  6.8 ev/sec
-Event 600 Completed  600 events  realTime=90 sec  6.7 ev/sec
-Event 700 Completed  700 events  realTime=104 sec  6.7 ev/sec
-Event 800 Completed  800 events  realTime=120 sec  6.7 ev/sec
-Event 900 Completed  900 events  realTime=135 sec  6.7 ev/sec
-Event 1000 Completed  1000 events  realTime=150 sec  6.7 ev/sec
-Event 2000 Completed  2000 events  realTime=296 sec  6.8 ev/sec
-Event 3000 Completed  3000 events  realTime=448 sec  6.7 ev/sec
-Event 4000 Completed  4000 events  realTime=604 sec  6.6 ev/sec
-Event 5000 Completed  5000 events  realTime=753 sec  6.6 ev/sec
-Event 6000 Completed  6000 events  realTime=906 sec  6.6 ev/sec
-Event 7000 Completed  7000 events  realTime=1054 sec  6.6 ev/sec
-Event 8000 Completed  8000 events  realTime=1208 sec  6.6 ev/sec
-Event 9000 Completed  9000 events  realTime=1360 sec  6.6 ev/sec
-Event 10000 Completed  10000 events  realTime=1511 sec  6.6 ev/sec
-Run complete  10000 Events  1511 seconds
-NTuple Det1                8794 entries
-NTuple Det2                8452 entries
-NTuple Det3                7634 entries
-NTuple Det4                7340 entries
-NTuple Det5                7105 entries
-NTuple Det6                6924 entries
-NTuple Det7                6821 entries
-NTuple Det8                6754 entries
-NTuple Det9                6688 entries
-NTuple Det10               6647 entries
-NTuple Det11               6503 entries
-NTuple Det12               6438 entries
-NTuple Det13               6420 entries
-NTuple Det14               6416 entries
-NTuple Det15               6416 entries
-NTuple Det16               6415 entries
-NTuple Det17               6415 entries
-NTuple Det18               6415 entries
-NTuple Det19               6415 entries
-NTuple Det20               6415 entries
-NTuple Det21               6415 entries
-NTuple Det22               6415 entries
-NTuple Det23               6415 entries
-NTuple Det24               6415 entries
-NTuple Det25               6414 entries
-NTuple Det26               6414 entries
-NTuple Det27               6414 entries
-NTuple Det28               6414 entries
-NTuple Det29               6414 entries
-NTuple Det30               6414 entries
-NTuple Det31               6414 entries
-NTuple DetLast             6414 entries
+Run complete  10 Events  0 seconds
+NTuple Det1                   8 entries
+NTuple Det2                   6 entries
+NTuple Det3                   6 entries
+NTuple Det4                   6 entries
+NTuple Det5                   6 entries
+NTuple Det6                   6 entries
+NTuple Det7                   6 entries
+NTuple Det8                   6 entries
+NTuple Det9                   6 entries
+NTuple Det10                  6 entries
+NTuple Det11                  6 entries
+NTuple Det12                  6 entries
+NTuple Det13                  6 entries
+NTuple Det14                  6 entries
+NTuple Det15                  6 entries
+NTuple Det16                  6 entries
+NTuple Det17                  6 entries
+NTuple Det18                  6 entries
+NTuple Det19                  6 entries
+NTuple Det20                  6 entries
+NTuple Det21                  6 entries
+NTuple Det22                  6 entries
+NTuple Det23                  6 entries
+NTuple Det24                  6 entries
+NTuple Det25                  6 entries
+NTuple Det26                  6 entries
+NTuple Det27                  6 entries
+NTuple Det28                  6 entries
+NTuple Det29                  6 entries
+NTuple Det30                  6 entries
+NTuple Det31                  6 entries
+NTuple DetLast                6 entries
 
 Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 3 Warnings
       1 times: All stochastic processes disabled
