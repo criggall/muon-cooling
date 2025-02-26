@@ -13,13 +13,7 @@ param period=4200 # HFOFO period
 param TRF=1/325*1000 # RF period (ns)
 
 param beamstart=-700 # from the rotator solenoid exit at z=0
-# beam ascii file=initial.dat beamZ=$beamstart # user provided file with particle data
-# beam gaussian particle=mu+ nEvents=10000 beamZ=-700.0 \
-    sigmaX=100.0 sigmaY=100.0 sigmaXp=0.00 sigmaYp=0.00 \
-    meanMomentum=250.0 sigmaP=0.0 meanT=0.0 sigmaT=0
-beam gaussian particle=mu+ nEvents=10 beamZ=-700.0 \
-    sigmaX=100.0 sigmaY=100.0 sigmaXp=0.00 sigmaYp=0.00 \
-    meanMomentum=250.0 sigmaP=0.0 meanT=0.0 sigmaT=0
+beam gaussian particle=mu+ nEvents=10 beamZ=-700.0 sigmaX=100.0 sigmaY=100.0 sigmaXp=0.00 sigmaYp=0.00 meanMomentum=250.0 sigmaP=0.0 meanT=0.0 sigmaT=0
 reference referenceMomentum=225 particle=mu+ beamZ=0.0
 
 #trace nTrace=1 format=ascii oneNTuple=1
@@ -45,7 +39,7 @@ param maxStep=10.0 steppingVerbose=0 nTrace=0
 ### detector
 
 include /Users/criggall/Documents/muon-cooling/RF-test/detectors.txt
-virtualdetector DetLast file=outlast format=ascii radius=300 color=0,1,0 length=0.001 material=Vacuum
+virtualdetector DetLast file=/Users/criggall/Documents/muon-cooling/RF-test/g4bl-output-sim51/outlast format=ascii radius=300 color=0,1,0 length=0.001 material=Vacuum
 
 ### Mag Field
 

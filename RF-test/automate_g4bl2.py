@@ -7,10 +7,10 @@ import numpy as np
 g4bl_dir = '/Users/criggall/Documents/muon-cooling/' # <--- Location of .bash_profile
 
 # Define working directory:
-dir = '/Users/criggall/Documents/muon-cooling/Automate-G4bl/' # <-- All input files must be in this same directory
+dir = '/Users/criggall/Documents/muon-cooling/RF-test/' # <-- All input files must be in this same directory
 
 # Define file locations:
-file = dir+'track_v7.in'
+file = dir+'ref_finder_v1.in'
 file_for_g4bl = '"'+file+'"'
 det_file = dir+'detectors.txt'
 beam_file = dir+'initial.dat'
@@ -19,21 +19,20 @@ beam_file = dir+'initial.dat'
 ref_particle = True
 
 # Specify whether to simulate beam as well:
-beam = False
+beam = True
+
+# Specify beam type:
+beam_type = 'gaussian' # <-- Options are 'gaussian' and 'file'
 
 # Set constant parameters:
-# beamstart = -700 # beam initial z offset (mm)
-beamtime = -0.671 # beam initial time offset (ns)
-density = 0.014 # GH2 density
-ref_p = 248 # reference particle momentum (MeV/c)
-bls = 21.4 # impacts solenoid current
+# ref_p = 225 # reference particle momentum (MeV/c)
 
 # Define range for parameters to scan over:
-# bls = np.arange(18, 21, 0.1) # impacts solenoid current
-beamstart = np.arange(-300,10,10) # beam initial z offset
+# toffset = np.arange(0,3.01,0.01)
+ref_p = np.arange(225,230.1,0.1)
 
 # Set number of loops based on parameter scan space:
-iterations = len(beamstart) # <-- Adding a second parameter to scan over will require a second loop below
+iterations = len(ref_p) # <-- Adding a second parameter to scan over will require a second loop below
 
 ##### FUNCTION DEFINITIONS #####
 
@@ -53,7 +52,10 @@ def modify_g4bl_input(dir, file, beam_file, parameters, out_dir):
             # Adjust input file paths:
             if 'beam ascii' in line or 'beam gaussian' in line:
                 if beam == True:
-                    lines[i] = f"beam ascii file={beam_file} beamZ=$beamstart\n"
+                    if beam_type == 'gaussian':
+                        lines[i] = "beam gaussian particle=mu+ nEvents=10 beamZ=-700.0 sigmaX=100.0 sigmaY=100.0 sigmaXp=0.00 sigmaYp=0.00 meanMomentum=250.0 sigmaP=0.0 meanT=0.0 sigmaT=0\n"
+                    if beam_type == 'file':
+                        lines[i] = f"beam ascii file={beam_file} beamZ=$beamstart\n"
                 # Replace with Gaussian beam to reduce sim time if False:
                 else:
                     lines[i] = "beam gaussian particle=mu+ nEvents=100 beamZ=-700.0 sigmaX=10.0 sigmaY=10.0 sigmaXp=0.100 sigmaYp=0.100 meanMomentum=200.0 sigmaP=4.0 meanT=0.0 sigmaT=0.0\n"
@@ -71,16 +73,6 @@ def modify_g4bl_input(dir, file, beam_file, parameters, out_dir):
                 lines[i] = f"include {dir}sol_place7_31.txt\n"
             elif 'virtualdetector' in line:
                 lines[i] = f"virtualdetector DetLast file={out_dir}outlast format=ascii radius=300 color=0,1,0 length=0.001 material=Vacuum\n"
-
-            # Update configurable parameters:
-            if 'param beamstart' in line:
-                lines[i] = f"param beamstart={parameters['beamstart']}\n"
-            elif 'param beamtime' in line:
-                lines[i] = f"param beamtime={parameters['beamtime']}\n"
-            elif 'material GH2' in line:
-                lines[i] = f"material GH2 Z=1 A=1.01 density={parameters['density']}\n"
-            elif 'param BLS' in line:
-                lines[i] = f"param BLS={parameters['BLS']}\n"
 
             # Check if reference particle is active and remove if False:
             if 'trace' in line:
@@ -155,13 +147,7 @@ for j in range(iterations):
 
     # Set configurable parameters:
     parameters = {
-        # 'beamstart' : beamstart,
-        'beamstart' : beamstart[j],
-        'beamtime' : beamtime,
-        'density' : density,
-        'ref_p' : ref_p,
-        # 'BLS' : bls[j]
-        'BLS' : bls
+        'ref_p' : ref_p[j]
     }
 
     # Execute functions:

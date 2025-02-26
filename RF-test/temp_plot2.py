@@ -6,28 +6,23 @@ import imageio.v2 as imageio
 ##### INPUTS #####
 
 # Main directory:
-main_dir = '/Users/criggall/Documents/muon-cooling/Automate-G4bl/'
+main_dir = '/Users/criggall/Documents/muon-cooling/RF-test/'
 
 # Name of parameter scan is over:
-# param_label = 'BLS'
-param_label = 'initial z offset'
+param_label = 'reference particle momentum (MeV/c)'
 
 # Parameter space scanned:
-# bls = np.arange(10,31)
-beamstart = np.arange(-300,10,10)
+ref_p = np.arange(225,230.1,0.1)
 
 # Number of steps in scan:
-# iterations = len(bls)
-iterations = len(beamstart)
+iterations = len(ref_p)
 
 # Specify whether reference particle, beam, or both:
 ref_particle = True
 # beam = False # <-- Still have to add this option
 
 # Region to plot:
-# plot_option = 'full channel'
-# plot_option = 'first period'
-plot_option = 'second period'
+plot_option = 0 # <-- = period number (0 for full channel)
 
 # RF period (325 MHz frequency):
 T = 1/(325*10**6)*10**9 # ns
@@ -39,18 +34,15 @@ len_period = 4.2 # m
 
 # Define function to plot xy trajectory:
 def plot_trajectory(x_vals, y_vals, z_vals, param_label, param_val, dir):
-    if plot_option == 'full channel':
+    if plot_option == 0:
         plt.plot(z_vals,x_vals,color='red',label='x')
         plt.plot(z_vals,y_vals,color='blue',label='y')
         plt.ylim(-15,15)
-    elif plot_option == 'first period':
-        plt.plot(z_vals[0:end_period],x_vals[0:end_period],color='red',label='x')
-        plt.plot(z_vals[0:end_period],y_vals[0:end_period],color='blue',label='y')
-        plt.ylim(-0.8,0.8)
-    elif plot_option == 'second period':
-        plt.plot(z_vals[end_period:end_period2],x_vals[end_period:end_period2],color='red',label='x')
-        plt.plot(z_vals[end_period:end_period2],y_vals[end_period:end_period2],color='blue',label='y')
-        plt.ylim(-2,2)
+    else:
+        start_index = period_start_indices[plot_option-1]
+        end_index = period_start_indices[plot_option]
+        plt.plot(z_vals[start_index:end_index],x_vals[start_index:end_index],color='red',label='x')
+        plt.plot(z_vals[start_index:end_index],y_vals[start_index:end_index],color='blue',label='y')
     plt.title(f'{param_label} = {round(param_val,1)}')
     plt.xlabel('z (m)')
     plt.ylabel('x, y (cm)')
@@ -59,22 +51,18 @@ def plot_trajectory(x_vals, y_vals, z_vals, param_label, param_val, dir):
     plt.close()
 
 # Define function to plot B field:
-def plot_B_field(x_vals, y_vals, z_vals, Bx_vals, By_vals, Bz_vals, end_period, param_label, param_val, dir):
-    if plot_option == 'full channel':
+def plot_B_field(x_vals, y_vals, z_vals, Bx_vals, By_vals, Bz_vals, param_label, param_val, dir):
+    if plot_option == 0:
         plt.plot(z_vals,Bx_vals,color='green',label='200*Bx')
         plt.plot(z_vals,By_vals,color='blue',label='200*By')
         plt.plot(z_vals,Bz_vals,color='red',label='Bz')
         plt.ylim(-200,200)
-    elif plot_option == 'first period':
-        plt.plot(z_vals[0:end_period],Bx_vals[0:end_period],color='green',label='200*Bx')
-        plt.plot(z_vals[0:end_period],By_vals[0:end_period],color='blue',label='200*By')
-        plt.plot(z_vals[0:end_period],Bz_vals[0:end_period],color='red',label='Bz')
-        plt.ylim(-10,10)
-    elif plot_option == 'second period':
-        plt.plot(z_vals[end_period:end_period2],Bx_vals[end_period:end_period2],color='green',label='200*Bx')
-        plt.plot(z_vals[end_period:end_period2],By_vals[end_period:end_period2],color='blue',label='200*By')
-        plt.plot(z_vals[end_period:end_period2],Bz_vals[end_period:end_period2],color='red',label='Bz')
-        plt.ylim(-35,35)
+    else:
+        start_index = period_start_indices[plot_option-1]
+        end_index = period_start_indices[plot_option]
+        plt.plot(z_vals[start_index:end_index],Bx_vals[start_index:end_index],color='green',label='200*Bx')
+        plt.plot(z_vals[start_index:end_index],By_vals[start_index:end_index],color='blue',label='200*By')
+        plt.plot(z_vals[start_index:end_index],Bz_vals[start_index:end_index],color='red',label='Bz')
     plt.title(f'{param_label} = {round(param_val,1)}')
     plt.xlabel('z (m)')
     plt.ylabel('B (T)')
@@ -97,7 +85,6 @@ for j in range(iterations):
 
         # Import data:
         dir = f'{main_dir}g4bl-output-sim{j+1}/'
-        # dir = f'/Users/criggall/Documents/muon-cooling/Automate-G4bl/BLS_coarse_scan/g4bl-output-sim{j+1}/'
         file = f'{dir}ReferenceParticle.txt'
         data = np.loadtxt(file)
 
@@ -107,6 +94,7 @@ for j in range(iterations):
         t_vals = []; mod_t_vals = []
         Bx_vals = []; By_vals = []; Bz_vals = []
         count = 0; count2 = 0
+        next_z = 0; period_start_z_vals = []; period_start_indices = []
         for i in range(data.shape[0]):
             x_vals.append(data[i][0]*0.1) # mm -> cm
             y_vals.append(data[i][1]*0.1)
@@ -127,13 +115,11 @@ for j in range(iterations):
             Bz_vals.append(Bz)
             del px, py, pz, t, Bx, By, Bz
 
-            # Find index for last value in first and second periods:
-            if z > len_period and count == 0:
-                end_period = i
-                count += 1
-            if z > 2*len_period and count2 == 0:
-                end_period2 = i
-                count2 += 1
+            # Find indices for first value in each period:
+            if z > next_z:
+                period_start_z_vals.append(z)
+                period_start_indices.append(i)
+                next_z += len_period
         
         # Check if particle makes it to end of channel:
         if max(z_vals) >= 130:
@@ -141,20 +127,14 @@ for j in range(iterations):
 
         # Plot:
         plt.clf()
-        # plot_trajectory(x_vals, y_vals, z_vals, param_label, bls[j], dir)
-        plot_trajectory(x_vals, y_vals, z_vals, param_label, beamstart[j], dir)
+        plot_trajectory(x_vals, y_vals, z_vals, param_label, ref_p[j], dir)
         plt.clf()
-        # plot_B_field(x_vals, y_vals, z_vals, Bx_vals, By_vals, Bz_vals, end_period, param_label, bls[j], dir)
-        plot_B_field(x_vals, y_vals, z_vals, Bx_vals, By_vals, Bz_vals, end_period, param_label, beamstart[j], dir)
+        plot_B_field(x_vals, y_vals, z_vals, Bx_vals, By_vals, Bz_vals, param_label, ref_p[j], dir)
 
     # if beam == True:
 
 
 ##### ANIMATIONS #####
-
-# Main directory:
-main_dir = '/Users/criggall/Documents/muon-cooling/Automate-G4bl/'
-# main_dir = '/Users/criggall/Documents/muon-cooling/Automate-G4bl/BLS_coarse_scan/'
 
 # List of sim directories:
 out_dirs = [main_dir+f'g4bl-output-sim{i+1}' for i in range(iterations)]
