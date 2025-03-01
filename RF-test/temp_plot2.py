@@ -12,7 +12,7 @@ main_dir = '/Users/criggall/Documents/muon-cooling/RF-test/'
 param_label = 'reference particle momentum (MeV/c)'
 
 # Parameter space scanned:
-ref_p = np.arange(225,230.1,0.1)
+ref_p = np.arange(220,225.1,0.1)
 
 # Number of steps in scan:
 iterations = len(ref_p)
@@ -22,7 +22,7 @@ ref_particle = True
 # beam = False # <-- Still have to add this option
 
 # Region to plot:
-plot_option = 0 # <-- = period number (0 for full channel)
+plot_option = 3 # <-- = period number (0 for full channel)
 
 # RF period (325 MHz frequency):
 T = 1/(325*10**6)*10**9 # ns
@@ -149,14 +149,10 @@ for i in range(iterations):
 # Create animations:
 xy_images = [imageio.imread(img) for img in xy_plot_paths]
 B_images = [imageio.imread(img) for img in B_plot_paths]
-# frame_duration = 500 # for coarse scans
-frame_duration = 100 # for fine scans
-if plot_option == 'full channel':
-    imageio.mimsave(main_dir+'xy_animation.gif', xy_images, duration=frame_duration, loop=0)
-    imageio.mimsave(main_dir+'B_animation.gif', B_images, duration=frame_duration, loop=0)
-elif plot_option == 'first period':
-    imageio.mimsave(main_dir+'xy_animation_first_period.gif', xy_images, duration=frame_duration, loop=0)
-    imageio.mimsave(main_dir+'B_animation_first_period.gif', B_images, duration=frame_duration, loop=0)
-elif plot_option == 'second period':
-    imageio.mimsave(main_dir+'xy_animation_second_period.gif', xy_images, duration=frame_duration, loop=0)
-    imageio.mimsave(main_dir+'B_animation_second_period.gif', B_images, duration=frame_duration, loop=0)
+frame_duration = 50
+if plot_option == 0:
+    imageio.mimsave(main_dir+'xy_animation_full_channel.gif', xy_images, duration=frame_duration, loop=0)
+    imageio.mimsave(main_dir+'B_animation_full_channel.gif', B_images, duration=frame_duration, loop=0)
+else:
+    imageio.mimsave(main_dir+f'xy_animation_period_{plot_option}.gif', xy_images, duration=frame_duration, loop=0)
+    imageio.mimsave(main_dir+f'B_animation_period_{plot_option}.gif', B_images, duration=frame_duration, loop=0)

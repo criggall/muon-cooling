@@ -28,8 +28,7 @@ beam_type = 'gaussian' # <-- Options are 'gaussian' and 'file'
 # ref_p = 225 # reference particle momentum (MeV/c)
 
 # Define range for parameters to scan over:
-# toffset = np.arange(0,3.01,0.01)
-ref_p = np.arange(225,230.1,0.1)
+ref_p = np.arange(220,225.1,0.1)
 
 # Set number of loops based on parameter scan space:
 iterations = len(ref_p) # <-- Adding a second parameter to scan over will require a second loop below
@@ -85,7 +84,7 @@ def modify_g4bl_input(dir, file, beam_file, parameters, out_dir):
             
         # Add reference particle if True:
         if ref_particle == True and count == 0:
-            lines.append(f'reference referenceMomentum={ref_p} particle=mu+ beamZ=0.0\n')
+            lines.append(f'reference referenceMomentum={parameters["ref_p"]} particle=mu+ beamZ=0.0\n')
             lines.append(f'trace nTrace=1 format=ascii file="{g4bl_dir}TraceParticle.txt"\n')
         
     with open(file, 'w') as f:
