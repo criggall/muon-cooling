@@ -10,7 +10,7 @@ g4bl_dir = '/Users/criggall/Documents/muon-cooling/' # <--- Location of .bash_pr
 dir = '/Users/criggall/Documents/muon-cooling/RF-test/' # <-- All input files must be in this same directory
 
 # Define file locations:
-file = dir+'ref_finder_v1.in'
+file = dir+'g4bl_input_card.in'
 file_for_g4bl = '"'+file+'"'
 det_file = dir+'detectors.txt'
 beam_file = dir+'initial.dat'
@@ -45,7 +45,7 @@ def modify_g4bl_input(dir, file, beam_file, parameters, out_dir):
 
     with open(file, 'r') as f:
         lines = f.readlines()
-        count = 0
+        # tr_cnt = 0; ref_cnt = 0
         for i, line in enumerate(lines):
             
             # Adjust input file paths:
@@ -73,19 +73,15 @@ def modify_g4bl_input(dir, file, beam_file, parameters, out_dir):
             elif 'virtualdetector' in line:
                 lines[i] = f"virtualdetector DetLast file={out_dir}outlast format=ascii radius=300 color=0,1,0 length=0.001 material=Vacuum\n"
 
-            # Check if reference particle is active and remove if False:
-            if 'trace' in line:
-                count += 1
-                if ref_particle == False:
-                    lines[i] = "\n"
+            # Remove any existing reference particles:
             if 'reference' in line:
-                if ref_particle == False:
-                    lines[i] = "\n"
-            
+                lines[i] = "\n"
+            if 'trace' in line:
+                lines[i] = "\n"
+        
         # Add reference particle if True:
-        if ref_particle == True and count == 0:
-            lines.append(f'reference referenceMomentum={parameters["ref_p"]} particle=mu+ beamZ=0.0\n')
-            lines.append(f'trace nTrace=1 format=ascii file="{g4bl_dir}TraceParticle.txt"\n')
+        lines.append(f'reference referenceMomentum={parameters["ref_p"]} particle=mu+ beamZ=0.0\n')
+        lines.append(f'trace nTrace=1 format=ascii file="{g4bl_dir}TraceParticle.txt"\n')
         
     with open(file, 'w') as f:
         f.writelines(lines)
@@ -112,7 +108,7 @@ def run_g4bl_sim(file):
 
 # Define function to copy .in card to output directory:
 def copy_in(file, out_dir):
-    copy_in_command = f"cp {file} {out_dir}/G4blInputCard.in"
+    copy_in_command = f"cp {file} {out_dir}/g4bl_input_card.in"
     copy_in_process = subprocess.run(copy_in_command, shell=True, capture_output=False)
 
 # Define function to move reference particle output and delete additional trace files:
@@ -120,10 +116,28 @@ def mv_ref_file(g4bl_dir, out_dir):
     mv_ref_file_command = f"mv {g4bl_dir}ReferenceParticle.txt {out_dir} && rm {g4bl_dir}TuneParticle.txt && rm {g4bl_dir}TraceParticle.txt"
     mv_ref_file_process = subprocess.run(mv_ref_file_command, shell=True, capture_output=False)
 
+# Define function to remove reference particle output for beam sim:
+def rm_ref_file(g4bl_dir, out_dir):
+    rm_ref_file_command = f"rm ReferenceParticle.txt && rm TuneParticle.txt && rm {g4bl_dir}TraceParticle.txt"
+    rm_ref_file_process = subprocess.run(rm_ref_file_command, shell=True, capture_output=False)
+
+# Define function to move detector output files for beam sim:
+def mv_det_out(out_dir):
+    mv_det_out_command = f"mv out*.txt {out_dir}"
+    mv_det_out_process = subprocess.run(mv_det_out_command, shell=True, capture_output=False)
+
 # Define function to remove detector output files for reference-particle-only sim:
 def rm_det_out(out_dir):
     rm_det_out_command = f"rm {out_dir}out*.txt"
     rm_det_out_process = subprocess.run(rm_det_out_command, shell=True, capture_output=False)
+
+# Define function to remove duplicate files from running directory:
+def rm_out_files(beam):
+    if beam == True:
+        rm_out_files_command = "rm kat*.dat"
+    elif beam == False:
+        rm_out_files_command = "rm out*.txt && rm kat*.dat"
+    rm_out_files_process = subprocess.run(rm_out_files_command, shell=True, capture_output=False)
 
 ##### MAIN LOOP #####
 
@@ -140,26 +154,35 @@ for j in range(iterations):
     dir_exists_output = str(dir_exists_process.stdout)[2]
     if dir_exists_output != '1':
         write_out(out_dir)
-    
-    # Copy .in card to output directory:
-    copy_in(file, out_dir)
 
     # Set configurable parameters:
     parameters = {
         'ref_p' : ref_p[j]
     }
 
-    # Execute functions:
+    # Modify input files:
     modify_g4bl_input(dir, file, beam_file, parameters, out_dir)
     if ref_particle == False:
         modify_detector_file(out_dir, det_file)
+
+    # Copy .in card to output directory:
+    copy_in(file, out_dir)
+
+    # Execute g4bl:
     stdout, stderr = run_g4bl_sim(file)
+    
+    # Organize output files:
     if ref_particle == True:
         mv_ref_file(g4bl_dir, out_dir)
+    elif ref_particle == False:
+        rm_ref_file(g4bl_dir, out_dir)
     if beam == False:
         rm_det_out(out_dir)
-        print(f'Removing detector files from directory {out_dir}')
+    elif beam == True:
+        mv_det_out(out_dir)
+    rm_out_files(beam)
     
+    # Print output to terminal:
     if stderr:
             print("Error running simulation:", stderr)
     else:
