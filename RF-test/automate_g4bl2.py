@@ -113,7 +113,7 @@ def copy_in(file, out_dir):
 
 # Define function to move reference particle output and delete additional trace files:
 def mv_ref_file(g4bl_dir, out_dir):
-    mv_ref_file_command = f"mv {g4bl_dir}ReferenceParticle.txt {out_dir} && rm {g4bl_dir}TuneParticle.txt && rm {g4bl_dir}TraceParticle.txt"
+    mv_ref_file_command = f"mv ReferenceParticle.txt {out_dir} && rm {g4bl_dir}TuneParticle.txt && rm {g4bl_dir}TraceParticle.txt"
     mv_ref_file_process = subprocess.run(mv_ref_file_command, shell=True, capture_output=False)
 
 # Define function to remove reference particle output for beam sim:
