@@ -1,0 +1,35 @@
+# First period:
+param num=0
+place SolPos z=700*0+$period*$num
+place SolNeg z=700*1+$period*$num
+place SolPos z=700*2+$period*$num
+place SolNeg z=700*3+$period*$num
+place SolPos z=700*4+$period*$num
+place SolNeg z=700*4+$period*$num
+
+# Second period:
+param num=1
+place SolPos z=700*0+$period*$num
+place SolNeg z=700*1+$period*$num
+place SolPos z=700*2+$period*$num
+place SolNeg z=700*3+$period*$num
+place SolPos z=700*4+$period*$num
+place SolNeg z=700*4+$period*$num
+
+# Third period:
+param num=2
+place SolPos z=700*0+$period*$num
+place SolNeg z=700*1+$period*$num
+place SolPos z=700*2+$period*$num
+place SolNeg z=700*3+$period*$num
+place SolPos z=700*4+$period*$num
+place SolNeg z=700*4+$period*$num
+
+# Fourth period:
+param num=3
+place SolPos z=700*0+$period*$num
+place SolNeg z=700*1+$period*$num
+place SolPos z=700*2+$period*$num
+place SolNeg z=700*3+$period*$num
+place SolPos z=700*4+$period*$num
+place SolNeg z=700*4+$period*$num

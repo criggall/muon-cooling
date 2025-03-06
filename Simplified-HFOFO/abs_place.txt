@@ -1,0 +1,21 @@
+place Det1 z=$period*0
+
+# First period:
+
+
+place Det2 z=$period*1
+
+# Second period:
+
+
+place Det3 z=$period*2
+
+# Third period:
+
+
+place Det4 z=$period*3
+
+# Fourth period:
+
+
+place Det5 z=$period*4

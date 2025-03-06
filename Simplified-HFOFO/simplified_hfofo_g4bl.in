@@ -1,0 +1,36 @@
+### PARAMETERS ###
+
+# Constants:
+param m=105.7 #MeV
+param c=2.997925*10^8 #m/s
+
+# Reference particle:
+param p=223.2 #MeV/c
+param v=$p*$c/sqrt($p^2+$m^2)
+
+# Solenoid current:
+param sol_current=90 #amps/mm^2
+
+# RF:
+param RF_frequency=325*10^6 #Hz
+param RF_period=1/$RF_frequency*10^9 #ns
+
+### REFERENCE PARTICLE ###
+
+reference referenceMomentum=$p particle=mu+ beamZ=0.0
+
+### DETECTORS ###
+
+include detectors.txt
+
+### SOLENOIDS ###
+
+include kat11.dat
+
+solenoid SolPos coilName=kat11 current=$sol_current color=0,1,1
+solenoid SolNeg coilName=kat11 current=-$sol_current color=0,1,0
+
+include sol_place.txt
+
+### RF ###
+
