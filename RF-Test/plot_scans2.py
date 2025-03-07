@@ -6,8 +6,8 @@ import imageio.v2 as imageio
 ##### INPUTS #####
 
 # Main directory:
-main_dir = '/Users/criggall/Documents/muon-cooling/RF-test/'
-fig_dir = main_dir+'Figures/'
+main_dir = '/Users/criggall/Documents/muon-cooling/RF-Test/ref_p_scan/'
+fig_dir = '/Users/criggall/Documents/muon-cooling/RF-Test/Figures/'
 
 # Name of parameter scan is over:
 param_label = 'reference particle momentum (MeV/c)'
@@ -32,7 +32,7 @@ T = 1/(325*10**6)*10**9 # ns
 len_period = 4.2 # m
 
 ##### IMPORT DIGITIZED DATA FROM PAPER #####
-paper_data_dir = '/Users/criggall/Documents/muon-cooling/paper-data'
+paper_data_dir = '/Users/criggall/Documents/muon-cooling/Paper-Data/'
 xdata = np.genfromtxt(paper_data_dir+'paper_x_vs_z.csv',delimiter=',')
 xdata_x = []; xdata_z = []
 for i in range(len(xdata)):
@@ -105,8 +105,8 @@ def plot_residual(x_vals, y_vals, z_vals, xdata_x, xdata_z, ydata_y, ydata_z, pa
         x_total_residual = 0
         y_total_residual = 0
         for i in range(len(positions)):
-            x_diff.append(x_vals_periodic[i] - x_paper_interp[i])
-            y_diff.append(y_vals_periodic[i] - y_paper_interp[i])
+            x_diff.append(abs(x_vals_periodic[i] - x_paper_interp[i]))
+            y_diff.append(abs(y_vals_periodic[i] - y_paper_interp[i]))
             x_total_residual += x_diff[i]
             y_total_residual += y_diff[i]
 
