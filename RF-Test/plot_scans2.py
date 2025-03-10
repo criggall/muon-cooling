@@ -107,8 +107,8 @@ def plot_residual(x_vals, y_vals, z_vals, xdata_x, xdata_z, ydata_y, ydata_z, pa
         for i in range(len(positions)):
             x_diff.append(abs(x_vals_periodic[i] - x_paper_interp[i]))
             y_diff.append(abs(y_vals_periodic[i] - y_paper_interp[i]))
-            x_total_residual += x_diff[i]
-            y_total_residual += y_diff[i]
+            x_total_residual += x_diff[i]**2
+            y_total_residual += y_diff[i]**2
 
     else:
     
@@ -130,8 +130,8 @@ def plot_residual(x_vals, y_vals, z_vals, xdata_x, xdata_z, ydata_y, ydata_z, pa
         for i in range(len(positions)):
             x_diff.append(x_vals_periodic[i] - x_paper_interp[i])
             y_diff.append(y_vals_periodic[i] - y_paper_interp[i])
-            x_total_residual += x_diff[i]
-            y_total_residual += y_diff[i]
+            x_total_residual += x_diff[i]**2
+            y_total_residual += y_diff[i]**2
 
     plt.plot(positions,x_diff,color='red',label=f'x (total residual = {round(x_total_residual,2)})')
     plt.plot(positions,y_diff,color='blue',label=f'y (total residual = {round(y_total_residual,2)})')
