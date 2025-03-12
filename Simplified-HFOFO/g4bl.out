@@ -1,19 +1,11 @@
 G4BL_DIR=/Applications/G4beamline-3.08.app/Contents
 LD_LIBRARY_PATH='/Applications/G4beamline-3.08.app/Contents/lib:'
-G4ABLADATA=/Users/criggall/Geant4Data/G4ABLA3.1
 G4LEDATA=/Users/criggall/Geant4Data/G4EMLOW8.0
 G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
-G4INCLDATA=/Users/criggall/Geant4Data/G4INCL1.0
-G4NEUTRONHPDATA=/Users/criggall/Geant4Data/G4NDL4.6
 G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
-G4PIIDATA=/Users/criggall/Geant4Data/G4PII1.3
 G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
-G4REALSURFACEDATA=/Users/criggall/Geant4Data/RealSurface2.2
-G4SAIDXSDATA=/Users/criggall/Geant4Data/G4SAIDDATA2.0
-G4TENDLDATA=/Users/criggall/Geant4Data/G4TENDL1.4
-G4LENDDATA=/Users/criggall/Geant4Data/LEND_GND1.3_ENDF.BVII.1
-G4beamline Process ID 19785
+G4beamline Process ID 6373
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -35,7 +27,6 @@ G4beamline Process ID 19785
                              WWW : http://geant4.org/
 **************************************************************
 
-param        viewer        best,1
 geometry                   nPoints=100 printGeometry=0 visual=0
                            tolerance=0.002
 param        m             105.7
@@ -97,28 +88,28 @@ place   SolNeg  copies=1 x=0.0 y=0.0 z=700.0
 place   SolPos  copies=1 x=0.0 y=0.0 z=1400.0 
 place   SolNeg  copies=1 x=0.0 y=0.0 z=2100.0 
 place   SolPos  copies=1 x=0.0 y=0.0 z=2800.0 
-place   SolNeg  copies=1 x=0.0 y=0.0 z=2800.0 
+place   SolNeg  copies=1 x=0.0 y=0.0 z=3500.0 
 param        num           1
 place   SolPos  copies=1 x=0.0 y=0.0 z=4200.0 
 place   SolNeg  copies=1 x=0.0 y=0.0 z=4900.0 
 place   SolPos  copies=1 x=0.0 y=0.0 z=5600.0 
 place   SolNeg  copies=1 x=0.0 y=0.0 z=6300.0 
 place   SolPos  copies=1 x=0.0 y=0.0 z=7000.0 
-place   SolNeg  copies=1 x=0.0 y=0.0 z=7000.0 
+place   SolNeg  copies=1 x=0.0 y=0.0 z=7700.0 
 param        num           2
 place   SolPos  copies=1 x=0.0 y=0.0 z=8400.0 
 place   SolNeg  copies=1 x=0.0 y=0.0 z=9100.0 
 place   SolPos  copies=1 x=0.0 y=0.0 z=9800.0 
 place   SolNeg  copies=1 x=0.0 y=0.0 z=10500.0 
 place   SolPos  copies=1 x=0.0 y=0.0 z=11200.0 
-place   SolNeg  copies=1 x=0.0 y=0.0 z=11200.0 
+place   SolNeg  copies=1 x=0.0 y=0.0 z=11900.0 
 param        num           3
 place   SolPos  copies=1 x=0.0 y=0.0 z=12600.0 
 place   SolNeg  copies=1 x=0.0 y=0.0 z=13300.0 
 place   SolPos  copies=1 x=0.0 y=0.0 z=14000.0 
 place   SolNeg  copies=1 x=0.0 y=0.0 z=14700.0 
 place   SolPos  copies=1 x=0.0 y=0.0 z=15400.0 
-place   SolNeg  copies=1 x=0.0 y=0.0 z=15400.0 
+place   SolNeg  copies=1 x=0.0 y=0.0 z=16100.0 
 place   Det1    copies=1 x=0.0 y=0.0 z=0.0 
 place   Det2    copies=1 x=0.0 y=0.0 z=4200.0 
 place   Det3    copies=1 x=0.0 y=0.0 z=8400.0 
@@ -149,7 +140,7 @@ deltaIntersection=0.1
  steppingFormat=N GLOBAL CL KE STEP VOL PROCESS
 steppingVerbose=0
               v=2.7240357e+08
-         viewer=best,1
+         viewer=none
  wallClockLimit=-1
   worldMaterial=Vacuum
      zTolerance=2.0
@@ -178,17 +169,9 @@ BLCMDsolenoid::Construct SolPos parent= relZ=1400.0 globZ=1400.0
 BLCMDsolenoid::Construct SolNeg parent= relZ=2100.0 globZ=2100.0
 	global pos=0.0,0.0,2100.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
 BLCMDsolenoid::Construct SolPos parent= relZ=2800.0 globZ=2800.0
-	global pos=0.0,0.0,2800.0  **************************************************************************
-*** G4Exception: GeomVol1002
-***    severity: Warning
-***   issued by: G4PVPlacement::CheckOverlaps()
-*** description: Overlap with volume already placed !
-          Overlap is detected for volume SolNeg:0 (G4Tubs)
-          apparently fully encapsulating volume SolPos:0 (G4Tubs) at the same level!
-NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
-**************************************************************************
-BLCMDsolenoid::Construct SolNeg parent= relZ=2800.0 globZ=2800.0
-	global pos=0.0,0.0,2800.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+	global pos=0.0,0.0,2800.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=3500.0 globZ=3500.0
+	global pos=0.0,0.0,3500.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
 BLCMDsolenoid::Construct SolPos parent= relZ=4200.0 globZ=4200.0
 	global pos=0.0,0.0,4200.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
 BLCMDsolenoid::Construct SolNeg parent= relZ=4900.0 globZ=4900.0
@@ -198,17 +181,9 @@ BLCMDsolenoid::Construct SolPos parent= relZ=5600.0 globZ=5600.0
 BLCMDsolenoid::Construct SolNeg parent= relZ=6300.0 globZ=6300.0
 	global pos=0.0,0.0,6300.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
 BLCMDsolenoid::Construct SolPos parent= relZ=7000.0 globZ=7000.0
-	global pos=0.0,0.0,7000.0  **************************************************************************
-*** G4Exception: GeomVol1002
-***    severity: Warning
-***   issued by: G4PVPlacement::CheckOverlaps()
-*** description: Overlap with volume already placed !
-          Overlap is detected for volume SolNeg:0 (G4Tubs)
-          apparently fully encapsulating volume SolPos:0 (G4Tubs) at the same level!
-NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
-**************************************************************************
-BLCMDsolenoid::Construct SolNeg parent= relZ=7000.0 globZ=7000.0
-	global pos=0.0,0.0,7000.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+	global pos=0.0,0.0,7000.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=7700.0 globZ=7700.0
+	global pos=0.0,0.0,7700.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
 BLCMDsolenoid::Construct SolPos parent= relZ=8400.0 globZ=8400.0
 	global pos=0.0,0.0,8400.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
 BLCMDsolenoid::Construct SolNeg parent= relZ=9100.0 globZ=9100.0
@@ -218,17 +193,9 @@ BLCMDsolenoid::Construct SolPos parent= relZ=9800.0 globZ=9800.0
 BLCMDsolenoid::Construct SolNeg parent= relZ=10500.0 globZ=10500.0
 	global pos=0.0,0.0,10500.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
 BLCMDsolenoid::Construct SolPos parent= relZ=11200.0 globZ=11200.0
-	global pos=0.0,0.0,11200.0  **************************************************************************
-*** G4Exception: GeomVol1002
-***    severity: Warning
-***   issued by: G4PVPlacement::CheckOverlaps()
-*** description: Overlap with volume already placed !
-          Overlap is detected for volume SolNeg:0 (G4Tubs)
-          apparently fully encapsulating volume SolPos:0 (G4Tubs) at the same level!
-NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
-**************************************************************************
-BLCMDsolenoid::Construct SolNeg parent= relZ=11200.0 globZ=11200.0
-	global pos=0.0,0.0,11200.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+	global pos=0.0,0.0,11200.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=11900.0 globZ=11900.0
+	global pos=0.0,0.0,11900.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
 BLCMDsolenoid::Construct SolPos parent= relZ=12600.0 globZ=12600.0
 	global pos=0.0,0.0,12600.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
 BLCMDsolenoid::Construct SolNeg parent= relZ=13300.0 globZ=13300.0
@@ -238,17 +205,9 @@ BLCMDsolenoid::Construct SolPos parent= relZ=14000.0 globZ=14000.0
 BLCMDsolenoid::Construct SolNeg parent= relZ=14700.0 globZ=14700.0
 	global pos=0.0,0.0,14700.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
 BLCMDsolenoid::Construct SolPos parent= relZ=15400.0 globZ=15400.0
-	global pos=0.0,0.0,15400.0  **************************************************************************
-*** G4Exception: GeomVol1002
-***    severity: Warning
-***   issued by: G4PVPlacement::CheckOverlaps()
-*** description: Overlap with volume already placed !
-          Overlap is detected for volume SolNeg:0 (G4Tubs)
-          apparently fully encapsulating volume SolPos:0 (G4Tubs) at the same level!
-NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
-**************************************************************************
-BLCMDsolenoid::Construct SolNeg parent= relZ=15400.0 globZ=15400.0
-	global pos=0.0,0.0,15400.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... Checking overlaps for volume Det1:0 (G4Tubs) ... OK! 
+	global pos=0.0,0.0,15400.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=16100.0 globZ=16100.0
+	global pos=0.0,0.0,16100.0  Checking overlaps for volume Det1:0 (G4Tubs) ... OK! 
 BLCMDvirtualdetector::Construct Det1 parent= relZ=0.0 globZ=0.0
 Checking overlaps for volume Det2:0 (G4Tubs) ... OK! 
 BLCMDvirtualdetector::Construct Det2 parent= relZ=4200.0 globZ=4200.0
@@ -274,7 +233,7 @@ Total geometry errors = 0  0 seconds
 ***     EventID: -2     TrackID: 1   mu+  KE=147.4 MeV
 **************************************************************************
 fieldVoxels: nx=4 ny=4 nz=116, 1856 voxels, 24 fields
-fieldVoxels: max field count is 18 fields, # voxels >5: 1632, >10: 1152, >20: 0
+fieldVoxels: max field count is 18 fields, # voxels >5: 1584, >10: 1152, >20: 0
 **************************************************************************
 *** G4Exception: Check number of field voxels
 ***    severity: Warning
@@ -285,104 +244,39 @@ fieldVoxels: max field count is 18 fields, # voxels >5: 1632, >10: 1152, >20: 0
 Run complete  1 Events  0 seconds
 ================== Begin Reference Particle(s) ===============
 Run complete  1 Events  0 seconds
-================== Prepare Visualization ==================
+================== Prepare Tracking Beam ==================
 Stochastic processes are enabled.
-Available UI session types: [ Qt, tcsh, csh ]
-Visualization Manager instantiating with verbosity "warnings (3)"...
-Visualization Manager initialising...
-Registering graphics systems...
+================== Begin Tracking Beam ===============
+Event 1 Completed  1 events  realTime=1 sec  1.0 ev/sec
+Event 2 Completed  2 events  realTime=1 sec  2.0 ev/sec
+Event 3 Completed  3 events  realTime=1 sec  3.0 ev/sec
+Event 4 Completed  4 events  realTime=1 sec  4.0 ev/sec
+Event 5 Completed  5 events  realTime=1 sec  5.0 ev/sec
+Event 6 Completed  6 events  realTime=1 sec  6.0 ev/sec
+Event 7 Completed  7 events  realTime=1 sec  7.0 ev/sec
+Event 8 Completed  8 events  realTime=1 sec  8.0 ev/sec
+Event 9 Completed  9 events  realTime=1 sec  9.0 ev/sec
+Event 10 Completed  10 events  realTime=1 sec  10.0 ev/sec
+Event 20 Completed  20 events  realTime=1 sec  20.0 ev/sec
+Event 30 Completed  30 events  realTime=1 sec  30.0 ev/sec
+Event 40 Completed  40 events  realTime=1 sec  40.0 ev/sec
+Event 50 Completed  50 events  realTime=1 sec  50.0 ev/sec
+Event 60 Completed  60 events  realTime=1 sec  60.0 ev/sec
+Event 70 Completed  70 events  realTime=1 sec  70.0 ev/sec
+Event 80 Completed  80 events  realTime=1 sec  80.0 ev/sec
+Event 90 Completed  90 events  realTime=1 sec  90.0 ev/sec
+Event 100 Completed  100 events  realTime=1 sec  100.0 ev/sec
+Run complete  100 Events  1 seconds
+NTuple Det1                 100 entries
+NTuple Det2                 101 entries
+NTuple Det3                  99 entries
+NTuple Det4                 100 entries
+NTuple Det5                  97 entries
+NTuple TuneParticle         178 entries
+NTuple ReferenceParticle      178 entries
 
-You have successfully registered the following graphics systems.
-Registered graphics systems are:
-  ASCIITree (ATree)
-  DAWNFILE (DAWNFILE)
-  G4HepRepFile (HepRepFile)
-  RayTracer (RayTracer)
-  VRML2FILE (VRML2FILE)
-  gMocrenFile (gMocrenFile)
-  OpenGLImmediateQt (OGLIQt, OGLI)
-  OpenGLStoredQt (OGLSQt, OGL, OGLS)
-  Qt3D (Qt3D)
-
-Registering model factories...
-
-You have successfully registered the following model factories.
-Registered model factories:
-  generic
-  drawByAttribute
-  drawByCharge
-  drawByOriginVolume
-  drawByParticleID
-  drawByEncounteredVolume
-
-Registered models:
-  None
-
-Registered filter factories:
-  attributeFilter
-  chargeFilter
-  originVolumeFilter
-  particleFilter
-  encounteredVolumeFilter
-
-Registered filters:
-  None
-
-You have successfully registered the following user vis actions.
-Run Duration User Vis Actions: none
-End of Event User Vis Actions: none
-End of Run User Vis Actions: none
-
-Some /vis commands (optionally) take a string to specify colour.
-"/vis/list" to see available colours.
-
-Selected visualization viewer: Qt
-BLVisManager init: /vis/open OGLSQt
-BLVisManager init: /vis/viewer/set/auxiliaryEdge true
-BLVisManager init: /vis/viewer/set/style surface
-BLVisManager init: /vis/viewer/set/viewpointThetaPhi 0 0 deg
-BLVisManager init: /vis/drawVolume
-BLVisManager init: /tracking/storeTrajectory 1
-BLVisManager init: /vis/scene/add/trajectories
-/tracking/storeTrajectory 1
-Attributes available for modeling and filtering with
-  "/vis/modeling/trajectories/create/drawByAttribute" and
-  "/vis/filtering/trajectories/create/attributeFilter" commands:
-G4TrajectoriesModel:
-  Event ID (EventID): G4int
-  Run ID (RunID): G4int
-G4Trajectory:
-  Charge (Ch): unit: e+ (G4double)
-  Track ID (ID): G4int
-  Initial kinetic energy (IKE): G4BestUnit (G4double)
-  Initial momentum magnitude (IMag): G4BestUnit (G4double)
-  Initial momentum (IMom): G4BestUnit (G4ThreeVector)
-  No. of points (NTP): G4int
-  PDG Encoding (PDG): G4int
-  Parent ID (PID): G4int
-  Particle Name (PN): G4String
-G4TrajectoryPoint:
-  Position (Pos): G4BestUnit (G4ThreeVector)
-WARNING: Trajectory storing has been requested.  This action may be
-  reversed with "/tracking/storeTrajectory 0".
-BLVisManager init: /vis/scene/endOfEventAction accumulate -1
-WARNING: The vis manager will keep an unlimited number of events.
-  This may use a lot of memory.
-  It may be changed with, e.g., "/vis/scene/endOfEventAction accumulate 10".
-BLVisManager init: /vis/viewer/set/hiddenMarker true
-
-WARNING: No extent set for user vis action "DrawMarkers".
-WARNING: User Vis Action "DrawMarkers" extent is null.
- Changing export format to "jpg"
-2025-03-12 16:35:04.609 g4bl[19785:1714245] +[IMKClient subclass]: chose IMKClient_Modern
-2025-03-12 16:35:04.609 g4bl[19785:1714245] +[IMKInputSession subclass]: chose IMKInputSession_Modern
-
-Graphics systems deleted.
-Visualization Manager deleting...
-
-Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 7 Warnings
+Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 3 Warnings
       1 times: Check number of field voxels
       1 times: EM Field Extends Outside World
-      4 times: GeomVol1002
       1 times: No physics registered
 g4beamline: simulation complete

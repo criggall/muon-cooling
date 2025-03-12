@@ -4,7 +4,7 @@ place SolNeg z=700*1+$period_len*$num
 place SolPos z=700*2+$period_len*$num
 place SolNeg z=700*3+$period_len*$num
 place SolPos z=700*4+$period_len*$num
-place SolNeg z=700*4+$period_len*$num
+place SolNeg z=700*5+$period_len*$num
 
 param num=1
 place SolPos z=700*0+$period_len*$num
@@ -12,7 +12,7 @@ place SolNeg z=700*1+$period_len*$num
 place SolPos z=700*2+$period_len*$num
 place SolNeg z=700*3+$period_len*$num
 place SolPos z=700*4+$period_len*$num
-place SolNeg z=700*4+$period_len*$num
+place SolNeg z=700*5+$period_len*$num
 
 param num=2
 place SolPos z=700*0+$period_len*$num
@@ -20,7 +20,7 @@ place SolNeg z=700*1+$period_len*$num
 place SolPos z=700*2+$period_len*$num
 place SolNeg z=700*3+$period_len*$num
 place SolPos z=700*4+$period_len*$num
-place SolNeg z=700*4+$period_len*$num
+place SolNeg z=700*5+$period_len*$num
 
 param num=3
 place SolPos z=700*0+$period_len*$num
@@ -28,4 +28,4 @@ place SolNeg z=700*1+$period_len*$num
 place SolPos z=700*2+$period_len*$num
 place SolNeg z=700*3+$period_len*$num
 place SolPos z=700*4+$period_len*$num
-place SolNeg z=700*4+$period_len*$num
+place SolNeg z=700*5+$period_len*$num
