@@ -5,11 +5,15 @@ param m=105.7 #MeV
 param c=2.997925*10^8 #m/s
 
 # Reference particle:
-param p=230 #MeV/c
+param p=205 #MeV/c
 param v=$p*$c/sqrt($p^2+$m^2)
 
 # Solenoid current:
 param sol_current=90 #amps/mm^2
+param current_step=0
+
+# Solenoid pitch:
+param pitch=-0.0025*180/pi
 
 # Period length:
 param period_len=4200 #mm
@@ -20,8 +24,8 @@ beam gaussian particle=mu+ nEvents=100 beamZ=-700.0 sigmaX=10.0 sigmaY=10.0 sigm
 
 ### REFERENCE PARTICLE ###
 
-reference referenceMomentum=$p particle=mu+ beamZ=0.0
-trace nTrace=0 format=ascii file="TraceParticle.txt"
+reference referenceMomentum=$p particle=mu+ beamX=0.0 beamY=0.0 beamZ=0.0
+trace nTrace=0 format=ascii
 
 ### DETECTORS ###
 
@@ -39,3 +43,6 @@ include sol_place.txt
 ### OTHER ###
 
 include abs_place.txt
+
+# Visualize magnetic field lines:
+fieldlines center=0,0,0

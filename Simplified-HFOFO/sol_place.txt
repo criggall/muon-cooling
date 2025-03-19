@@ -1,31 +1,31 @@
 param num=0
-place SolPos z=700*0+$period_len*$num
-place SolNeg z=700*1+$period_len*$num
-place SolPos z=700*2+$period_len*$num
-place SolNeg z=700*3+$period_len*$num
-place SolPos z=700*4+$period_len*$num
-place SolNeg z=700*5+$period_len*$num
+place SolPos z=700*0+$period_len*$num current=$sol_current+$current_step*0 rotation=X$pitch,Z240
+place SolNeg z=700*1+$period_len*$num current=-($sol_current+$current_step*1) rotation=X$pitch
+place SolPos z=700*2+$period_len*$num current=$sol_current+$current_step*2 rotation=X$pitch,Z120
+place SolNeg z=700*3+$period_len*$num current=-($sol_current+$current_step*3) rotation=X$pitch,Z240
+place SolPos z=700*4+$period_len*$num current=$sol_current+$current_step*4 rotation=X$pitch
+place SolNeg z=700*5+$period_len*$num current=-($sol_current+$current_step*5) rotation=X$pitch,Z120
 
 param num=1
-place SolPos z=700*0+$period_len*$num
-place SolNeg z=700*1+$period_len*$num
-place SolPos z=700*2+$period_len*$num
-place SolNeg z=700*3+$period_len*$num
-place SolPos z=700*4+$period_len*$num
-place SolNeg z=700*5+$period_len*$num
+place SolPos z=700*0+$period_len*$num current=$sol_current+$current_step*6 rotation=X$pitch,Z240
+place SolNeg z=700*1+$period_len*$num current=-($sol_current+$current_step*7) rotation=X$pitch
+place SolPos z=700*2+$period_len*$num current=$sol_current+$current_step*8 rotation=X$pitch,Z120
+place SolNeg z=700*3+$period_len*$num current=-($sol_current+$current_step*9) rotation=X$pitch,Z240
+place SolPos z=700*4+$period_len*$num current=$sol_current+$current_step*10 rotation=X$pitch
+place SolNeg z=700*5+$period_len*$num current=-($sol_current+$current_step*11) rotation=X$pitch,Z120
 
 param num=2
-place SolPos z=700*0+$period_len*$num
-place SolNeg z=700*1+$period_len*$num
-place SolPos z=700*2+$period_len*$num
-place SolNeg z=700*3+$period_len*$num
-place SolPos z=700*4+$period_len*$num
-place SolNeg z=700*5+$period_len*$num
+place SolPos z=700*0+$period_len*$num current=$sol_current+$current_step*12 rotation=X$pitch,Z240
+place SolNeg z=700*1+$period_len*$num current=-($sol_current+$current_step*13) rotation=X$pitch
+place SolPos z=700*2+$period_len*$num current=$sol_current+$current_step*14 rotation=X$pitch,Z120
+place SolNeg z=700*3+$period_len*$num current=-($sol_current+$current_step*15) rotation=X$pitch,Z240
+place SolPos z=700*4+$period_len*$num current=$sol_current+$current_step*16 rotation=X$pitch
+place SolNeg z=700*5+$period_len*$num current=-($sol_current+$current_step*17) rotation=X$pitch,Z120
 
 param num=3
-place SolPos z=700*0+$period_len*$num
-place SolNeg z=700*1+$period_len*$num
-place SolPos z=700*2+$period_len*$num
-place SolNeg z=700*3+$period_len*$num
-place SolPos z=700*4+$period_len*$num
-place SolNeg z=700*5+$period_len*$num
+place SolPos z=700*0+$period_len*$num current=$sol_current+$current_step*18 rotation=X$pitch,Z240
+place SolNeg z=700*1+$period_len*$num current=-($sol_current+$current_step*19) rotation=X$pitch
+place SolPos z=700*2+$period_len*$num current=$sol_current+$current_step*20 rotation=X$pitch,Z120
+place SolNeg z=700*3+$period_len*$num current=-($sol_current+$current_step*21) rotation=X$pitch,Z240
+place SolPos z=700*4+$period_len*$num current=$sol_current+$current_step*22 rotation=X$pitch
+place SolNeg z=700*5+$period_len*$num current=-($sol_current+$current_step*23) rotation=X$pitch,Z120
