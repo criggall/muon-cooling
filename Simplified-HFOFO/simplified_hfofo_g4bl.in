@@ -5,15 +5,14 @@ param m=105.7 #MeV
 param c=2.997925*10^8 #m/s
 
 # Reference particle:
-param p=205 #MeV/c
+param p=270 #MeV/c
 param v=$p*$c/sqrt($p^2+$m^2)
 
 # Solenoid current:
 param sol_current=90 #amps/mm^2
-param current_step=0
 
 # Solenoid pitch:
-param pitch=-0.0025*180/pi
+param pitch=-0.0025*180/pi #deg (2.5 mrad)
 
 # Period length:
 param period_len=4200 #mm
@@ -24,7 +23,9 @@ beam gaussian particle=mu+ nEvents=100 beamZ=-700.0 sigmaX=10.0 sigmaY=10.0 sigm
 
 ### REFERENCE PARTICLE ###
 
-reference referenceMomentum=$p particle=mu+ beamX=0.0 beamY=0.0 beamZ=0.0
+#reference referenceMomentum=$p particle=mu+ beamX=0.0 beamY=0.0 beamZ=0.0
+reference referenceMomentum=$p particle=mu+ beamX=-6.65767 beamY=11.7673 beamZ=0.0 # x and y offset same as leaving matching section of original HFOFO
+
 trace nTrace=0 format=ascii
 
 ### DETECTORS ###
