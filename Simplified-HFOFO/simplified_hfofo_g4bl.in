@@ -5,11 +5,12 @@ param m=105.7 #MeV
 param c=2.997925*10^8 #m/s
 
 # Reference particle:
-param p=270 #MeV/c
+param p=221.8 #MeV/c
 param v=$p*$c/sqrt($p^2+$m^2)
 
 # Solenoid current:
-param sol_current=90 #amps/mm^2
+#param sol_current=94.136 #amps/mm^2
+param sol_current=94.307
 
 # Solenoid pitch:
 param pitch=-0.0025*180/pi #deg (2.5 mrad)
@@ -23,8 +24,12 @@ beam gaussian particle=mu+ nEvents=100 beamZ=-700.0 sigmaX=10.0 sigmaY=10.0 sigm
 
 ### REFERENCE PARTICLE ###
 
-#reference referenceMomentum=$p particle=mu+ beamX=0.0 beamY=0.0 beamZ=0.0
-reference referenceMomentum=$p particle=mu+ beamX=-6.65767 beamY=11.7673 beamZ=0.0 # x and y offset same as leaving matching section of original HFOFO
+reference referenceMomentum=$p particle=mu+ beamX=-6.65767/8200.1 beamY=11.7673/8200.1 beamZ=0.0 beamXp=-3.82563/221.754 beamYp=-2.37079/221.754
+
+# beamX = x/z leaving the matching channel
+# beamY = y/z leaving the matching channel
+# beamXp = px/pz leaving the matching channel
+# beamYp = py/pz leaving the matching channel
 
 trace nTrace=0 format=ascii
 
