@@ -6,7 +6,7 @@ import imageio.v2 as imageio
 ##### INPUTS #####
 
 # Main directory:
-main_dir = '/Users/criggall/Documents/muon-cooling/RF-Test/ref_p_scan/'
+main_dir = '/Users/criggall/Documents/muon-cooling/RF-Test/Reference-Momentum-Scan/'
 fig_dir = '/Users/criggall/Documents/muon-cooling/RF-Test/Figures/'
 
 # Name of parameter scan is over:

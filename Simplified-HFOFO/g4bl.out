@@ -1,19 +1,11 @@
 G4BL_DIR=/Applications/G4beamline-3.08.app/Contents
 LD_LIBRARY_PATH='/Applications/G4beamline-3.08.app/Contents/lib:'
-G4ABLADATA=/Users/criggall/Geant4Data/G4ABLA3.1
 G4LEDATA=/Users/criggall/Geant4Data/G4EMLOW8.0
 G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
-G4INCLDATA=/Users/criggall/Geant4Data/G4INCL1.0
-G4NEUTRONHPDATA=/Users/criggall/Geant4Data/G4NDL4.6
 G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
-G4PIIDATA=/Users/criggall/Geant4Data/G4PII1.3
 G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
-G4REALSURFACEDATA=/Users/criggall/Geant4Data/RealSurface2.2
-G4SAIDXSDATA=/Users/criggall/Geant4Data/G4SAIDDATA2.0
-G4TENDLDATA=/Users/criggall/Geant4Data/G4TENDL1.4
-G4LENDDATA=/Users/criggall/Geant4Data/LEND_GND1.3_ENDF.BVII.1
-G4beamline Process ID 23314
+G4beamline Process ID 18540
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -41,7 +33,7 @@ param        m             105.7
 param        c             2.997925e+08
 param        p             221.8
 param        v             2.7063246e+08
-param        sol_current   94.307
+param        sol_current   94.136
 param        pitch         -0.14323945
 param        period_len    4200
 beam    GAUSSIAN particle=mu+ nEvents=100 firstEvent=-1 lastEvent=2147483647 beamX=0.0 beamY=0.0 beamZ=-700.0 maxR=1000000.0 
@@ -57,123 +49,93 @@ reference                  particle=mu+ beamX=-0.0008119 beamY=0.001435
 trace                      nTrace=0 format=asciiTrace oneNTuple=0
                            primaryOnly=0 traceTune=1 filename=Ev%dTrk%d
                            file=Ev%dTrk%d require= coordinates=Centerline
-virtualdetector Det1       radius=360 innerRadius=0 height=720 width=720
-                           length=0.001 maxStep=100 material=Vacuum
-                           color=0,1,0 noSingles=0 format=bltrackfile
-                           filename=out1 file=out1 require=
-                           referenceParticle=0 coordinates=Centerline kill=0
-virtualdetector Det2       radius=360 innerRadius=0 height=720 width=720
-                           length=0.001 maxStep=100 material=Vacuum
-                           color=0,1,0 noSingles=0 format=bltrackfile
-                           filename=out2 file=out2 require=
-                           referenceParticle=0 coordinates=Centerline kill=0
-virtualdetector Det3       radius=360 innerRadius=0 height=720 width=720
-                           length=0.001 maxStep=100 material=Vacuum
-                           color=0,1,0 noSingles=0 format=bltrackfile
-                           filename=out3 file=out3 require=
-                           referenceParticle=0 coordinates=Centerline kill=0
-virtualdetector Det4       radius=360 innerRadius=0 height=720 width=720
-                           length=0.001 maxStep=100 material=Vacuum
-                           color=0,1,0 noSingles=0 format=bltrackfile
-                           filename=out4 file=out4 require=
-                           referenceParticle=0 coordinates=Centerline kill=0
-virtualdetector Det5       radius=360 innerRadius=0 height=720 width=720
-                           length=0.001 maxStep=100 material=Vacuum
-                           color=0,1,0 noSingles=0 format=bltrackfile
-                           filename=out5 file=out5 require=
-                           referenceParticle=0 coordinates=Centerline kill=0
 coil    coil    innerRadius=420.0 outerRadius=600.0 length=300.0 material=Cu 
 		tolerance=0.003 nSheets=10 
 		maxR=360.0 maxZ=6000.0 dR=15.0 dZ=15.0 filename=coil.dat 
 coilmap coil    tolerance=0.00300 [fraction of Bz(r=0,z=0)]
 coilmap coil    read file 'coil.dat'  dR=15.0 dZ=15.0
-solenoid     SolPos        coilName=coil current=94.31 color=0,1,1 alternate=0
+solenoid     SolPos        coilName=coil current=94.14 color=0,1,1 alternate=0
                            kill=0 coil=coil
-solenoid     SolNeg        coilName=coil current=-94.31 color=0,1,0
+solenoid     SolNeg        coilName=coil current=-94.14 color=0,1,0
                            alternate=0 kill=0 coil=coil
 param        num           -1
 place   SolPos  copies=1 x=0.0 y=0.0 z=-4200.0 rotation='X-0.14323945,Z240'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=-3500.0 rotation='X-0.14323945'
-                current=-94.307
+                current=-94.136
 place   SolPos  copies=1 x=0.0 y=0.0 z=-2800.0 rotation='X-0.14323945,Z120'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=-2100.0 rotation='X-0.14323945,Z240'
-                current=-94.307
+                current=-94.136
 place   SolPos  copies=1 x=0.0 y=0.0 z=-1400.0 rotation='X-0.14323945'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=-700.0 rotation='X-0.14323945,Z120'
-                current=-94.307
+                current=-94.136
 param        num           0
 place   SolPos  copies=1 x=0.0 y=0.0 z=0.0 rotation='X-0.14323945,Z240'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=700.0 rotation='X-0.14323945'
-                current=-94.307
+                current=-94.136
 place   SolPos  copies=1 x=0.0 y=0.0 z=1400.0 rotation='X-0.14323945,Z120'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=2100.0 rotation='X-0.14323945,Z240'
-                current=-94.307
+                current=-94.136
 place   SolPos  copies=1 x=0.0 y=0.0 z=2800.0 rotation='X-0.14323945'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=3500.0 rotation='X-0.14323945,Z120'
-                current=-94.307
+                current=-94.136
 param        num           1
 place   SolPos  copies=1 x=0.0 y=0.0 z=4200.0 rotation='X-0.14323945,Z240'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=4900.0 rotation='X-0.14323945'
-                current=-94.307
+                current=-94.136
 place   SolPos  copies=1 x=0.0 y=0.0 z=5600.0 rotation='X-0.14323945,Z120'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=6300.0 rotation='X-0.14323945,Z240'
-                current=-94.307
+                current=-94.136
 place   SolPos  copies=1 x=0.0 y=0.0 z=7000.0 rotation='X-0.14323945'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=7700.0 rotation='X-0.14323945,Z120'
-                current=-94.307
+                current=-94.136
 param        num           2
 place   SolPos  copies=1 x=0.0 y=0.0 z=8400.0 rotation='X-0.14323945,Z240'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=9100.0 rotation='X-0.14323945'
-                current=-94.307
+                current=-94.136
 place   SolPos  copies=1 x=0.0 y=0.0 z=9800.0 rotation='X-0.14323945,Z120'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=10500.0 rotation='X-0.14323945,Z240'
-                current=-94.307
+                current=-94.136
 place   SolPos  copies=1 x=0.0 y=0.0 z=11200.0 rotation='X-0.14323945'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=11900.0 rotation='X-0.14323945,Z120'
-                current=-94.307
+                current=-94.136
 param        num           3
 place   SolPos  copies=1 x=0.0 y=0.0 z=12600.0 rotation='X-0.14323945,Z240'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=13300.0 rotation='X-0.14323945'
-                current=-94.307
+                current=-94.136
 place   SolPos  copies=1 x=0.0 y=0.0 z=14000.0 rotation='X-0.14323945,Z120'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=14700.0 rotation='X-0.14323945,Z240'
-                current=-94.307
+                current=-94.136
 place   SolPos  copies=1 x=0.0 y=0.0 z=15400.0 rotation='X-0.14323945'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=16100.0 rotation='X-0.14323945,Z120'
-                current=-94.307
+                current=-94.136
 param        num           4
 place   SolPos  copies=1 x=0.0 y=0.0 z=16800.0 rotation='X-0.14323945,Z240'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=17500.0 rotation='X-0.14323945'
-                current=-94.307
+                current=-94.136
 place   SolPos  copies=1 x=0.0 y=0.0 z=18200.0 rotation='X-0.14323945,Z120'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=18900.0 rotation='X-0.14323945,Z240'
-                current=-94.307
+                current=-94.136
 place   SolPos  copies=1 x=0.0 y=0.0 z=19600.0 rotation='X-0.14323945'
-                current=94.307
+                current=94.136
 place   SolNeg  copies=1 x=0.0 y=0.0 z=20300.0 rotation='X-0.14323945,Z120'
-                current=-94.307
-place   Det1    copies=1 x=0.0 y=0.0 z=0.0 
-place   Det2    copies=1 x=0.0 y=0.0 z=4200.0 
-place   Det3    copies=1 x=0.0 y=0.0 z=8400.0 
-place   Det4    copies=1 x=0.0 y=0.0 z=12600.0 
-place   Det5    copies=1 x=0.0 y=0.0 z=16800.0 
+                current=-94.136
 fieldlines                 t=0 center=0,0,0 radius=100 nLines=100 dl=10
                            color=1,1,1 minField=0.001 maxPoints=10000
                            subdivide=10 N=128 exit=0 square=0 Efield=0
@@ -182,7 +144,7 @@ fieldlines                 t=0 center=0,0,0 radius=100 nLines=100 dl=10
 World size (before incrementing by 201.357 mm): 1639.6 H  1639.9 W  40903.0 L
 
 PARAMETERS:
-            Zcl=16800
+            Zcl=20451.5
               c=2.997925e+08
      deltaChord=3.0
 deltaIntersection=0.1
@@ -200,7 +162,7 @@ deltaIntersection=0.1
               p=221.8
      period_len=4200
           pitch=-0.14323945
-    sol_current=94.307
+    sol_current=94.136
  steppingFormat=N GLOBAL CL KE STEP VOL PROCESS
 steppingVerbose=0
               v=2.7063246e+08
@@ -295,17 +257,7 @@ BLCMDsolenoid::Construct SolNeg parent= relZ=18900.0 globZ=18900.0
 BLCMDsolenoid::Construct SolPos parent= relZ=19600.0 globZ=19600.0
 	global pos=0.0,0.0,19600.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
 BLCMDsolenoid::Construct SolNeg parent= relZ=20300.0 globZ=20300.0
-	global pos=0.0,0.0,20300.0  Checking overlaps for volume Det1:0 (G4Tubs) ... OK! 
-BLCMDvirtualdetector::Construct Det1 parent= relZ=0.0 globZ=0.0
-Checking overlaps for volume Det2:0 (G4Tubs) ... OK! 
-BLCMDvirtualdetector::Construct Det2 parent= relZ=4200.0 globZ=4200.0
-Checking overlaps for volume Det3:0 (G4Tubs) ... OK! 
-BLCMDvirtualdetector::Construct Det3 parent= relZ=8400.0 globZ=8400.0
-Checking overlaps for volume Det4:0 (G4Tubs) ... OK! 
-BLCMDvirtualdetector::Construct Det4 parent= relZ=12600.0 globZ=12600.0
-Checking overlaps for volume Det5:0 (G4Tubs) ... OK! 
-BLCMDvirtualdetector::Construct Det5 parent= relZ=16800.0 globZ=16800.0
-### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
+	global pos=0.0,0.0,20300.0  ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
 
 Geometry test nPoints=100 tolerance=0.002 mm:
 Testing geometry for children of group 'World':
@@ -354,14 +306,9 @@ Event 70 Completed  70 events  realTime=1 sec  70.0 ev/sec
 Event 80 Completed  80 events  realTime=1 sec  80.0 ev/sec
 Event 90 Completed  90 events  realTime=1 sec  90.0 ev/sec
 Event 100 Completed  100 events  realTime=1 sec  100.0 ev/sec
-Run complete  100 Events  1 seconds
-NTuple Det1                 100 entries
-NTuple Det2                 102 entries
-NTuple Det3                  99 entries
-NTuple Det4                  99 entries
-NTuple Det5                  99 entries
-NTuple TuneParticle         218 entries
-NTuple ReferenceParticle      218 entries
+Run complete  100 Events  0 seconds
+NTuple TuneParticle         209 entries
+NTuple ReferenceParticle      209 entries
 
 Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 3 Warnings
       1 times: Check number of field voxels

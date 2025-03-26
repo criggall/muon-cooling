@@ -9,8 +9,7 @@ param p=221.8 #MeV/c
 param v=$p*$c/sqrt($p^2+$m^2)
 
 # Solenoid current:
-#param sol_current=94.136 #amps/mm^2
-param sol_current=94.307
+param sol_current=94.136 #amps/mm^2
 
 # Solenoid pitch:
 param pitch=-0.0025*180/pi #deg (2.5 mrad)

@@ -7,7 +7,7 @@ import numpy as np
 g4bl_dir = '/Users/criggall/Documents/muon-cooling/' # <--- Location of .bash_profile
 
 # Define working directory:
-dir = '/Users/criggall/Documents/muon-cooling/RF-test/' # <-- All input files must be in this same directory
+dir = '/Users/criggall/Documents/muon-cooling/RF-Test/' # <-- All input files must be in this same directory
 
 # Define file locations:
 file = dir+'g4bl_input_card.in'
@@ -45,7 +45,6 @@ def modify_g4bl_input(dir, file, beam_file, parameters, out_dir):
 
     with open(file, 'r') as f:
         lines = f.readlines()
-        # tr_cnt = 0; ref_cnt = 0
         for i, line in enumerate(lines):
             
             # Adjust input file paths:
