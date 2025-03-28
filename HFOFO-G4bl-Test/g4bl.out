@@ -1,11 +1,19 @@
 G4BL_DIR=/Applications/G4beamline-3.08.app/Contents
 LD_LIBRARY_PATH='/Applications/G4beamline-3.08.app/Contents/lib:'
+G4ABLADATA=/Users/criggall/Geant4Data/G4ABLA3.1
 G4LEDATA=/Users/criggall/Geant4Data/G4EMLOW8.0
 G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
+G4INCLDATA=/Users/criggall/Geant4Data/G4INCL1.0
+G4NEUTRONHPDATA=/Users/criggall/Geant4Data/G4NDL4.6
 G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
+G4PIIDATA=/Users/criggall/Geant4Data/G4PII1.3
 G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
-G4beamline Process ID 33659
+G4REALSURFACEDATA=/Users/criggall/Geant4Data/RealSurface2.2
+G4SAIDXSDATA=/Users/criggall/Geant4Data/G4SAIDDATA2.0
+G4TENDLDATA=/Users/criggall/Geant4Data/G4TENDL1.4
+G4LENDDATA=/Users/criggall/Geant4Data/LEND_GND1.3_ENDF.BVII.1
+G4beamline Process ID 53732
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -2028,9 +2036,12 @@ reference                  particle=mu+ beamX=0 beamY=0 beamZ=0 beamT=0
 trace                      nTrace=0 format=asciiTrace oneNTuple=0
                            primaryOnly=0 traceTune=1 filename=Ev%dTrk%d
                            file=Ev%dTrk%d require= coordinates=Centerline
-profile                    z= zloop=8200:131750:10 require= particle=mu+
-                           file=profile.txt filename=profile.txt
-                           coordinates=reference
+profile                    z= zloop=0:131750:10 require= particle=mu+
+                           file=profile_c.txt filename=profile_c.txt
+                           coordinates=c
+profile                    z= zloop=0:131750:10 require= particle=mu+
+                           file=profile_r.txt filename=profile_r.txt
+                           coordinates=r
 
 World size (before incrementing by 201.357 mm): 1695.7 H  1695.6 W  274500.0 L
 
@@ -7426,7 +7437,7 @@ BLCMDtubs::Construct terminus parent= relZ=131752.0 globZ=131752.0
 
 Geometry test nPoints=100 tolerance=0.002 mm:
 Testing geometry for children of group 'World':
-Total geometry errors = 0  0 seconds
+Total geometry errors = 0  2 seconds
 
 ================= Prepare Tune Particle(s) ===========
 ================= Begin Tune Particle(s) =============
@@ -8151,3 +8162,88 @@ Run complete  1 Events  0 seconds
 697 8672 8682 -1.971 -2.422 8670 0.5378 0.8431 0.0000 1.4 1.000
 698 8682 1.798e+308 -2.181 -2.288 8680 0.6266 0.7793 0.0000 1.5 1.000
 
+Run complete  1 Events  0 seconds
+================== Prepare Tracking Beam ==================
+Stochastic processes are enabled.
+================== Begin Tracking Beam ===============
+Event 1 Completed  1 events  realTime=1 sec  1.0 ev/sec
+Event 2 Completed  2 events  realTime=1 sec  2.0 ev/sec
+Event 3 Completed  3 events  realTime=1 sec  3.0 ev/sec
+Event 7 Completed  4 events  realTime=1 sec  4.0 ev/sec
+Event 8 Completed  5 events  realTime=2 sec  2.5 ev/sec
+Event 10 Completed  6 events  realTime=2 sec  3.0 ev/sec
+Event 12 Completed  7 events  realTime=2 sec  3.5 ev/sec
+Event 14 Completed  8 events  realTime=3 sec  2.7 ev/sec
+Event 15 Completed  9 events  realTime=3 sec  3.0 ev/sec
+Event 17 Completed  10 events  realTime=3 sec  3.3 ev/sec
+Event 46 Completed  20 events  realTime=6 sec  3.3 ev/sec
+Event 71 Completed  30 events  realTime=8 sec  3.8 ev/sec
+Event 82 Completed  40 events  realTime=10 sec  4.0 ev/sec
+Event 96 Completed  50 events  realTime=14 sec  3.6 ev/sec
+Event 110 Completed  60 events  realTime=17 sec  3.5 ev/sec
+Event 127 Completed  70 events  realTime=19 sec  3.7 ev/sec
+Event 145 Completed  80 events  realTime=22 sec  3.6 ev/sec
+Event 158 Completed  90 events  realTime=24 sec  3.8 ev/sec
+Event 175 Completed  100 events  realTime=26 sec  3.8 ev/sec
+Event 346 Completed  200 events  realTime=50 sec  4.0 ev/sec
+Event 509 Completed  300 events  realTime=75 sec  4.0 ev/sec
+Event 691 Completed  400 events  realTime=101 sec  4.0 ev/sec
+Event 861 Completed  500 events  realTime=125 sec  4.0 ev/sec
+Event 1027 Completed  600 events  realTime=149 sec  4.0 ev/sec
+Event 1210 Completed  700 events  realTime=176 sec  4.0 ev/sec
+Event 1396 Completed  800 events  realTime=201 sec  4.0 ev/sec
+Event 1562 Completed  900 events  realTime=226 sec  4.0 ev/sec
+Event 1725 Completed  1000 events  realTime=250 sec  4.0 ev/sec
+Event 3412 Completed  2000 events  realTime=498 sec  4.0 ev/sec
+Event 5113 Completed  3000 events  realTime=734 sec  4.1 ev/sec
+Event 6760 Completed  4000 events  realTime=984 sec  4.1 ev/sec
+Event 8555 Completed  5000 events  realTime=1220 sec  4.1 ev/sec
+Event 10266 Completed  6000 events  realTime=1473 sec  4.1 ev/sec
+Event 12004 Completed  7000 events  realTime=1727 sec  4.1 ev/sec
+Event 13637 Completed  8000 events  realTime=1976 sec  4.0 ev/sec
+Event 15375 Completed  9000 events  realTime=2224 sec  4.0 ev/sec
+Event 17028 Completed  10000 events  realTime=2472 sec  4.0 ev/sec
+Event 18725 Completed  11000 events  realTime=2715 sec  4.1 ev/sec
+Event 7459 Completed  12000 events  realTime=2944 sec  4.1 ev/sec
+Run complete  12471 Events  3008 seconds
+NTuple Det1               12028 entries
+NTuple Det2               11632 entries
+NTuple Det3               11152 entries
+NTuple Det4               10791 entries
+NTuple Det5               10407 entries
+NTuple Det6                9908 entries
+NTuple Det7                9511 entries
+NTuple Det8                9150 entries
+NTuple Det9                8792 entries
+NTuple Det10               8496 entries
+NTuple Det11               8167 entries
+NTuple Det12               7892 entries
+NTuple Det13               7645 entries
+NTuple Det14               7402 entries
+NTuple Det15               7214 entries
+NTuple Det16               7034 entries
+NTuple Det17               6867 entries
+NTuple Det18               6666 entries
+NTuple Det19               6508 entries
+NTuple Det20               6354 entries
+NTuple Det21               6198 entries
+NTuple Det22               6058 entries
+NTuple Det23               5960 entries
+NTuple Det24               5844 entries
+NTuple Det25               5746 entries
+NTuple Det26               5662 entries
+NTuple Det27               5577 entries
+NTuple Det28               5497 entries
+NTuple Det29               5436 entries
+NTuple Det30               5380 entries
+NTuple Det31               5320 entries
+NTuple DetLast             5290 entries
+NTuple TuneParticle        1024 entries
+NTuple ReferenceParticle     1024 entries
+profile: wrote 'profile_c.txt'
+profile: wrote 'profile_r.txt'
+
+Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 2 Warnings
+      1 times: Check number of field voxels
+      1 times: EM Field Extends Outside World
+g4beamline: simulation complete

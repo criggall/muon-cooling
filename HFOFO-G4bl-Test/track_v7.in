@@ -108,4 +108,5 @@ place terminus z=$zlastRF+102
 
 reference referenceMomentum=221.8 particle=mu+
 trace nTrace=0 format=ascii
-profile zloop=8200:131750:10 coordinates=reference file=profile.txt
+profile zloop=0:131750:10 coordinates=c file=profile_c.txt
+profile zloop=0:131750:10 coordinates=r file=profile_r.txt
