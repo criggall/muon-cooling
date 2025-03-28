@@ -23,10 +23,13 @@ beam gaussian particle=mu+ nEvents=100 beamZ=-700.0 sigmaX=10.0 sigmaY=10.0 sigm
 
 ### REFERENCE PARTICLE ###
 
-reference referenceMomentum=$p particle=mu+ beamX=-6.65767/8200.1 beamY=11.7673/8200.1 beamZ=0.0 beamXp=-3.82563/221.754 beamYp=-2.37079/221.754
+param Xp=-3.82563/221.754
+param Yp=-2.37079/221.754
 
-# beamX = x/z leaving the matching channel
-# beamY = y/z leaving the matching channel
+reference referenceMomentum=$p particle=mu+ beamX=-6.65767 beamY=11.7673 beamZ=0.0 beamXp=$Xp beamYp=$Yp
+
+# beamX = x leaving the matching channel
+# beamY = y leaving the matching channel
 # beamXp = px/pz leaving the matching channel
 # beamYp = py/pz leaving the matching channel
 
