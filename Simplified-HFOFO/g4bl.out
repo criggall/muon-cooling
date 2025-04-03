@@ -1,11 +1,19 @@
 G4BL_DIR=/Applications/G4beamline-3.08.app/Contents
 LD_LIBRARY_PATH='/Applications/G4beamline-3.08.app/Contents/lib:'
+G4ABLADATA=/Users/criggall/Geant4Data/G4ABLA3.1
 G4LEDATA=/Users/criggall/Geant4Data/G4EMLOW8.0
 G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
+G4INCLDATA=/Users/criggall/Geant4Data/G4INCL1.0
+G4NEUTRONHPDATA=/Users/criggall/Geant4Data/G4NDL4.6
 G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
+G4PIIDATA=/Users/criggall/Geant4Data/G4PII1.3
 G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
-G4beamline Process ID 51551
+G4REALSURFACEDATA=/Users/criggall/Geant4Data/RealSurface2.2
+G4SAIDXSDATA=/Users/criggall/Geant4Data/G4SAIDDATA2.0
+G4TENDLDATA=/Users/criggall/Geant4Data/G4TENDL1.4
+G4LENDDATA=/Users/criggall/Geant4Data/LEND_GND1.3_ENDF.BVII.1
+G4beamline Process ID 8239
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -41,10 +49,9 @@ param        X             -11.2945
 param        Y             14.0917
 param        Xp            0.0036587524
 param        Yp            -0.0056541256
-beam    GAUSSIAN particle=mu+ nEvents=10000 firstEvent=-1 lastEvent=2147483647 beamX=-11.3 beamY=14.1 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=225.0 weight=1.000000 
-		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00000 sigmaYp=0.00000 
-		sigmaP=0.0 sigmaT=0.000 meanXp=0.00366 meanYp=-0.00565 meanT=0.000 
+beam    ASCII   nEvents=2147483647 firstEvent=-1 lastEvent=2147483647 beamZ=0.0 maxR=1000000.0 renumber=0 weight=1.000000 
+		filename=initial.dat format=BLTrackFile 
+		
 reference                  particle=mu+ beamX=-11.29 beamY=14.09 beamZ=0
                            beamT=0 rotation= referenceMomentum=225
                            beamXp=0.003659 beamYp=-0.005654 meanMomentum=225
