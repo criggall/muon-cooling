@@ -5,7 +5,7 @@ G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
 G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
 G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
-G4beamline Process ID 39125
+G4beamline Process ID 51551
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -27,6 +27,7 @@ G4beamline Process ID 39125
                              WWW : http://geant4.org/
 **************************************************************
 
+param        viewer        best,1
 geometry                   nPoints=100 printGeometry=0 visual=0
                            tolerance=0.002
 param        m             105.7
@@ -40,7 +41,7 @@ param        X             -11.2945
 param        Y             14.0917
 param        Xp            0.0036587524
 param        Yp            -0.0056541256
-beam    GAUSSIAN particle=mu+ nEvents=100 firstEvent=-1 lastEvent=2147483647 beamX=-11.3 beamY=14.1 beamZ=0.0 maxR=1000000.0 
+beam    GAUSSIAN particle=mu+ nEvents=10000 firstEvent=-1 lastEvent=2147483647 beamX=-11.3 beamY=14.1 beamZ=0.0 maxR=1000000.0 
 		meanMomentum=225.0 weight=1.000000 
 		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00000 sigmaYp=0.00000 
 		sigmaP=0.0 sigmaT=0.000 meanXp=0.00366 meanYp=-0.00565 meanT=0.000 
@@ -170,10 +171,6 @@ place   Det2    copies=1 x=0.0 y=0.0 z=4200.0
 place   Det3    copies=1 x=0.0 y=0.0 z=8400.0 
 place   Det4    copies=1 x=0.0 y=0.0 z=12600.0 
 place   Det5    copies=1 x=0.0 y=0.0 z=16800.0 
-fieldlines                 t=0 center=0,0,0 radius=100 nLines=100 dl=10
-                           color=1,1,1 minField=0.001 maxPoints=10000
-                           subdivide=10 N=128 exit=0 square=0 Efield=0
-                           forever=0
 
 World size (before incrementing by 201.357 mm): 1639.6 H  1639.9 W  41903.0 L
 
@@ -204,7 +201,7 @@ deltaIntersection=0.1
  steppingFormat=N GLOBAL CL KE STEP VOL PROCESS
 steppingVerbose=0
               v=2.7134253e+08
-         viewer=none
+         viewer=best,1
  wallClockLimit=-1
   worldMaterial=Vacuum
      zTolerance=2.0
@@ -304,66 +301,3 @@ BLCMDvirtualdetector::Construct Det3 parent= relZ=8400.0 globZ=8400.0
 Checking overlaps for volume Det4:0 (G4Tubs) ... OK! 
 BLCMDvirtualdetector::Construct Det4 parent= relZ=12600.0 globZ=12600.0
 Checking overlaps for volume Det5:0 (G4Tubs) ... OK! 
-BLCMDvirtualdetector::Construct Det5 parent= relZ=16800.0 globZ=16800.0
-### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
-
-Geometry test nPoints=100 tolerance=0.002 mm:
-Testing geometry for children of group 'World':
-Total geometry errors = 0  0 seconds
-
-================= Prepare Tune Particle(s) ===========
-================= Begin Tune Particle(s) =============
-**************************************************************************
-*** G4Exception: EM Field Extends Outside World
-***    severity: Warning
-***   issued by: BLGlobalField
-*** description: May give inaccurate tracking near world boundary.
-***     EventID: -2     TrackID: 1   mu+  KE=142.9 MeV
-**************************************************************************
-fieldVoxels: nx=6 ny=6 nz=155, 5580 voxels, 36 fields
-fieldVoxels: max field count is 18 fields, # voxels >5: 4968, >10: 4068, >20: 0
-**************************************************************************
-*** G4Exception: Check number of field voxels
-***    severity: Warning
-***   issued by: BLGlobalField
-*** description: nVoxels = 5580, max fields/voxel = 18
-***     EventID: -2     TrackID: 1   mu+  KE=142.9 MeV
-**************************************************************************
-Run complete  1 Events  0 seconds
-================== Begin Reference Particle(s) ===============
-Run complete  1 Events  0 seconds
-================== Prepare Tracking Beam ==================
-Stochastic processes are enabled.
-================== Begin Tracking Beam ===============
-Event 1 Completed  1 events  realTime=1 sec  1.0 ev/sec
-Event 2 Completed  2 events  realTime=1 sec  2.0 ev/sec
-Event 3 Completed  3 events  realTime=1 sec  3.0 ev/sec
-Event 4 Completed  4 events  realTime=1 sec  4.0 ev/sec
-Event 5 Completed  5 events  realTime=1 sec  5.0 ev/sec
-Event 6 Completed  6 events  realTime=1 sec  6.0 ev/sec
-Event 7 Completed  7 events  realTime=1 sec  7.0 ev/sec
-Event 8 Completed  8 events  realTime=1 sec  8.0 ev/sec
-Event 9 Completed  9 events  realTime=1 sec  9.0 ev/sec
-Event 10 Completed  10 events  realTime=1 sec  10.0 ev/sec
-Event 20 Completed  20 events  realTime=1 sec  20.0 ev/sec
-Event 30 Completed  30 events  realTime=1 sec  30.0 ev/sec
-Event 40 Completed  40 events  realTime=1 sec  40.0 ev/sec
-Event 50 Completed  50 events  realTime=1 sec  50.0 ev/sec
-Event 60 Completed  60 events  realTime=1 sec  60.0 ev/sec
-Event 70 Completed  70 events  realTime=1 sec  70.0 ev/sec
-Event 80 Completed  80 events  realTime=1 sec  80.0 ev/sec
-Event 90 Completed  90 events  realTime=1 sec  90.0 ev/sec
-Event 100 Completed  100 events  realTime=1 sec  100.0 ev/sec
-Run complete  100 Events  0 seconds
-NTuple Det1                   0 entries
-NTuple Det2                 102 entries
-NTuple Det3                  99 entries
-NTuple Det4                  99 entries
-NTuple Det5                  99 entries
-NTuple AllTracks            669 entries
-
-Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 3 Warnings
-      1 times: Check number of field voxels
-      1 times: EM Field Extends Outside World
-      1 times: No physics registered
-g4beamline: simulation complete

@@ -24,7 +24,7 @@ param Y=14.0917
 param Xp=0.823201/224.995
 param Yp=-1.27215/224.995
 
-beam gaussian particle=mu+ nEvents=100 beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp sigmaX=0.0 sigmaY=0.0 sigmaXp=0.00 sigmaYp=0.00 meanMomentum=$p sigmaP=0.0 meanT=0.0 sigmaT=0.0
+beam gaussian particle=mu+ nEvents=10000 beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp sigmaX=0.0 sigmaY=0.0 sigmaXp=0.00 sigmaYp=0.00 meanMomentum=$p sigmaP=0.0 meanT=0.0 sigmaT=0.0
 
 ### REFERENCE PARTICLE ###
 
@@ -50,4 +50,4 @@ include sol_place.txt
 include abs_place.txt
 
 # Visualize magnetic field lines:
-fieldlines center=0,0,0
+# fieldlines center=0,0,0
