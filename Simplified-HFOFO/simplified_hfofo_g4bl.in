@@ -1,3 +1,7 @@
+### PHYSICS ###
+
+physics QGSP_BIC doStochastics=0
+
 ### PARAMETERS ###
 
 # Constants:
@@ -24,7 +28,11 @@ param Y=14.0917
 param Xp=0.823201/224.995
 param Yp=-1.27215/224.995
 
-beam gaussian particle=mu+ nEvents=10000 beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp sigmaX=0.0 sigmaY=0.0 sigmaXp=0.00 sigmaYp=0.00 meanMomentum=$p sigmaP=0.0 meanT=0.0 sigmaT=0.0
+beam gaussian particle=mu+ nEvents=10000 \
+beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+sigmaX=10.0 sigmaY=10.0 sigmaXp=0.1 sigmaYp=0.1 \
+meanMomentum=$p sigmaP=0.0 meanT=0.0 sigmaT=1.0
+
 #beam ascii file=initial.dat beamZ=0.0
 
 ### REFERENCE PARTICLE ###
