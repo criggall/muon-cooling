@@ -14,10 +14,10 @@ file = dir+'g4bl_input_card.in'
 file_for_g4bl = '"'+file+'"'
 
 # Define range of solenoid current scan:
-sol_curr = np.arange(90,100,0.1)
+ref_p = np.arange(227,228,0.1)
 
 # Set number of loops based on scan space:
-iterations = len(sol_curr)
+iterations = len(ref_p)
 
 ##### FUNCTION DEFINITIONS #####
 
@@ -34,8 +34,8 @@ def modify_g4bl_input(dir, file, parameters, out_dir):
         for i, line in enumerate(lines):
             
             # Adjust solenoid constant current:
-            if 'param sol_current' in line:
-                lines[i] = f"param sol_current={parameters['sol_curr']} #amps/mm^2\n"
+            if 'param p=' in line:
+                lines[i] = f"param p={parameters['ref_p']} #MeV/c\n"
         
     with open(file, 'w') as f:
         f.writelines(lines)
@@ -53,7 +53,7 @@ def copy_in(file, out_dir):
 
 # Define function to move reference particle output and delete additional trace files:
 def mv_ref_file(g4bl_dir, out_dir):
-    mv_ref_file_command = f"mv ReferenceParticle.txt {out_dir} && rm {g4bl_dir}TuneParticle.txt && rm {g4bl_dir}coil.dat"
+    mv_ref_file_command = f"mv AllTracks.txt {out_dir} && rm out*.txt && rm coil.dat"
     mv_ref_file_process = subprocess.run(mv_ref_file_command, shell=True, capture_output=False)
 
 ##### MAIN LOOP #####
@@ -74,7 +74,7 @@ for j in range(iterations):
 
     # Set configurable parameters:
     parameters = {
-        'sol_curr' : sol_curr[j]
+        'ref_p' : ref_p[j]
     }
 
     # Modify input files:
