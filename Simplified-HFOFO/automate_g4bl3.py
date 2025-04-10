@@ -14,10 +14,10 @@ file = dir+'g4bl_input_card.in'
 file_for_g4bl = '"'+file+'"'
 
 # Define range of solenoid current scan:
-ref_p = np.arange(227,228,0.1)
+sol_current = np.arange(-80.51,-80.39,0.01)
 
 # Set number of loops based on scan space:
-iterations = len(ref_p)
+iterations = len(sol_current)
 
 ##### FUNCTION DEFINITIONS #####
 
@@ -34,8 +34,8 @@ def modify_g4bl_input(dir, file, parameters, out_dir):
         for i, line in enumerate(lines):
             
             # Adjust solenoid constant current:
-            if 'param p=' in line:
-                lines[i] = f"param p={parameters['ref_p']} #MeV/c\n"
+            if 'param sol_current=' in line:
+                lines[i] = f"param sol_current={parameters['sol_current']} #MeV/c\n"
         
     with open(file, 'w') as f:
         f.writelines(lines)
@@ -74,7 +74,7 @@ for j in range(iterations):
 
     # Set configurable parameters:
     parameters = {
-        'ref_p' : ref_p[j]
+        'sol_current' : sol_current[j]
     }
 
     # Modify input files:
