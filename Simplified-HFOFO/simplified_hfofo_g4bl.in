@@ -9,11 +9,13 @@ param m=105.7 #MeV
 param c=2.997925*10^8 #m/s
 
 # Reference particle:
-param p=227.5 #MeV/c
+#param p=227.5 #MeV/c
+param p=201 #MeV/c
 param v=$p*$c/sqrt($p^2+$m^2)
 
 # Solenoid current:
-param sol_current=-91.481 #amps/mm^2
+#param sol_current=-91.481 #amps/mm^2
+param sol_current=-80.46 #amps/mm^2
 
 # Solenoid pitch:
 param pitch=-0.0025*180/pi #rad-->deg

@@ -1,0 +1,382 @@
+G4BL_DIR=/Applications/G4beamline-3.08.app/Contents
+LD_LIBRARY_PATH='/Applications/G4beamline-3.08.app/Contents/lib:'
+G4LEDATA=/Users/criggall/Geant4Data/G4EMLOW8.0
+G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
+G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
+G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
+G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
+G4beamline Process ID 89333
+
+*************************************************************
+ g4beamline version: 3.08                        (Oct  8 2022)
+                      Copyright : Tom Roberts, Muons, Inc.
+                        License : Gnu Public License
+                            WWW : http://g4beamline.muonsinc.com
+
+          ################################
+          !!! G4Backtrace is activated !!!
+          ################################
+
+
+**************************************************************
+ Geant4 version Name: geant4-11-00-patch-02 [MT]   (25-May-2022)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+
+geometry                   nPoints=100 printGeometry=0 visual=0
+                           tolerance=0.002
+G4PhysListFactory::GetReferencePhysList <QGSP_BIC>  EMoption= 0
+<<< Geant4 Physics List simulation engine: QGSP_BIC
+
+
+physics      QGSP_BIC      disable= inactivate= deactivate= doStochastics=0
+                           fluct=1 minRangeCut=1 list=0 gammaToMuPair=0
+                           spinTracking=0 synchrotronRadiation=0
+                           synchrotronRadiationMuon=0 maxTime=1e+06
+param        m             105.7
+param        c             2.997925e+08
+param        p             201
+param        v             2.6534051e+08
+param        sol_current   -80.46
+param        pitch         -0.14323945
+param        period_len    4200
+param        X             -11.2945
+param        Y             14.0917
+param        Xp            0.0036587524
+param        Yp            -0.0056541256
+beam    GAUSSIAN particle=mu+ nEvents=10000 firstEvent=-1 lastEvent=2147483647 beamX=-11.3 beamY=14.1 beamZ=0.0 maxR=1000000.0 
+		meanMomentum=201.0 weight=1.000000 
+		sigmaX=10.0 sigmaY=10.0 sigmaZ=0.0 sigmaXp=0.10000 sigmaYp=0.10000 
+		sigmaP=0.0 sigmaT=1.000 meanXp=0.00366 meanYp=-0.00565 meanT=0.000 
+reference                  particle=mu+ beamX=-11.29 beamY=14.09 beamZ=0
+                           beamT=0 rotation= referenceMomentum=201
+                           beamXp=0.003659 beamYp=-0.005654 meanMomentum=201
+                           meanXp=0.003659 meanYp=-0.005654 tuneZ=-3.7e+21
+                           tuneMomentum=-3.7e+21 tolerance=0.001 noEfield=0
+                           noBfield=0 noEloss=0 P=201
+trace                      nTrace=1 format=asciiTrace oneNTuple=1
+                           primaryOnly=0 traceTune=1 filename=AllTracks
+                           file=AllTracks require= coordinates=Centerline
+virtualdetector Det1       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=out1 file=out1 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+virtualdetector Det2       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=out2 file=out2 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+virtualdetector Det3       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=out3 file=out3 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+virtualdetector Det4       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=out4 file=out4 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+virtualdetector Det5       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=out5 file=out5 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+coil    coil    innerRadius=420.0 outerRadius=600.0 length=300.0 material=Cu 
+		tolerance=0.003 nSheets=10 
+		maxR=360.0 maxZ=6000.0 dR=15.0 dZ=15.0 filename=coil.dat 
+coilmap coil    tolerance=0.00300 [fraction of Bz(r=0,z=0)]
+coilmap coil    read file 'coil.dat'  dR=15.0 dZ=15.0
+solenoid     SolPos        coilName=coil current=80.46 color=0,1,1 alternate=0
+                           kill=0 coil=coil
+solenoid     SolNeg        coilName=coil current=-80.46 color=0,1,0
+                           alternate=0 kill=0 coil=coil
+param        num           -1
+place   SolPos  copies=1 x=0.0 y=0.0 z=-3700.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=-3000.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=-2300.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=-1600.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=-900.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=-200.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+param        num           0
+place   SolPos  copies=1 x=0.0 y=0.0 z=500.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=1200.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=1900.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=2600.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=3300.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=4000.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+param        num           1
+place   SolPos  copies=1 x=0.0 y=0.0 z=4700.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=5400.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=6100.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=6800.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=7500.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=8200.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+param        num           2
+place   SolPos  copies=1 x=0.0 y=0.0 z=8900.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=9600.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=10300.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=11000.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=11700.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=12400.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+param        num           3
+place   SolPos  copies=1 x=0.0 y=0.0 z=13100.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=13800.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=14500.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=15200.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=15900.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=16600.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+param        num           4
+place   SolPos  copies=1 x=0.0 y=0.0 z=17300.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=18000.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=18700.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=19400.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=20100.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=20800.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+param        eps           0.5
+place   Det1    copies=1 x=0.0 y=0.0 z=0.5 
+place   Det2    copies=1 x=0.0 y=0.0 z=4200.5 
+place   Det3    copies=1 x=0.0 y=0.0 z=8400.5 
+place   Det4    copies=1 x=0.0 y=0.0 z=12600.5 
+place   Det5    copies=1 x=0.0 y=0.0 z=16800.5 
+
+World size (before incrementing by 201.357 mm): 1639.6 H  1639.9 W  41903.0 L
+
+PARAMETERS:
+              X=-11.2945
+             Xp=0.0036587524
+              Y=14.0917
+             Yp=-0.0056541256
+            Zcl=16800.5
+              c=2.997925e+08
+     deltaChord=3.0
+deltaIntersection=0.1
+   deltaOneStep=0.01
+            eps=0.5
+         epsMax=0.05
+         epsMin=2.5e-7
+ eventTimeLimit=30
+    fieldVoxels=200,200,200
+      histoFile=g4beamline
+    histoUpdate=0
+              m=105.7
+        maxStep=100.0
+        minStep=0.01
+            num=4
+              p=201
+     period_len=4200
+          pitch=-0.14323945
+    sol_current=-80.46
+ steppingFormat=N GLOBAL CL KE STEP VOL PROCESS
+steppingVerbose=0
+              v=2.6534051e+08
+         viewer=none
+ wallClockLimit=-1
+  worldMaterial=Vacuum
+     zTolerance=2.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=-3700.0 globZ=-3700.0
+	global pos=0.0,0.0,-3700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=-3000.0 globZ=-3000.0
+	global pos=0.0,0.0,-3000.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=-2300.0 globZ=-2300.0
+	global pos=0.0,0.0,-2300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=-1600.0 globZ=-1600.0
+	global pos=0.0,0.0,-1600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=-900.0 globZ=-900.0
+	global pos=0.0,0.0,-900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=-200.0 globZ=-200.0
+	global pos=0.0,0.0,-200.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=500.0 globZ=500.0
+	global pos=0.0,0.0,500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=1200.0 globZ=1200.0
+	global pos=0.0,0.0,1200.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=1900.0 globZ=1900.0
+	global pos=0.0,0.0,1900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=2600.0 globZ=2600.0
+	global pos=0.0,0.0,2600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=3300.0 globZ=3300.0
+	global pos=0.0,0.0,3300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=4000.0 globZ=4000.0
+	global pos=0.0,0.0,4000.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=4700.0 globZ=4700.0
+	global pos=0.0,0.0,4700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=5400.0 globZ=5400.0
+	global pos=0.0,0.0,5400.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=6100.0 globZ=6100.0
+	global pos=0.0,0.0,6100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=6800.0 globZ=6800.0
+	global pos=0.0,0.0,6800.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=7500.0 globZ=7500.0
+	global pos=0.0,0.0,7500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=8200.0 globZ=8200.0
+	global pos=0.0,0.0,8200.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=8900.0 globZ=8900.0
+	global pos=0.0,0.0,8900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=9600.0 globZ=9600.0
+	global pos=0.0,0.0,9600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=10300.0 globZ=10300.0
+	global pos=0.0,0.0,10300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=11000.0 globZ=11000.0
+	global pos=0.0,0.0,11000.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=11700.0 globZ=11700.0
+	global pos=0.0,0.0,11700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=12400.0 globZ=12400.0
+	global pos=0.0,0.0,12400.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=13100.0 globZ=13100.0
+	global pos=0.0,0.0,13100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=13800.0 globZ=13800.0
+	global pos=0.0,0.0,13800.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=14500.0 globZ=14500.0
+	global pos=0.0,0.0,14500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=15200.0 globZ=15200.0
+	global pos=0.0,0.0,15200.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=15900.0 globZ=15900.0
+	global pos=0.0,0.0,15900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=16600.0 globZ=16600.0
+	global pos=0.0,0.0,16600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=17300.0 globZ=17300.0
+	global pos=0.0,0.0,17300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=18000.0 globZ=18000.0
+	global pos=0.0,0.0,18000.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=18700.0 globZ=18700.0
+	global pos=0.0,0.0,18700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=19400.0 globZ=19400.0
+	global pos=0.0,0.0,19400.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=20100.0 globZ=20100.0
+	global pos=0.0,0.0,20100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=20800.0 globZ=20800.0
+	global pos=0.0,0.0,20800.0  Checking overlaps for volume Det1:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det1 parent= relZ=0.5 globZ=0.5
+Checking overlaps for volume Det2:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det2 parent= relZ=4200.5 globZ=4200.5
+Checking overlaps for volume Det3:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det3 parent= relZ=8400.5 globZ=8400.5
+Checking overlaps for volume Det4:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det4 parent= relZ=12600.5 globZ=12600.5
+Checking overlaps for volume Det5:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct Det5 parent= relZ=16800.5 globZ=16800.5
+### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
+
+Geometry test nPoints=100 tolerance=0.002 mm:
+Testing geometry for children of group 'World':
+Total geometry errors = 0  0 seconds
+
+================= Prepare Tune Particle(s) ===========
+================= Begin Tune Particle(s) =============
+**************************************************************************
+*** G4Exception: EM Field Extends Outside World
+***    severity: Warning
+***   issued by: BLGlobalField
+*** description: May give inaccurate tracking near world boundary.
+***     EventID: -2     TrackID: 1   mu+  KE=121.4 MeV
+**************************************************************************
+fieldVoxels: nx=6 ny=6 nz=155, 5580 voxels, 36 fields
+fieldVoxels: max field count is 18 fields, # voxels >5: 4968, >10: 4068, >20: 0
+**************************************************************************
+*** G4Exception: Check number of field voxels
+***    severity: Warning
+***   issued by: BLGlobalField
+*** description: nVoxels = 5580, max fields/voxel = 18
+***     EventID: -2     TrackID: 1   mu+  KE=121.4 MeV
+**************************************************************************
+Run complete  1 Events  0 seconds
+================== Begin Reference Particle(s) ===============
+Run complete  1 Events  0 seconds
+================== Prepare Tracking Beam ==================
+**************************************************************************
+*** G4Exception: All stochastic processes disabled
+***    severity: Warning
+***   issued by: physics
+**************************************************************************
+================== Begin Tracking Beam ===============
+Event 1 Completed  1 events  realTime=1 sec  1.0 ev/sec
+Event 2 Completed  2 events  realTime=1 sec  2.0 ev/sec
+Event 3 Completed  3 events  realTime=1 sec  3.0 ev/sec
+Event 4 Completed  4 events  realTime=1 sec  4.0 ev/sec
+Event 5 Completed  5 events  realTime=1 sec  5.0 ev/sec
+Event 6 Completed  6 events  realTime=1 sec  6.0 ev/sec
+Event 7 Completed  7 events  realTime=1 sec  7.0 ev/sec
+Event 8 Completed  8 events  realTime=1 sec  8.0 ev/sec
+Event 9 Completed  9 events  realTime=1 sec  9.0 ev/sec
+Event 10 Completed  10 events  realTime=1 sec  10.0 ev/sec
+Event 20 Completed  20 events  realTime=1 sec  20.0 ev/sec
+Event 30 Completed  30 events  realTime=1 sec  30.0 ev/sec
+Event 40 Completed  40 events  realTime=1 sec  40.0 ev/sec
+Event 50 Completed  50 events  realTime=1 sec  50.0 ev/sec
+Event 60 Completed  60 events  realTime=1 sec  60.0 ev/sec
+Event 70 Completed  70 events  realTime=1 sec  70.0 ev/sec
+Event 80 Completed  80 events  realTime=1 sec  80.0 ev/sec
+Event 90 Completed  90 events  realTime=1 sec  90.0 ev/sec
+Event 100 Completed  100 events  realTime=1 sec  100.0 ev/sec
+Event 200 Completed  200 events  realTime=1 sec  200.0 ev/sec
+Event 300 Completed  300 events  realTime=1 sec  300.0 ev/sec
+Event 400 Completed  400 events  realTime=1 sec  400.0 ev/sec
+Event 500 Completed  500 events  realTime=2 sec  250.0 ev/sec
+Event 600 Completed  600 events  realTime=2 sec  300.0 ev/sec
+Event 700 Completed  700 events  realTime=2 sec  350.0 ev/sec
+Event 800 Completed  800 events  realTime=2 sec  400.0 ev/sec
+Event 900 Completed  900 events  realTime=3 sec  300.0 ev/sec
+Event 1000 Completed  1000 events  realTime=3 sec  333.3 ev/sec
+Event 2000 Completed  2000 events  realTime=6 sec  333.3 ev/sec
+Event 3000 Completed  3000 events  realTime=8 sec  375.0 ev/sec
+Event 4000 Completed  4000 events  realTime=11 sec  363.6 ev/sec
+Event 5000 Completed  5000 events  realTime=14 sec  357.1 ev/sec
+Event 6000 Completed  6000 events  realTime=17 sec  352.9 ev/sec
+Event 7000 Completed  7000 events  realTime=20 sec  350.0 ev/sec
+Event 8000 Completed  8000 events  realTime=22 sec  363.6 ev/sec
+Event 9000 Completed  9000 events  realTime=25 sec  360.0 ev/sec
+Event 10000 Completed  10000 events  realTime=28 sec  357.1 ev/sec
+Run complete  10000 Events  28 seconds
+NTuple Det1               10000 entries
+NTuple Det2               10000 entries
+NTuple Det3               10001 entries
+NTuple Det4               10000 entries
+NTuple Det5                9992 entries
+NTuple AllTracks            673 entries
+
+Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 3 Warnings
+      1 times: All stochastic processes disabled
+      1 times: Check number of field voxels
+      1 times: EM Field Extends Outside World
+g4beamline: simulation complete
