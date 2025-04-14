@@ -10,7 +10,7 @@ param c=2.997925*10^8 #m/s
 
 # Reference particle:
 #param p=227.5 #MeV/c
-param p=201 #MeV/c
+param p=199.9 #MeV/c
 param v=$p*$c/sqrt($p^2+$m^2)
 
 # Solenoid current:
