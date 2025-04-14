@@ -13,7 +13,7 @@ G4REALSURFACEDATA=/Users/criggall/Geant4Data/RealSurface2.2
 G4SAIDXSDATA=/Users/criggall/Geant4Data/G4SAIDDATA2.0
 G4TENDLDATA=/Users/criggall/Geant4Data/G4TENDL1.4
 G4LENDDATA=/Users/criggall/Geant4Data/LEND_GND1.3_ENDF.BVII.1
-G4beamline Process ID 781
+G4beamline Process ID 4502
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -47,25 +47,27 @@ physics      QGSP_BIC      disable= inactivate= deactivate= doStochastics=0
                            synchrotronRadiationMuon=0 maxTime=1e+06
 param        m             105.7
 param        c             2.997925e+08
-param        p             199.9
-param        v             2.650239e+08
+param        p             200
+param        v             2.6505285e+08
 param        sol_current   -80.46
 param        pitch         -0.14323945
 param        period_len    4200
-param        X             -11.2945
-param        Y             14.0917
+param        dx            -1
+param        dy            -1
+param        X             -12.2945
+param        Y             13.0917
 param        Xp            0.0036587524
 param        Yp            -0.0056541256
-beam    GAUSSIAN particle=mu+ nEvents=10000 firstEvent=-1 lastEvent=2147483647 beamX=-11.3 beamY=14.1 beamZ=0.0 maxR=1000000.0 
-		meanMomentum=199.9 weight=1.000000 
+beam    GAUSSIAN particle=mu+ nEvents=10000 firstEvent=-1 lastEvent=2147483647 beamX=-12.3 beamY=13.1 beamZ=0.0 maxR=1000000.0 
+		meanMomentum=200.0 weight=1.000000 
 		sigmaX=10.0 sigmaY=10.0 sigmaZ=0.0 sigmaXp=0.10000 sigmaYp=0.10000 
 		sigmaP=0.0 sigmaT=1.000 meanXp=0.00366 meanYp=-0.00565 meanT=0.000 
-reference                  particle=mu+ beamX=-11.29 beamY=14.09 beamZ=0
-                           beamT=0 rotation= referenceMomentum=199.9
-                           beamXp=0.003659 beamYp=-0.005654 meanMomentum=199.9
+reference                  particle=mu+ beamX=-12.29 beamY=13.09 beamZ=0
+                           beamT=0 rotation= referenceMomentum=200
+                           beamXp=0.003659 beamYp=-0.005654 meanMomentum=200
                            meanXp=0.003659 meanYp=-0.005654 tuneZ=-3.7e+21
                            tuneMomentum=-3.7e+21 tolerance=0.001 noEfield=0
-                           noBfield=0 noEloss=0 P=199.9
+                           noBfield=0 noEloss=0 P=200
 trace                      nTrace=1 format=asciiTrace oneNTuple=1
                            primaryOnly=0 traceTune=1 filename=AllTracks
                            file=AllTracks require= coordinates=Centerline
@@ -191,15 +193,17 @@ place   Det5    copies=1 x=0.0 y=0.0 z=16800.5
 World size (before incrementing by 201.357 mm): 1639.6 H  1639.9 W  41903.0 L
 
 PARAMETERS:
-              X=-11.2945
+              X=-12.2945
              Xp=0.0036587524
-              Y=14.0917
+              Y=13.0917
              Yp=-0.0056541256
             Zcl=16800.5
               c=2.997925e+08
      deltaChord=3.0
 deltaIntersection=0.1
    deltaOneStep=0.01
+             dx=-1
+             dy=-1
             eps=0.5
          epsMax=0.05
          epsMin=2.5e-7
@@ -211,13 +215,13 @@ deltaIntersection=0.1
         maxStep=100.0
         minStep=0.01
             num=4
-              p=199.9
+              p=200
      period_len=4200
           pitch=-0.14323945
     sol_current=-80.46
  steppingFormat=N GLOBAL CL KE STEP VOL PROCESS
 steppingVerbose=0
-              v=2.650239e+08
+              v=2.6505285e+08
          viewer=none
  wallClockLimit=-1
   worldMaterial=Vacuum
@@ -317,7 +321,7 @@ Total geometry errors = 0  0 seconds
 ***    severity: Warning
 ***   issued by: BLGlobalField
 *** description: May give inaccurate tracking near world boundary.
-***     EventID: -2     TrackID: 1   mu+  KE=120.4 MeV
+***     EventID: -2     TrackID: 1   mu+  KE=120.5 MeV
 **************************************************************************
 fieldVoxels: nx=6 ny=6 nz=155, 5580 voxels, 36 fields
 fieldVoxels: max field count is 18 fields, # voxels >5: 4968, >10: 4068, >20: 0
@@ -326,7 +330,7 @@ fieldVoxels: max field count is 18 fields, # voxels >5: 4968, >10: 4068, >20: 0
 ***    severity: Warning
 ***   issued by: BLGlobalField
 *** description: nVoxels = 5580, max fields/voxel = 18
-***     EventID: -2     TrackID: 1   mu+  KE=120.4 MeV
+***     EventID: -2     TrackID: 1   mu+  KE=120.5 MeV
 **************************************************************************
 Run complete  1 Events  0 seconds
 ================== Begin Reference Particle(s) ===============
@@ -359,27 +363,27 @@ Event 90 Completed  90 events  realTime=1 sec  90.0 ev/sec
 Event 100 Completed  100 events  realTime=1 sec  100.0 ev/sec
 Event 200 Completed  200 events  realTime=1 sec  200.0 ev/sec
 Event 300 Completed  300 events  realTime=1 sec  300.0 ev/sec
-Event 400 Completed  400 events  realTime=1 sec  400.0 ev/sec
+Event 400 Completed  400 events  realTime=2 sec  200.0 ev/sec
 Event 500 Completed  500 events  realTime=2 sec  250.0 ev/sec
-Event 600 Completed  600 events  realTime=2 sec  300.0 ev/sec
+Event 600 Completed  600 events  realTime=3 sec  200.0 ev/sec
 Event 700 Completed  700 events  realTime=3 sec  233.3 ev/sec
-Event 800 Completed  800 events  realTime=3 sec  266.7 ev/sec
+Event 800 Completed  800 events  realTime=4 sec  200.0 ev/sec
 Event 900 Completed  900 events  realTime=4 sec  225.0 ev/sec
 Event 1000 Completed  1000 events  realTime=4 sec  250.0 ev/sec
-Event 2000 Completed  2000 events  realTime=8 sec  250.0 ev/sec
+Event 2000 Completed  2000 events  realTime=9 sec  222.2 ev/sec
 Event 3000 Completed  3000 events  realTime=13 sec  230.8 ev/sec
-Event 4000 Completed  4000 events  realTime=17 sec  235.3 ev/sec
-Event 5000 Completed  5000 events  realTime=22 sec  227.3 ev/sec
-Event 6000 Completed  6000 events  realTime=26 sec  230.8 ev/sec
-Event 7000 Completed  7000 events  realTime=31 sec  225.8 ev/sec
-Event 8000 Completed  8000 events  realTime=35 sec  228.6 ev/sec
-Event 9000 Completed  9000 events  realTime=39 sec  230.8 ev/sec
-Event 10000 Completed  10000 events  realTime=44 sec  227.3 ev/sec
-Run complete  10000 Events  44 seconds
+Event 4000 Completed  4000 events  realTime=18 sec  222.2 ev/sec
+Event 5000 Completed  5000 events  realTime=23 sec  217.4 ev/sec
+Event 6000 Completed  6000 events  realTime=27 sec  222.2 ev/sec
+Event 7000 Completed  7000 events  realTime=32 sec  218.8 ev/sec
+Event 8000 Completed  8000 events  realTime=36 sec  222.2 ev/sec
+Event 9000 Completed  9000 events  realTime=41 sec  219.5 ev/sec
+Event 10000 Completed  10000 events  realTime=45 sec  222.2 ev/sec
+Run complete  10000 Events  45 seconds
 NTuple Det1               10000 entries
 NTuple Det2               10000 entries
 NTuple Det3               10000 entries
-NTuple Det4               10002 entries
+NTuple Det4               10001 entries
 NTuple Det5                9997 entries
 NTuple AllTracks            673 entries
 

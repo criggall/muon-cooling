@@ -10,7 +10,7 @@ param c=2.997925*10^8 #m/s
 
 # Reference particle:
 #param p=227.5 #MeV/c
-param p=199.9 #MeV/c
+param p=200 #MeV/c
 param v=$p*$c/sqrt($p^2+$m^2)
 
 # Solenoid current:
@@ -25,8 +25,11 @@ param period_len=4200 #mm
 
 ### BEAM ###
 
-param X=-11.2945
-param Y=14.0917
+param dx=-1
+param dy=-1
+
+param X=-11.2945+$dx
+param Y=14.0917+$dy
 param Xp=0.823201/224.995
 param Yp=-1.27215/224.995
 
