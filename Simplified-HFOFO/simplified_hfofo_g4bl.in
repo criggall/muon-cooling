@@ -9,12 +9,12 @@ param m=105.7 #MeV
 param c=2.997925*10^8 #m/s
 
 # Reference particle:
-#param p=227.5 #MeV/c
-param p=200 #MeV/c
+#param dp=-0.1 #MeV/c
+param dp=0
+param p=200+$dp #MeV/c
 param v=$p*$c/sqrt($p^2+$m^2)
 
 # Solenoid current:
-#param sol_current=-91.481 #amps/mm^2
 param sol_current=-80.46 #amps/mm^2
 
 # Solenoid pitch:
@@ -25,15 +25,17 @@ param period_len=4200 #mm
 
 ### BEAM ###
 
-param dx=-1
-param dy=-1
+#param dx=-0.12/sqrt(2) #mm
+#param dy=-0.12/sqrt(2) #mm
+param dx=0 #mm
+param dy=0 #mm
 
-param X=-11.2945+$dx
-param Y=14.0917+$dy
-param Xp=0.823201/224.995
-param Yp=-1.27215/224.995
+param X=-11.2945+$dx #mm
+param Y=14.0917+$dy #mm
+param Xp=0.823201/224.995 #mm
+param Yp=-1.27215/224.995 #mm
 
-beam gaussian particle=mu+ nEvents=10000 \
+beam gaussian particle=mu+ nEvents=100 \
 beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
 sigmaX=10.0 sigmaY=10.0 sigmaXp=0.1 sigmaYp=0.1 \
 meanMomentum=$p sigmaP=0.0 meanT=0.0 sigmaT=1.0
@@ -64,4 +66,4 @@ include sol_place.txt
 include abs_place.txt
 
 # Visualize magnetic field lines:
-# fieldlines center=0,0,0
+#fieldlines center=0,0,0
