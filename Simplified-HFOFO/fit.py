@@ -69,25 +69,25 @@ wave_nums = wave_nums[:len(wave_nums)//2]
 amplitude = amplitude[:len(amplitude)//2]
 
 # Amplitude and wave number values from FFT:
-a = [0.25, 0.05, 0.08]
-k = [0.55, 0.77, 1.43]
+a = [5.0e-3, 2.2e-3, 1.4e-3, 4.2e-4]
+k = [0.2, 0.4, 3.5, 9.0]
 
 # Define functional form of observed dp particle trajectory:
-# def f(z, phi0, phi1, phi2):
-#     return ( a[0]*np.sin(k[0]*z+phi0) +  a[1]*np.sin(k[1]*z+phi1) + a[2]*np.sin(k[2]*z+phi2))
-def f(z):
-    return ( a[0]*np.sin(k[0]*z) +  a[1]*np.sin(k[1]*z) + a[2]*np.sin(k[2]*z))
+def f(z, phi0, phi1, phi2, phi3, y):
+    return ( a[0]*np.sin(k[0]*z+phi0) +  a[1]*np.sin(k[1]*z+phi1) + a[2]*np.sin(k[2]*z+phi2) + a[3]*np.sin(k[3]*z+phi3) + y)
 
 # Fit to find phases:
-initial_phases = [0, 0, 0]
-# popt, pcov = curve_fit(f, z_uniform, displacements_uniform, p0=initial_phases)
+initial = [0, 0, 0, 0, 0]
+popt, pcov = curve_fit(f, z_uniform, displacements_uniform, p0=initial)
 
 # Plot:
 plt.figure(figsize=(12,5))
 plt.plot(z_uniform, displacements_uniform, label='data',color='black')
-# plt.plot(z_uniform, f(z, *popt), label='fit', linestyle='--',color='green')
-plt.plot(z_uniform, f(z_uniform), label='fit', linestyle='--',color='green')
+plt.plot(z_uniform, f(z_uniform, *popt), label='fit', linestyle='--',color='green')
 plt.xlabel('z (m)')
 plt.ylabel('displacement (cm)')
 plt.legend()
-plt.savefig(main_dir+'Figures/fit_test.png')
+plt.savefig(main_dir+'Figures/fit.png')
+
+# Print fitted functional form:
+print(f'f(z) = {a[0]}sin({k[0]}z+{round(popt[0],2)}) +  {a[1]}sin({k[1]}z+{round(popt[1],2)}) + {a[2]}sin({k[2]}z+{round(popt[2],2)}) + {a[3]}sin({k[3]}z+{round(popt[3],2)}) + {round(popt[4],2)}')
