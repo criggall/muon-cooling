@@ -9,8 +9,8 @@ param m=105.7 #MeV
 param c=2.997925*10^8 #m/s
 
 # Reference particle:
-#param dp=-0.1 #MeV/c
 param dp=0
+#param dp=-0.1 #MeV/c
 param p=200+$dp #MeV/c
 param v=$p*$c/sqrt($p^2+$m^2)
 
@@ -25,15 +25,20 @@ param period_len=4200 #mm
 
 ### BEAM ###
 
-#param dx=-0.12/sqrt(2) #mm
-#param dy=-0.12/sqrt(2) #mm
 param dx=0 #mm
 param dy=0 #mm
+#param dx=-0.12/sqrt(2) #mm
+#param dy=-0.12/sqrt(2) #mm
+
+#param dxp=0 #radians
+#param dyp=0 #radians
+param dxp=-0.001 #radians
+param dyp=-0.001 #radians
 
 param X=-11.2945+$dx #mm
 param Y=14.0917+$dy #mm
-param Xp=0.823201/224.995 #mm
-param Yp=-1.27215/224.995 #mm
+param Xp=0.823201/224.995+$dxp #radians
+param Yp=-1.27215/224.995+$dyp #radians
 
 beam gaussian particle=mu+ nEvents=100 \
 beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 

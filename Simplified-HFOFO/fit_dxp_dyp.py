@@ -10,7 +10,7 @@ len_period = 4.2 # m
 main_dir = '/Users/criggall/Documents/muon-cooling/Simplified-HFOFO/'
 
 # Load data for offset particle:
-file = main_dir+'offset_particle_output/AllTracks_dp_neg_dxy_extended.txt'
+file = main_dir+'offset_particle_output/AllTracks_dxp_dyp_extended.txt'
 data = np.loadtxt(file)
 
 # Load data for reference particle:
@@ -60,24 +60,17 @@ z_uniform = np.linspace(np.min(z_vals), np.max(z_vals), len(z_vals))
 displacements_interp_func = interp1d(z_vals, displacements)
 displacements_uniform = displacements_interp_func(z_uniform)
 
-# Perform FFT:
-fft = np.fft.fft(displacements_uniform)
-dz = z_uniform[1] - z_uniform[0]
-wave_nums = np.fft.fftfreq(len(z_uniform), d=dz)
-amplitude = np.abs(fft)
-wave_nums = wave_nums[:len(wave_nums)//2]
-amplitude = amplitude[:len(amplitude)//2]
-
 # Amplitude and wave number values from FFT:
-a = [5.0e-3, 2.2e-3, 1.4e-3, 4.2e-4]
-k = [0.2, 0.4, 3.5, 9.0]
+''' See plot-compare-particles notebook for FFT computation and plots'''
+a = [3.4e-2, 6.3e-3]
+k = [3.5, 7.0]
 
 # Define functional form of observed dp particle trajectory:
-def f(z, phi0, phi1, phi2, phi3, y):
-    return ( a[0]*np.sin(k[0]*z+phi0) +  a[1]*np.sin(k[1]*z+phi1) + a[2]*np.sin(k[2]*z+phi2) + a[3]*np.sin(k[3]*z+phi3) + y)
+def f(z, phi0, phi1, y):
+    return ( a[0]*np.sin(k[0]*z+phi0) +  a[1]*np.sin(k[1]*z+phi1) + y)
 
 # Fit to find phases:
-initial = [0, 0, 0, 0, 0]
+initial = [0, 0, 0]
 popt, pcov = curve_fit(f, z_uniform, displacements_uniform, p0=initial)
 
 # Plot:
@@ -87,7 +80,7 @@ plt.plot(z_uniform, f(z_uniform, *popt), label='fit', linestyle='--',color='gree
 plt.xlabel('z (m)')
 plt.ylabel('displacement (cm)')
 plt.legend()
-plt.savefig(main_dir+'Figures/fit.png')
+plt.savefig(main_dir+'Figures/fit_dxp_dyp.png')
 
 # Print fitted functional form:
-print(f'f(z) = {a[0]}sin({k[0]}z+{round(popt[0],2)}) +  {a[1]}sin({k[1]}z+{round(popt[1],2)}) + {a[2]}sin({k[2]}z+{round(popt[2],2)}) + {a[3]}sin({k[3]}z+{round(popt[3],2)}) + {round(popt[4],2)}')
+print(f'f(z) = {a[0]}sin({k[0]}z+{round(popt[0],2)}) +  {a[1]}sin({k[1]}z+{round(popt[1],2)}) + {round(popt[2],2)}')
