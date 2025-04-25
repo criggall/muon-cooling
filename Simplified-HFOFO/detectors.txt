@@ -7,3 +7,11 @@ virtualdetector Det6 file=out6 format=ascii radius=360 color=0,1,0 length=0.001 
 virtualdetector Det7 file=out7 format=ascii radius=360 color=0,1,0 length=0.001 material=Vacuum
 virtualdetector Det8 file=out8 format=ascii radius=360 color=0,1,0 length=0.001 material=Vacuum
 virtualdetector Det9 file=out9 format=ascii radius=360 color=0,1,0 length=0.001 material=Vacuum
+virtualdetector Det10 file=out10 format=ascii radius=360 color=0,1,0 length=0.001 material=Vacuum
+virtualdetector Det11 file=out11 format=ascii radius=360 color=0,1,0 length=0.001 material=Vacuum
+virtualdetector Det12 file=out12 format=ascii radius=360 color=0,1,0 length=0.001 material=Vacuum
+virtualdetector Det13 file=out13 format=ascii radius=360 color=0,1,0 length=0.001 material=Vacuum
+virtualdetector Det14 file=out14 format=ascii radius=360 color=0,1,0 length=0.001 material=Vacuum
+virtualdetector Det15 file=out15 format=ascii radius=360 color=0,1,0 length=0.001 material=Vacuum
+virtualdetector Det16 file=out16 format=ascii radius=360 color=0,1,0 length=0.001 material=Vacuum
+virtualdetector Det17 file=out17 format=ascii radius=360 color=0,1,0 length=0.001 material=Vacuum
