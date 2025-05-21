@@ -1,0 +1,69 @@
+### PHYSICS ###
+
+physics QGSP_BIC doStochastics=0
+
+### PARAMETERS ###
+
+# Constants:
+param m=105.7 #MeV
+param c=2.997925*10^8 #m/s
+
+# Reference particle:
+param dp=-4.0000000000000036 #MeV/c
+param p=200+$dp #MeV/c
+param v=$p*$c/sqrt($p^2+$m^2)
+
+# Solenoid current:
+param sol_current=-80.46 #amps/mm^2
+
+# Solenoid pitch:
+param pitch=-0.0025*180/pi #rad-->deg
+
+# Period length:
+param period_len=4200 #mm
+
+### BEAM ###
+
+param dx=0 #mm
+param dy=0 #mm
+
+param dxp=0 #radians
+param dyp=0 #radians
+
+param X=-11.2945+$dx #mm
+param Y=14.0917+$dy #mm
+param Xp=0.823201/224.995+$dxp #radians
+param Yp=-1.27215/224.995+$dyp #radians
+
+beam gaussian particle=mu+ nEvents=100 \
+beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+sigmaX=10.0 sigmaY=10.0 sigmaXp=0.1 sigmaYp=0.1 \
+meanMomentum=$p sigmaP=0.0 meanT=0.0 sigmaT=1.0
+
+#beam ascii file=initial.dat beamZ=0.0
+
+### REFERENCE PARTICLE ###
+
+reference referenceMomentum=$p particle=mu+ beamX=$X beamY=$Y beamZ=0.0 beamXp=$Xp beamYp=$Yp
+
+trace nTrace=1 format=ascii oneNTuple=1
+
+### DETECTORS ###
+
+include /Users/criggall/Documents/muon-cooling/Simplified-HFOFO/detectors.txt
+
+### SOLENOIDS ###
+
+coil coil innerRadius=420 outerRadius=600 length=300 nSheets=10 maxR=360 maxZ=6000 dR=15 dZ=15 tolerance=0.003 
+
+solenoid SolPos coilName=coil current=-$sol_current color=0,1,1
+solenoid SolNeg coilName=coil current=$sol_current color=0,1,0
+
+include /Users/criggall/Documents/muon-cooling/Simplified-HFOFO/sol_place.txt
+
+### OTHER ###
+
+include /Users/criggall/Documents/muon-cooling/Simplified-HFOFO/abs_place.txt
+
+# Visualize magnetic field lines:
+#fieldlines center=0,0,0

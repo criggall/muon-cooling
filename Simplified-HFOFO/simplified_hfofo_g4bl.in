@@ -9,8 +9,8 @@ param m=105.7 #MeV
 param c=2.997925*10^8 #m/s
 
 # Reference particle:
-param dp=0
-#param dp=-0.1 #MeV/c
+param dp=0 #MeV/c
+#param dp=-0.1
 param p=200+$dp #MeV/c
 param v=$p*$c/sqrt($p^2+$m^2)
 
@@ -27,13 +27,13 @@ param period_len=4200 #mm
 
 param dx=0 #mm
 param dy=0 #mm
-#param dx=-0.12/sqrt(2) #mm
-#param dy=-0.12/sqrt(2) #mm
+#param dx=-0.12/sqrt(2)
+#param dy=-0.12/sqrt(2)
 
 param dxp=0 #radians
 param dyp=0 #radians
-#param dxp=-0.001 #radians
-#param dyp=-0.001 #radians
+#param dxp=-0.001
+#param dyp=-0.001
 
 param X=-11.2945+$dx #mm
 param Y=14.0917+$dy #mm
