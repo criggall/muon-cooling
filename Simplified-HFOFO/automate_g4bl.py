@@ -10,19 +10,23 @@ g4bl_dir = '/Users/criggall/Documents/muon-cooling/' # <--- Location of .bash_pr
 dir = '/Users/criggall/Documents/muon-cooling/Simplified-HFOFO/' # <-- All input files must be in this same directory
 
 # Define file locations:
-file = dir+'simplified_hfofo_g4bl2.in'
+file = dir+'simplified_hfofo_g4bl_test.in'
 file_for_g4bl = '"'+file+'"'
 
 # # Define range of solenoid current scan:
 # sol_current = np.arange(-80.51,-80.39,0.01)
 
-# Define range of delta p scan:
-# delta_p = np.arange(-5.0, 5.0, 0.1)
-# delta_p = np.arange(-10.0, 10.0, 0.5)
-delta_p = np.arange(-50.0,50.0,5)
+# # Define range of delta p scan:
+# # delta_p = np.arange(-5.0, 5.0, 0.1)
+# # delta_p = np.arange(-10.0, 10.0, 0.5)
+# delta_p = np.arange(-50.0,50.0,5)
+
+# Define range of solenoid tilt scan:
+nominal_pitch = -0.0025*180/np.pi
+pitch = np.linspace(0,nominal_pitch,10)
 
 # Set number of loops based on scan space:
-iterations = len(delta_p)
+iterations = len(pitch)
 
 ##### FUNCTION DEFINITIONS #####
 
@@ -38,11 +42,13 @@ def modify_g4bl_input(dir, file, parameters, out_dir):
         lines = f.readlines()
         for i, line in enumerate(lines):
             
-            # Adjust solenoid constant current:
+            # Adjust parameter:
             # if 'param sol_current=' in line:
             #     lines[i] = f"param sol_current={parameters['sol_current']} #amps/mm^2\n"
-            if 'param dp=' in line:
-                lines[i] = f"param dp={parameters['delta_p']} #MeV/c\n"
+            # if 'param dp=' in line:
+            #     lines[i] = f"param dp={parameters['delta_p']} #MeV/c\n"
+            if 'param pitch=' in line:
+                lines[i] = f"param pitch={parameters['pitch']} #deg\n"
         
     with open(file, 'w') as f:
         f.writelines(lines)
@@ -81,7 +87,7 @@ for j in range(iterations):
 
     # Set configurable parameters:
     parameters = {
-        'delta_p' : delta_p[j]
+        'pitch' : pitch[j]
     }
 
     # Modify input files:

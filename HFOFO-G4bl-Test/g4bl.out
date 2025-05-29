@@ -5,7 +5,7 @@ G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
 G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
 G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
-G4beamline Process ID 10517
+G4beamline Process ID 21080
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -7450,7 +7450,7 @@ fieldVoxels: max field count is 20 fields, # voxels >5: 24624, >10: 23524, >20: 
 *** description: nVoxels = 26892, max fields/voxel = 20
 ***     EventID: -2     TrackID: 1   mu+  KE=140 MeV
 **************************************************************************
-Run complete  1 Events  1 seconds
+Run complete  1 Events  0 seconds
 ================== Begin Reference Particle(s) ===============
 
 # segmentRCVector
@@ -8245,11 +8245,6 @@ BLVisManager init: /vis/viewer/set/hiddenMarker true
 WARNING: No extent set for user vis action "DrawMarkers".
 WARNING: User Vis Action "DrawMarkers" extent is null.
  Changing export format to "jpg"
-G4VisManager: Using G4TrajectoryDrawByCharge as fallback trajectory model.
-See commands in /vis/modeling/trajectories/ for other options.
-1 event has been kept for refreshing and/or reviewing.
-  "/vis/reviewKeptEvents" to review them one by one.
-  "/vis/enable", then "/vis/viewer/flush" or "/vis/viewer/rebuild" to see them accumulated.
 
 Graphics systems deleted.
 Visualization Manager deleting...
