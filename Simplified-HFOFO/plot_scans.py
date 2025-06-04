@@ -159,10 +159,10 @@ for j in range(iterations):
     Lz_vals = Lz_vals[:start_last_period]
 
     # Compute dispersion:
-    D_vals = []
-    for i in range(len(z_vals)):
-        D_val = (np.sqrt( (x_vals_ref[i] - x_vals[i])**2 + (y_vals_ref[i] - y_vals[i])**2 )) / (pitch[j]/200)
-        D_vals.append(D_val)
+    # D_vals = []
+    # for i in range(len(z_vals)):
+    #     D_val = (np.sqrt( (x_vals_ref[i] - x_vals[i])**2 + (y_vals_ref[i] - y_vals[i])**2 )) / (delta_p[j]/200)
+    #     D_vals.append(D_val)
 
     # Plot:
     plot_orbit(x_vals, y_vals, z_vals, param_label, pitch[j], dir)
