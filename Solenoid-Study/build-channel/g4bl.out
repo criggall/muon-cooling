@@ -1,0 +1,258 @@
+G4BL_DIR=/Applications/G4beamline-3.08.app/Contents
+LD_LIBRARY_PATH='/Applications/G4beamline-3.08.app/Contents/lib:'
+G4LEDATA=/Users/criggall/Geant4Data/G4EMLOW8.0
+G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
+G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
+G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
+G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
+G4beamline Process ID 44563
+
+*************************************************************
+ g4beamline version: 3.08                        (Oct  8 2022)
+                      Copyright : Tom Roberts, Muons, Inc.
+                        License : Gnu Public License
+                            WWW : http://g4beamline.muonsinc.com
+
+          ################################
+          !!! G4Backtrace is activated !!!
+          ################################
+
+
+**************************************************************
+ Geant4 version Name: geant4-11-00-patch-02 [MT]   (25-May-2022)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+
+geometry                   nPoints=100 printGeometry=0 visual=0
+                           tolerance=0.002
+param        pi            3.141592654
+param        degrad        0.017453293
+param        refP          200.0
+param        refXp         0.0
+param        refYp         0.0
+randomseed                 print=0
+G4PhysListFactory::GetReferencePhysList <QGSP_BIC>  EMoption= 0
+<<< Geant4 Physics List simulation engine: QGSP_BIC
+
+
+physics      QGSP_BIC      disable= inactivate= deactivate= doStochastics=0
+                           fluct=1 minRangeCut=1 list=0 gammaToMuPair=0
+                           spinTracking=0 synchrotronRadiation=0
+                           synchrotronRadiationMuon=0 maxTime=1e+06
+reference                  particle=mu+ beamX=0 beamY=0 beamZ=0 beamT=0
+                           rotation= referenceMomentum=200 beamXp=0 beamYp=0
+                           meanMomentum=200 meanXp=0 meanYp=0 tuneZ=-3.7e+21
+                           tuneMomentum=-3.7e+21 tolerance=0.001 noEfield=0
+                           noBfield=0 noEloss=0 P=200
+particlecolor              reference=1,1,1
+beam    GAUSSIAN particle=mu+ nEvents=1 firstEvent=-1 lastEvent=2147483647 beamX=1.5 beamY=0.0 beamZ=-3000.0 maxR=1000000.0 
+		meanMomentum=200.0 weight=1.000000 
+		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00000 sigmaYp=0.00000 
+		sigmaP=0.0 sigmaT=0.000 meanXp=0.00000 meanYp=0.00000 meanT=0.000 
+trackcuts                  kill= keep= killSecondaries=1 kineticEnergyCut=0
+                           kineticEnergyMax=1.798e+308 maxTime=1e+06
+                           keepPrimaries=0 steppingVerbose=0
+trace                      nTrace=10 format=asciiTrace oneNTuple=1
+                           primaryOnly=0 traceTune=1 filename=AllTracks
+                           file=AllTracks require= coordinates=Centerline
+param        solinner      400.0
+param        solthick      100.0
+param        sollength     100.0
+param        period        925.0
+param        solcurrent    100.0
+param        maxStep       5.0
+coil    Coil1   innerRadius=400.0 outerRadius=500.0 length=100.0 material=Cu 
+		tolerance=0.002 nSheets=0 
+		maxR=5000.0 maxZ=10000.0 dR=0.0 dZ=0.0 filename=Coil1.dat 
+coilmap Coil1   tolerance=0.00200 [fraction of Bz(r=0,z=0)]
+coilmap Coil1   read file 'Coil1.dat'  dR=7.8 dZ=7.8
+solenoid     FOFOCoil      coilName=Coil1 current=100 color=1,1,1 alternate=0
+                           kill=0 coil=Coil1
+solenoid     FOFOposCoil   coilName=Coil1 current=100 color=1,1,1 alternate=0
+                           kill=0 coil=Coil1
+solenoid     FOFOnegCoil   coilName=Coil1 current=-100 color=1,1,1 alternate=0
+                           kill=0 coil=Coil1
+virtualdetector det        radius=300 innerRadius=0 height=600 width=600
+                           length=0.001 maxStep=5 material= color= noSingles=0
+                           format=bltrackfile filename= file= require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+do i=0,3,1
+(do i=0)
+place   det     copies=1 x=0.0 y=0.0 z=0.0 
+place   FOFOposCoil copies=1 x=0.0 y=0.0 z=462.5 
+place   FOFOnegCoil copies=1 x=0.0 y=0.0 z=1387.5 
+(do i=1)
+place   det     copies=1 x=0.0 y=0.0 z=925.0 
+place   FOFOposCoil copies=1 x=0.0 y=0.0 z=1387.5 
+place   FOFOnegCoil copies=1 x=0.0 y=0.0 z=2312.5 
+(do i=2)
+place   det     copies=1 x=0.0 y=0.0 z=1850.0 
+place   FOFOposCoil copies=1 x=0.0 y=0.0 z=2312.5 
+place   FOFOnegCoil copies=1 x=0.0 y=0.0 z=3237.5 
+(do i=3)
+place   det     copies=1 x=0.0 y=0.0 z=2775.0 
+place   FOFOposCoil copies=1 x=0.0 y=0.0 z=3237.5 
+place   FOFOnegCoil copies=1 x=0.0 y=0.0 z=4162.5 
+enddo
+place   det     copies=1 x=0.0 y=0.0 z=9250.0 
+
+World size (before incrementing by 201.357 mm): 1000.0 H  1000.0 W  18500.0 L
+
+PARAMETERS:
+            Zcl=9250
+         degrad=0.017453293
+     deltaChord=3.0
+deltaIntersection=0.1
+   deltaOneStep=0.01
+         epsMax=0.05
+         epsMin=2.5e-7
+ eventTimeLimit=30
+    fieldVoxels=200,200,200
+      histoFile=g4beamline
+    histoUpdate=0
+              i=3
+        maxStep=5.0
+        minStep=0.01
+         period=925.0
+             pi=3.141592654
+           refP=200.0
+          refXp=0.0
+          refYp=0.0
+     solcurrent=100.0
+       solinner=400.0
+      sollength=100.0
+       solthick=100.0
+ steppingFormat=N GLOBAL CL KE STEP VOL PROCESS
+steppingVerbose=0
+         viewer=none
+ wallClockLimit=-1
+  worldMaterial=Vacuum
+     zTolerance=2.0
+Checking overlaps for volume det:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det parent= relZ=0.0 globZ=0.0
+Checking overlaps for volume FOFOposCoil:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct FOFOposCoil parent= relZ=462.5 globZ=462.5
+	global pos=0.0,0.0,462.5  Checking overlaps for volume FOFOnegCoil:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct FOFOnegCoil parent= relZ=1387.5 globZ=1387.5
+	global pos=0.0,0.0,1387.5  Checking overlaps for volume det:0 (G4Tubs) ... OK! 
+**************************************************************************
+*** G4Exception: Duplicate NTuple
+***    severity: Warning
+***   issued by: BLNTuple
+*** description: VirtualDetector/det
+**************************************************************************
+BLCMDvirtualdetector::Construct det parent= relZ=925.0 globZ=925.0
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with volume already placed !
+          Overlap is detected for volume FOFOposCoil:0 (G4Tubs)
+          apparently fully encapsulating volume FOFOnegCoil:0 (G4Tubs) at the same level!
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+BLCMDsolenoid::Construct FOFOposCoil parent= relZ=1387.5 globZ=1387.5
+	global pos=0.0,0.0,1387.5  Checking overlaps for volume FOFOposCoil:0 (G4Tubs) ... Checking overlaps for volume FOFOnegCoil:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct FOFOnegCoil parent= relZ=2312.5 globZ=2312.5
+	global pos=0.0,0.0,2312.5  Checking overlaps for volume det:0 (G4Tubs) ... OK! 
+**************************************************************************
+*** G4Exception: Duplicate NTuple
+***    severity: Warning
+***   issued by: BLNTuple
+*** description: VirtualDetector/det
+**************************************************************************
+BLCMDvirtualdetector::Construct det parent= relZ=1850.0 globZ=1850.0
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with volume already placed !
+          Overlap is detected for volume FOFOposCoil:0 (G4Tubs)
+          apparently fully encapsulating volume FOFOnegCoil:0 (G4Tubs) at the same level!
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+BLCMDsolenoid::Construct FOFOposCoil parent= relZ=2312.5 globZ=2312.5
+	global pos=0.0,0.0,2312.5  Checking overlaps for volume FOFOposCoil:0 (G4Tubs) ... Checking overlaps for volume FOFOnegCoil:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct FOFOnegCoil parent= relZ=3237.5 globZ=3237.5
+	global pos=0.0,0.0,3237.5  Checking overlaps for volume det:0 (G4Tubs) ... OK! 
+**************************************************************************
+*** G4Exception: Duplicate NTuple
+***    severity: Warning
+***   issued by: BLNTuple
+*** description: VirtualDetector/det
+**************************************************************************
+BLCMDvirtualdetector::Construct det parent= relZ=2775.0 globZ=2775.0
+**************************************************************************
+*** G4Exception: GeomVol1002
+***    severity: Warning
+***   issued by: G4PVPlacement::CheckOverlaps()
+*** description: Overlap with volume already placed !
+          Overlap is detected for volume FOFOposCoil:0 (G4Tubs)
+          apparently fully encapsulating volume FOFOnegCoil:0 (G4Tubs) at the same level!
+NOTE: Reached maximum fixed number -1- of overlaps reports for this volume !
+**************************************************************************
+BLCMDsolenoid::Construct FOFOposCoil parent= relZ=3237.5 globZ=3237.5
+	global pos=0.0,0.0,3237.5  Checking overlaps for volume FOFOposCoil:0 (G4Tubs) ... Checking overlaps for volume FOFOnegCoil:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct FOFOnegCoil parent= relZ=4162.5 globZ=4162.5
+	global pos=0.0,0.0,4162.5  Checking overlaps for volume det:0 (G4Tubs) ... OK! 
+**************************************************************************
+*** G4Exception: Duplicate NTuple
+***    severity: Warning
+***   issued by: BLNTuple
+*** description: VirtualDetector/det
+**************************************************************************
+BLCMDvirtualdetector::Construct det parent= relZ=9250.0 globZ=9250.0
+### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
+
+Geometry test nPoints=100 tolerance=0.002 mm:
+Testing geometry for children of group 'World':
+Total geometry errors = 0  0 seconds
+
+================= Prepare Tune Particle(s) ===========
+================= Begin Tune Particle(s) =============
+**************************************************************************
+*** G4Exception: EM Field Extends Outside World
+***    severity: Warning
+***   issued by: BLGlobalField
+*** description: May give inaccurate tracking near world boundary.
+***     EventID: -2     TrackID: 1   mu+  KE=120.5 MeV
+**************************************************************************
+fieldVoxels: nx=7 ny=7 nz=94, 4606 voxels, 8 fields
+fieldVoxels: max field count is 8 fields, # voxels >5: 3969, >10: 0, >20: 0
+**************************************************************************
+*** G4Exception: Check number of field voxels
+***    severity: Warning
+***   issued by: BLGlobalField
+*** description: nVoxels = 4606, max fields/voxel = 8
+***     EventID: -2     TrackID: 1   mu+  KE=120.5 MeV
+**************************************************************************
+Run complete  1 Events  0 seconds
+================== Begin Reference Particle(s) ===============
+Run complete  1 Events  0 seconds
+================== Prepare Tracking Beam ==================
+**************************************************************************
+*** G4Exception: All stochastic processes disabled
+***    severity: Warning
+***   issued by: physics
+**************************************************************************
+================== Begin Tracking Beam ===============
+Event 1 Completed  1 events  realTime=1 sec  1.0 ev/sec
+Run complete  1 Events  0 seconds
+NTuple det                    1 entries
+NTuple det                    1 entries
+NTuple det                    1 entries
+NTuple det                    1 entries
+NTuple det                    1 entries
+NTuple AllTracks           6237 entries
+
+Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 10 Warnings
+      1 times: All stochastic processes disabled
+      1 times: Check number of field voxels
+      4 times: Duplicate NTuple
+      1 times: EM Field Extends Outside World
+      3 times: GeomVol1002
+g4beamline: simulation complete

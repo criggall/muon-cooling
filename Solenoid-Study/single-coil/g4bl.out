@@ -5,7 +5,7 @@ G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
 G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
 G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
-G4beamline Process ID 94613
+G4beamline Process ID 33561
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -69,15 +69,16 @@ coil    Coil1   innerRadius=400.0 outerRadius=500.0 length=100.0 material=Cu
 		tolerance=0.002 nSheets=0 
 		maxR=5000.0 maxZ=10000.0 dR=0.0 dZ=0.0 filename=Coil1.dat 
 coilmap Coil1   tolerance=0.00200 [fraction of Bz(r=0,z=0)]
-coilmap Coil1   read file 'Coil1.dat'  dR=7.8 dZ=7.8
+BLCoil::determineNsheets 'Coil1'  nSheets=16 err=0.000465
+coilmap Coil1   nR=642 nZ=1282 dR=7.8 dZ=7.8 error=0.001626
+coilmap Coil1    DONE 11 seconds
+coilmap Coil1   wrote file 'Coil1.dat'   6584432 bytes
 solenoid     FOFOCoil      coilName=Coil1 current=100 color=1,1,1 alternate=0
                            kill=0 coil=Coil1
 virtualdetector det        radius=300 innerRadius=0 height=600 width=600
                            length=0.001 maxStep=5 material= color= noSingles=0
                            format=bltrackfile filename= file= require=
                            referenceParticle=0 coordinates=Centerline kill=0
-newparticlentuple det0     format=bltrackfile filename=det0.txt file=det0.txt
-                           require= coordinates=Centerline kill=0
 do i=0,0,1
 (do i=0)
 place   det     copies=1 x=0.0 y=0.0 z=0.0 
@@ -156,7 +157,6 @@ Run complete  1 Events  0 seconds
 ================== Begin Tracking Beam ===============
 Event 1 Completed  1 events  realTime=1 sec  1.0 ev/sec
 Run complete  1 Events  0 seconds
-NTuple det0                   3 entries
 NTuple det                    1 entries
 NTuple det                    1 entries
 NTuple AllTracks           6679 entries

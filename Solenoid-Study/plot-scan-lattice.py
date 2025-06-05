@@ -18,7 +18,8 @@ import imageio.v2 as imageio
 # elif polarity == 'not_flipped':
 #      main_dir = main_dir+'not-flipped/'
 
-main_dir = '/Users/criggall/Documents/muon-cooling/Solenoid-Study/single-coil/'
+# main_dir = '/Users/criggall/Documents/muon-cooling/Solenoid-Study/single-coil/'
+main_dir = '/Users/criggall/Documents/muon-cooling/Solenoid-Study/build-channel/'
 
 # Parameter space scanned:
 # nominal_tilt = -0.0025*180/np.pi
@@ -28,22 +29,6 @@ periods = np.arange(100,1500,100)
 # Number of steps in scan:
 # iterations = len(tilt)
 iterations = len(periods)
-
-##### MATCHED REFERENCE PARTICLE DATA #####
-
-# # Read in matched reference particle data:
-# file_ref = main_dir+'AllTracks.txt'
-# data_ref = np.loadtxt(file_ref)
-
-# # Values along channel:
-# x_vals_ref = []; y_vals_ref = []; z_vals_ref = []
-# for i in range(data_ref.shape[0]):
-#     id = data_ref[i][8]
-#     if id == -2:
-#         x_vals_ref.append(data_ref[i][0]*0.1) # mm -> cm
-#         y_vals_ref.append(data_ref[i][1]*0.1)
-#         z = data_ref[i][2]*0.001 # mm -> m
-#         z_vals_ref.append(z)
 
 ##### PLOTTING FUNCTIONS #####
 
@@ -96,9 +81,7 @@ def plot_angular_momentum(Lz_vals, z_vals, param_val, dir):
 
 ##### MAIN LOOP #####
 
-full_channel_indices = []
-x_total_residuals = []
-y_total_residuals = []
+min_Lz_vals = []; max_Lz_vals = []
 for j in range(iterations):
 
     # Import data:
@@ -114,7 +97,7 @@ for j in range(iterations):
     for i in range(data.shape[0]):
         id = data[i][8]
         # if id == -2: # reference
-        if id == 1: # offset
+        if id == 1: # with initial conditions
             x = data[i][0]*0.1; y = data[i][1]*0.1 # mm -> cm
             x_vals.append(x); y_vals.append(y)
             z = data[i][2]*0.001 # mm --> m
@@ -122,6 +105,10 @@ for j in range(iterations):
             px = data[i][3]; py = data[i][4]
             Lz = x*py - y*px
             Lz_vals.append(Lz)
+    
+    # Find min and max Lz:
+    min_Lz_vals.append(abs(np.min(Lz_vals)))
+    max_Lz_vals.append(abs(np.max(Lz_vals)))
 
     # Plot:
     # plot_orbit(x_vals, y_vals, z_vals, tilt[j], dir)
@@ -130,6 +117,15 @@ for j in range(iterations):
     plot_angular_momentum(Lz_vals, z_vals, periods[j], dir)
 
     del x_vals, y_vals, z_vals, px_vals, py_vals, Lz_vals
+
+# Plot magnitude of min and max Lz for each spacing:
+plt.figure()
+plt.plot(periods,min_Lz_vals,label='|min|',marker='.',color='blue')
+plt.plot(periods,max_Lz_vals,label='|max|',marker='.',color='red')
+plt.xlabel('period length (mm)')
+plt.ylabel('$L_z$ (cm*MeV/c)')
+plt.legend()
+plt.savefig(main_dir+'min_max_Lz.png',dpi=300)
 
 ##### ANIMATIONS #####
 

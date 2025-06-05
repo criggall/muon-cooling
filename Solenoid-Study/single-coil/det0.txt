@@ -1,6 +1,0 @@
-#BLTrackFile NTuple/det0
-#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
-#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
-0 0 0 0 0 200 0 -13 -2 1 0 1
-0 0 0 0 0 200 0 -13 -1 1 0 1
-1.5 0 -3000 0 0 200 0 -13 1 1 0 1

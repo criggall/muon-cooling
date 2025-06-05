@@ -65,7 +65,7 @@ virtualdetector det radius=300 length=0.001 color='' format=ascii
 ### ELEMENT PLACING SEQUENCE ###
 ################################
 
-newparticlentuple det0 file=det0.txt format=ascii
+#newparticlentuple det0 file=det0.txt format=ascii
 
 do i 0 0
 
