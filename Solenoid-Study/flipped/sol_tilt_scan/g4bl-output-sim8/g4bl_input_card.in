@@ -1,0 +1,85 @@
+#################
+### CONSTANTS ###
+#################
+
+param pi=3.141592654
+param degrad=$pi/180
+param refP=200.0
+
+param beamxp=0.0
+param beamyp=-0.0073
+
+######################
+### INITIALIZATION ###
+######################
+
+randomseed time
+
+#trace format=ascii
+
+## decay/stochastics enabled:
+#physics QGSP_BIC doStochastics=1
+## disable=Decay
+
+# decay/stochastics disabled:
+physics QGSP_BIC doStochastics=0 
+
+# Reference Particle (25th harmonic - 201.25 MHz)
+reference particle=mu+ \
+	beamX=0 \
+	beamY=0 \
+	beamZ=0.0 \
+	beamXp=0 beamYp=0 \
+	referenceMomentum=$refP
+
+particlecolor reference=1,1,1
+
+beam gaussian particle=mu+ nEvents=100 beamX=1.50 beamY=0 beamZ=0 beamXp=$beamxp  beamYp=$beamyp \
+     sigmaX=20.0 sigmaY=20. sigmaXp=0.1 sigmaYp=0.1 meanMomentum=$refP sigmaP=0.0 meanT=0.0 sigmaT=0.0
+
+# kill secondaries
+trackcuts killSecondaries=1
+
+trace format=ascii nTrace=10 oneNTuple=1
+
+############################
+### GEOMETRY DEFINITIONS ###
+############################
+
+# FOFO channel
+param solinner=400.0
+param solthick=100.0
+param sollength=400.0
+param period=2000.0
+param solcurrent=100.0
+param maxStep=5.0
+param tilt=-0.11140846016432673 #deg
+coil Coil1 innerRadius=$solinner outerRadius=$solinner+$solthick length=$sollength maxR=5000 maxZ=10000.0
+solenoid FOFOnCoil coilName=Coil1 current=$solcurrent
+solenoid FOFOfCoil coilName=Coil1 current=-$solcurrent
+
+# detector and filter
+#virtualdetector det radius=500 length=0.001 color=0,1,0 format=ascii
+#particlefilter filter radius=1000 length=0.001 color=1,1,1 kill=mu+ nWait=$nWait referenceWait=1
+virtualdetector det radius=300 length=0.001 color='' format=ascii
+
+################################
+### ELEMENT PLACING SEQUENCE ###
+################################
+
+#newparticlentuple det0 file=det0.txt format=ascii
+
+do i 0 25
+
+  place det x=0 z=$period*$i y=0
+  place det x=0 z=$period*$i+$period/8 y=0 ###
+  place det x=0 z=$period*$i+$period/4 y=0
+  place FOFOnCoil x=0 z=$period*$i+$period/4  y=0 rotation=X$tilt
+  place det x=0 z=$period*$i+3*$period/8 y=0 ###
+  place det x=0 z=$period*$i+$period/2 y=0
+  place det x=0 z=$period*$i+5*$period/8 y=0 ###
+  place FOFOfCoil x=0 z=$period*$i+$period*3/4  y=0 rotation=X$tilt
+  place det x=0 z=$period*$i+$period*3/4 y=0
+  place det x=0 z=$period*$i+7*$period/8 y=0 ###
+  
+enddo

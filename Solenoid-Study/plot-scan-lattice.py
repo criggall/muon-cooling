@@ -1,0 +1,159 @@
+import numpy as np
+from matplotlib import pyplot as plt
+import os
+import imageio.v2 as imageio
+
+##### INPUTS #####
+
+# # Choose to run flipped or not flipped lattice:
+# polarity = 'flipped'
+# # polarity = 'not_flipped'
+
+# # Main directory:
+# main_dir = '/Users/criggall/Documents/solenoid-study/'
+
+# # Define working directory:
+# if polarity == 'flipped':
+#      main_dir = main_dir+'flipped/'
+# elif polarity == 'not_flipped':
+#      main_dir = main_dir+'not-flipped/'
+
+main_dir = '/Users/criggall/Documents/solenoid-study/single-coil/'
+
+# Parameter space scanned:
+# nominal_tilt = -0.0025*180/np.pi
+# tilt = np.linspace(0,nominal_tilt,10)
+periods = np.arange(100,1500,100)
+
+# Number of steps in scan:
+# iterations = len(tilt)
+iterations = len(periods)
+
+##### MATCHED REFERENCE PARTICLE DATA #####
+
+# # Read in matched reference particle data:
+# file_ref = main_dir+'AllTracks.txt'
+# data_ref = np.loadtxt(file_ref)
+
+# # Values along channel:
+# x_vals_ref = []; y_vals_ref = []; z_vals_ref = []
+# for i in range(data_ref.shape[0]):
+#     id = data_ref[i][8]
+#     if id == -2:
+#         x_vals_ref.append(data_ref[i][0]*0.1) # mm -> cm
+#         y_vals_ref.append(data_ref[i][1]*0.1)
+#         z = data_ref[i][2]*0.001 # mm -> m
+#         z_vals_ref.append(z)
+
+##### PLOTTING FUNCTIONS #####
+
+units = '$^{\circ}$'
+
+# Define function to plot orbit in xy-plane:
+def plot_orbit(x_vals, y_vals, z_vals, param_val, dir):
+    plt.clf()
+    plt.scatter(x_vals,y_vals,s=1)
+    # plt.title(f'solenoid tilt = {round(param_val,2)} {units}')
+    plt.title(f'period = {param_val} mm')
+    plt.xlabel('x (cm)')
+    plt.ylabel('y (cm)')
+    # if polarity == 'flipped':
+    #     plt.xlim(-1.5,1.5)
+    #     plt.ylim(-1.5,1.5)
+    # elif polarity == 'not_flipped':
+    #     plt.xlim(-0.5,3.5)
+    #     plt.ylim(-0.5,3.5)
+    plt.savefig(dir+'orbit.png',dpi=300)
+    plt.close()
+
+# vlines_pos = np.arange(0.5,22,1)
+# vlines_neg = np.arange(1,22,1)
+
+# Define function to plot Lz along z:
+def plot_angular_momentum(Lz_vals, z_vals, param_val, dir):
+    plt.clf()
+    plt.figure(figsize=(10,4))
+    # for i in range(len(vlines_pos)):
+    #    plt.axvline(x=vlines_pos[i],color='black',alpha=0.2)
+    # for i in range(len(vlines_neg)):
+    #    plt.axvline(x=vlines_neg[i],color='grey',alpha=0.2)
+    plt.axvline(x=0.5,color='black',alpha=0.1)
+    plt.axvline(x=0.5+param_val/1000,color='black',alpha=0.1)
+    plt.scatter(z_vals, Lz_vals,s=0.5,color='black')
+    # plt.title(f'solenoid tilt = {round(param_val,2)} {units}')
+    plt.title(f'period = {param_val} mm')
+    # if polarity == 'flipped':
+    #     plt.ylim(-20,20)
+    # elif polarity == 'not_flipped':
+    #     # plt.ylim(-15,15)
+    #     plt.ylim(-25,25)
+    plt.xlim(-1,4)
+    plt.ylim(-0.05,0.05)
+    plt.xlabel('z (m)')
+    plt.ylabel('$L_z$ (cm*MeV/c)')
+    plt.savefig(dir+'angular_momentum.png',dpi=300)
+    plt.close()
+
+##### MAIN LOOP #####
+
+full_channel_indices = []
+x_total_residuals = []
+y_total_residuals = []
+for j in range(iterations):
+
+    # Import data:
+    # dir = f'{main_dir}sol_tilt_scan/g4bl-output-sim{j+1}/'
+    dir = f'{main_dir}coil_spacing_scan/g4bl-output-sim{j+1}/'
+    file = f'{dir}AllTracks.txt'
+    data = np.loadtxt(file)
+
+    # Values along channel:
+    x_vals = []; y_vals = []; z_vals = []
+    px_vals = []; py_vals = []
+    Lz_vals = []
+    for i in range(data.shape[0]):
+        id = data[i][8]
+        # if id == -2: # reference
+        if id == 1: # offset
+            x = data[i][0]*0.1; y = data[i][1]*0.1 # mm -> cm
+            x_vals.append(x); y_vals.append(y)
+            z = data[i][2]*0.001 # mm --> m
+            z_vals.append(z)
+            px = data[i][3]; py = data[i][4]
+            Lz = x*py - y*px
+            Lz_vals.append(Lz)
+
+    # Plot:
+    # plot_orbit(x_vals, y_vals, z_vals, tilt[j], dir)
+    # plot_angular_momentum(Lz_vals, z_vals, tilt[j], dir)
+    # plot_orbit(x_vals, y_vals, z_vals, periods[j], dir)
+    plot_angular_momentum(Lz_vals, z_vals, periods[j], dir)
+
+    del x_vals, y_vals, z_vals, px_vals, py_vals, Lz_vals
+
+##### ANIMATIONS #####
+
+frame_duration = 400
+
+# List of sim directories:
+# out_dirs = [main_dir+f'sol_tilt_scan/g4bl-output-sim{i+1}' for i in range(iterations)]
+out_dirs = [main_dir+f'coil_spacing_scan/g4bl-output-sim{i+1}' for i in range(iterations)]
+
+# # List of orbit plot files:
+# orbit_plot_paths = []
+# for i in range(iterations):
+#     orbit_plot_paths.append(out_dirs[i]+'/orbit.png')
+
+# # Create animation of orbit over scan:
+# orbit_plots = [imageio.imread(img) for img in orbit_plot_paths]
+# imageio.mimsave(main_dir+'orbit_scan_sol_tilt.gif', orbit_plots, duration=frame_duration, loop=0)
+
+# List of angular momentum plot files:
+Lz_plot_paths = []
+for i in range(iterations):
+    Lz_plot_paths.append(out_dirs[i]+'/angular_momentum.png')
+
+# Create animation of angular momentum over scan:
+Lz_plots = [imageio.imread(img) for img in Lz_plot_paths]
+# imageio.mimsave(main_dir+'Lz_scan_sol_tilt.gif', Lz_plots, duration=frame_duration, loop=0)
+imageio.mimsave(main_dir+'Lz_scan_coil_spacing.gif', Lz_plots, duration=frame_duration, loop=0)

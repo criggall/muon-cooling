@@ -1,0 +1,8 @@
+#BLTrackFile VirtualDetector/det
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+#BLTrackFile VirtualDetector/det
+#x y z Px Py Pz t PDGid EventID TrackID ParentID Weight
+#mm mm mm MeV/c MeV/c MeV/c ns - - - - -
+1.48629 -0.165368 -0.0005 -0.0151166 -0.0920636 200 11.3175 -13 1 1 0 1
+-3.6372 4.9267 10000 -0.0951445 0.128836 200 49.0426 -13 1 1 0 1
