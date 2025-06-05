@@ -10,7 +10,7 @@ import imageio.v2 as imageio
 # # polarity = 'not_flipped'
 
 # # Main directory:
-# main_dir = '/Users/criggall/Documents/solenoid-study/'
+# main_dir = '/Users/criggall/Documents/muon-cooling/Solenoid-Study/'
 
 # # Define working directory:
 # if polarity == 'flipped':
@@ -18,7 +18,7 @@ import imageio.v2 as imageio
 # elif polarity == 'not_flipped':
 #      main_dir = main_dir+'not-flipped/'
 
-main_dir = '/Users/criggall/Documents/solenoid-study/single-coil/'
+main_dir = '/Users/criggall/Documents/muon-cooling/Solenoid-Study/single-coil/'
 
 # Parameter space scanned:
 # nominal_tilt = -0.0025*180/np.pi

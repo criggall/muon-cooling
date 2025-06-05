@@ -4,7 +4,7 @@ import numpy as np
 ##### INPUTS #####
 
 # Define directory where g4bl is installed:
-g4bl_dir = '/Users/criggall/Documents/solenoid-study/' # Location of .bash_profile
+g4bl_dir = '/Users/criggall/Documents/muon-cooling/Solenoid-Study/' # Location of .bash_profile
 
 # Define working directory:
 dir = g4bl_dir+'single-coil/'
