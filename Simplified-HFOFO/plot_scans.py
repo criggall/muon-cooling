@@ -166,10 +166,11 @@ for j in range(iterations):
 
     # Plot:
     plot_orbit(x_vals, y_vals, z_vals, param_label, pitch[j], dir)
-    plot_dispersion(D_vals, z_vals, param_label, pitch[j], dir)
+    # plot_dispersion(D_vals, z_vals, param_label, pitch[j], dir)
     plot_angular_momentum(Lz_vals, z_vals, param_label, pitch[j], dir)
 
-    del x_vals, y_vals, z_vals, D_vals
+    # del x_vals, y_vals, z_vals, D_vals
+    del x_vals, y_vals, z_vals
 
 ##### ANIMATIONS #####
 
