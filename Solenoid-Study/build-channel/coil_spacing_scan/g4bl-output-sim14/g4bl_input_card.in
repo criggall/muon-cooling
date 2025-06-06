@@ -67,7 +67,7 @@ virtualdetector det radius=300 length=0.001 color='' format=ascii
 ### ELEMENT PLACING SEQUENCE ###
 ################################
 
-newparticlentuple det0 file=det0.txt format=ascii
+#newparticlentuple det0 file=det0.txt format=ascii
 
 # Same polarity case:
 
@@ -81,8 +81,8 @@ newparticlentuple det0 file=det0.txt format=ascii
 do i 0 0
 
   place det x=0 z=$period*$i y=0
-  place FOFOposCoil x=0 z=$period*$i+$period/2  y=0 
-  place FOFOnegCoil x=0 z=$period*$i+3*$period/2  y=0 
+  place FOFOposCoil x=0 z=2*$period*$i+$period/2  y=0 
+  place FOFOnegCoil x=0 z=2*$period*$i+3*$period/2  y=0 
 
 enddo
 

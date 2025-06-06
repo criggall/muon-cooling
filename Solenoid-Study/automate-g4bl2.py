@@ -7,11 +7,11 @@ import numpy as np
 g4bl_dir = '/Users/criggall/Documents/muon-cooling/Solenoid-Study/' # Location of .bash_profile
 
 # Define working directory:
-dir = g4bl_dir+'single-coil/'
+dir = g4bl_dir+'build-channel/'
 
 # Define file location:
 # file = dir+'singlecoil.in'
-file = dir+'secondcoil.in'
+file = dir+'morecoils.in'
 file_for_g4bl = '"'+file+'"'
 
 # # Define range of coil length scan:
@@ -70,8 +70,7 @@ for j in range(iterations):
 
     # Define output directory:
     # out_dir = dir+f'coil_length_scan/g4bl-output-sim{j+1}/'
-    out_dir = dir+f'coil_spacing_coarse_scan/g4bl-output-sim{j+1}/'
-    # out_dir = dir+f'coil_spacing_fine_scan/g4bl-output-sim{j+1}/'
+    out_dir = dir+f'coil_spacing_scan/g4bl-output-sim{j+1}/'
 
     # Make output directory if it does not already exist:
     dir_exists_command = f'if test -d {out_dir}; then echo 1; fi'
