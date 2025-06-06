@@ -90,11 +90,23 @@ popt, pcov = curve_fit(fit_f, B2L_vals, f_vals)
 f_fit_vals = fit_f(B2L_vals, *popt)
 print(f'Fit result: f = {np.round(*popt,1)}/(B^2*L)')
 
-# Plot focusing length vs. B^2*L:
-start = 0
-plt.plot(B2L_vals[start:],f_pred_vals[start:],color='green',label='Theory',zorder=1)
-plt.scatter(B2L_vals[start:],f_vals[start:],s=4,color='black',label='Simulation',zorder=2)
+# # Plot focusing length vs. B^2*L:
+# start = 0
+# # plt.plot(B2L_vals[start:],f_pred_vals[start:],color='green',label='Theory',zorder=1)
+# plt.plot(B2L_vals[start:],f_fit_vals[start:],color='red',label='Fit',zorder=1)
+# plt.scatter(B2L_vals[start:],f_vals[start:],s=4,color='black',label='Simulation',zorder=2)
+# plt.ylabel('Focusing length (mm)')
+# plt.xlabel('$B^2 L$ (T$^2$mm)')
+# plt.legend()
+# plt.savefig(main_dir+'f_vs_length.png',dpi=300)
+
+# Plot linearly:
+B2L_vals_inv = []
+for i in range(len(B2L_vals)):
+    B2L_vals_inv.append(1/B2L_vals[i])
+plt.plot(B2L_vals_inv,f_fit_vals,color='red',label='Fit',zorder=1)
+plt.scatter(B2L_vals_inv,f_vals,s=4,color='black',label='Simulation',zorder=2)
 plt.ylabel('Focusing length (mm)')
-plt.xlabel('$B^2 L$ (T$^2$mm)')
+plt.xlabel('$1/(B^2 L)$ (T$^2$mm)')
 plt.legend()
 plt.savefig(main_dir+'f_vs_length.png',dpi=300)
