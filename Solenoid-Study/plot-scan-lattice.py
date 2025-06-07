@@ -40,42 +40,24 @@ def plot_orbit(x_vals, y_vals, z_vals, param_val, dir):
     plt.scatter(x_vals,y_vals,s=1)
     # plt.title(f'solenoid tilt = {round(param_val,2)} {units}')
     plt.title(f'period = {param_val} mm')
-    plt.xlabel('x (cm)')
-    plt.ylabel('y (cm)')
-    # if polarity == 'flipped':
-    #     plt.xlim(-1.5,1.5)
-    #     plt.ylim(-1.5,1.5)
-    # elif polarity == 'not_flipped':
-    #     plt.xlim(-0.5,3.5)
-    #     plt.ylim(-0.5,3.5)
+    plt.xlabel('x (mm)')
+    plt.ylabel('y (mm)')
     plt.savefig(dir+'orbit.png',dpi=300)
     plt.close()
-
-# vlines_pos = np.arange(0.5,22,1)
-# vlines_neg = np.arange(1,22,1)
 
 # Define function to plot Lz along z:
 def plot_angular_momentum(Lz_vals, z_vals, param_val, dir):
     plt.clf()
     plt.figure(figsize=(10,4))
-    # for i in range(len(vlines_pos)):
-    #    plt.axvline(x=vlines_pos[i],color='black',alpha=0.2)
-    # for i in range(len(vlines_neg)):
-    #    plt.axvline(x=vlines_neg[i],color='grey',alpha=0.2)
-    plt.axvline(x=0.5,color='black',alpha=0.1)
-    plt.axvline(x=0.5+param_val/1000,color='black',alpha=0.1)
+    plt.axvline(x=param_val,color='black',alpha=0.1)
+    plt.axvline(x=2*param_val,color='black',alpha=0.1)
     plt.scatter(z_vals, Lz_vals,s=0.5,color='black')
     # plt.title(f'solenoid tilt = {round(param_val,2)} {units}')
     plt.title(f'period = {param_val} mm')
-    # if polarity == 'flipped':
-    #     plt.ylim(-20,20)
-    # elif polarity == 'not_flipped':
-    #     # plt.ylim(-15,15)
-    #     plt.ylim(-25,25)
-    plt.xlim(-1,4)
-    plt.ylim(-0.05,0.05)
-    plt.xlabel('z (m)')
-    plt.ylabel('$L_z$ (cm*MeV/c)')
+    plt.xlim(-3000,6000)
+    plt.ylim(-0.5,0.5)
+    plt.xlabel('z (mm)')
+    plt.ylabel('$L_z$ (mm*MeV/c)')
     plt.savefig(dir+'angular_momentum.png',dpi=300)
     plt.close()
 
@@ -98,11 +80,9 @@ for j in range(iterations):
         id = data[i][8]
         # if id == -2: # reference
         if id == 1: # with initial conditions
-            x = data[i][0]*0.1; y = data[i][1]*0.1 # mm -> cm
-            x_vals.append(x); y_vals.append(y)
-            z = data[i][2]*0.001 # mm --> m
-            z_vals.append(z)
-            px = data[i][3]; py = data[i][4]
+            x = data[i][0]; y = data[i][1]; z = data[i][2] # mm
+            x_vals.append(x); y_vals.append(y); z_vals.append(z)
+            px = data[i][3]; py = data[i][4] # MeV/c
             Lz = x*py - y*px
             Lz_vals.append(Lz)
     
@@ -113,7 +93,6 @@ for j in range(iterations):
     # Plot:
     # plot_orbit(x_vals, y_vals, z_vals, tilt[j], dir)
     # plot_angular_momentum(Lz_vals, z_vals, tilt[j], dir)
-    # plot_orbit(x_vals, y_vals, z_vals, periods[j], dir)
     plot_angular_momentum(Lz_vals, z_vals, periods[j], dir)
 
     del x_vals, y_vals, z_vals, px_vals, py_vals, Lz_vals
@@ -123,7 +102,7 @@ plt.figure()
 plt.plot(periods,min_Lz_vals,label='|min|',marker='.',color='blue')
 plt.plot(periods,max_Lz_vals,label='|max|',marker='.',color='red')
 plt.xlabel('period length (mm)')
-plt.ylabel('$L_z$ (cm*MeV/c)')
+plt.ylabel('$L_z$ (mm*MeV/c)')
 plt.legend()
 plt.savefig(main_dir+'min_max_Lz.png',dpi=300)
 

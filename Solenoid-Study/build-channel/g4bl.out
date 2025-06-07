@@ -5,7 +5,7 @@ G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
 G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
 G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
-G4beamline Process ID 66161
+G4beamline Process ID 4459
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -62,7 +62,7 @@ trace                      nTrace=10 format=asciiTrace oneNTuple=1
 param        solinner      400.0
 param        solthick      100.0
 param        sollength     100.0
-param        period        1000.0
+param        period        200.0
 param        solcurrent    100.0
 param        maxStep       5.0
 coil    Coil1   innerRadius=400.0 outerRadius=500.0 length=100.0 material=Cu 
@@ -80,26 +80,18 @@ virtualdetector det        radius=300 innerRadius=0 height=600 width=600
                            length=0.001 maxStep=5 material= color= noSingles=0
                            format=bltrackfile filename= file= require=
                            referenceParticle=0 coordinates=Centerline kill=0
-do i=0,2,1
+do i=0,0,1
 (do i=0)
 place   det     copies=1 x=0.0 y=0.0 z=0.0 
-place   FOFOposCoil copies=1 x=0.0 y=0.0 z=500.0 
-place   FOFOnegCoil copies=1 x=0.0 y=0.0 z=1500.0 
-(do i=1)
-place   det     copies=1 x=0.0 y=0.0 z=1000.0 
-place   FOFOposCoil copies=1 x=0.0 y=0.0 z=2500.0 
-place   FOFOnegCoil copies=1 x=0.0 y=0.0 z=3500.0 
-(do i=2)
-place   det     copies=1 x=0.0 y=0.0 z=2000.0 
-place   FOFOposCoil copies=1 x=0.0 y=0.0 z=4500.0 
-place   FOFOnegCoil copies=1 x=0.0 y=0.0 z=5500.0 
+place   FOFOposCoil copies=1 x=0.0 y=0.0 z=100.0 
+place   FOFOnegCoil copies=1 x=0.0 y=0.0 z=300.0 
 enddo
-place   det     copies=1 x=0.0 y=0.0 z=10000.0 
+place   det     copies=1 x=0.0 y=0.0 z=2000.0 
 
-World size (before incrementing by 201.357 mm): 1000.0 H  1000.0 W  20000.0 L
+World size (before incrementing by 201.357 mm): 1000.0 H  1000.0 W  12000.0 L
 
 PARAMETERS:
-            Zcl=10000
+            Zcl=2000
          degrad=0.017453293
      deltaChord=3.0
 deltaIntersection=0.1
@@ -110,10 +102,10 @@ deltaIntersection=0.1
     fieldVoxels=200,200,200
       histoFile=g4beamline
     histoUpdate=0
-              i=2
+              i=0
         maxStep=5.0
         minStep=0.01
-         period=1000.0
+         period=200.0
              pi=3.141592654
            refP=200.0
           refXp=0.0
@@ -131,22 +123,10 @@ steppingVerbose=0
 Checking overlaps for volume det:0 (G4Tubs) ... OK! 
 BLCMDvirtualdetector::Construct det parent= relZ=0.0 globZ=0.0
 Checking overlaps for volume FOFOposCoil:0 (G4Tubs) ... OK! 
-BLCMDsolenoid::Construct FOFOposCoil parent= relZ=500.0 globZ=500.0
-	global pos=0.0,0.0,500.0  Checking overlaps for volume FOFOnegCoil:0 (G4Tubs) ... OK! 
-BLCMDsolenoid::Construct FOFOnegCoil parent= relZ=1500.0 globZ=1500.0
-	global pos=0.0,0.0,1500.0  Checking overlaps for volume det:0 (G4Tubs) ... OK! 
-**************************************************************************
-*** G4Exception: Duplicate NTuple
-***    severity: Warning
-***   issued by: BLNTuple
-*** description: VirtualDetector/det
-**************************************************************************
-BLCMDvirtualdetector::Construct det parent= relZ=1000.0 globZ=1000.0
-Checking overlaps for volume FOFOposCoil:0 (G4Tubs) ... OK! 
-BLCMDsolenoid::Construct FOFOposCoil parent= relZ=2500.0 globZ=2500.0
-	global pos=0.0,0.0,2500.0  Checking overlaps for volume FOFOnegCoil:0 (G4Tubs) ... OK! 
-BLCMDsolenoid::Construct FOFOnegCoil parent= relZ=3500.0 globZ=3500.0
-	global pos=0.0,0.0,3500.0  Checking overlaps for volume det:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct FOFOposCoil parent= relZ=100.0 globZ=100.0
+	global pos=0.0,0.0,100.0  Checking overlaps for volume FOFOnegCoil:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct FOFOnegCoil parent= relZ=300.0 globZ=300.0
+	global pos=0.0,0.0,300.0  Checking overlaps for volume det:0 (G4Tubs) ... OK! 
 **************************************************************************
 *** G4Exception: Duplicate NTuple
 ***    severity: Warning
@@ -154,18 +134,6 @@ BLCMDsolenoid::Construct FOFOnegCoil parent= relZ=3500.0 globZ=3500.0
 *** description: VirtualDetector/det
 **************************************************************************
 BLCMDvirtualdetector::Construct det parent= relZ=2000.0 globZ=2000.0
-Checking overlaps for volume FOFOposCoil:0 (G4Tubs) ... OK! 
-BLCMDsolenoid::Construct FOFOposCoil parent= relZ=4500.0 globZ=4500.0
-	global pos=0.0,0.0,4500.0  Checking overlaps for volume FOFOnegCoil:0 (G4Tubs) ... OK! 
-BLCMDsolenoid::Construct FOFOnegCoil parent= relZ=5500.0 globZ=5500.0
-	global pos=0.0,0.0,5500.0  Checking overlaps for volume det:0 (G4Tubs) ... OK! 
-**************************************************************************
-*** G4Exception: Duplicate NTuple
-***    severity: Warning
-***   issued by: BLNTuple
-*** description: VirtualDetector/det
-**************************************************************************
-BLCMDvirtualdetector::Construct det parent= relZ=10000.0 globZ=10000.0
 ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
 
 Geometry test nPoints=100 tolerance=0.002 mm:
@@ -179,15 +147,6 @@ Total geometry errors = 0  0 seconds
 ***    severity: Warning
 ***   issued by: BLGlobalField
 *** description: May give inaccurate tracking near world boundary.
-***     EventID: -2     TrackID: 1   mu+  KE=120.5 MeV
-**************************************************************************
-fieldVoxels: nx=7 ny=7 nz=99, 4851 voxels, 6 fields
-fieldVoxels: max field count is 6 fields, # voxels >5: 3626, >10: 0, >20: 0
-**************************************************************************
-*** G4Exception: Check number of field voxels
-***    severity: Warning
-***   issued by: BLGlobalField
-*** description: nVoxels = 4851, max fields/voxel = 6
 ***     EventID: -2     TrackID: 1   mu+  KE=120.5 MeV
 **************************************************************************
 Run complete  1 Events  0 seconds
@@ -204,13 +163,10 @@ Event 1 Completed  1 events  realTime=1 sec  1.0 ev/sec
 Run complete  1 Events  0 seconds
 NTuple det                    1 entries
 NTuple det                    1 entries
-NTuple det                    1 entries
-NTuple det                    1 entries
-NTuple AllTracks           6685 entries
+NTuple AllTracks           4278 entries
 
-Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 6 Warnings
+Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 3 Warnings
       1 times: All stochastic processes disabled
-      1 times: Check number of field voxels
-      3 times: Duplicate NTuple
+      1 times: Duplicate NTuple
       1 times: EM Field Extends Outside World
 g4beamline: simulation complete
