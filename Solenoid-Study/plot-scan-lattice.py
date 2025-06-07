@@ -30,6 +30,9 @@ periods = np.arange(100,1500,100)
 # iterations = len(tilt)
 iterations = len(periods)
 
+# Number of solenoids in lattice:
+n = 6
+
 ##### PLOTTING FUNCTIONS #####
 
 units = '$^{\circ}$'
@@ -49,16 +52,33 @@ def plot_orbit(x_vals, y_vals, z_vals, param_val, dir):
 def plot_angular_momentum(Lz_vals, z_vals, param_val, dir):
     plt.clf()
     plt.figure(figsize=(10,4))
-    plt.axvline(x=param_val,color='black',alpha=0.1)
-    plt.axvline(x=2*param_val,color='black',alpha=0.1)
+    for i in range(n):
+        plt.axvline(x=500+i*param_val,color='black',alpha=0.1)
     plt.scatter(z_vals, Lz_vals,s=0.5,color='black')
     # plt.title(f'solenoid tilt = {round(param_val,2)} {units}')
     plt.title(f'period = {param_val} mm')
-    plt.xlim(-3000,6000)
+    # plt.xlim(-1500,5500) # for 2 solenoids
+    plt.xlim(-1500,8500)
     plt.ylim(-0.5,0.5)
     plt.xlabel('z (mm)')
     plt.ylabel('$L_z$ (mm*MeV/c)')
     plt.savefig(dir+'angular_momentum.png',dpi=300)
+    plt.close()
+
+# Define function to plot Bz along z:
+def plot_B_field(Bz_vals, z_vals, param_val, dir):
+    plt.clf()
+    plt.figure(figsize=(10,4))
+    for i in range(n):
+        plt.axvline(x=500+i*param_val,color='black',alpha=0.1)
+    plt.scatter(z_vals, Bz_vals,s=0.5,color='red')
+    plt.title(f'period = {param_val} mm')
+    # plt.xlim(-1500,5500) # for 2 solenoids
+    plt.xlim(-1500,8500)
+    plt.ylim(-1.5,1.5)
+    plt.xlabel('z (mm)')
+    plt.ylabel('$B_z$ (T)')
+    plt.savefig(dir+'B_field.png',dpi=300)
     plt.close()
 
 ##### MAIN LOOP #####
@@ -75,6 +95,7 @@ for j in range(iterations):
     # Values along channel:
     x_vals = []; y_vals = []; z_vals = []
     px_vals = []; py_vals = []
+    Bz_vals = []
     Lz_vals = []
     for i in range(data.shape[0]):
         id = data[i][8]
@@ -83,6 +104,7 @@ for j in range(iterations):
             x = data[i][0]; y = data[i][1]; z = data[i][2] # mm
             x_vals.append(x); y_vals.append(y); z_vals.append(z)
             px = data[i][3]; py = data[i][4] # MeV/c
+            Bz_vals.append(data[i][14])
             Lz = x*py - y*px
             Lz_vals.append(Lz)
     
@@ -94,17 +116,18 @@ for j in range(iterations):
     # plot_orbit(x_vals, y_vals, z_vals, tilt[j], dir)
     # plot_angular_momentum(Lz_vals, z_vals, tilt[j], dir)
     plot_angular_momentum(Lz_vals, z_vals, periods[j], dir)
+    plot_B_field(Bz_vals, z_vals, periods[j], dir)
 
     del x_vals, y_vals, z_vals, px_vals, py_vals, Lz_vals
 
-# Plot magnitude of min and max Lz for each spacing:
-plt.figure()
-plt.plot(periods,min_Lz_vals,label='|min|',marker='.',color='blue')
-plt.plot(periods,max_Lz_vals,label='|max|',marker='.',color='red')
-plt.xlabel('period length (mm)')
-plt.ylabel('$L_z$ (mm*MeV/c)')
-plt.legend()
-plt.savefig(main_dir+'min_max_Lz.png',dpi=300)
+# # Plot magnitude of min and max Lz for each spacing:
+# plt.figure()
+# plt.plot(periods,min_Lz_vals,label='|min|',marker='.',color='blue')
+# plt.plot(periods,max_Lz_vals,label='|max|',marker='.',color='red')
+# plt.xlabel('period length (mm)')
+# plt.ylabel('$L_z$ (mm*MeV/c)')
+# plt.legend()
+# plt.savefig(main_dir+'min_max_Lz.png',dpi=300)
 
 ##### ANIMATIONS #####
 
@@ -132,3 +155,12 @@ for i in range(iterations):
 Lz_plots = [imageio.imread(img) for img in Lz_plot_paths]
 # imageio.mimsave(main_dir+'Lz_scan_sol_tilt.gif', Lz_plots, duration=frame_duration, loop=0)
 imageio.mimsave(main_dir+'Lz_scan_coil_spacing.gif', Lz_plots, duration=frame_duration, loop=0)
+
+# List of B field plot files:
+Bz_plot_paths = []
+for i in range(iterations):
+    Bz_plot_paths.append(out_dirs[i]+'/B_field.png')
+
+# Create animation of B field over scan:
+Bz_plots = [imageio.imread(img) for img in Bz_plot_paths]
+imageio.mimsave(main_dir+'Bz_scan_coil_spacing.gif', Bz_plots, duration=frame_duration, loop=0)

@@ -50,7 +50,7 @@ trace format=ascii nTrace=10 oneNTuple=1
 param solinner=400.0
 param solthick=100.0
 param sollength=100.0
-param period=200.0
+param period=1000.0
 param solcurrent=100.0
 param maxStep=5.0
 coil Coil1 innerRadius=$solinner outerRadius=$solinner+$solthick length=$sollength maxR=5000 maxZ=10000.0
@@ -69,21 +69,23 @@ virtualdetector det radius=300 length=0.001 color='' format=ascii
 
 #newparticlentuple det0 file=det0.txt format=ascii
 
-# Same polarity case:
+### Same polarity case:
 
 #do i 0 1
 
 #  place det x=0 z=$period*$i y=0
-#  place FOFOCoil x=0 z=$period*$i+$period/2  y=0 
+#  place FOFOCoil x=0 z=500+$i*$period y=0 
 
-# Flipped polarity case:
+#enddo
 
-do i 0 0
+### Flipped polarity case:
 
-  place det x=0 z=$period*$i y=0
-  place FOFOposCoil x=0 z=2*$period*$i+$period/2  y=0 
-  place FOFOnegCoil x=0 z=2*$period*$i+3*$period/2  y=0 
+do i 0 2
+	
+	place det x=0 z=$period*$i y=0
+	place FOFOposCoil x=0 z=500+2*$i*$period y=0 
+	place FOFOnegCoil x=0 z=500+2*$i*$period+$period y=0 
 
 enddo
 
-place det x=0 z=10*$period
+#place det x=0 z=10*$period
