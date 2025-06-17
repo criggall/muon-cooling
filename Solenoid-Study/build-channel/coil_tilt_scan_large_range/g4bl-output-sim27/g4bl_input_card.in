@@ -1,0 +1,99 @@
+#################
+### CONSTANTS ###
+#################
+
+param pi=3.141592654
+param degrad=$pi/180
+param refP=200.0
+
+param refXp=0.0
+param refYp=0.0
+
+######################
+### INITIALIZATION ###
+######################
+
+randomseed time
+
+#trace format=ascii
+
+## decay/stochastics enabled:
+#physics QGSP_BIC doStochastics=1
+## disable=Decay
+
+# decay/stochastics disabled:
+physics QGSP_BIC doStochastics=0 
+
+# Reference Particle (25th harmonic - 201.25 MHz)
+reference particle=mu+ \
+	beamX=0 \
+	beamY=0 \
+	beamZ=0.0 \
+	beamXp=0 beamYp=0 \
+	referenceMomentum=$refP
+
+particlecolor reference=1,1,1
+
+beam gaussian particle=mu+ nEvents=100 beamX=1.5 beamY=0.0 beamZ=-3000 beamXp=$refXp  beamYp=$refYp \
+     sigmaX=0.5 sigmaY=0.5 sigmaXp=0.0 sigmaYp=0.0 meanMomentum=$refP sigmaP=0.0 meanT=0.0 sigmaT=0.0
+
+# kill secondaries
+trackcuts killSecondaries=1
+
+trace format=ascii nTrace=10 oneNTuple=1
+
+############################
+### GEOMETRY DEFINITIONS ###
+############################
+
+# FOFO channel
+param solinner=400.0
+param solthick=100.0
+param sollength=100.0
+param period=400.0
+param solcurrent=50.0
+param maxStep=5.0
+param tilt=2.6
+coil Coil1 innerRadius=$solinner outerRadius=$solinner+$solthick length=$sollength maxR=5000 maxZ=10000.0
+solenoid FOFOCoil coilName=Coil1 current=$solcurrent
+solenoid FOFOposCoil coilName=Coil1 current=$solcurrent
+solenoid FOFOnegCoil coilName=Coil1 current=-$solcurrent
+
+# detector and filter
+#virtualdetector det radius=500 length=0.001 color=0,1,0 format=ascii
+#particlefilter filter radius=1000 length=0.001 color=1,1,1 kill=mu+ nWait=$nWait referenceWait=1
+virtualdetector det radius=300 length=0.001 color=0,1,0 format=ascii
+
+################################
+### ELEMENT PLACING SEQUENCE ###
+################################
+
+#newparticlentuple det0 file=det0.txt format=ascii
+
+### Same polarity case:
+
+#do i 0 1
+
+#  place det x=0 z=$period*$i y=0
+#  place FOFOCoil x=0 z=500+$i*$period y=0 
+
+#enddo
+
+### Flipped polarity case:
+
+do i 0 9
+	
+	place det x=0 z=500+2*$i*$period y=0
+	place FOFOposCoil x=0 z=500+2*$i*$period y=0 rotation=X$tilt
+	place det x=0 z=500+2*$i*$period+$period/4 y=0
+	place det x=0 z=500+2*$i*$period+$period/2 y=0
+	place det x=0 z=500+2*$i*$period+3*$period/4 y=0
+	place det x=0 z=500+2*$i*$period+$period y=0
+	place FOFOnegCoil x=0 z=500+2*$i*$period+$period y=0 rotation=X$tilt
+	place det x=0 z=500+2*$i*$period+5*$period/4 y=0
+	place det x=0 z=500+2*$i*$period+3*$period/2 y=0
+	place det x=0 z=500+2*$i*$period+7*$period/4 y=0
+
+enddo
+
+#place det x=0 z=10*$period

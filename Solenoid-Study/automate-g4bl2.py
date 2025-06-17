@@ -7,22 +7,29 @@ import numpy as np
 g4bl_dir = '/Users/criggall/Documents/muon-cooling/Solenoid-Study/' # Location of .bash_profile
 
 # Define working directory:
+# dir = g4bl_dir+'single-coil/'
 dir = g4bl_dir+'build-channel/'
 
 # Define file location:
-# file = dir+'singlecoil.in'
-file = dir+'morecoils.in'
+# file = dir+'singlecoil_tilted.in'
+file = dir+'morecoils_tilted.in'
 file_for_g4bl = '"'+file+'"'
 
 # # Define range of coil length scan:
 # coil_lengths = np.arange(5,400,5)
 
-# Define range of coil spacing scan:
-periods = np.arange(100,1500,100)
+# # Define range of coil spacing scan:
+# periods = np.arange(100,1500,100)
+
+# Define range of coil tilt scan:
+# tilts = np.arange(0,5,0.1)
+# tilts = np.arange(0,0.3,0.01)
+tilts = np.arange(0,60,5)
 
 # Set number of loops based on scan space:
 # iterations = len(coil_lengths)
-iterations = len(periods)
+# iterations = len(periods)
+iterations = len(tilts)
 
 ##### FUNCTION DEFINITIONS #####
 
@@ -40,8 +47,10 @@ def modify_g4bl_input(dir, file, parameters, out_dir):
 
             # if 'param sollength=' in line:
             #     lines[i] = f"param sollength={parameters['coil length']}\n"
-            if 'param period=' in line:
-                lines[i] = f"param period={parameters['period']}\n"
+            # if 'param period=' in line:
+            #     lines[i] = f"param period={parameters['period']}\n"
+            if 'param tilt=' in line:
+                lines[i] = f"param tilt={parameters['tilt']}\n"
         
     with open(file, 'w') as f:
         f.writelines(lines)
@@ -70,7 +79,8 @@ for j in range(iterations):
 
     # Define output directory:
     # out_dir = dir+f'coil_length_scan/g4bl-output-sim{j+1}/'
-    out_dir = dir+f'coil_spacing_scan/g4bl-output-sim{j+1}/'
+    # out_dir = dir+f'coil_spacing_scan/g4bl-output-sim{j+1}/'
+    out_dir = dir+f'coil_tilt_scan/g4bl-output-sim{j+1}/'
 
     # Make output directory if it does not already exist:
     dir_exists_command = f'if test -d {out_dir}; then echo 1; fi'
@@ -81,7 +91,9 @@ for j in range(iterations):
 
     # Set configurable parameters:
     parameters = {
-        'period' : periods[j]
+        # 'coil length' : coil_lengths[j]
+        # 'period' : periods[j]
+        'tilt' : tilts[j]
     }
 
     # Modify input files:
