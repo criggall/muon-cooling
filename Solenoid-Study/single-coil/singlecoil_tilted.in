@@ -53,7 +53,7 @@ param sollength=100.0
 param period=1000.0
 param solcurrent=100.0
 param maxStep=5.0
-param tilt=4.9
+param tilt=5.0
 coil Coil1 innerRadius=$solinner outerRadius=$solinner+$solthick length=$sollength maxR=5000 maxZ=10000.0
 solenoid FOFOCoil coilName=Coil1 current=$solcurrent
 
