@@ -1,0 +1,1257 @@
+G4BL_DIR=/Applications/G4beamline-3.08.app/Contents
+LD_LIBRARY_PATH='/Applications/G4beamline-3.08.app/Contents/lib:'
+G4LEDATA=/Users/criggall/Geant4Data/G4EMLOW8.0
+G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
+G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
+G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
+G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
+G4beamline Process ID 44328
+
+*************************************************************
+ g4beamline version: 3.08                        (Oct  8 2022)
+                      Copyright : Tom Roberts, Muons, Inc.
+                        License : Gnu Public License
+                            WWW : http://g4beamline.muonsinc.com
+
+          ################################
+          !!! G4Backtrace is activated !!!
+          ################################
+
+
+**************************************************************
+ Geant4 version Name: geant4-11-00-patch-02 [MT]   (25-May-2022)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+
+geometry                   nPoints=100 printGeometry=0 visual=0
+                           tolerance=0.002
+G4PhysListFactory::GetReferencePhysList <QGSP_BIC>  EMoption= 0
+<<< Geant4 Physics List simulation engine: QGSP_BIC
+
+
+physics      QGSP_BIC      disable= inactivate= deactivate= doStochastics=0
+                           fluct=1 minRangeCut=1 list=0 gammaToMuPair=0
+                           spinTracking=0 synchrotronRadiation=0
+                           synchrotronRadiationMuon=0 maxTime=1e+06
+param        m             105.7
+param        c             2.997925e+08
+param        p             200
+param        v             2.6505285e+08
+param        sol_current   -80.46
+param        pitch         -0.14323945
+param        period_len    4200
+param        X             -11.2945
+param        Y             14.0917
+param        Xp            0.0036587524
+param        Yp            -0.0056541256
+beam    GAUSSIAN particle=mu+ nEvents=100 firstEvent=-1 lastEvent=2147483647 beamX=-11.3 beamY=14.1 beamZ=0.0 maxR=1000000.0 
+		meanMomentum=200.0 weight=1.000000 
+		sigmaX=10.0 sigmaY=10.0 sigmaZ=0.0 sigmaXp=0.10000 sigmaYp=0.10000 
+		sigmaP=0.0 sigmaT=0.000 meanXp=0.00366 meanYp=-0.00565 meanT=0.000 
+reference                  particle=mu+ beamX=-11.29 beamY=14.09 beamZ=0
+                           beamT=0 rotation= referenceMomentum=200
+                           beamXp=0.003659 beamYp=-0.005654 meanMomentum=200
+                           meanXp=0.003659 meanYp=-0.005654 tuneZ=-3.7e+21
+                           tuneMomentum=-3.7e+21 tolerance=0.001 noEfield=0
+                           noBfield=0 noEloss=0 P=200
+trace                      nTrace=0 format=asciiTrace oneNTuple=1
+                           primaryOnly=0 traceTune=1 filename=AllTracks
+                           file=AllTracks require= coordinates=Centerline
+coil    coil    innerRadius=420.0 outerRadius=600.0 length=300.0 material=Cu 
+		tolerance=0.003 nSheets=10 
+		maxR=360.0 maxZ=6000.0 dR=15.0 dZ=15.0 filename=coil.dat 
+coilmap coil    tolerance=0.00300 [fraction of Bz(r=0,z=0)]
+coilmap coil    read file 'coil.dat'  dR=15.0 dZ=15.0
+solenoid     SolPos        coilName=coil current=80.46 color=0,1,1 alternate=0
+                           kill=0 coil=coil
+solenoid     SolNeg        coilName=coil current=-80.46 color=0,1,0
+                           alternate=0 kill=0 coil=coil
+do i=-1,30,1
+(do i=-1)
+virtualdetector det-1      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det-1 file=det-1 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det-1   copies=1 x=0.0 y=0.0 z=-3700.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=-3700.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=-3000.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=-2300.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=-1600.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=-900.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=-200.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=0)
+virtualdetector det0       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det0 file=det0 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det0    copies=1 x=0.0 y=0.0 z=500.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=500.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=1200.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=1900.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=2600.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=3300.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=4000.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=1)
+virtualdetector det1       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det1 file=det1 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det1    copies=1 x=0.0 y=0.0 z=4700.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=4700.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=5400.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=6100.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=6800.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=7500.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=8200.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=2)
+virtualdetector det2       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det2 file=det2 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det2    copies=1 x=0.0 y=0.0 z=8900.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=8900.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=9600.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=10300.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=11000.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=11700.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=12400.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=3)
+virtualdetector det3       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det3 file=det3 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det3    copies=1 x=0.0 y=0.0 z=13100.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=13100.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=13800.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=14500.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=15200.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=15900.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=16600.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=4)
+virtualdetector det4       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det4 file=det4 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det4    copies=1 x=0.0 y=0.0 z=17300.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=17300.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=18000.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=18700.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=19400.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=20100.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=20800.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=5)
+virtualdetector det5       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det5 file=det5 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det5    copies=1 x=0.0 y=0.0 z=21500.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=21500.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=22200.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=22900.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=23600.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=24300.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=25000.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=6)
+virtualdetector det6       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det6 file=det6 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det6    copies=1 x=0.0 y=0.0 z=25700.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=25700.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=26400.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=27100.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=27800.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=28500.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=29200.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=7)
+virtualdetector det7       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det7 file=det7 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det7    copies=1 x=0.0 y=0.0 z=29900.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=29900.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=30600.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=31300.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=32000.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=32700.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=33400.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=8)
+virtualdetector det8       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det8 file=det8 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det8    copies=1 x=0.0 y=0.0 z=34100.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=34100.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=34800.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=35500.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=36200.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=36900.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=37600.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=9)
+virtualdetector det9       radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det9 file=det9 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det9    copies=1 x=0.0 y=0.0 z=38300.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=38300.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=39000.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=39700.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=40400.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=41100.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=41800.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=10)
+virtualdetector det10      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det10 file=det10 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det10   copies=1 x=0.0 y=0.0 z=42500.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=42500.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=43200.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=43900.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=44600.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=45300.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=46000.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=11)
+virtualdetector det11      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det11 file=det11 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det11   copies=1 x=0.0 y=0.0 z=46700.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=46700.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=47400.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=48100.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=48800.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=49500.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=50200.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=12)
+virtualdetector det12      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det12 file=det12 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det12   copies=1 x=0.0 y=0.0 z=50900.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=50900.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=51600.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=52300.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=53000.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=53700.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=54400.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=13)
+virtualdetector det13      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det13 file=det13 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det13   copies=1 x=0.0 y=0.0 z=55100.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=55100.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=55800.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=56500.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=57200.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=57900.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=58600.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=14)
+virtualdetector det14      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det14 file=det14 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det14   copies=1 x=0.0 y=0.0 z=59300.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=59300.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=60000.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=60700.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=61400.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=62100.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=62800.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=15)
+virtualdetector det15      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det15 file=det15 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det15   copies=1 x=0.0 y=0.0 z=63500.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=63500.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=64200.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=64900.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=65600.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=66300.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=67000.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=16)
+virtualdetector det16      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det16 file=det16 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det16   copies=1 x=0.0 y=0.0 z=67700.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=67700.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=68400.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=69100.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=69800.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=70500.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=71200.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=17)
+virtualdetector det17      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det17 file=det17 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det17   copies=1 x=0.0 y=0.0 z=71900.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=71900.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=72600.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=73300.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=74000.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=74700.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=75400.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=18)
+virtualdetector det18      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det18 file=det18 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det18   copies=1 x=0.0 y=0.0 z=76100.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=76100.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=76800.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=77500.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=78200.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=78900.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=79600.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=19)
+virtualdetector det19      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det19 file=det19 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det19   copies=1 x=0.0 y=0.0 z=80300.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=80300.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=81000.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=81700.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=82400.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=83100.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=83800.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=20)
+virtualdetector det20      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det20 file=det20 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det20   copies=1 x=0.0 y=0.0 z=84500.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=84500.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=85200.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=85900.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=86600.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=87300.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=88000.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=21)
+virtualdetector det21      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det21 file=det21 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det21   copies=1 x=0.0 y=0.0 z=88700.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=88700.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=89400.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=90100.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=90800.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=91500.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=92200.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=22)
+virtualdetector det22      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det22 file=det22 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det22   copies=1 x=0.0 y=0.0 z=92900.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=92900.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=93600.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=94300.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=95000.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=95700.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=96400.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=23)
+virtualdetector det23      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det23 file=det23 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det23   copies=1 x=0.0 y=0.0 z=97100.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=97100.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=97800.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=98500.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=99200.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=99900.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=100600.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=24)
+virtualdetector det24      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det24 file=det24 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det24   copies=1 x=0.0 y=0.0 z=101300.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=101300.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=102000.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=102700.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=103400.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=104100.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=104800.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=25)
+virtualdetector det25      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det25 file=det25 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det25   copies=1 x=0.0 y=0.0 z=105500.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=105500.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=106200.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=106900.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=107600.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=108300.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=109000.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=26)
+virtualdetector det26      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det26 file=det26 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det26   copies=1 x=0.0 y=0.0 z=109700.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=109700.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=110400.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=111100.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=111800.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=112500.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=113200.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=27)
+virtualdetector det27      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det27 file=det27 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det27   copies=1 x=0.0 y=0.0 z=113900.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=113900.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=114600.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=115300.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=116000.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=116700.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=117400.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=28)
+virtualdetector det28      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det28 file=det28 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det28   copies=1 x=0.0 y=0.0 z=118100.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=118100.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=118800.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=119500.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=120200.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=120900.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=121600.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=29)
+virtualdetector det29      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det29 file=det29 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det29   copies=1 x=0.0 y=0.0 z=122300.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=122300.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=123000.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=123700.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=124400.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=125100.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=125800.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+(do i=30)
+virtualdetector det30      radius=360 innerRadius=0 height=720 width=720
+                           length=0.001 maxStep=100 material=Vacuum
+                           color=0,1,0 noSingles=0 format=bltrackfile
+                           filename=det30 file=det30 require=
+                           referenceParticle=0 coordinates=Centerline kill=0
+place   det30   copies=1 x=0.0 y=0.0 z=126500.0 
+place   SolPos  copies=1 x=0.0 y=0.0 z=126500.0 rotation='X-0.14323945,Z240'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=127200.0 rotation='X-0.14323945'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=127900.0 rotation='X-0.14323945,Z120'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=128600.0 rotation='X-0.14323945,Z240'
+                current=-80.46
+place   SolPos  copies=1 x=0.0 y=0.0 z=129300.0 rotation='X-0.14323945'
+                current=--80.46
+place   SolNeg  copies=1 x=0.0 y=0.0 z=130000.0 rotation='X-0.14323945,Z120'
+                current=-80.46
+enddo
+
+World size (before incrementing by 201.357 mm): 1639.6 H  1639.9 W  260303.0 L
+
+PARAMETERS:
+              X=-11.2945
+             Xp=0.0036587524
+              Y=14.0917
+             Yp=-0.0056541256
+            Zcl=130151
+              c=2.997925e+08
+     deltaChord=3.0
+deltaIntersection=0.1
+   deltaOneStep=0.01
+         epsMax=0.05
+         epsMin=2.5e-7
+ eventTimeLimit=30
+    fieldVoxels=200,200,200
+      histoFile=g4beamline
+    histoUpdate=0
+              i=30
+              m=105.7
+        maxStep=100.0
+        minStep=0.01
+              p=200
+     period_len=4200
+          pitch=-0.14323945
+    sol_current=-80.46
+ steppingFormat=N GLOBAL CL KE STEP VOL PROCESS
+steppingVerbose=0
+              v=2.6505285e+08
+         viewer=none
+ wallClockLimit=-1
+  worldMaterial=Vacuum
+     zTolerance=2.0
+Checking overlaps for volume det-1:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det-1 parent= relZ=-3700.0 globZ=-3700.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=-3700.0 globZ=-3700.0
+	global pos=0.0,0.0,-3700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=-3000.0 globZ=-3000.0
+	global pos=0.0,0.0,-3000.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=-2300.0 globZ=-2300.0
+	global pos=0.0,0.0,-2300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=-1600.0 globZ=-1600.0
+	global pos=0.0,0.0,-1600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=-900.0 globZ=-900.0
+	global pos=0.0,0.0,-900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=-200.0 globZ=-200.0
+	global pos=0.0,0.0,-200.0  Checking overlaps for volume det0:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det0 parent= relZ=500.0 globZ=500.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=500.0 globZ=500.0
+	global pos=0.0,0.0,500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=1200.0 globZ=1200.0
+	global pos=0.0,0.0,1200.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=1900.0 globZ=1900.0
+	global pos=0.0,0.0,1900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=2600.0 globZ=2600.0
+	global pos=0.0,0.0,2600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=3300.0 globZ=3300.0
+	global pos=0.0,0.0,3300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=4000.0 globZ=4000.0
+	global pos=0.0,0.0,4000.0  Checking overlaps for volume det1:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det1 parent= relZ=4700.0 globZ=4700.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=4700.0 globZ=4700.0
+	global pos=0.0,0.0,4700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=5400.0 globZ=5400.0
+	global pos=0.0,0.0,5400.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=6100.0 globZ=6100.0
+	global pos=0.0,0.0,6100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=6800.0 globZ=6800.0
+	global pos=0.0,0.0,6800.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=7500.0 globZ=7500.0
+	global pos=0.0,0.0,7500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=8200.0 globZ=8200.0
+	global pos=0.0,0.0,8200.0  Checking overlaps for volume det2:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det2 parent= relZ=8900.0 globZ=8900.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=8900.0 globZ=8900.0
+	global pos=0.0,0.0,8900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=9600.0 globZ=9600.0
+	global pos=0.0,0.0,9600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=10300.0 globZ=10300.0
+	global pos=0.0,0.0,10300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=11000.0 globZ=11000.0
+	global pos=0.0,0.0,11000.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=11700.0 globZ=11700.0
+	global pos=0.0,0.0,11700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=12400.0 globZ=12400.0
+	global pos=0.0,0.0,12400.0  Checking overlaps for volume det3:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det3 parent= relZ=13100.0 globZ=13100.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=13100.0 globZ=13100.0
+	global pos=0.0,0.0,13100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=13800.0 globZ=13800.0
+	global pos=0.0,0.0,13800.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=14500.0 globZ=14500.0
+	global pos=0.0,0.0,14500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=15200.0 globZ=15200.0
+	global pos=0.0,0.0,15200.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=15900.0 globZ=15900.0
+	global pos=0.0,0.0,15900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=16600.0 globZ=16600.0
+	global pos=0.0,0.0,16600.0  Checking overlaps for volume det4:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det4 parent= relZ=17300.0 globZ=17300.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=17300.0 globZ=17300.0
+	global pos=0.0,0.0,17300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=18000.0 globZ=18000.0
+	global pos=0.0,0.0,18000.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=18700.0 globZ=18700.0
+	global pos=0.0,0.0,18700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=19400.0 globZ=19400.0
+	global pos=0.0,0.0,19400.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=20100.0 globZ=20100.0
+	global pos=0.0,0.0,20100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=20800.0 globZ=20800.0
+	global pos=0.0,0.0,20800.0  Checking overlaps for volume det5:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det5 parent= relZ=21500.0 globZ=21500.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=21500.0 globZ=21500.0
+	global pos=0.0,0.0,21500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=22200.0 globZ=22200.0
+	global pos=0.0,0.0,22200.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=22900.0 globZ=22900.0
+	global pos=0.0,0.0,22900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=23600.0 globZ=23600.0
+	global pos=0.0,0.0,23600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=24300.0 globZ=24300.0
+	global pos=0.0,0.0,24300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=25000.0 globZ=25000.0
+	global pos=0.0,0.0,25000.0  Checking overlaps for volume det6:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det6 parent= relZ=25700.0 globZ=25700.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=25700.0 globZ=25700.0
+	global pos=0.0,0.0,25700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=26400.0 globZ=26400.0
+	global pos=0.0,0.0,26400.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=27100.0 globZ=27100.0
+	global pos=0.0,0.0,27100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=27800.0 globZ=27800.0
+	global pos=0.0,0.0,27800.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=28500.0 globZ=28500.0
+	global pos=0.0,0.0,28500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=29200.0 globZ=29200.0
+	global pos=0.0,0.0,29200.0  Checking overlaps for volume det7:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det7 parent= relZ=29900.0 globZ=29900.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=29900.0 globZ=29900.0
+	global pos=0.0,0.0,29900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=30600.0 globZ=30600.0
+	global pos=0.0,0.0,30600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=31300.0 globZ=31300.0
+	global pos=0.0,0.0,31300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=32000.0 globZ=32000.0
+	global pos=0.0,0.0,32000.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=32700.0 globZ=32700.0
+	global pos=0.0,0.0,32700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=33400.0 globZ=33400.0
+	global pos=0.0,0.0,33400.0  Checking overlaps for volume det8:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det8 parent= relZ=34100.0 globZ=34100.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=34100.0 globZ=34100.0
+	global pos=0.0,0.0,34100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=34800.0 globZ=34800.0
+	global pos=0.0,0.0,34800.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=35500.0 globZ=35500.0
+	global pos=0.0,0.0,35500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=36200.0 globZ=36200.0
+	global pos=0.0,0.0,36200.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=36900.0 globZ=36900.0
+	global pos=0.0,0.0,36900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=37600.0 globZ=37600.0
+	global pos=0.0,0.0,37600.0  Checking overlaps for volume det9:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det9 parent= relZ=38300.0 globZ=38300.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=38300.0 globZ=38300.0
+	global pos=0.0,0.0,38300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=39000.0 globZ=39000.0
+	global pos=0.0,0.0,39000.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=39700.0 globZ=39700.0
+	global pos=0.0,0.0,39700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=40400.0 globZ=40400.0
+	global pos=0.0,0.0,40400.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=41100.0 globZ=41100.0
+	global pos=0.0,0.0,41100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=41800.0 globZ=41800.0
+	global pos=0.0,0.0,41800.0  Checking overlaps for volume det10:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det10 parent= relZ=42500.0 globZ=42500.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=42500.0 globZ=42500.0
+	global pos=0.0,0.0,42500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=43200.0 globZ=43200.0
+	global pos=0.0,0.0,43200.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=43900.0 globZ=43900.0
+	global pos=0.0,0.0,43900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=44600.0 globZ=44600.0
+	global pos=0.0,0.0,44600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=45300.0 globZ=45300.0
+	global pos=0.0,0.0,45300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=46000.0 globZ=46000.0
+	global pos=0.0,0.0,46000.0  Checking overlaps for volume det11:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det11 parent= relZ=46700.0 globZ=46700.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=46700.0 globZ=46700.0
+	global pos=0.0,0.0,46700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=47400.0 globZ=47400.0
+	global pos=0.0,0.0,47400.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=48100.0 globZ=48100.0
+	global pos=0.0,0.0,48100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=48800.0 globZ=48800.0
+	global pos=0.0,0.0,48800.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=49500.0 globZ=49500.0
+	global pos=0.0,0.0,49500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=50200.0 globZ=50200.0
+	global pos=0.0,0.0,50200.0  Checking overlaps for volume det12:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det12 parent= relZ=50900.0 globZ=50900.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=50900.0 globZ=50900.0
+	global pos=0.0,0.0,50900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=51600.0 globZ=51600.0
+	global pos=0.0,0.0,51600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=52300.0 globZ=52300.0
+	global pos=0.0,0.0,52300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=53000.0 globZ=53000.0
+	global pos=0.0,0.0,53000.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=53700.0 globZ=53700.0
+	global pos=0.0,0.0,53700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=54400.0 globZ=54400.0
+	global pos=0.0,0.0,54400.0  Checking overlaps for volume det13:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det13 parent= relZ=55100.0 globZ=55100.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=55100.0 globZ=55100.0
+	global pos=0.0,0.0,55100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=55800.0 globZ=55800.0
+	global pos=0.0,0.0,55800.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=56500.0 globZ=56500.0
+	global pos=0.0,0.0,56500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=57200.0 globZ=57200.0
+	global pos=0.0,0.0,57200.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=57900.0 globZ=57900.0
+	global pos=0.0,0.0,57900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=58600.0 globZ=58600.0
+	global pos=0.0,0.0,58600.0  Checking overlaps for volume det14:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det14 parent= relZ=59300.0 globZ=59300.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=59300.0 globZ=59300.0
+	global pos=0.0,0.0,59300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=60000.0 globZ=60000.0
+	global pos=0.0,0.0,60000.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=60700.0 globZ=60700.0
+	global pos=0.0,0.0,60700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=61400.0 globZ=61400.0
+	global pos=0.0,0.0,61400.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=62100.0 globZ=62100.0
+	global pos=0.0,0.0,62100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=62800.0 globZ=62800.0
+	global pos=0.0,0.0,62800.0  Checking overlaps for volume det15:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det15 parent= relZ=63500.0 globZ=63500.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=63500.0 globZ=63500.0
+	global pos=0.0,0.0,63500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=64200.0 globZ=64200.0
+	global pos=0.0,0.0,64200.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=64900.0 globZ=64900.0
+	global pos=0.0,0.0,64900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=65600.0 globZ=65600.0
+	global pos=0.0,0.0,65600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=66300.0 globZ=66300.0
+	global pos=0.0,0.0,66300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=67000.0 globZ=67000.0
+	global pos=0.0,0.0,67000.0  Checking overlaps for volume det16:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det16 parent= relZ=67700.0 globZ=67700.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=67700.0 globZ=67700.0
+	global pos=0.0,0.0,67700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=68400.0 globZ=68400.0
+	global pos=0.0,0.0,68400.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=69100.0 globZ=69100.0
+	global pos=0.0,0.0,69100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=69800.0 globZ=69800.0
+	global pos=0.0,0.0,69800.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=70500.0 globZ=70500.0
+	global pos=0.0,0.0,70500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=71200.0 globZ=71200.0
+	global pos=0.0,0.0,71200.0  Checking overlaps for volume det17:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det17 parent= relZ=71900.0 globZ=71900.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=71900.0 globZ=71900.0
+	global pos=0.0,0.0,71900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=72600.0 globZ=72600.0
+	global pos=0.0,0.0,72600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=73300.0 globZ=73300.0
+	global pos=0.0,0.0,73300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=74000.0 globZ=74000.0
+	global pos=0.0,0.0,74000.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=74700.0 globZ=74700.0
+	global pos=0.0,0.0,74700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=75400.0 globZ=75400.0
+	global pos=0.0,0.0,75400.0  Checking overlaps for volume det18:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det18 parent= relZ=76100.0 globZ=76100.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=76100.0 globZ=76100.0
+	global pos=0.0,0.0,76100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=76800.0 globZ=76800.0
+	global pos=0.0,0.0,76800.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=77500.0 globZ=77500.0
+	global pos=0.0,0.0,77500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=78200.0 globZ=78200.0
+	global pos=0.0,0.0,78200.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=78900.0 globZ=78900.0
+	global pos=0.0,0.0,78900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=79600.0 globZ=79600.0
+	global pos=0.0,0.0,79600.0  Checking overlaps for volume det19:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det19 parent= relZ=80300.0 globZ=80300.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=80300.0 globZ=80300.0
+	global pos=0.0,0.0,80300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=81000.0 globZ=81000.0
+	global pos=0.0,0.0,81000.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=81700.0 globZ=81700.0
+	global pos=0.0,0.0,81700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=82400.0 globZ=82400.0
+	global pos=0.0,0.0,82400.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=83100.0 globZ=83100.0
+	global pos=0.0,0.0,83100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=83800.0 globZ=83800.0
+	global pos=0.0,0.0,83800.0  Checking overlaps for volume det20:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det20 parent= relZ=84500.0 globZ=84500.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=84500.0 globZ=84500.0
+	global pos=0.0,0.0,84500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=85200.0 globZ=85200.0
+	global pos=0.0,0.0,85200.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=85900.0 globZ=85900.0
+	global pos=0.0,0.0,85900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=86600.0 globZ=86600.0
+	global pos=0.0,0.0,86600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=87300.0 globZ=87300.0
+	global pos=0.0,0.0,87300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=88000.0 globZ=88000.0
+	global pos=0.0,0.0,88000.0  Checking overlaps for volume det21:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det21 parent= relZ=88700.0 globZ=88700.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=88700.0 globZ=88700.0
+	global pos=0.0,0.0,88700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=89400.0 globZ=89400.0
+	global pos=0.0,0.0,89400.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=90100.0 globZ=90100.0
+	global pos=0.0,0.0,90100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=90800.0 globZ=90800.0
+	global pos=0.0,0.0,90800.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=91500.0 globZ=91500.0
+	global pos=0.0,0.0,91500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=92200.0 globZ=92200.0
+	global pos=0.0,0.0,92200.0  Checking overlaps for volume det22:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det22 parent= relZ=92900.0 globZ=92900.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=92900.0 globZ=92900.0
+	global pos=0.0,0.0,92900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=93600.0 globZ=93600.0
+	global pos=0.0,0.0,93600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=94300.0 globZ=94300.0
+	global pos=0.0,0.0,94300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=95000.0 globZ=95000.0
+	global pos=0.0,0.0,95000.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=95700.0 globZ=95700.0
+	global pos=0.0,0.0,95700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=96400.0 globZ=96400.0
+	global pos=0.0,0.0,96400.0  Checking overlaps for volume det23:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det23 parent= relZ=97100.0 globZ=97100.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=97100.0 globZ=97100.0
+	global pos=0.0,0.0,97100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=97800.0 globZ=97800.0
+	global pos=0.0,0.0,97800.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=98500.0 globZ=98500.0
+	global pos=0.0,0.0,98500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=99200.0 globZ=99200.0
+	global pos=0.0,0.0,99200.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=99900.0 globZ=99900.0
+	global pos=0.0,0.0,99900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=100600.0 globZ=100600.0
+	global pos=0.0,0.0,100600.0  Checking overlaps for volume det24:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det24 parent= relZ=101300.0 globZ=101300.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=101300.0 globZ=101300.0
+	global pos=0.0,0.0,101300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=102000.0 globZ=102000.0
+	global pos=0.0,0.0,102000.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=102700.0 globZ=102700.0
+	global pos=0.0,0.0,102700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=103400.0 globZ=103400.0
+	global pos=0.0,0.0,103400.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=104100.0 globZ=104100.0
+	global pos=0.0,0.0,104100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=104800.0 globZ=104800.0
+	global pos=0.0,0.0,104800.0  Checking overlaps for volume det25:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det25 parent= relZ=105500.0 globZ=105500.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=105500.0 globZ=105500.0
+	global pos=0.0,0.0,105500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=106200.0 globZ=106200.0
+	global pos=0.0,0.0,106200.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=106900.0 globZ=106900.0
+	global pos=0.0,0.0,106900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=107600.0 globZ=107600.0
+	global pos=0.0,0.0,107600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=108300.0 globZ=108300.0
+	global pos=0.0,0.0,108300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=109000.0 globZ=109000.0
+	global pos=0.0,0.0,109000.0  Checking overlaps for volume det26:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det26 parent= relZ=109700.0 globZ=109700.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=109700.0 globZ=109700.0
+	global pos=0.0,0.0,109700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=110400.0 globZ=110400.0
+	global pos=0.0,0.0,110400.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=111100.0 globZ=111100.0
+	global pos=0.0,0.0,111100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=111800.0 globZ=111800.0
+	global pos=0.0,0.0,111800.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=112500.0 globZ=112500.0
+	global pos=0.0,0.0,112500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=113200.0 globZ=113200.0
+	global pos=0.0,0.0,113200.0  Checking overlaps for volume det27:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det27 parent= relZ=113900.0 globZ=113900.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=113900.0 globZ=113900.0
+	global pos=0.0,0.0,113900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=114600.0 globZ=114600.0
+	global pos=0.0,0.0,114600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=115300.0 globZ=115300.0
+	global pos=0.0,0.0,115300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=116000.0 globZ=116000.0
+	global pos=0.0,0.0,116000.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=116700.0 globZ=116700.0
+	global pos=0.0,0.0,116700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=117400.0 globZ=117400.0
+	global pos=0.0,0.0,117400.0  Checking overlaps for volume det28:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det28 parent= relZ=118100.0 globZ=118100.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=118100.0 globZ=118100.0
+	global pos=0.0,0.0,118100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=118800.0 globZ=118800.0
+	global pos=0.0,0.0,118800.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=119500.0 globZ=119500.0
+	global pos=0.0,0.0,119500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=120200.0 globZ=120200.0
+	global pos=0.0,0.0,120200.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=120900.0 globZ=120900.0
+	global pos=0.0,0.0,120900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=121600.0 globZ=121600.0
+	global pos=0.0,0.0,121600.0  Checking overlaps for volume det29:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det29 parent= relZ=122300.0 globZ=122300.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=122300.0 globZ=122300.0
+	global pos=0.0,0.0,122300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=123000.0 globZ=123000.0
+	global pos=0.0,0.0,123000.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=123700.0 globZ=123700.0
+	global pos=0.0,0.0,123700.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=124400.0 globZ=124400.0
+	global pos=0.0,0.0,124400.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=125100.0 globZ=125100.0
+	global pos=0.0,0.0,125100.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=125800.0 globZ=125800.0
+	global pos=0.0,0.0,125800.0  Checking overlaps for volume det30:0 (G4Tubs) ... OK! 
+BLCMDvirtualdetector::Construct det30 parent= relZ=126500.0 globZ=126500.0
+Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=126500.0 globZ=126500.0
+	global pos=0.0,0.0,126500.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=127200.0 globZ=127200.0
+	global pos=0.0,0.0,127200.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=127900.0 globZ=127900.0
+	global pos=0.0,0.0,127900.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=128600.0 globZ=128600.0
+	global pos=0.0,0.0,128600.0  Checking overlaps for volume SolPos:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolPos parent= relZ=129300.0 globZ=129300.0
+	global pos=0.0,0.0,129300.0  Checking overlaps for volume SolNeg:0 (G4Tubs) ... OK! 
+BLCMDsolenoid::Construct SolNeg parent= relZ=130000.0 globZ=130000.0
+	global pos=0.0,0.0,130000.0  ### Adding tracking cuts for neutron  TimeCut(ns)= 10000  KinEnergyCut(MeV)= 0
+
+Geometry test nPoints=100 tolerance=0.002 mm:
+Testing geometry for children of group 'World':
+Total geometry errors = 0  0 seconds
+
+================= Prepare Tune Particle(s) ===========
+================= Begin Tune Particle(s) =============
+**************************************************************************
+*** G4Exception: EM Field Extends Outside World
+***    severity: Warning
+***   issued by: BLGlobalField
+*** description: May give inaccurate tracking near world boundary.
+***     EventID: -2     TrackID: 1   mu+  KE=120.5 MeV
+**************************************************************************
+fieldVoxels: nx=6 ny=6 nz=701, 25236 voxels, 192 fields
+fieldVoxels: max field count is 18 fields, # voxels >5: 24624, >10: 23724, >20: 0
+**************************************************************************
+*** G4Exception: Check number of field voxels
+***    severity: Warning
+***   issued by: BLGlobalField
+*** description: nVoxels = 25236, max fields/voxel = 18
+***     EventID: -2     TrackID: 1   mu+  KE=120.5 MeV
+**************************************************************************
+Run complete  1 Events  0 seconds
+================== Begin Reference Particle(s) ===============
+Run complete  1 Events  0 seconds
+================== Prepare Tracking Beam ==================
+**************************************************************************
+*** G4Exception: All stochastic processes disabled
+***    severity: Warning
+***   issued by: physics
+**************************************************************************
+================== Begin Tracking Beam ===============
+Event 1 Completed  1 events  realTime=1 sec  1.0 ev/sec
+Event 2 Completed  2 events  realTime=1 sec  2.0 ev/sec
+Event 3 Completed  3 events  realTime=1 sec  3.0 ev/sec
+Event 4 Completed  4 events  realTime=1 sec  4.0 ev/sec
+Event 5 Completed  5 events  realTime=1 sec  5.0 ev/sec
+Event 6 Completed  6 events  realTime=1 sec  6.0 ev/sec
+Event 7 Completed  7 events  realTime=1 sec  7.0 ev/sec
+Event 8 Completed  8 events  realTime=1 sec  8.0 ev/sec
+Event 9 Completed  9 events  realTime=1 sec  9.0 ev/sec
+Event 10 Completed  10 events  realTime=1 sec  10.0 ev/sec
+Event 20 Completed  20 events  realTime=1 sec  20.0 ev/sec
+Event 30 Completed  30 events  realTime=1 sec  30.0 ev/sec
+Event 40 Completed  40 events  realTime=1 sec  40.0 ev/sec
+Event 50 Completed  50 events  realTime=1 sec  50.0 ev/sec
+Event 60 Completed  60 events  realTime=1 sec  60.0 ev/sec
+Event 70 Completed  70 events  realTime=2 sec  35.0 ev/sec
+Event 80 Completed  80 events  realTime=2 sec  40.0 ev/sec
+Event 90 Completed  90 events  realTime=2 sec  45.0 ev/sec
+Event 100 Completed  100 events  realTime=2 sec  50.0 ev/sec
+Run complete  100 Events  2 seconds
+NTuple det-1                  0 entries
+NTuple det0                 100 entries
+NTuple det1                 100 entries
+NTuple det2                 100 entries
+NTuple det3                 100 entries
+NTuple det4                 100 entries
+NTuple det5                 100 entries
+NTuple det6                 100 entries
+NTuple det7                 100 entries
+NTuple det8                  99 entries
+NTuple det9                  99 entries
+NTuple det10                 99 entries
+NTuple det11                 99 entries
+NTuple det12                 98 entries
+NTuple det13                 98 entries
+NTuple det14                 98 entries
+NTuple det15                 97 entries
+NTuple det16                 96 entries
+NTuple det17                 96 entries
+NTuple det18                 96 entries
+NTuple det19                 96 entries
+NTuple det20                 96 entries
+NTuple det21                 96 entries
+NTuple det22                 96 entries
+NTuple det23                 96 entries
+NTuple det24                 95 entries
+NTuple det25                 95 entries
+NTuple det26                 95 entries
+NTuple det27                 95 entries
+NTuple det28                 95 entries
+NTuple det29                 95 entries
+NTuple det30                 95 entries
+NTuple AllTracks           2736 entries
+
+Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 3 Warnings
+      1 times: All stochastic processes disabled
+      1 times: Check number of field voxels
+      1 times: EM Field Extends Outside World
+g4beamline: simulation complete

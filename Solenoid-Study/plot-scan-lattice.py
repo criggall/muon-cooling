@@ -26,8 +26,8 @@ main_dir = '/Users/criggall/Documents/muon-cooling/Solenoid-Study/build-channel/
 # tilt = np.linspace(0,nominal_tilt,10)
 # periods = np.arange(100,1500,100)
 # tilts = np.arange(0,5,0.1)
-# tilts = np.arange(0,0.3,0.01)
-tilts = np.arange(0,60,5)
+tilts = np.arange(0,0.3,0.01)
+# tilts = np.arange(0,60,5)
 
 # Number of steps in scan:
 # iterations = len(periods)
@@ -35,7 +35,7 @@ iterations = len(tilts)
 
 # Number of solenoids in lattice:
 # n = 1
-n = 20
+n = 18
 
 # Period length (if static):
 period = 400
@@ -87,6 +87,7 @@ def plot_angular_momentum(Lz_vals, z_vals, param_val, dir):
     # plt.title(f'period = {param_val} mm')
     plt.title(f'solenoid tilt = {round(param_val,3)} {units}')
     plt.xlim(-1500,8500)
+    plt.ylim(-1,1)
     plt.xlabel('$z$ (mm)')
     plt.ylabel('$L_z$ (mm*MeV/c)')
     plt.savefig(dir+'angular_momentum.png',dpi=300)
@@ -102,6 +103,7 @@ def plot_B_trans(Bx_vals,By_vals, z_vals, param_val, dir):
     plt.legend()
     plt.title(f'solenoid tilt = {round(param_val,3)} {units}')
     plt.xlim(-1500,8500)
+    plt.ylim(-0.01,0.01)
     plt.xlabel('$z$ (mm)')
     plt.ylabel('$B$ (T)')
     plt.savefig(dir+'B_trans.png',dpi=300)
@@ -129,6 +131,7 @@ def plot_Br(Br_vals, z_vals, param_val, dir):
     plt.scatter(z_vals, Br_vals, s=0.5,color='darkblue',label='$B_r$')
     plt.title(f'solenoid tilt = {round(param_val,3)} {units}')
     plt.xlim(-1500,8500)
+    plt.ylim(-0.01,0.01)
     plt.xlabel('$z$ (mm)')
     plt.ylabel('$B_r$ (T)')
     plt.savefig(dir+'B_r.png',dpi=300)
@@ -197,8 +200,8 @@ frame_duration = 400
 
 # List of sim directories:
 # out_dirs = [main_dir+f'sol_tilt_scan/g4bl-output-sim{i+1}' for i in range(iterations)]
-out_dirs = [main_dir+f'coil_tilt_scan/g4bl-output-sim{i+1}' for i in range(iterations)]
 # out_dirs = [main_dir+f'coil_spacing_scan/g4bl-output-sim{i+1}' for i in range(iterations)]
+out_dirs = [main_dir+f'coil_tilt_scan/g4bl-output-sim{i+1}' for i in range(iterations)]
 
 # # List of orbit plot files:
 # orbit_plot_paths = []

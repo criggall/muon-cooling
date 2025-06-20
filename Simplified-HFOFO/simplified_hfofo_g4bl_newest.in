@@ -1,0 +1,67 @@
+### PHYSICS ###
+
+physics QGSP_BIC doStochastics=0
+
+### PARAMETERS ###
+
+# Constants:
+param m=105.7 #MeV
+param c=2.997925*10^8 #m/s
+
+# Reference particle:
+param p=200 #MeV/c
+param v=$p*$c/sqrt($p^2+$m^2)
+
+# Solenoid current:
+param sol_current=-80.46 #amps/mm^2
+
+# Solenoid pitch:
+param pitch=-0.1432394487827058 #deg
+
+# Period length:
+param period_len=4200 #mm
+
+# Initial conditions:
+param X=-11.2945 #mm
+param Y=14.0917 #mm
+param Xp=0.823201/224.995 #radians
+param Yp=-1.27215/224.995 #radians
+
+### BEAM ###
+
+beam gaussian particle=mu+ nEvents=100 beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+sigmaX=10.0 sigmaY=10.0 sigmaXp=0.1 sigmaYp=0.1 meanMomentum=$p sigmaP=0.0 meanT=0.0 sigmaT=0.0
+
+#beam ascii file=initial.dat beamZ=0.0
+
+### REFERENCE PARTICLE ###
+
+reference referenceMomentum=$p particle=mu+ beamX=$X beamY=$Y beamZ=0.0 beamXp=$Xp beamYp=$Yp
+#reference referenceMomentum=$p particle=mu+ beamX=0.0 beamY=0.0 beamZ=0.0 beamXp=0.0 beamYp=0.0
+
+trace nTrace=0 format=ascii oneNTuple=1
+
+### SOLENOIDS ###
+
+coil coil innerRadius=420 outerRadius=600 length=300 nSheets=10 maxR=360 maxZ=6000 dR=15 dZ=15 tolerance=0.003 
+
+solenoid SolPos coilName=coil current=-$sol_current color=0,1,1
+solenoid SolNeg coilName=coil current=$sol_current color=0,1,0
+
+### PLACEMENT ###
+
+# 30 HFOFO periods + 1 at start + 1 at end for edge field effects
+
+do i -1 30
+
+    virtualdetector det$i file=det$i format=ascii radius=360 color=0,1,0 length=0.001 material=Vacuum
+    place det$i z=500+$period_len*$i
+
+    place SolPos z=500+$period_len*$i current=-$sol_current rotation=X$pitch,Z240
+    place SolNeg z=1200+$period_len*$i current=$sol_current rotation=X$pitch
+    place SolPos z=1900+$period_len*$i current=-$sol_current rotation=X$pitch,Z120
+    place SolNeg z=2600+$period_len*$i current=$sol_current rotation=X$pitch,Z240
+    place SolPos z=3300+$period_len*$i current=-$sol_current rotation=X$pitch
+    place SolNeg z=4000+$period_len*$i current=$sol_current rotation=X$pitch,Z120
+
+enddo

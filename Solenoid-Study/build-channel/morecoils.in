@@ -34,7 +34,7 @@ reference particle=mu+ \
 
 particlecolor reference=1,1,1
 
-beam gaussian particle=mu+ nEvents=100 beamX=1.5 beamY=0.0 beamZ=-3000 beamXp=$refXp  beamYp=$refYp \
+beam gaussian particle=mu+ nEvents=10 beamX=1.5 beamY=0.0 beamZ=-3000 beamXp=$refXp  beamYp=$refYp \
      sigmaX=0.5 sigmaY=0.5 sigmaXp=0.0 sigmaYp=0.0 meanMomentum=$refP sigmaP=0.0 meanT=0.0 sigmaT=0.0
 
 # kill secondaries

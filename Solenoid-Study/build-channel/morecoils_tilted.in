@@ -34,7 +34,9 @@ reference particle=mu+ \
 
 particlecolor reference=1,1,1
 
-beam gaussian particle=mu+ nEvents=100 beamX=1.5 beamY=0.0 beamZ=-3000 beamXp=$refXp  beamYp=$refYp \
+#beam gaussian particle=mu+ nEvents=100 beamX=1.5 beamY=0.0 beamZ=-3000 beamXp=$refXp  beamYp=$refYp \
+#     sigmaX=0.5 sigmaY=0.5 sigmaXp=0.0 sigmaYp=0.0 meanMomentum=$refP sigmaP=0.0 meanT=0.0 sigmaT=0.0
+beam gaussian particle=mu+ nEvents=10 beamX=1.5 beamY=0.0 beamZ=500.0 beamXp=$refXp  beamYp=$refYp \
      sigmaX=0.5 sigmaY=0.5 sigmaXp=0.0 sigmaYp=0.0 meanMomentum=$refP sigmaP=0.0 meanT=0.0 sigmaT=0.0
 
 # kill secondaries
@@ -51,9 +53,9 @@ param solinner=400.0
 param solthick=100.0
 param sollength=100.0
 param period=400.0
-param solcurrent=50.0
+param solcurrent=100.0
 param maxStep=5.0
-param tilt=55
+param tilt=0.0
 coil Coil1 innerRadius=$solinner outerRadius=$solinner+$solthick length=$sollength maxR=5000 maxZ=10000.0
 solenoid FOFOCoil coilName=Coil1 current=$solcurrent
 solenoid FOFOposCoil coilName=Coil1 current=$solcurrent
@@ -81,19 +83,42 @@ virtualdetector det radius=300 length=0.001 color=0,1,0 format=ascii
 
 ### Flipped polarity case:
 
-do i 0 9
+#do i -1 10
 	
-	place det x=0 z=500+2*$i*$period y=0
+#	place det x=0 z=500+2*$i*$period y=0
+#	place FOFOposCoil x=0 z=500+2*$i*$period y=0 rotation=X$tilt
+#	place det x=0 z=500+2*$i*$period+$period/4 y=0
+#	place det x=0 z=500+2*$i*$period+$period/2 y=0
+#	place det x=0 z=500+2*$i*$period+3*$period/4 y=0
+#	place det x=0 z=500+2*$i*$period+$period y=0
+#	place FOFOnegCoil x=0 z=500+2*$i*$period+$period y=0 rotation=X$tilt
+#	place det x=0 z=500+2*$i*$period+5*$period/4 y=0
+#	place det x=0 z=500+2*$i*$period+3*$period/2 y=0
+#	place det x=0 z=500+2*$i*$period+7*$period/4 y=0
+
+#enddo
+
+param end=10
+
+do i -1 $end
+	
 	place FOFOposCoil x=0 z=500+2*$i*$period y=0 rotation=X$tilt
-	place det x=0 z=500+2*$i*$period+$period/4 y=0
-	place det x=0 z=500+2*$i*$period+$period/2 y=0
-	place det x=0 z=500+2*$i*$period+3*$period/4 y=0
-	place det x=0 z=500+2*$i*$period+$period y=0
 	place FOFOnegCoil x=0 z=500+2*$i*$period+$period y=0 rotation=X$tilt
-	place det x=0 z=500+2*$i*$period+5*$period/4 y=0
-	place det x=0 z=500+2*$i*$period+3*$period/2 y=0
-	place det x=0 z=500+2*$i*$period+7*$period/4 y=0
+
+	if $i>-1
+		if $i<$end
+			place det x=0 z=500+2*$i*$period y=0
+			place det x=0 z=500+2*$i*$period+$period/4 y=0
+			place det x=0 z=500+2*$i*$period+$period/2 y=0
+			place det x=0 z=500+2*$i*$period+3*$period/4 y=0
+			place det x=0 z=500+2*$i*$period+$period y=0
+			place det x=0 z=500+2*$i*$period+5*$period/4 y=0
+			place det x=0 z=500+2*$i*$period+3*$period/2 y=0
+			place det x=0 z=500+2*$i*$period+7*$period/4 y=0
+		endif
+	endif
 
 enddo
+
 
 #place det x=0 z=10*$period

@@ -23,8 +23,8 @@ file_for_g4bl = '"'+file+'"'
 
 # Define range of coil tilt scan:
 # tilts = np.arange(0,5,0.1)
-# tilts = np.arange(0,0.3,0.01)
-tilts = np.arange(0,60,5)
+tilts = np.arange(0,0.3,0.01)
+# tilts = np.arange(0,60,5)
 
 # Set number of loops based on scan space:
 # iterations = len(coil_lengths)
