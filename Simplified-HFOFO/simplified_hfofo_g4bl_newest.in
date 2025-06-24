@@ -29,8 +29,10 @@ param Yp=-1.27215/224.995 #radians
 
 ### BEAM ###
 
-beam gaussian particle=mu+ nEvents=100 beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
-sigmaX=10.0 sigmaY=10.0 sigmaXp=0.1 sigmaYp=0.1 meanMomentum=$p sigmaP=0.0 meanT=0.0 sigmaT=0.0
+beam gaussian particle=mu+ nEvents=100 \
+beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+sigmaX=10.0 sigmaY=10.0 sigmaXp=0.1 sigmaYp=0.1 \ 
+meanMomentum=$p sigmaP=10.0 meanT=0.0 sigmaT=0.0
 
 #beam ascii file=initial.dat beamZ=0.0
 
@@ -52,10 +54,21 @@ solenoid SolNeg coilName=coil current=$sol_current color=0,1,0
 
 # 30 HFOFO periods + 1 at start + 1 at end for edge field effects
 
-do i -1 30
+param num_periods=30
 
-    virtualdetector det$i file=det$i format=ascii radius=360 color=0,1,0 length=0.001 material=Vacuum
-    place det$i z=500+$period_len*$i
+virtualdetector det file=det format=ascii radius=360 color=0,1,0 length=0.001 material=Vacuum
+
+do i -1 $num_periods
+
+    #virtualdetector det$i file=det$i format=ascii radius=360 color=0,1,0 length=0.001 material=Vacuum
+    #place det$i z=500+$period_len*$i
+    place det z=500+$period_len*$i
+    if $i<$num_periods
+        do j 1 11
+            #place det$i z=500+$period_len*$i+$j*$period_len/12
+            place det z=500+$period_len*$i+$j*$period_len/12
+        enddo
+    endif
 
     place SolPos z=500+$period_len*$i current=-$sol_current rotation=X$pitch,Z240
     place SolNeg z=1200+$period_len*$i current=$sol_current rotation=X$pitch
