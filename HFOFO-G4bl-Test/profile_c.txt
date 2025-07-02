@@ -1,3 +1,0 @@
-# g4beamline profile
-#Z N meanX sigmaX meanY sigmaY emitX emitY emitTrans betaX betaY betaTrans alphaX alphaY alphaTrans meanP
-#mm - mm mm mm mm mm-rad mm-rad mm-rad mm mm mm - - - MeV/c
