@@ -4,4 +4,4 @@ Input beam files (leaving simulated front-end) + script to convert from ICOOL to
 
 - for003Pre6D.dat = ICOOL file from Diktys corresponding to distribution from Stratakis and Palmer paper (ICOOL format)
 
-- input.dat = converted for003Pre6D.dat file now compatible with G4beamline (BLTrackFile format)
+- for003Pre6D_g4bl.dat = converted for003Pre6D.dat file now compatible with G4beamline (BLTrackFile format)

@@ -16,7 +16,9 @@ ref = icool_df.iloc[0]
 data = icool_df.iloc[1:]
 
 # Create txt file with column and unit labels:
-f = open('input.txt','w')
+file_name = icool_file[:-4]
+temp_file = file_name+'_g4bl.txt'
+f = open(temp_file,'w')
 f.write("#BLTrackFile\n")
 f.write("#x y z Px Py Pz t PDGid EventID TrackId ParentID Weight\n")
 f.write("#cm cm cm MeV/c MeV/c MeV/c ns - - - - -\n")
@@ -76,11 +78,11 @@ for j in range(len(icool_df.values)-1):
 f.close()
 
 # Convert to .dat file:
-with open('input.txt','r') as f:
+with open(temp_file,'r') as f:
     r = f.read()
-with open('input.dat','w') as f:
+with open(file_name+'_g4bl.dat','w') as f:
     f.write(r)
 
 # Remove intermediate .txt file:
-command = f"rm input.txt"
+command = f"rm {temp_file}"
 subprocess.run(command, shell=True, capture_output=False)
