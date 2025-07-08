@@ -1,1 +1,0 @@
-Input beam file (leaving simulated front-end) + script to convert from ICOOL to G4beamline formatting
