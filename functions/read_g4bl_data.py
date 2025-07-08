@@ -4,7 +4,9 @@ import pandas as pd
 
 def readTraceData(file):
 
-    ''' Returns a DataFrame with positions, momenta, time, ID, and B-field components from G4beamline trace output. 
+    ''' Returns a DataFrame with positions, momenta, time, ID, and B-field components from G4beamline trace output.
+
+    The default units are mm for position, MeV/c for momenta, ns for time and Tesla for B field.
     
     Inputs:
     file = G4beamline track file (ascii) '''
@@ -30,6 +32,8 @@ def readTraceData(file):
 def readDetData(file, cuts=False, low_p_cut=0, high_p_cut=400):
 
     ''' Returns a DataFrame with positions, momenta, time, and ID from G4beamline detector output.
+
+    The default units are mm for position, MeV/c for momenta, and ns for time.
 
     Inputs:
     file = G4beamline detector output file (ascii) 
