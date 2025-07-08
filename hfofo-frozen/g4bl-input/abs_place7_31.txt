@@ -48,7 +48,7 @@ place wedge0 x=-95.05 y=146.2 rotation=Y90,Z573.0 lowerWidth=51.856 z=3650+$peri
 place abtube z=3650+$period*3
   
 place Det4 z=-9.8+$zshift+$period*4
-  
+
 place wedge0 x=-79.11 y=-155.4 rotation=Y90,Z-26.97 lowerWidth=51.351 z=150+$period*4
 place abtube z=150+$period*4
 place wedge0 x=174.2 y=9.204 rotation=Y90,Z93.03 lowerWidth=50.851 z=850+$period*4
