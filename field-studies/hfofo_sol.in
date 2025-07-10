@@ -13,7 +13,7 @@ param ref_p=200.0
 physics QGSP_BIC doStochastics=0
 
 # Reference particle:
-reference particle=mu+ \
+reference particle=neutron \
     beamX=0.0 beamY=0.0 beamZ=-3000 \
     beamXp=0.0 beamYp=0.0 referenceMomentum=$ref_p
 trace nTrace=0 format=ascii
@@ -37,8 +37,8 @@ trackcuts killSecondaries=1
 param length=300
 param inner_radius=360
 param outer_radius=500
-param current=-80.46
-param period=1000
+param current=80.46
+param spacing=700
 
 # Solenoid pitch (in degrees):
 param pitch=0.8
@@ -49,18 +49,16 @@ param maxStep=5.0
 # Solenoids:
 coil coil innerRadius=$inner_radius outerRadius=$outer_radius length=$length \
     maxR=5000 maxZ=10000
-solenoid sol coilName=coil current=$current
-
-# Detector:
-virtualdetector det radius=300 length=0.001 color=0,1,0 format=ascii
+solenoid sol_pos coilName=coil current=$current
+solenoid sol_neg coilName=coil current=-$current
 
 ################################
 ### ELEMENT PLACING SEQUENCE ###
 ################################
 
-do i 0 0
+do i 0 2
 
-    place det x=0 y=0 z=$period*$i
-    place sol x=0 y=0 z=$period*$i rotation=X$pitch
+    place sol_pos x=0 y=0 z=2*$spacing*$i rotation=X$pitch
+    place sol_neg x=0 y=0 z=2*$spacing*$i+$spacing rotation=X$pitch
 
 enddo
