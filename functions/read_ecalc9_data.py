@@ -14,7 +14,7 @@ def readECALC9(file):
     values = { k : [] for k in keys }
 
     column_names = ['regn #', 'Z', 'Bz', 'eperp', 'elong', 'e6D', 'Ldim', 'Pzavg', 'beta', 'alpha', 'betaL', 'alphaL', 'n0', 'n1', 'n2', 'Lcan(eVs)', 'sigmaE', 'sigmaT', 'corrE', 'corrT', 'sigmaE_c', 'avg', 'yavg', 'Dx', 'Dy', 'Dr', 'Dr2']
-    df = pd.read_csv(file, delim_whitespace=True, skiprows=12, names=column_names)
+    df = pd.read_csv(file, sep='\s+', skiprows=12, names=column_names)
 
     values['z'].append(df['Z'].values)
     values['Bz'].append(df['Bz'].values)
@@ -40,7 +40,7 @@ def readECALC9F(file):
     values = { k : [] for k in keys }
 
     column_names = ['regn #', 'Z', 'Bz', 'eperp', 'elong', 'e6D', 'Ldim', 'Pzavg', 'beta', 'alpha', 'betaL', 'alphaL', 'n0', 'n1', 'n2', 'Lcan(eVs)', 'sigmaE', 'sigmaT', 'corrE', 'corrT', 'sigmaE_c', 'avg', 'yavg', 'Dx', 'Dy', 'Dr', 'Dr2']
-    df = pd.read_csv(file, delim_whitespace=True, skiprows=13, names=column_names)
+    df = pd.read_csv(file, sep='\s+', skiprows=13, names=column_names)
 
     values['z'].append(df['Z'].values)
     values['Bz'].append(df['Bz'].values)
@@ -66,7 +66,7 @@ def readEMITCALC(file):
     values = { k : [] for k in keys }
 
     column_names = ['regn #', 'Z', 'Bz0', '<Pz>', '<Lcanon>', '<x>', '<y>', '<t>', 'total #', '# in cuts', 'emit_1', 'emit_2', 'emit_3', 'e_perp', 'e_long', 'beta_perp', 'alpha_perp', 'Ldim', 'beta_long', 'alpha_long', 'D_x', 'D_y', 'Corr_E', 'Corr_t', 'sigma_E', 'asymmetry']
-    df = pd.read_csv(file, delim_whitespace=True, skiprows=15, names=column_names)
+    df = pd.read_csv(file, sep='\s+', skiprows=15, names=column_names)
 
     values['z'].append(df['Z'].values)
     values['Bz0'].append(df['Bz0'].values)
