@@ -56,9 +56,16 @@ solenoid sol_neg coilName=coil current=-$current
 ### ELEMENT PLACING SEQUENCE ###
 ################################
 
-do i 0 2
+# Pitches only:
+#do i 0 2
+    #place sol_pos x=0 y=0 z=2*$spacing*$i rotation=X$pitch
+    #place sol_neg x=0 y=0 z=2*$spacing*$i+$spacing rotation=X$pitch
+#enddo
 
-    place sol_pos x=0 y=0 z=2*$spacing*$i rotation=X$pitch
-    place sol_neg x=0 y=0 z=2*$spacing*$i+$spacing rotation=X$pitch
-
-enddo
+# Pitches and rolls:
+place sol_pos x=0 y=0 z=0 rotation=X$pitch,Z240
+place sol_neg x=0 y=0 z=$spacing rotation=X$pitch
+place sol_pos x=0 y=0 z=$spacing*2 rotation=X$pitch,Z120
+place sol_neg x=0 y=0 z=$spacing*3 rotation=X$pitch,Z240
+place sol_pos x=0 y=0 z=$spacing*4 rotation=X$pitch
+place sol_neg x=0 y=0 z=$spacing*5 rotation=X$pitch,Z120
