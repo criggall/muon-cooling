@@ -16,6 +16,7 @@ def readFieldMapData(file):
     columns = ['x', 'y', 'z', 't', 'Bx', 'By', 'Bz']
     df = pd.DataFrame(data[:, 0:7], columns=columns)
 
-    df['Br'] = np.sqrt(df['Bx']**2 + df['By']**2)
+    theta = np.arctan2(df['y'], df['x'])
+    df['Br'] = df['Bx']*np.cos(theta) + df['By']*np.sin(theta)
 
     return df

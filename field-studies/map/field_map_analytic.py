@@ -75,12 +75,24 @@ def br(r, z):
     br = mu*I/pi * xi/(4*r) * (2*(K(k) - E(k)) - k**2*K(k))
     return br
 
-def Bz(r, z, pitch=0.0):
+def Bz(r, z):
     Bz = -bz(r, z-L) + bz(r, z+L)
-    # Bz *= np.cos(pitch*math.pi/180)
     return Bz
 
-def Br(r, z, pitch=0.0):
+def Br(r, z):
     Br = br(r, z-L) + br(r, z+L)
-    # Br *= 
     return Br
+
+### RE-DEFINE FIELD FUNCTIONS WITH ROTATION ###
+
+def Bz_rot(r, z, theta, pitch=0.0):
+    Bz = Bz(r, z)
+    Br = Br(r, z)
+    Bzp = Br*np.sin(theta)*np.sin(pitch) + Bz*np.cos(pitch)
+    return Bzp
+
+def Br_rot(r, z, theta, pitch=0.0):
+    Bz = Bz(r, z)
+    Br = Br(r, z)
+    Brp = Br*(np.cos(theta))**2 - Br*(np.sin(theta))**2*np.cos(pitch) - Bz*np.sin(theta)*np.sin(pitch)
+    return Brp
