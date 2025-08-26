@@ -1,67 +1,58 @@
 import numpy as np
 from scipy.optimize import leastsq
-import matplotlib.pyplot as plt
+import cmath
 
-import sys
-import os
-parent_dir = os.path.abspath(os.path.join(os.getcwd(), '..'))
-sys.path.append(parent_dir)
-from field_map_g4bl import readFieldMapData
+def fitMultipoles(x, y, Bx, By, max_order=5):
 
-##### INPUTS #####
-
-# z value at which to evaluate:
-z_val = 0.0
-
-# Path to field map file:
-file = 'single-solenoid/fieldmap.txt'
-
-##### DEFINE FUNCTIONS #####
-
-def fit_multipoles(x, y, Bx, By, max_order=10):
-
-    ''' Fit B = Bx + i By to multipole expansion: B = sum_n c_n (x + i y)^n
+    ''' Fit B = Bx + i By to multipole expansion:
+        B(z) = sum_{n=1}^{max_order} c_n * (x + i y)^(n-1)
     Inputs:
         x, y --> 2D arrays of positions
         Bx, By --> 2D arrays of transverse magnetic field components
-        max_order --> maximum multipole order (positive integer)
+        max_order --> maximum multipole order (integer >= 1)
     Returns:
-        coefficients --> dictionary {n: c_n} for -max_order <= n <= max_order '''
+        coefficients --> dict {n: c_n} for 1 <= n <= max_order '''
     
     z = x + 1j * y
-    z_flat = z.flatten()
+    z_flat = z.ravel()
 
     B = Bx + 1j * By
-    B_flat = B.flatten()
+    B_flat = B.ravel()
 
     mask = np.abs(z_flat) > 1e-10
     z_valid = z_flat[mask]
     B_valid = B_flat[mask]
 
-    start_n = 0
-    n_values = list(range(start_n, max_order + 1))
+    n_values = list(range(1, max_order+1))
+    A = np.array([z_valid**(n-1) for n in n_values]).T
 
-    A = np.array([z_valid**n for n in n_values]).T
     coeffs, _, _, _ = np.linalg.lstsq(A, B_valid, rcond=None)
 
     return {n: coeffs[i] for i, n in enumerate(n_values)}
 
-##### APPLY TO SIMULATION DATA #####
 
-data = readFieldMapData(file)
+def computeField(x, y, coeffs):
 
-x = np.unique(data['x'].values)
-y = np.unique(data['y'].values)
-X, Y = np.meshgrid(x, y)
+    ''' Compute transverse B field using coefficients from multipole expansion, as per:
+        B(z) = sum_{n=1}^{max_order} c_n * (x + i y)^(n-1)
+    Inputs:
+        x, y --> 2D arrays of position values
+        coeffs --> list of coefficients in multipole expansion, ordered by n
+    Returns:
+        Bx, By --> 2D array of transverse field values '''
+    
+    B = np.zeros((len(x), len(y)))
+    phi = np.zeros((len(x), len(y)))
+    for i in range(len(x)):
+        for j in range(len(y)):
 
-data_slice = data[data['z'] == z_val]
-Bx = data_slice.pivot_table(index='y', columns='x', values='Bx')
-Bx = Bx.values
-By = data_slice.pivot_table(index='y', columns='x', values='By')
-By = By.values
+            z = x[i] + 1j * y[j]
+    
+            B_val = 0
+            for n in range(len(coeffs)):
+                B_val += coeffs[n] * z**n
+            
+            B[i][j] = abs(B_val)
+            phi[i][j] = cmath.phase(B_val)
 
-coeffs = fit_multipoles(X, Y, Bx, By, max_order=5)
-
-print("Multipole coefficients:")
-for n in sorted(coeffs.keys()):
-    print(f"n={n:2d} : {coeffs[n]:.4e}")
+    return B, phi
