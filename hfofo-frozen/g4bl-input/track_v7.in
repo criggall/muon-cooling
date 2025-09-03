@@ -107,4 +107,3 @@ include sol_place7_31.txt
 place DetLast z=$zlastRF+100
 place terminus z=-1000 # to stop reflected particles
 place terminus z=$zlastRF+102
-
