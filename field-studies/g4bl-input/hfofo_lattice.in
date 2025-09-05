@@ -54,16 +54,25 @@ solenoid SolNeg coilName=coil current=$sol_current color=0,1,0
 
 param num=1
 
+## With rotations:
 do i -1 $num
-
     place SolPos z=0+$period_len*$i current=-$sol_current rotation=X$pitch,Z240
     place SolNeg z=700+$period_len*$i current=$sol_current rotation=X$pitch
     place SolPos z=1400+$period_len*$i current=-$sol_current rotation=X$pitch,Z120
     place SolNeg z=2100+$period_len*$i current=$sol_current rotation=X$pitch,Z240
     place SolPos z=2800+$period_len*$i current=-$sol_current rotation=X$pitch
     place SolNeg z=3500+$period_len*$i current=$sol_current rotation=X$pitch,Z120
-
 enddo
+
+## Without rotations:
+#do i -1 $num
+#    place SolPos z=0+$period_len*$i current=-$sol_current
+#    place SolNeg z=700+$period_len*$i current=$sol_current
+#    place SolPos z=1400+$period_len*$i current=-$sol_current
+#    place SolNeg z=2100+$period_len*$i current=$sol_current
+#    place SolPos z=2800+$period_len*$i current=-$sol_current
+#    place SolNeg z=3500+$period_len*$i current=$sol_current
+#enddo
 
 ### OUTPUT FIELDS ###
 
