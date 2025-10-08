@@ -1,0 +1,41 @@
+
+
+### PHYSICS ###
+
+physics QGSP_BIC doStochastics=0
+
+### BEAM ###
+
+beam gaussian particle=mu+ nEvents=1 \
+    beamZ=0.0 beamX=0.0 beamY=0.0 beamXp=0.0 beamYp=0.0 \ 
+    sigmaX=0.0 sigmaY=0.0 sigmaXp=0.0 sigmaYp=0.0 \ 
+    meanMomentum=0.0 sigmaP=0.0 meanT=0.0 sigmaT=0.0
+
+### REFERENCE PARTICLE ###
+
+reference referenceMomentum=200 particle=mu+ \
+    beamX=0.0 beamY=0.0 beamZ=0.0 beamXp=0.0 beamYp=0.0
+
+trace nTrace=1 format=ascii oneNTuple=1
+
+### FIELD EXPRESSION ###
+
+param a=0.055
+param k=0.00285714*pi
+param phi=1.55
+param b=0.069738
+param Rref=400
+
+fieldexpr field Bx=($a*sin($k*z+$phi)+$b)*x/$Rref, By=($a*sin($k*z+$phi)+$b)*y/$Rref Bz=0 length=1 width=1 height=1
+#fieldexpr field Bx=1 By=0 Bz=0 length=1 width=1 height=1
+
+### PLACEMENT ###
+
+place field x=0 y=0 z=0
+
+### FIELDMAP ###
+
+fieldntuple fieldmap format=ascii x=-50,50,10 y=-50,50,10 z=-10,10,0.1
+
+
+
