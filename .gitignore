@@ -1,4 +1,4 @@
 .DS_Store
 field-studies/map/hfofo-lattice/fieldmap*.txt
 field-studies/map/single-solenoid/fieldmap*.txt
-field-studies/map/dipole-test/fieldmap*.txt
+field-studies/map/analytic/fieldmap*.txt

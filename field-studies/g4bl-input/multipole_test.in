@@ -19,7 +19,7 @@ trace nTrace=1 format=ascii oneNTuple=1
 
 ### DIPOLE ###
 
-multipole Dipole dipole=1 fieldLength=100
+multipole Dipole dipole=1 fieldLength=100 apertureRadius=100
 
 ### PLACEMENT ###
 
