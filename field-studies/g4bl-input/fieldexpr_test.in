@@ -13,11 +13,17 @@ beam gaussian particle=mu+ nEvents=1 \
 
 ### REFERENCE PARTICLE ###
 
-#reference referenceMomentum=200 particle=mu+ \
-#    beamX=0.0 beamY=0.0 beamZ=0.0 beamXp=0.0 beamYp=0.0
+# Initial conditions:
+param X=-11.2945 #mm
+param Y=14.0917 #mm
+param Xp=0.823201/224.995 #radians
+param Yp=-1.27215/224.995 #radians
 
-reference referenceMomentum=200 particle=neutron \
-    beamX=0.0 beamY=0.0 beamZ=0.0 beamXp=0.0 beamYp=0.0
+reference referenceMomentum=200 particle=mu+ \
+    beamX=$X beamY=$Y beamZ=0.0 beamXp=$Xp beamYp=$Yp
+
+#reference referenceMomentum=200 particle=neutron \
+#    beamX=0.0 beamY=0.0 beamZ=0.0 beamXp=0.0 beamYp=0.0
 
 trace nTrace=1 format=ascii oneNTuple=1
 
@@ -31,8 +37,8 @@ param Rref=400
 
 param period=4200
 
-fieldexpr field Bx=$a*sin($k*z+$phi)+$b \
-    By=0 \
+fieldexpr field Bx=($a*sin($k*z+$phi)+$b)*cos(7*pi/4-floor((z-350)/700)*pi/4) \
+    By=($a*sin($k*z+$phi)+$b)*sin(7*pi/4-floor((z-350)/700)*pi/4) \
     Bz=0 \
     length=$period width=600 height=600
 
@@ -47,18 +53,20 @@ solenoid SolNeg coilName=coil current=$sol_current color=0,1,0
 
 ### PLACEMENT ###
 
-place field x=0 y=0 z=$period/2
+param zshift=500
 
-place SolPos z=0 current=-$sol_current
-place SolNeg z=700 current=$sol_current
-place SolPos z=1400 current=-$sol_current
-place SolNeg z=2100 current=$sol_current
-place SolPos z=2800 current=-$sol_current
-place SolNeg z=3500 current=$sol_current
+place field x=0 y=0 z=$period/2+$zshift
+
+place SolPos z=0+$zshift current=-$sol_current
+place SolNeg z=700+$zshift current=$sol_current
+place SolPos z=1400+$zshift current=-$sol_current
+place SolNeg z=2100+$zshift current=$sol_current
+place SolPos z=2800+$zshift current=-$sol_current
+place SolNeg z=3500+$zshift current=$sol_current
 
 ### FIELDMAP ###
 
-fieldntuple fieldmap format=ascii x=-200,200,10 y=-200,200,10 z=0,4200,10
+fieldntuple fieldmap format=ascii x=-200,200,10 y=-200,200,10 z=0+$zshift,4200+$zshift,10
 
 
 
