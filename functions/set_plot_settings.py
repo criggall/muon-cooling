@@ -19,5 +19,6 @@ def setPlotSettings(font=False):
             "text.usetex": True,
             "font.family": "serif",
             "font.serif": ["Computer Modern"],
-            "text.latex.preamble": r"\usepackage{amsmath}"
+            "text.latex.preamble": r"\usepackage{amsmath}",
+            "font.size": 14
         })

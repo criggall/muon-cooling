@@ -29,18 +29,38 @@ trace nTrace=1 format=ascii oneNTuple=1
 
 ### FIELD EXPRESSION ###
 
-param a=0.055
-param k=0.00285714*pi
-param phi=1.55
-param b=0.069738
-param Rref=400
-
 param period=4200
 
-fieldexpr field Bx=($a*sin($k*z+$phi)+$b)*cos(7*pi/4-floor((z-350)/700)*pi/4) \
-    By=($a*sin($k*z+$phi)+$b)*sin(7*pi/4-floor((z-350)/700)*pi/4) \
-    Bz=0 \
-    length=$period width=600 height=600
+## Fit with one sine term and step function rotations:
+
+#param a=0.055
+#param k=0.00285714*pi
+#param phi=1.55
+#param b=0.069738
+
+#fieldexpr field Bx=($a*sin($k*z+$phi)+$b)*cos(7*pi/4-floor((z-350)/700)*pi/4) \
+#    By=($a*sin($k*z+$phi)+$b)*sin(7*pi/4-floor((z-350)/700)*pi/4) \
+#    Bz=0 \
+#    length=$period width=600 height=600
+
+## Fit with four sine terms and no rotations:
+
+param a=0.05489858
+param k1=0.00897609
+param phi1=1.57066062
+param b=0.00805173
+param k2=0.01795108
+param phi2=1.57273619
+param c=0.00249277
+param k3=0.02693144
+param phi3=-1.57890505
+param d=0.00184459
+param k4=0.03591906
+param phi4=-1.60272732
+param offset=0.06083017
+
+fieldexpr field Bx=($a*sin($k1*z+$phi1)+$b*sin($k2*z+$phi2)+$c*sin($k3*z+$phi3)+$d*sin($k4*z+$phi4)+$offset) \
+    By=0 Bz=0 length=$period width=600 height=600
 
 ### SOLENOIDS ###
 
@@ -53,16 +73,20 @@ solenoid SolNeg coilName=coil current=$sol_current color=0,1,0
 
 ### PLACEMENT ###
 
-param zshift=500
+param zshift=0
 
 place field x=0 y=0 z=$period/2+$zshift
 
-place SolPos z=0+$zshift current=-$sol_current
-place SolNeg z=700+$zshift current=$sol_current
-place SolPos z=1400+$zshift current=-$sol_current
-place SolNeg z=2100+$zshift current=$sol_current
-place SolPos z=2800+$zshift current=-$sol_current
-place SolNeg z=3500+$zshift current=$sol_current
+#place SolPos z=0+$zshift current=-$sol_current
+#place SolNeg z=700+$zshift current=$sol_current
+#place SolPos z=1400+$zshift current=-$sol_current
+#place SolNeg z=2100+$zshift current=$sol_current
+#place SolPos z=2800+$zshift current=-$sol_current
+#place SolNeg z=3500+$zshift current=$sol_current
+
+#do i 0 6
+#    place field x=0 y=0 z=$period/6*$i
+#enddo
 
 ### FIELDMAP ###
 
