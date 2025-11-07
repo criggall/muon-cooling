@@ -45,21 +45,15 @@ param period=4200
 
 ## Fit with four sine terms and no rotations:
 
-param a=0.05489858
-param k1=0.00897609
-param phi1=1.57066062
-param b=0.00805173
-param k2=0.01795108
-param phi2=1.57273619
-param c=0.00249277
-param k3=0.02693144
-param phi3=-1.57890505
-param d=0.00184459
-param k4=0.03591906
-param phi4=-1.60272732
+param a=0.05489501
+param k=0.00897611
+param phi=1.57061852
+param b=0.00804858
+param c=-0.0024954
+param d=-0.00184349
 param offset=0.06083017
 
-fieldexpr field Bx=($a*sin($k1*z+$phi1)+$b*sin($k2*z+$phi2)+$c*sin($k3*z+$phi3)+$d*sin($k4*z+$phi4)+$offset) \
+fieldexpr field Bx=($a*sin($k*z+$phi)+$b*sin($k*2*z+$phi)+$c*sin($k*3*z+$phi)+$d*sin($k*4*z+$phi)+$offset) \
     By=0 Bz=0 length=$period width=600 height=600
 
 ### SOLENOIDS ###
