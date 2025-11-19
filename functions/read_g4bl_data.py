@@ -50,6 +50,8 @@ def readDetData(file, cuts=False, low_p_cut=0, high_p_cut=400):
     df['xp'] = df['px'] / df['pz']
     df['yp'] = df['py'] / df['pz']
 
+    df['r'] = np.sqrt(df['x']**2+df['y']**2)
+
     if cuts:
         df = df[(df['ptotal'] > low_p_cut) & (df['ptotal'] < high_p_cut)]
 

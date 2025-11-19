@@ -38,8 +38,10 @@ meanMomentum=$p sigmaP=0.0 meanT=0.0 sigmaT=0.0
 
 ### REFERENCE PARTICLE ###
 
-reference referenceMomentum=$p particle=neutron beamX=$X beamY=$Y beamZ=0.0 beamXp=$Xp beamYp=$Yp
+#reference referenceMomentum=$p particle=neutron beamX=$X beamY=$Y beamZ=0.0 beamXp=$Xp beamYp=$Yp
 #reference referenceMomentum=$p particle=neutron beamX=0.0 beamY=0.0 beamZ=0.0 beamXp=0.0 beamYp=0.0
+
+reference referenceMomentum=$p particle=mu+ beamX=$X beamY=$Y beamZ=0.0 beamXp=$Xp beamYp=$Yp
 
 trace nTrace=1 format=ascii oneNTuple=1
 
@@ -52,7 +54,7 @@ solenoid SolNeg coilName=coil current=$sol_current color=0,1,0
 
 ### PLACEMENT ###
 
-param num=1
+param num=2
 
 ## With rotations:
 do i -1 $num

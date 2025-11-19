@@ -53,8 +53,14 @@ param c=-0.0024954
 param d=-0.00184349
 param offset=0.06083017
 
-fieldexpr field Bx=($a*sin($k*z+$phi)+$b*sin($k*2*z+$phi)+$c*sin($k*3*z+$phi)+$d*sin($k*4*z+$phi)+$offset) \
-    By=0 Bz=0 length=$period width=600 height=600
+#fieldexpr field Bx=($a*sin($k*z+$phi)+$b*sin($k*2*z+$phi)+$c*sin($k*3*z+$phi)+$d*sin($k*4*z+$phi)+$offset) \
+#    By=0 Bz=0 length=$period width=600 height=600
+
+## Fit with four sine terms and sigmoid function for rotations:
+
+param aa=1.04736819
+param bb=0.0212512996
+param cc=-1050.19208
 
 ### SOLENOIDS ###
 
@@ -69,7 +75,10 @@ solenoid SolNeg coilName=coil current=$sol_current color=0,1,0
 
 param zshift=0
 
-place field x=0 y=0 z=$period/2+$zshift
+#place field x=0 y=0 z=$period/2+$zshift
+
+
+## first period:
 
 #place SolPos z=0+$zshift current=-$sol_current
 #place SolNeg z=700+$zshift current=$sol_current
@@ -78,8 +87,37 @@ place field x=0 y=0 z=$period/2+$zshift
 #place SolPos z=2800+$zshift current=-$sol_current
 #place SolNeg z=3500+$zshift current=$sol_current
 
+do i 0 6
+    #param angle=3*pi/4-pi/4*$i
+    #fieldexpr field Bx=($a*sin($k*z+$phi)+$b*sin($k*2*z+$phi)+$c*sin($k*3*z+$phi)+$d*sin($k*4*z+$phi)+$offset)*cos($angle) \
+    #    By=($a*sin($k*z+$phi)+$b*sin($k*2*z+$phi)+$c*sin($k*3*z+$phi)+$d*sin($k*4*z+$phi)+$offset)*sin($angle) \
+    #    Bz=0 length=300 width=600 height=600
+    param angle=3*pi/4-($aa/(1+exp(-$bb*(z-$cc))))*pi/4*$i
+    fieldexpr field Bx=($a*sin($k*z+$phi)+$b*sin($k*2*z+$phi)+$c*sin($k*3*z+$phi)+$d*sin($k*4*z+$phi)+$offset)*cos($angle) \
+        By=($a*sin($k*z+$phi)+$b*sin($k*2*z+$phi)+$c*sin($k*3*z+$phi)+$d*sin($k*4*z+$phi)+$offset)*sin($angle) \
+        Bz=0 length=$period width=600 height=600
+    place field x=0 y=0 z=$period/6*$i
+enddo
+
+## second period:
+
+#place SolPos z=0+$zshift+6*$period current=-$sol_current
+#place SolNeg z=700+$zshift+6*$period current=$sol_current
+#place SolPos z=1400+$zshift+6*$period current=-$sol_current
+#place SolNeg z=2100+$zshift+6*$period current=$sol_current
+#place SolPos z=2800+$zshift+6*$period current=-$sol_current
+#place SolNeg z=3500+$zshift+6*$period current=$sol_current
+
 #do i 0 6
-#    place field x=0 y=0 z=$period/6*$i
+    #param angle=3*pi/4-pi/4*$i
+    #fieldexpr field Bx=($a*sin($k*z+$phi)+$b*sin($k*2*z+$phi)+$c*sin($k*3*z+$phi)+$d*sin($k*4*z+$phi)+$offset)*cos($angle) \
+    #    By=($a*sin($k*z+$phi)+$b*sin($k*2*z+$phi)+$c*sin($k*3*z+$phi)+$d*sin($k*4*z+$phi)+$offset)*sin($angle) \
+    #    Bz=0 length=300 width=600 height=600
+#    param angle=3*pi/4-($aa/(1+exp(-$bb*(z-$cc))))*pi/4*$i
+#    fieldexpr field Bx=($a*sin($k*z+$phi)+$b*sin($k*2*z+$phi)+$c*sin($k*3*z+$phi)+$d*sin($k*4*z+$phi)+$offset)*cos($angle) \
+#        By=($a*sin($k*z+$phi)+$b*sin($k*2*z+$phi)+$c*sin($k*3*z+$phi)+$d*sin($k*4*z+$phi)+$offset)*sin($angle) \
+#        Bz=0 length=$period width=600 height=600
+#    place field x=0 y=0 z=$period/6*$i+6*$period
 #enddo
 
 ### FIELDMAP ###

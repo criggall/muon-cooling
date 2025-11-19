@@ -2,3 +2,5 @@
 field-studies/map/hfofo-lattice/fieldmap*.txt
 field-studies/map/single-solenoid/fieldmap*.txt
 field-studies/map/analytic/fieldmap*.txt
+
+hfofo-frozen/g4bl-input/zntuple.txt
