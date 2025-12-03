@@ -54,7 +54,7 @@ solenoid SolNeg coilName=coil current=$sol_current color=0,1,0
 
 ### PLACEMENT ###
 
-param num=2
+param num=4
 
 ## With rotations:
 do i -1 $num
