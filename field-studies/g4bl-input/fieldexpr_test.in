@@ -60,35 +60,25 @@ solenoid SolNeg coilName=coil current=$sol_current color=0,1,0
 
 ## Dipole field:
 
-# constant-angle sections:
-do i 0 6
-    param angle=-pi/3*$i+2*pi/3
-    #param angle=1.0139487771549618*$i
-    fieldexpr field Bx=($a*sin($k*z+$phi)+$b*sin($k*2*z+$phi)+$c*sin($k*3*z+$phi)+$d*sin($k*4*z+$phi)+$offset)*cos($angle) \
-        By=($a*sin($k*z+$phi)+$b*sin($k*2*z+$phi)+$c*sin($k*3*z+$phi)+$d*sin($k*4*z+$phi)+$offset)*sin($angle) \
-        Bz=0 length=300 width=600 height=600
-    place field x=0 y=0 z=$period/6*$i
-enddo
-
-# rotating sections:
 do i 0 6
     param shift=$period/6*$i+350
-    param angle=-($aa/(1+exp(-$bb*(z-$cc-350/2))))-pi/3*$i+2*pi/3
-    #param angle=($aa/(1+exp(-$bb*(z-$cc))))+1.0139487771549618*$i
+    param angle=-($aa/(1+exp(-$bb*(z-$cc-350/2))))+pi/2+pi/3*(1-$i)
     fieldexpr field Bx=($a*sin($k*(z+350)+$phi)+$b*sin($k*2*(z+350)+$phi)+$c*sin($k*3*(z+350)+$phi)+$d*sin($k*4*(z+350)+$phi)+$offset)*cos($angle) \
         By=($a*sin($k*(z+350)+$phi)+$b*sin($k*2*(z+350)+$phi)+$c*sin($k*3*(z+350)+$phi)+$d*sin($k*4*(z+350)+$phi)+$offset)*sin($angle) \
-        Bz=0 length=400 width=600 height=600
+        Bz=0 length=700 width=600 height=600
     place field x=0 y=0 z=$period/6*$i+350
 enddo
 
 ## FOFO lattice:
 
-#place SolPos z=0 current=-$sol_current
-#place SolNeg z=700 current=$sol_current
-#place SolPos z=1400 current=-$sol_current
-#place SolNeg z=2100 current=$sol_current
-#place SolPos z=2800 current=-$sol_current
-#place SolNeg z=3500 current=$sol_current
+#do i 0 1
+#    place SolPos z=0+4200*$i current=-$sol_current
+#    place SolNeg z=700+4200*$i current=$sol_current
+#    place SolPos z=1400+4200*$i current=-$sol_current
+#    place SolNeg z=2100+4200*$i current=$sol_current
+#    place SolPos z=2800+4200*$i current=-$sol_current
+#    place SolNeg z=3500+4200*$i current=$sol_current
+#enddo
 
 ### FIELDMAP ###
 
