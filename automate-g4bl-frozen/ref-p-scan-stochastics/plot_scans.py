@@ -8,7 +8,9 @@ import imageio.v2 as imageio
 # Parameter space scanned:
 # ref_p = np.arange(230,250,1)
 # ref_p = np.arange(237,246,0.1)
-ref_p = np.arange(245,246,0.01)
+# ref_p = np.arange(245,246,0.01)
+# ref_p = np.arange(245.50,247.50,0.01)
+ref_p = np.arange(246.38,246.40,0.001)
 
 # Number of steps in scan:
 iterations = len(ref_p)
@@ -18,7 +20,9 @@ iterations = len(ref_p)
 # Define function to plot orbit:
 def plot_orbit(x_vals, y_vals, p_val, dir):
     plt.plot(x_vals,y_vals)
-    plt.title(f'$p$ = {round(p_val,1)} MeV/c')
+    plt.title(f'$p$ = {round(p_val,3)} MeV/c')
+    plt.xlim((-150,150))
+    plt.ylim((-150,150))
     plt.xlabel('$x$ [mm]')
     plt.ylabel('$y$ [mm]')
     plt.savefig(dir+'orbit.png',dpi=300)
@@ -56,6 +60,6 @@ for i in range(iterations):
 
 # Create animations:
 plots = [imageio.imread(img) for img in paths]
-frame_duration = 500 # for coarse scans
-# frame_duration = 100 # for fine scans
+# frame_duration = 500 # for coarse scans
+frame_duration = 100 # for fine scans
 imageio.mimsave('refp_scan.gif', plots, duration=frame_duration, loop=0)

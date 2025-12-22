@@ -38,7 +38,9 @@ file_for_g4bl = '"'+file+'"'
 # Define range for parameters to scan over:
 # ref_p = np.arange(230,250,1)
 # ref_p = np.arange(237,246,0.1)
-ref_p = np.arange(245,246,0.01)
+# ref_p = np.arange(245,246,0.01)
+# ref_p = np.arange(245.50,247.50,0.01)
+ref_p = np.arange(246.38,246.40,0.001)
 
 # Set number of loops based on parameter scan space:
 iterations = len(ref_p)

@@ -101,6 +101,6 @@ include sol_place7_31.txt
 place terminus z=-1000 # to stop reflected particles
 place terminus z=$zlastRF+102
 
-param ref_p=245.12999999999988
+param ref_p=246.39300000000006
 reference referenceMomentum=$ref_p particle=mu+ beamX=0.0 beamY=0.0 beamZ=0.0 beamXp=0.0 beamYp=0.0
 trace nTrace=0 format=ascii oneNTuple=1
