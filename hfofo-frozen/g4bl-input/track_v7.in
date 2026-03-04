@@ -108,5 +108,6 @@ place DetLast z=$zlastRF+100
 place terminus z=-1000 # to stop reflected particles
 place terminus z=$zlastRF+102
 
-#zntuple zloop=4250:8450:10 format=ascii file=zntuple
-zntuple zloop=4700:134250:100 format=for009.dat file=for009
+#zntuple zloop=4250:8450:10 format=ascii file=zntuple_oneperiod
+#zntuple zloop=4700:134250:100 format=for009.dat file=for009
+zntuple zloop=4700:134250:200 format=ascii file=zntuple
