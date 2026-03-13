@@ -11,10 +11,13 @@ param zshift=60
 param period=4200 # HFOFO period
 
 param beamstart=-700 # from the rotator solenoid exit at z=0
-beam ascii file=initial.dat beamZ=$beamstart # user provided file with particle data
+#beam ascii file=initial.dat beamZ=$beamstart # user provided file with particle data
 # beam gaussian particle=mu+ nEvents=100 beamZ=-700.0 \
     sigmaX=10.0 sigmaY=10.0 sigmaXp=0.100 sigmaYp=0.100 \
     meanMomentum=200.0 sigmaP=4.0 meanT=0.0 sigmaT=0.0
+beam gaussian particle=mu+ nEvents=1000 beamZ=-700.0 \
+    sigmaX=0.0 sigmaY=0.0 sigmaP=0.0 sigmaXp=0.0 sigmaYp=0.0 \
+    meanMomentum=247.5 sigmaP=0.0 meanT=0.0 sigmaT=0.0
 
 param beamtime=-0.671 # average time of mu+ in initial.dat modulo RF period TRF
 # if there is no mu+ take mu- and add TRF/2
@@ -110,4 +113,8 @@ place terminus z=$zlastRF+102
 
 #zntuple zloop=4250:8450:10 format=ascii file=zntuple_oneperiod
 #zntuple zloop=4700:134250:100 format=for009.dat file=for009
-zntuple zloop=4700:134250:200 format=ascii file=zntuple
+#zntuple zloop=4700:134250:200 format=ascii file=zntuple
+
+#zntuple zloop=1075:134900:950 format=ascii file=zntuple #start of each RF cavity
+#zntuple zloop=1575:134900:950 format=ascii file=zntuple #end of each RF cavity
+zntuple zloop=1325:134900:950 format=ascii file=zntuple #middle of each RF cavity
