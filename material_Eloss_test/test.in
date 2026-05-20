@@ -1,0 +1,21 @@
+
+
+material GH2 Z=1 A=1.01 density=0.014 # 20% of LH2
+#param worldMaterial=GH2
+param worldMaterial=Vacuum
+
+physics QGSP_BIC 
+
+beam gaussian particle=mu+ nEvents=100 beamZ=0.0 \
+    sigmaX=0.0 sigmaY=0.0 sigmaXp=0.0 sigmaYp=0.0 \
+    meanMomentum=221.8 sigmaP=0.0 meanT=0.0 sigmaT=0.0
+
+reference referenceMomentum=221.8 particle=mu+ beamZ=0.0 noEloss=0
+trace nTrace=1 format=ascii
+
+# LiH wedge absorber
+
+box cube height=200 length=200 width=200 material=LITHIUM_HYDRIDE color=0,0,1 
+
+place cube x=0 y=0 z=500
+place cube x=0 y=0 z=1500

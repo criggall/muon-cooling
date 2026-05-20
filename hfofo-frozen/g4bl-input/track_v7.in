@@ -11,8 +11,8 @@ param zshift=60
 param period=4200 # HFOFO period
 
 param beamstart=-700 # from the rotator solenoid exit at z=0
-beam ascii file=initial.dat beamZ=$beamstart # user provided file with particle data
-# beam gaussian particle=mu+ nEvents=100 beamZ=-700.0 \
+#beam ascii file=initial.dat beamZ=$beamstart # user provided file with particle data
+beam gaussian particle=mu+ nEvents=100 beamZ=-700.0 \
     sigmaX=10.0 sigmaY=10.0 sigmaXp=0.100 sigmaYp=0.100 \
     meanMomentum=200.0 sigmaP=4.0 meanT=0.0 sigmaT=0.0
 #beam gaussian particle=mu+ nEvents=1000 beamZ=-700.0 \
@@ -117,4 +117,21 @@ place terminus z=$zlastRF+102
 
 #zntuple zloop=1075:134900:700 format=ascii file=zntuple #start of each RF cavity
 #zntuple zloop=1575:134900:700 format=ascii file=zntuple #end of each RF cavity
-zntuple zloop=1325:134900:700 format=ascii file=zntuple #middle of each RF cavity
+#zntuple zloop=1325:134900:700 format=ascii file=zntuple #middle of each RF cavity
+
+#zntuple zloop=1075:134900:700 format=ascii file=zntuple_mid1 #corrected middle of first cavity in pair
+#zntuple zloop=1325:134900:700 format=ascii file=zntuple_mid2 #corrected middle of second cavity in pair
+
+
+
+#reference referenceMomentum=247.5 particle=mu+ \
+    beamX=0 beamY=0 beamZ=$beamstart
+#reference referenceMomentum=221.8 particle=mu+ \
+    beamX=0 beamY=0 beamZ=$beamstart
+#trace nTrace=1 format=ascii
+
+#fieldntuple fieldmap format=ascii x=0 y=0 z=825 t=5.4,7.3,0.01
+#fieldntuple fieldmap format=ascii x=0 y=0 z=1075 t=5.4,7.3,0.01
+
+
+tune
