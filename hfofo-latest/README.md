@@ -1,0 +1,1 @@
+Current working lattice design. Changes from original: Operates at constant reference momentum of 200 MeV/c. Optics only for now (until I can solve the RF problem).

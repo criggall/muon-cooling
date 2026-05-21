@@ -18,8 +18,17 @@ param sol_current=-80.46 #amps/mm^2
 # Solenoid pitch:
 param pitch=-0.1432394487827058 #deg
 
+# RF gradient:
+param rf_grad=25 #MV/m
+
+# Pillbox length:
+param rf_len=250 #mm
+
 # Period length:
 param period_len=4200 #mm
+
+# Cell spacing:
+param space=$period_len/6 #mm
 
 # Initial conditions:
 param X=-11.2945 #mm
@@ -37,8 +46,7 @@ meanMomentum=$p sigmaP=10.0 meanT=0.0 sigmaT=0.0
 ### REFERENCE PARTICLE ###
 
 # mu plus:
-#reference referenceMomentum=$p particle=mu+ beamX=0.0 beamY=0.0 beamZ=0.0 beamXp=0.0 beamYp=0.0
-reference referenceMomentum=$p particle=mu+ beamX=$X beamY=$Y beamZ=0.0 beamXp=$Xp beamYp=$Yp
+reference referenceMomentum=$p particle=mu+ beamX=0.0 beamY=0.0 beamZ=0.0 beamXp=0.0 beamYp=0.0
 
 # mu minus:
 param tshift=-1/(325e6)*0.5
@@ -54,25 +62,19 @@ coil coil innerRadius=420 outerRadius=600 length=300 nSheets=10 maxR=360 maxZ=60
 solenoid SolPos coilName=coil current=-$sol_current color=0,1,1
 solenoid SolNeg coilName=coil current=$sol_current color=0,1,0
 
+### RF CAVITIES ###
+
+pillbox RFC innerLength=$rf_len-1 frequency=0.325 maxGradient=$rf_grad \
+    win1Thick=0 win1OuterRadius=0 collarThick=0 collarRadialThick=0 \
+    winMat=Vacuum irisRadius=300 win2Thick=0.12 wallThick=0.4 pipeThick=0.4 cavityMaterial=Vacuum kill=1
+
 ### PLACEMENT ###
 
-# 30 HFOFO periods + 1 at start + 1 at end for edge field effects
+# 2 HFOFO period + 1 at start + 1 at end for edge field effects
 
-param num_periods=30
-
-virtualdetector det file=det format=ascii radius=360 color=0,1,0 length=0.001 material=Vacuum
+param num_periods=2
 
 do i -1 $num_periods
-
-    #virtualdetector det$i file=det$i format=ascii radius=360 color=0,1,0 length=0.001 material=Vacuum
-    #place det$i z=500+$period_len*$i
-    place det z=500+$period_len*$i
-    if $i<$num_periods
-        do j 1 11
-            #place det$i z=500+$period_len*$i+$j*$period_len/12
-            place det z=500+$period_len*$i+$j*$period_len/12
-        enddo
-    endif
 
     place SolPos z=500+$period_len*$i current=-$sol_current rotation=X$pitch,Z240
     place SolNeg z=1200+$period_len*$i current=$sol_current rotation=X$pitch
@@ -80,5 +82,27 @@ do i -1 $num_periods
     place SolNeg z=2600+$period_len*$i current=$sol_current rotation=X$pitch,Z240
     place SolPos z=3300+$period_len*$i current=-$sol_current rotation=X$pitch
     place SolNeg z=4000+$period_len*$i current=$sol_current rotation=X$pitch,Z120
+
+    if $i<$num_periods
+        if $i>-1
+            place RFC z=500-$rf_len/2+$space*0+$period_len*$i phaseAcc=0
+            place RFC z=500+$rf_len/2+$space*0+$period_len*$i phaseAcc=0
+
+            place RFC z=500-$rf_len/2+$space*1+$period_len*$i phaseAcc=0
+            place RFC z=500+$rf_len/2+$space*1+$period_len*$i phaseAcc=0
+
+            place RFC z=500-$rf_len/2+$space*2+$period_len*$i phaseAcc=0
+            place RFC z=500+$rf_len/2+$space*2+$period_len*$i phaseAcc=0
+
+            place RFC z=500-$rf_len/2+$space*3+$period_len*$i phaseAcc=0
+            place RFC z=500+$rf_len/2+$space*3+$period_len*$i phaseAcc=0
+
+            place RFC z=500-$rf_len/2+$space*4+$period_len*$i phaseAcc=0
+            place RFC z=500+$rf_len/2+$space*4+$period_len*$i phaseAcc=0
+
+            place RFC z=500-$rf_len/2+$space*5+$period_len*$i phaseAcc=0
+            place RFC z=500+$rf_len/2+$space*5+$period_len*$i phaseAcc=0
+        endif
+    endif
 
 enddo

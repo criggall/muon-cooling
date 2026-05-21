@@ -1,0 +1,1 @@
+Some experiments to determine how G4beamline handles energy loss in materials (especially comparing stochastics to no-stochastics simulations) and how well that agrees with theory prediction.

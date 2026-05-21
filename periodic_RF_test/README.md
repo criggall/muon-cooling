@@ -1,0 +1,1 @@
+A workshop for testing single period RF designs until I can replicate the correct reference particle orbit. Using the lattice parameters (solenoid currents, etc.) from the constant-momentum (200 MeV/c) design found in the hfofo-latest directory. Note that the current lattice file has no materials (world, absorbers, cavity windows, etc.) and no stochastic effects.
