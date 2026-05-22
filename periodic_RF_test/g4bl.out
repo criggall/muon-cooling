@@ -1,19 +1,11 @@
 G4BL_DIR=/Applications/G4beamline-3.08.app/Contents
 LD_LIBRARY_PATH='/Applications/G4beamline-3.08.app/Contents/lib:'
-G4ABLADATA=/Users/criggall/Geant4Data/G4ABLA3.1
 G4LEDATA=/Users/criggall/Geant4Data/G4EMLOW8.0
 G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
-G4INCLDATA=/Users/criggall/Geant4Data/G4INCL1.0
-G4NEUTRONHPDATA=/Users/criggall/Geant4Data/G4NDL4.6
 G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
-G4PIIDATA=/Users/criggall/Geant4Data/G4PII1.3
 G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
-G4REALSURFACEDATA=/Users/criggall/Geant4Data/RealSurface2.2
-G4SAIDXSDATA=/Users/criggall/Geant4Data/G4SAIDDATA2.0
-G4TENDLDATA=/Users/criggall/Geant4Data/G4TENDL1.4
-G4LENDDATA=/Users/criggall/Geant4Data/LEND_GND1.3_ENDF.BVII.1
-G4beamline Process ID 7349
+G4beamline Process ID 40763
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -48,10 +40,12 @@ physics      QGSP_BIC      disable= inactivate= deactivate= doStochastics=0
 param        m             105.7
 param        c             2.997925e+08
 param        p             200
-param        v             2.6505285e+08
+param        v             0.88412103
 param        sol_current   -80.46
 param        pitch         -0.14323945
 param        rf_grad       25
+param        rf_freq       325
+param        rf_period     3.0769231
 param        rf_len        250
 param        period_len    4200
 param        space         700
@@ -61,11 +55,15 @@ param        Xp            0.0036587524
 param        Yp            -0.0056541256
 beam    GAUSSIAN particle=mu+ nEvents=100 firstEvent=-1 lastEvent=2147483647 beamX=-11.3 beamY=14.1 beamZ=0.0 maxR=1000000.0 
 		meanMomentum=200.0 weight=1.000000 
-		sigmaX=10.0 sigmaY=10.0 sigmaZ=0.0 sigmaXp=0.10000 sigmaYp=0.10000 
-		sigmaP=10.0 sigmaT=0.000 meanXp=0.00366 meanYp=-0.00565 meanT=0.000 
-reference                  particle=mu+ beamX=0 beamY=0 beamZ=0 beamT=0
-                           rotation= referenceMomentum=200 beamXp=0 beamYp=0
-                           meanMomentum=200 meanXp=0 meanYp=0 tuneZ=-3.7e+21
+		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00000 sigmaYp=0.00000 
+		sigmaP=0.0 sigmaT=0.010 meanXp=0.00366 meanYp=-0.00565 meanT=0.000 
+zntuple                    z= zloop=0:4200*2:100 noSingles=0 format=ascii
+                           file=zntuple filename=zntuple require=
+                           referenceParticle=0 coordinates=Centerline
+reference                  particle=mu+ beamX=-11.29 beamY=14.09 beamZ=0
+                           beamT=0 rotation= referenceMomentum=200
+                           beamXp=0.003659 beamYp=-0.005654 meanMomentum=200
+                           meanXp=0.003659 meanYp=-0.005654 tuneZ=-3.7e+21
                            tuneMomentum=-3.7e+21 tolerance=0.001 noEfield=0
                            noBfield=0 noEloss=0 P=200
 param        tshift        -1.5384615e-09
@@ -77,9 +75,7 @@ coil    coil    innerRadius=420.0 outerRadius=600.0 length=300.0 material=Cu
 		tolerance=0.003 nSheets=10 
 		maxR=360.0 maxZ=6000.0 dR=15.0 dZ=15.0 filename=coil.dat 
 coilmap coil    tolerance=0.00300 [fraction of Bz(r=0,z=0)]
-coilmap coil    nR=26 nZ=402 dR=15.0 dZ=15.0 error=0.001255
-coilmap coil     DONE 0 seconds
-coilmap coil    wrote file 'coil.dat'   83696 bytes
+coilmap coil    read file 'coil.dat'  dR=15.0 dZ=15.0
 solenoid     SolPos        coilName=coil current=80.46 color=0,1,1 alternate=0
                            kill=0 coil=coil
 solenoid     SolNeg        coilName=coil current=-80.46 color=0,1,0
@@ -222,14 +218,16 @@ deltaIntersection=0.1
               p=200
      period_len=4200
           pitch=-0.14323945
+        rf_freq=325
         rf_grad=25
          rf_len=250
+      rf_period=3.0769231
     sol_current=-80.46
           space=700
  steppingFormat=N GLOBAL CL KE STEP VOL PROCESS
 steppingVerbose=0
          tshift=-1.5384615e-09
-              v=2.6505285e+08
+              v=0.88412103
          viewer=none
  wallClockLimit=-1
   worldMaterial=Vacuum
@@ -538,40 +536,40 @@ Total geometry errors = 0  0 seconds
 *** description: May give inaccurate tracking near world boundary.
 ***     EventID: -2     TrackID: 1   mu+  KE=120.5 MeV
 **************************************************************************
-fieldVoxels: nx=6 ny=5 nz=113, 3390 voxels, 48 fields
-fieldVoxels: max field count is 19 fields, # voxels >5: 2880, >10: 2130, >20: 0
+fieldVoxels: nx=6 ny=6 nz=113, 4068 voxels, 48 fields
+fieldVoxels: max field count is 19 fields, # voxels >5: 3456, >10: 2556, >20: 0
 **************************************************************************
 *** G4Exception: Check number of field voxels
 ***    severity: Warning
 ***   issued by: BLGlobalField
-*** description: nVoxels = 3390, max fields/voxel = 19
+*** description: nVoxels = 4068, max fields/voxel = 19
 ***     EventID: -2     TrackID: 1   mu+  KE=120.5 MeV
 **************************************************************************
-pillbox RFC: Time OK  timeOffset=2.1845 ns, incremented to 2.1845 ns
-pillbox RFC: Time OK  timeOffset=3.1287 ns, incremented to 3.1287 ns
-pillbox RFC: Time OK  timeOffset=4.8274 ns, incremented to 4.8274 ns
-pillbox RFC: Time OK  timeOffset=5.7717 ns, incremented to 5.7717 ns
-pillbox RFC: Time OK  timeOffset=7.4706 ns, incremented to 7.4706 ns
-pillbox RFC: Time OK  timeOffset=8.4152 ns, incremented to 8.4152 ns
-pillbox RFC: Time OK  timeOffset=10.1142 ns, incremented to 10.1142 ns
-pillbox RFC: Time OK  timeOffset=11.0585 ns, incremented to 11.0585 ns
-pillbox RFC: Time OK  timeOffset=12.7576 ns, incremented to 12.7576 ns
-pillbox RFC: Time OK  timeOffset=13.7031 ns, incremented to 13.7031 ns
-pillbox RFC: Time OK  timeOffset=15.4025 ns, incremented to 15.4025 ns
-pillbox RFC: Time OK  timeOffset=16.3467 ns, incremented to 16.3467 ns
-pillbox RFC: Time OK  timeOffset=18.0465 ns, incremented to 18.0465 ns
-pillbox RFC: Time OK  timeOffset=18.9931 ns, incremented to 18.9931 ns
-pillbox RFC: Time OK  timeOffset=20.6929 ns, incremented to 20.6929 ns
-pillbox RFC: Time OK  timeOffset=21.6372 ns, incremented to 21.6372 ns
-pillbox RFC: Time OK  timeOffset=23.3375 ns, incremented to 23.3375 ns
-pillbox RFC: Time OK  timeOffset=24.2851 ns, incremented to 24.2851 ns
-pillbox RFC: Time OK  timeOffset=25.9855 ns, incremented to 25.9855 ns
-pillbox RFC: Time OK  timeOffset=26.9301 ns, incremented to 26.9301 ns
-pillbox RFC: Time OK  timeOffset=28.6308 ns, incremented to 28.6308 ns
-pillbox RFC: Time OK  timeOffset=29.5792 ns, incremented to 29.5792 ns
-pillbox RFC: Time OK  timeOffset=31.2802 ns, incremented to 31.2802 ns
-pillbox RFC: Time OK  timeOffset=32.2247 ns, incremented to 32.2247 ns
-Run complete  1 Events  1 seconds
+pillbox RFC: Time OK  timeOffset=2.1856 ns, incremented to 2.1856 ns
+pillbox RFC: Time OK  timeOffset=3.1322 ns, incremented to 3.1322 ns
+pillbox RFC: Time OK  timeOffset=4.8320 ns, incremented to 4.8320 ns
+pillbox RFC: Time OK  timeOffset=5.7764 ns, incremented to 5.7764 ns
+pillbox RFC: Time OK  timeOffset=7.4761 ns, incremented to 7.4761 ns
+pillbox RFC: Time OK  timeOffset=8.4226 ns, incremented to 8.4226 ns
+pillbox RFC: Time OK  timeOffset=10.1223 ns, incremented to 10.1223 ns
+pillbox RFC: Time OK  timeOffset=11.0666 ns, incremented to 11.0666 ns
+pillbox RFC: Time OK  timeOffset=12.7662 ns, incremented to 12.7662 ns
+pillbox RFC: Time OK  timeOffset=13.7123 ns, incremented to 13.7123 ns
+pillbox RFC: Time OK  timeOffset=15.4118 ns, incremented to 15.4118 ns
+pillbox RFC: Time OK  timeOffset=16.3561 ns, incremented to 16.3561 ns
+pillbox RFC: Time OK  timeOffset=18.0555 ns, incremented to 18.0555 ns
+pillbox RFC: Time OK  timeOffset=19.0012 ns, incremented to 19.0012 ns
+pillbox RFC: Time OK  timeOffset=20.7005 ns, incremented to 20.7005 ns
+pillbox RFC: Time OK  timeOffset=21.6447 ns, incremented to 21.6447 ns
+pillbox RFC: Time OK  timeOffset=23.3439 ns, incremented to 23.3439 ns
+pillbox RFC: Time OK  timeOffset=24.2891 ns, incremented to 24.2891 ns
+pillbox RFC: Time OK  timeOffset=25.9882 ns, incremented to 25.9882 ns
+pillbox RFC: Time OK  timeOffset=26.9324 ns, incremented to 26.9324 ns
+pillbox RFC: Time OK  timeOffset=28.6314 ns, incremented to 28.6314 ns
+pillbox RFC: Time OK  timeOffset=29.5763 ns, incremented to 29.5763 ns
+pillbox RFC: Time OK  timeOffset=31.2752 ns, incremented to 31.2752 ns
+pillbox RFC: Time OK  timeOffset=32.2194 ns, incremented to 32.2194 ns
+Run complete  1 Events  0 seconds
 ================== Begin Reference Particle(s) ===============
 Run complete  1 Events  0 seconds
 ================== Prepare Tracking Beam ==================
@@ -599,9 +597,94 @@ Event 60 Completed  60 events  realTime=1 sec  60.0 ev/sec
 Event 70 Completed  70 events  realTime=1 sec  70.0 ev/sec
 Event 80 Completed  80 events  realTime=1 sec  80.0 ev/sec
 Event 90 Completed  90 events  realTime=1 sec  90.0 ev/sec
-Event 100 Completed  100 events  realTime=2 sec  50.0 ev/sec
-Run complete  100 Events  2 seconds
-NTuple AllTracks            600 entries
+Event 100 Completed  100 events  realTime=1 sec  100.0 ev/sec
+Run complete  100 Events  1 seconds
+NTuple Z0                   100 entries
+NTuple Z100                 100 entries
+NTuple Z200                 100 entries
+NTuple Z300                 100 entries
+NTuple Z400                 100 entries
+NTuple Z500                 100 entries
+NTuple Z600                 100 entries
+NTuple Z700                 100 entries
+NTuple Z800                 100 entries
+NTuple Z900                 100 entries
+NTuple Z1000                100 entries
+NTuple Z1100                100 entries
+NTuple Z1200                100 entries
+NTuple Z1300                100 entries
+NTuple Z1400                100 entries
+NTuple Z1500                100 entries
+NTuple Z1600                100 entries
+NTuple Z1700                100 entries
+NTuple Z1800                100 entries
+NTuple Z1900                100 entries
+NTuple Z2000                100 entries
+NTuple Z2100                100 entries
+NTuple Z2200                100 entries
+NTuple Z2300                100 entries
+NTuple Z2400                100 entries
+NTuple Z2500                100 entries
+NTuple Z2600                100 entries
+NTuple Z2700                100 entries
+NTuple Z2800                100 entries
+NTuple Z2900                100 entries
+NTuple Z3000                100 entries
+NTuple Z3100                100 entries
+NTuple Z3200                100 entries
+NTuple Z3300                100 entries
+NTuple Z3400                100 entries
+NTuple Z3500                100 entries
+NTuple Z3600                100 entries
+NTuple Z3700                100 entries
+NTuple Z3800                100 entries
+NTuple Z3900                100 entries
+NTuple Z4000                100 entries
+NTuple Z4100                100 entries
+NTuple Z4200                100 entries
+NTuple Z4300                100 entries
+NTuple Z4400                100 entries
+NTuple Z4500                100 entries
+NTuple Z4600                100 entries
+NTuple Z4700                100 entries
+NTuple Z4800                100 entries
+NTuple Z4900                100 entries
+NTuple Z5000                100 entries
+NTuple Z5100                100 entries
+NTuple Z5200                100 entries
+NTuple Z5300                100 entries
+NTuple Z5400                100 entries
+NTuple Z5500                100 entries
+NTuple Z5600                100 entries
+NTuple Z5700                100 entries
+NTuple Z5800                100 entries
+NTuple Z5900                100 entries
+NTuple Z6000                100 entries
+NTuple Z6100                100 entries
+NTuple Z6200                100 entries
+NTuple Z6300                100 entries
+NTuple Z6400                100 entries
+NTuple Z6500                100 entries
+NTuple Z6600                100 entries
+NTuple Z6700                100 entries
+NTuple Z6800                100 entries
+NTuple Z6900                100 entries
+NTuple Z7000                100 entries
+NTuple Z7100                100 entries
+NTuple Z7200                100 entries
+NTuple Z7300                100 entries
+NTuple Z7400                100 entries
+NTuple Z7500                100 entries
+NTuple Z7600                100 entries
+NTuple Z7700                100 entries
+NTuple Z7800                100 entries
+NTuple Z7900                100 entries
+NTuple Z8000                100 entries
+NTuple Z8100                100 entries
+NTuple Z8200                100 entries
+NTuple Z8300                100 entries
+NTuple Z8400                100 entries
+NTuple AllTracks            608 entries
 
 Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 3 Warnings
       1 times: All stochastic processes disabled

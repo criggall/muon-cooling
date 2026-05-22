@@ -10,7 +10,7 @@ param c=2.997925*10^8 #m/s
 
 # Reference particle:
 param p=200 #MeV/c
-param v=$p*$c/sqrt($p^2+$m^2)
+param v=$p/sqrt($p^2+$m^2)
 
 # Solenoid current:
 param sol_current=-80.46 #amps/mm^2
@@ -20,6 +20,10 @@ param pitch=-0.1432394487827058 #deg
 
 # RF gradient:
 param rf_grad=25 #MV/m
+
+# RF frequency:
+param rf_freq=325 #MHz
+param rf_period=(1/$rf_freq)*10^3 #ns
 
 # Pillbox length:
 param rf_len=250 #mm
@@ -40,13 +44,15 @@ param Yp=-1.27215/224.995 #radians
 
 beam gaussian particle=mu+ nEvents=100 \
 beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
-sigmaX=10.0 sigmaY=10.0 sigmaXp=0.1 sigmaYp=0.1 \ 
-meanMomentum=$p sigmaP=10.0 meanT=0.0 sigmaT=0.0
+sigmaX=0.0 sigmaY=0.0 sigmaXp=0.0 sigmaYp=0.0 \ 
+meanMomentum=$p sigmaP=0.0 meanT=0.0 sigmaT=0.01
+
+zntuple zloop=0:$period_len*2:100 format=ascii file=zntuple
 
 ### REFERENCE PARTICLE ###
 
 # mu plus:
-reference referenceMomentum=$p particle=mu+ beamX=0.0 beamY=0.0 beamZ=0.0 beamXp=0.0 beamYp=0.0
+reference referenceMomentum=$p particle=mu+ beamX=$X beamY=$Y beamZ=0.0 beamXp=$Xp beamYp=$Yp
 
 # mu minus:
 param tshift=-1/(325e6)*0.5
@@ -104,5 +110,6 @@ do i -1 $num_periods
             place RFC z=500+$rf_len/2+$space*5+$period_len*$i phaseAcc=0
         endif
     endif
+
 
 enddo
