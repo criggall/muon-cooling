@@ -19,7 +19,8 @@ param sol_current=-80.46 #amps/mm^2
 param pitch=-0.1432394487827058 #deg
 
 # RF gradient:
-param rf_grad=25 #MV/m
+#param rf_grad=25 #MV/m
+param rf_grad=12.5 #MV/m
 
 # RF frequency:
 param rf_freq=325 #MHz
@@ -35,24 +36,30 @@ param period_len=4200 #mm
 param space=$period_len/6 #mm
 
 # Initial conditions:
-param X=-11.2945 #mm
-param Y=14.0917 #mm
-param Xp=0.823201/224.995 #radians
-param Yp=-1.27215/224.995 #radians
+#param X=-11.2945 #mm
+#param Y=14.0917 #mm
+#param Xp=0.823201/224.995 #radians
+#param Yp=-1.27215/224.995 #radians
 
 ### BEAM ###
 
-beam gaussian particle=mu+ nEvents=100 \
-beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
-sigmaX=0.0 sigmaY=0.0 sigmaXp=0.0 sigmaYp=0.0 \ 
-meanMomentum=$p sigmaP=0.0 meanT=0.0 sigmaT=0.01
+param X=-11.3477
+param Y=13.9798
+param Xp=-0.00123932
+param Yp=-0.00637463
 
-zntuple zloop=0:$period_len*2:100 format=ascii file=zntuple
+beam gaussian particle=mu+ nEvents=10000 \
+beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+sigmaX=0.05 sigmaY=0.05 sigmaXp=0.005 sigmaYp=0.005 \ 
+meanMomentum=$p sigmaP=0.0 meanT=0.0 sigmaT=0.0
+
+#zntuple zloop=0:$period_len*2:100 format=ascii file=zntuple
+zntuple zloop=0:$period_len*30:100 format=ascii file=zntuple
 
 ### REFERENCE PARTICLE ###
 
 # mu plus:
-reference referenceMomentum=$p particle=mu+ beamX=$X beamY=$Y beamZ=0.0 beamXp=$Xp beamYp=$Yp
+reference referenceMomentum=$p particle=mu+ beamX=$X beamY=$Y beamZ=0.0 beamXp=$Xp beamYp=$Yp beamT=0.0
 
 # mu minus:
 param tshift=-1/(325e6)*0.5
@@ -76,9 +83,9 @@ pillbox RFC innerLength=$rf_len-1 frequency=0.325 maxGradient=$rf_grad \
 
 ### PLACEMENT ###
 
-# 2 HFOFO period + 1 at start + 1 at end for edge field effects
+# 2 HFOFO periods + 1 at start + 1 at end for edge field effects
 
-param num_periods=2
+param num_periods=30
 
 do i -1 $num_periods
 

@@ -1,4 +1,5 @@
 .DS_Store
+
 field-studies/map/hfofo-lattice/fieldmap*.txt
 field-studies/map/single-solenoid/fieldmap*.txt
 field-studies/map/analytic/fieldmap*.txt
@@ -7,3 +8,5 @@ hfofo-frozen/g4bl-output/zntuple*.txt
 hfofo-frozen/g4bl-output/for009.dat
 
 field-studies/map/test_act_res.gif
+
+periodic_RF_test/zntuple*.txt
