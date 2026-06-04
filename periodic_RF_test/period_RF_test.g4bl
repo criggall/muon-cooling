@@ -20,7 +20,7 @@ param pitch=-0.1432394487827058 #deg
 
 # RF gradient:
 #param rf_grad=25 #MV/m
-param rf_grad=12.5 #MV/m
+param rf_grad=1.25 #MV/m
 
 # RF frequency:
 param rf_freq=325 #MHz
@@ -36,22 +36,23 @@ param period_len=4200 #mm
 param space=$period_len/6 #mm
 
 # Initial conditions:
+# for gradient of 0
 #param X=-11.2945 #mm
 #param Y=14.0917 #mm
 #param Xp=0.823201/224.995 #radians
 #param Yp=-1.27215/224.995 #radians
+# for gradient of 1.25 MV/m
+param X=-11.3606 #mm
+param Y=14.0513 #mm
+param Xp=0.00361177 #radians
+param Yp=-0.00623106 #radians
 
 ### BEAM ###
 
-param X=-11.3477
-param Y=13.9798
-param Xp=-0.00123932
-param Yp=-0.00637463
-
-beam gaussian particle=mu+ nEvents=10000 \
+beam gaussian particle=mu+ nEvents=5000 \
 beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
-sigmaX=0.05 sigmaY=0.05 sigmaXp=0.005 sigmaYp=0.005 \ 
-meanMomentum=$p sigmaP=0.0 meanT=0.0 sigmaT=0.0
+sigmaX=100.0 sigmaY=100.0 sigmaXp=0.1 sigmaYp=0.1 \ 
+meanMomentum=$p sigmaP=100.0 meanT=0.0 sigmaT=0.0
 
 #zntuple zloop=0:$period_len*2:100 format=ascii file=zntuple
 zntuple zloop=0:$period_len*30:100 format=ascii file=zntuple
