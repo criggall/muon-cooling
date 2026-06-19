@@ -29,10 +29,15 @@ param Yp=-1.27215/224.995 #radians
 
 ### BEAM ###
 
-beam gaussian particle=mu+ nEvents=100 \
+#beam gaussian particle=mu+ nEvents=100 \
+#beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+#sigmaX=10.0 sigmaY=10.0 sigmaXp=0.1 sigmaYp=0.1 \ 
+#meanMomentum=$p sigmaP=10.0 meanT=0.0 sigmaT=0.0
+
+beam gaussian particle=mu+ nEvents=10 \
 beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
-sigmaX=10.0 sigmaY=10.0 sigmaXp=0.1 sigmaYp=0.1 \ 
-meanMomentum=$p sigmaP=10.0 meanT=0.0 sigmaT=0.0
+sigmaX=10.0 sigmaY=10.0 sigmaZ=100.0 sigmaXp=0.0 sigmaYp=0.0 \ 
+meanMomentum=$p sigmaP=0.0 meanT=0.0 sigmaT=0.0
 
 ### REFERENCE PARTICLE ###
 
@@ -45,7 +50,8 @@ param tshift=-1/(325e6)*0.5
 param zshift=$period_len*0.5
 #reference referenceMomentum=$p particle=mu- beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp beamZ=$zshift
 
-trace nTrace=0 format=ascii oneNTuple=1
+#trace nTrace=0 format=ascii oneNTuple=1
+trace nTrace=10 format=ascii oneNTuple=1
 
 ### SOLENOIDS ###
 

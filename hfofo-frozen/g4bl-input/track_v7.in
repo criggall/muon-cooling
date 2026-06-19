@@ -5,20 +5,21 @@ param worldMaterial=GH2
 
 param pi=3.1415926
 
-physics QGSP_BIC 
+physics QGSP_BIC
 
 param zshift=60
 param period=4200 # HFOFO period
 
 param beamstart=-700 # from the rotator solenoid exit at z=0
 #beam ascii file=initial.dat beamZ=$beamstart # user provided file with particle data
-beam gaussian particle=mu+ nEvents=100 beamZ=-700.0 \
-    sigmaX=10.0 sigmaY=10.0 sigmaXp=0.100 sigmaYp=0.100 \
-    meanMomentum=200.0 sigmaP=4.0 meanT=0.0 sigmaT=0.0
 #beam gaussian particle=mu+ nEvents=1000 beamZ=-700.0 \
     sigmaX=0.0 sigmaY=0.0 sigmaP=0.0 sigmaXp=0.0 sigmaYp=0.0 \
     meanMomentum=247.5 sigmaP=0.0 meanT=0.0 sigmaT=0.0
+beam gaussian particle=mu+ nEvents=100 beamZ=$beamstart \
+    sigmaX=80.0 sigmaY=80.0 sigmaXp=0.1 sigmaYp=0.1 \
+    meanMomentum=247.5 sigmaP=100.0 meanT=0.0 sigmaT=0.0
 
+param TRF=1/325*10^3
 param beamtime=-0.671 # average time of mu+ in initial.dat modulo RF period TRF
 # if there is no mu+ take mu- and add TRF/2
 
@@ -111,6 +112,9 @@ place DetLast z=$zlastRF+100
 place terminus z=-1000 # to stop reflected particles
 place terminus z=$zlastRF+102
 
+
+### Data read-out
+
 #zntuple zloop=4250:8450:10 format=ascii file=zntuple_oneperiod
 #zntuple zloop=4700:134250:100 format=for009.dat file=for009
 #zntuple zloop=4700:134250:200 format=ascii file=zntuple
@@ -123,10 +127,7 @@ place terminus z=$zlastRF+102
 #zntuple zloop=1325:134900:700 format=ascii file=zntuple_mid2 #corrected middle of second cavity in pair
 
 
-
 #reference referenceMomentum=247.5 particle=mu+ \
-    beamX=0 beamY=0 beamZ=$beamstart
-#reference referenceMomentum=221.8 particle=mu+ \
     beamX=0 beamY=0 beamZ=$beamstart
 #trace nTrace=1 format=ascii
 
@@ -134,4 +135,4 @@ place terminus z=$zlastRF+102
 #fieldntuple fieldmap format=ascii x=0 y=0 z=1075 t=5.4,7.3,0.01
 
 
-tune
+zntuple zloop=-700:125985:700 format=ascii file=mu_plus_beam
