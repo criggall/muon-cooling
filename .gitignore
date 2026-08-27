@@ -6,6 +6,7 @@ field-studies/map/analytic/fieldmap*.txt
 
 hfofo-frozen/g4bl-output/zntuple*.txt
 hfofo-frozen/g4bl-output/for009.dat
+hfofo-frozen/g4bl-output/for_fieldmap*.txt
 
 field-studies/map/test_act_res.gif
 

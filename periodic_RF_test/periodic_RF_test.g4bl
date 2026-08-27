@@ -1,0 +1,156 @@
+### GAS ###
+
+#material GH2 Z=1 A=1.01 density=0.014 # 20% of LH2
+#param worldMaterial=GH2
+
+### PHYSICS ###
+
+physics QGSP_BIC doStochastics=0
+
+### PARAMETERS ###
+
+# Step size:
+param maxStep=1
+
+# Constants:
+param m=105.7 #MeV
+param c=2.997925*10^8 #m/s
+
+# Reference particle:
+param p=200 #MeV/c
+param v=$p/sqrt($p^2+$m^2)
+
+# Solenoid current:
+param sol_current=-80.46 #amps/mm^2
+
+# Solenoid pitch:
+param pitch=-0.1432394487827058 #deg
+
+# RF gradient:
+param rf_grad=25 #MV/m
+
+# RF frequency:
+param rf_freq=325 #MHz
+param rf_period=(1/$rf_freq)*10^3 #ns
+
+# Pillbox length:
+param rf_len=250 #mm
+
+# Period length:
+param period_len=4200 #mm
+
+# Cell spacing:
+param space=$period_len/6 #mm
+
+# Initial conditions:
+# for gradient of 0
+#param X=-11.2945 #mm
+#param Y=14.0917 #mm
+#param Xp=0.823201/224.995 #radians
+#param Yp=-1.27215/224.995 #radians
+# for full gradient (iterating to find solution)
+#param X=-11.3606 #mm
+#param Y=14.0513 #mm
+#param Xp=0.00361177 #radians
+#param Yp=-0.00623106 #radians
+param X=6.534625
+param Y=11.5409
+param Xp=0.04697778559507758
+param Yp=-0.02656280878310617
+
+# Slab absorber thickness:
+param absth=10 #mm
+
+### BEAM ###
+
+# pencil beam:
+beam gaussian particle=mu+ nEvents=10 \
+beamZ=500.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+sigmaX=0.0 sigmaY=0.0 sigmaXp=0.0 sigmaYp=0.0 \ 
+meanMomentum=$p sigmaP=0.0
+
+# distribution:
+#beam gaussian particle=mu+ nEvents=1000 \
+#beamZ=500.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+#sigmaX=10.0 sigmaY=10.0 sigmaXp=0.1 sigmaYp=0.1 \ 
+#meanMomentum=$p sigmaP=10.0
+
+zntuple zloop=500:$period_len*30+500:100 format=ascii file=zntuple referenceParticle=1
+
+### REFERENCE PARTICLE ###
+
+reference referenceMomentum=$p particle=mu+ beamX=$X beamY=$Y beamZ=500.0 beamXp=$Xp beamYp=$Yp
+
+trace nTrace=0 format=ascii oneNTuple=1
+
+### SOLENOIDS ###
+
+coil coil innerRadius=420 outerRadius=600 length=300 nSheets=10 maxR=360 maxZ=6000 dR=15 dZ=15 tolerance=0.003 
+
+solenoid SolPos coilName=coil current=-$sol_current color=0,1,1
+solenoid SolNeg coilName=coil current=$sol_current color=0,1,0
+
+### RF CAVITIES ###
+
+pillbox RFC innerLength=$rf_len-1 frequency=0.325 maxGradient=$rf_grad \
+    win1Thick=0 win1OuterRadius=0 collarThick=0 collarRadialThick=0 \
+    winMat=Vacuum irisRadius=300 win2Thick=0.12 wallThick=0.4 pipeThick=0.4 cavityMaterial=Vacuum kill=1
+
+### ABSORBER (SLAB FOR TESTING) ###
+
+box abs height=700 length=$absth width=700 material=LITHIUM_HYDRIDE color=0,0,1
+
+### PLACEMENT ###
+
+# 2 HFOFO periods + 1 at start + 1 at end for edge field effects
+
+param num_periods=30
+
+param phase1=9.3
+param phase2=9.278
+
+do i -1 $num_periods
+
+    place SolPos z=500+$period_len*$i current=-$sol_current rotation=X$pitch,Z240
+    place SolNeg z=1200+$period_len*$i current=$sol_current rotation=X$pitch
+    place SolPos z=1900+$period_len*$i current=-$sol_current rotation=X$pitch,Z120
+    place SolNeg z=2600+$period_len*$i current=$sol_current rotation=X$pitch,Z240
+    place SolPos z=3300+$period_len*$i current=-$sol_current rotation=X$pitch
+    place SolNeg z=4000+$period_len*$i current=$sol_current rotation=X$pitch,Z120
+
+    if $i<$num_periods
+        if $i>-1
+            place RFC z=500-$rf_len/2+$space*0+$period_len*$i phaseAcc=$phase1
+            place RFC z=500+$rf_len/2+$space*0+$period_len*$i phaseAcc=$phase2
+
+            place abs z=500+$rf_len/2+$space*0+$period_len*$i+($space-$rf_len)/2
+
+            place RFC z=500-$rf_len/2+$space*1+$period_len*$i phaseAcc=$phase1
+            place RFC z=500+$rf_len/2+$space*1+$period_len*$i phaseAcc=$phase2
+
+            place abs z=500+$rf_len/2+$space*1+$period_len*$i+($space-$rf_len)/2
+
+            place RFC z=500-$rf_len/2+$space*2+$period_len*$i phaseAcc=$phase1
+            place RFC z=500+$rf_len/2+$space*2+$period_len*$i phaseAcc=$phase2
+
+            place abs z=500+$rf_len/2+$space*2+$period_len*$i+($space-$rf_len)/2
+
+            place RFC z=500-$rf_len/2+$space*3+$period_len*$i phaseAcc=$phase1
+            place RFC z=500+$rf_len/2+$space*3+$period_len*$i phaseAcc=$phase2
+
+            place abs z=500+$rf_len/2+$space*3+$period_len*$i+($space-$rf_len)/2
+
+            place RFC z=500-$rf_len/2+$space*4+$period_len*$i phaseAcc=$phase1
+            place RFC z=500+$rf_len/2+$space*4+$period_len*$i phaseAcc=$phase2
+            
+            place abs z=500+$rf_len/2+$space*4+$period_len*$i+($space-$rf_len)/2
+
+            place RFC z=500-$rf_len/2+$space*5+$period_len*$i phaseAcc=$phase1
+            place RFC z=500+$rf_len/2+$space*5+$period_len*$i phaseAcc=$phase2
+
+            place abs z=500+$rf_len/2+$space*5+$period_len*$i+($space-$rf_len)/2
+        endif
+    endif
+
+
+enddo

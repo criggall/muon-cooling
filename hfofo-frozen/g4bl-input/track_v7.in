@@ -11,11 +11,11 @@ param zshift=60
 param period=4200 # HFOFO period
 
 param beamstart=-700 # from the rotator solenoid exit at z=0
-#beam ascii file=initial.dat beamZ=$beamstart # user provided file with particle data
+beam ascii file=initial.dat beamZ=$beamstart # user provided file with particle data
 #beam gaussian particle=mu+ nEvents=1000 beamZ=-700.0 \
     sigmaX=0.0 sigmaY=0.0 sigmaP=0.0 sigmaXp=0.0 sigmaYp=0.0 \
     meanMomentum=247.5 sigmaP=0.0 meanT=0.0 sigmaT=0.0
-beam gaussian particle=mu+ nEvents=100 beamZ=$beamstart \
+#beam gaussian particle=mu+ nEvents=100 beamZ=$beamstart \
     sigmaX=80.0 sigmaY=80.0 sigmaXp=0.1 sigmaYp=0.1 \
     meanMomentum=247.5 sigmaP=100.0 meanT=0.0 sigmaT=0.0
 
@@ -39,8 +39,8 @@ param maxStep=10.0 steppingVerbose=0 nTrace=0
 
 ### detector
 
-include detectors.txt
-virtualdetector DetLast file=outlast format=ascii radius=300 color=0,1,0 length=0.001 material=Vacuum
+#include detectors.txt
+#virtualdetector DetLast file=outlast format=ascii radius=300 color=0,1,0 length=0.001 material=Vacuum
 
 ### Mag Field
 
@@ -108,7 +108,7 @@ include abs_place7_31.txt
 include RFplace7_31.txt
 include sol_place7_31.txt
 
-place DetLast z=$zlastRF+100
+#place DetLast z=$zlastRF+100
 place terminus z=-1000 # to stop reflected particles
 place terminus z=$zlastRF+102
 
@@ -135,4 +135,7 @@ place terminus z=$zlastRF+102
 #fieldntuple fieldmap format=ascii x=0 y=0 z=1075 t=5.4,7.3,0.01
 
 
-zntuple zloop=-700:125985:700 format=ascii file=mu_plus_beam
+#zntuple zloop=-700:125985:700 format=ascii file=mu_plus_beam
+
+#zntuple zloop=500+$period*26,500+$period*30,20 format=ascii file=for_fieldmap
+zntuple zloop=500+$period*26,500+$period*27,20 format=ascii file=for_fieldmap2

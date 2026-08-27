@@ -1,0 +1,56 @@
+### PHYSICS ###
+
+physics QGSP_BIC doStochastics=0
+
+### PARAMETERS ###
+
+# Reference particle:
+param p=200 #MeV/c
+
+# RF gradient:
+#param rf_grad=1.25 #MV/m
+param rf_grad=25
+
+# RF frequency:
+param rf_freq=325 #MHz
+param rf_period=(1/$rf_freq)*10^3 #ns
+
+# Pillbox length:
+param rf_len=250 #mm
+
+# Slab absorber thickness:
+param absth=5 #mm
+
+### BEAM ###
+
+beam gaussian particle=mu+ nEvents=10 beamZ=0 beamX=0 beamY=0 beamXp=0 beamYp=0 \ 
+    sigmaX=0 sigmaY=0 sigmaXp=0 sigmaYp=0 meanMomentum=$p sigmaP=0
+
+### REFERENCE PARTICLE ###
+
+#reference referenceMomentum=$p particle=mu+ beamX=0 beamY=0 beamZ=0 beamXp=0 beamYp=0 \
+#    tuneZ=800 tuneMomentum=$p
+
+reference referenceMomentum=$p particle=mu+ beamX=0 beamY=0 beamZ=0 beamXp=0 beamYp=0
+
+trace nTrace=0 format=ascii oneNTuple=1
+
+### RF CAVITIES ###
+
+pillbox RFC innerLength=$rf_len-1 frequency=0.325 maxGradient=$rf_grad \
+    win1Thick=0 win1OuterRadius=0 collarThick=0 collarRadialThick=0 \
+    winMat=Vacuum irisRadius=300 win2Thick=0.12 wallThick=0.4 pipeThick=0.4 cavityMaterial=Vacuum kill=1
+
+### ABSORBER ###
+
+box abs height=700 length=$absth width=700 material=LITHIUM_HYDRIDE color=0,0,1
+
+### PLACEMENT ###
+
+#place abs z=100
+#place RFC z=500 timeOffset=1.885
+place RFC z=500 phaseAcc=0
+
+#place abs z=900
+#place RFC z=1300 timeOffset=4.901
+place RFC z=1300 phaseAcc=0
