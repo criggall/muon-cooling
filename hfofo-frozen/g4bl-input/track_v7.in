@@ -11,13 +11,20 @@ param zshift=60
 param period=4200 # HFOFO period
 
 param beamstart=-700 # from the rotator solenoid exit at z=0
-beam ascii file=initial.dat beamZ=$beamstart # user provided file with particle data
+#beam ascii file=initial.dat beamZ=$beamstart # user provided file with particle data
 #beam gaussian particle=mu+ nEvents=1000 beamZ=-700.0 \
     sigmaX=0.0 sigmaY=0.0 sigmaP=0.0 sigmaXp=0.0 sigmaYp=0.0 \
     meanMomentum=247.5 sigmaP=0.0 meanT=0.0 sigmaT=0.0
 #beam gaussian particle=mu+ nEvents=100 beamZ=$beamstart \
     sigmaX=80.0 sigmaY=80.0 sigmaXp=0.1 sigmaYp=0.1 \
     meanMomentum=247.5 sigmaP=100.0 meanT=0.0 sigmaT=0.0
+
+beam gaussian particle=mu+ nEvents=10000 \
+beamZ=$beamstart beamX=0 beamY=0 beamXp=0 beamYp=0 \ 
+sigmaX=80.0 sigmaY=80.0 sigmaXp=0.1 sigmaYp=0.1 \ 
+meanMomentum=247.5 sigmaP=100.0
+
+zntuple zloop=500:4200*30+500:10 format=ascii file=zntuple referenceParticle=1
 
 param TRF=1/325*10^3
 param beamtime=-0.671 # average time of mu+ in initial.dat modulo RF period TRF
