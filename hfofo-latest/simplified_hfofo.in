@@ -88,3 +88,5 @@ do i -1 $num_periods
     place SolNeg z=4000+$period_len*$i current=$sol_current rotation=X$pitch,Z120
 
 enddo
+
+zntuple zloop=500:$period_len*30+500:10 format=ascii file=zntuple referenceParticle=1
