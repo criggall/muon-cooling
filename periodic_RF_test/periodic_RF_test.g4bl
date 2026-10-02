@@ -88,11 +88,23 @@ param absth=10 #mm
 #sigmaX=80.0 sigmaY=80.0 sigmaXp=0.1 sigmaYp=0.1 \ 
 #meanMomentum=$p sigmaP=100.0
 
-# energy distribution:
-beam gaussian particle=mu+ nEvents=100 \
+# Finding matched distribution...
+# v.1:
+#beam gaussian particle=mu+ nEvents=10000 \
+#beamZ=500.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+#sigmaX=200.0 sigmaY=200.0 sigmaXp=1 sigmaYp=1 \ 
+#meanMomentum=$p sigmaP=100.0
+# v.2:
+beam gaussian particle=mu+ nEvents=10000 \
 beamZ=500.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
-sigmaX=0.0 sigmaY=0.0 sigmaXp=0.0 sigmaYp=0.0 \ 
-meanMomentum=$p sigmaP=5.0
+sigmaX=20.0 sigmaY=20.0 sigmaXp=0.1 sigmaYp=0.1 \ 
+meanMomentum=$p sigmaP=15.0
+
+# energy distribution:
+#beam gaussian particle=mu+ nEvents=100 \
+#beamZ=500.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+#sigmaX=0.0 sigmaY=0.0 sigmaXp=0.0 sigmaYp=0.0 \ 
+#meanMomentum=$p sigmaP=5.0
 
 zntuple zloop=500:$period_len*30+500:10 format=ascii file=zntuple referenceParticle=1
 
