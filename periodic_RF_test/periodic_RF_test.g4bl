@@ -77,7 +77,7 @@ param absth=10 #mm
 ### BEAM ###
 
 # pencil beam:
-#beam gaussian particle=mu+ nEvents=10 \
+#beam gaussian particle=mu+ nEvents=1000 \
 #beamZ=500.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
 #sigmaX=0.0 sigmaY=0.0 sigmaXp=0.0 sigmaYp=0.0 \ 
 #meanMomentum=$p sigmaP=0.0
@@ -95,16 +95,22 @@ param absth=10 #mm
 #sigmaX=200.0 sigmaY=200.0 sigmaXp=1 sigmaYp=1 \ 
 #meanMomentum=$p sigmaP=100.0
 # v.2:
-beam gaussian particle=mu+ nEvents=10000 \
-beamZ=500.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
-sigmaX=20.0 sigmaY=20.0 sigmaXp=0.1 sigmaYp=0.1 \ 
-meanMomentum=$p sigmaP=15.0
+#beam gaussian particle=mu+ nEvents=10000 \
+#beamZ=500.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+#sigmaX=20.0 sigmaY=20.0 sigmaXp=0.1 sigmaYp=0.1 \ 
+#meanMomentum=$p sigmaP=15.0
 
 # energy distribution:
 #beam gaussian particle=mu+ nEvents=100 \
 #beamZ=500.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
 #sigmaX=0.0 sigmaY=0.0 sigmaXp=0.0 sigmaYp=0.0 \ 
 #meanMomentum=$p sigmaP=5.0
+
+# finding transfer matrix:
+beam gaussian particle=mu+ nEvents=1 \
+beamZ=500.0*(1-1/1000) beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+sigmaX=0.0 sigmaY=0.0 sigmaXp=0.0 sigmaYp=0.0 \ 
+meanMomentum=$p sigmaP=0.0
 
 zntuple zloop=500:$period_len*30+500:10 format=ascii file=zntuple referenceParticle=1
 
@@ -162,6 +168,10 @@ param num_periods=30
 param inc=28
 param phase1=9.3+$inc
 param phase2=9.278+$inc
+# for wedges+gas+windows using averaged stochastics to tune:
+#param inc=28.5
+#param phase1=9.3+$inc
+#param phase2=9.278+$inc
 
 do i -1 $num_periods
 
