@@ -77,10 +77,10 @@ param absth=10 #mm
 ### BEAM ###
 
 # pencil beam:
-#beam gaussian particle=mu+ nEvents=1000 \
-#beamZ=500.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
-#sigmaX=0.0 sigmaY=0.0 sigmaXp=0.0 sigmaYp=0.0 \ 
-#meanMomentum=$p sigmaP=0.0
+beam gaussian particle=mu+ nEvents=1 \
+beamZ=500.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+sigmaX=0.0 sigmaY=0.0 sigmaXp=0.0 sigmaYp=0.0 \ 
+meanMomentum=$p sigmaP=0.0
 
 # 6D distribution:
 #beam gaussian particle=mu+ nEvents=10000 \
@@ -107,12 +107,13 @@ param absth=10 #mm
 #meanMomentum=$p sigmaP=5.0
 
 # finding transfer matrix:
-beam gaussian particle=mu+ nEvents=1 \
-beamZ=500.0*(1-1/1000) beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
-sigmaX=0.0 sigmaY=0.0 sigmaXp=0.0 sigmaYp=0.0 \ 
-meanMomentum=$p sigmaP=0.0
+#beam gaussian particle=mu+ nEvents=1 \
+#beamZ=500.0-1/1000 beamX=$X+$X/1000 beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+#sigmaX=0.0 sigmaY=0.0 sigmaXp=0.0 sigmaYp=0.0 \ 
+#meanMomentum=$p sigmaP=0.0
 
 zntuple zloop=500:$period_len*30+500:10 format=ascii file=zntuple referenceParticle=1
+#zntuple zloop=0:$period_len*30+500:10 format=ascii file=zntuple referenceParticle=1
 
 ### REFERENCE PARTICLE ###
 
