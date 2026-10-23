@@ -5,7 +5,7 @@ G4ENSDFSTATEDATA=/Users/criggall/Geant4Data/G4ENSDFSTATE2.3
 G4PARTICLEXSDATA=/Users/criggall/Geant4Data/G4PARTICLEXS4.0
 G4LEVELGAMMADATA=/Users/criggall/Geant4Data/PhotonEvaporation5.7
 G4RADIOACTIVEDATA=/Users/criggall/Geant4Data/RadioactiveDecay5.6
-G4beamline Process ID 13611
+G4beamline Process ID 64542
 
 *************************************************************
  g4beamline version: 3.08                        (Oct  8 2022)
@@ -43,7 +43,7 @@ physics      QGSP_BIC      disable= inactivate= deactivate= doStochastics=0
 trackcuts                  kill= keep= killSecondaries=1 kineticEnergyCut=0
                            kineticEnergyMax=1.798e+308 maxTime=1e+06
                            keepPrimaries=0 steppingVerbose=0
-param        maxStep       1
+param        maxStep       0.1
 param        m             105.7
 param        c             2.997925e+08
 param        p             200
@@ -58,20 +58,20 @@ param        period_len    4200
 param        space         700
 param        X             6.2800650000000005
 param        Y             12.902899999999999
-param        Xp            0.052191507
+param        Xp            0.05213936776327295
 param        Yp            -0.025578377
 param        absth         10
 beam    GAUSSIAN particle=mu+ nEvents=1 firstEvent=-1 lastEvent=2147483647 beamX=6.3 beamY=12.9 beamZ=500.0 maxR=1000000.0 
 		meanMomentum=200.0 weight=1.000000 
 		sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.00000 sigmaYp=0.00000 
-		sigmaP=0.0 sigmaT=0.000 meanXp=0.05219 meanYp=-0.02558 meanT=0.000 
+		sigmaP=0.0 sigmaT=0.000 meanXp=0.05214 meanYp=-0.02558 meanT=0.000 
 zntuple                    z= zloop=500:4200*30+500:10 noSingles=0
                            format=ascii file=zntuple filename=zntuple require=
                            referenceParticle=1 coordinates=Centerline
 reference                  particle=mu+ beamX=6.28 beamY=12.9 beamZ=500
                            beamT=0 rotation= referenceMomentum=200
-                           beamXp=0.05219 beamYp=-0.02558 meanMomentum=200
-                           meanXp=0.05219 meanYp=-0.02558 tuneZ=-3.7e+21
+                           beamXp=0.05214 beamYp=-0.02558 meanMomentum=200
+                           meanXp=0.05214 meanYp=-0.02558 tuneZ=-3.7e+21
                            tuneMomentum=-3.7e+21 tolerance=0.001 noEfield=0
                            noBfield=0 noEloss=0 P=200
 trace                      nTrace=0 format=asciiTrace oneNTuple=1
@@ -91,11 +91,11 @@ pillbox      RFC           maxGradient=25 color=1.0,0.0,0.0 frequency=0.325
                            wallThick=0.4 irisRadius=300 collarRadialThick=0
                            collarThick=0 win1Thick=0 win1OuterRadius=0
                            win2Thick=0.12 winMat=Be phaseAcc=40
-                           skinDepth=0.002 timingTolerance=0.001 maxStep=1
+                           skinDepth=0.002 timingTolerance=0.001 maxStep=0.1
                            cavityMaterial=Vacuum timeOffset=-4.7e+21
                            timeIncrement=0 fieldMapFile= kill=1
 trap         abs           height=350 upperWidth=0.005 lowerWidth=59.5 Xul=0
-                           Xur=0 Xll=0 Xlr=0 length=700 maxStep=1
+                           Xur=0 Xll=0 Xlr=0 length=700 maxStep=0.1
                            material=LITHIUM_HYDRIDE color=0,0,1 kill=0
 param        num_periods   30
 param        inc           28
@@ -1424,7 +1424,7 @@ World size (before incrementing by 201.357 mm): 1639.6 H  1639.9 W  260303.0 L
 
 PARAMETERS:
               X=6.2800650000000005
-             Xp=0.052191507
+             Xp=0.05213936776327295
               Y=12.902899999999999
              Yp=-0.025578377
             Zcl=130151
@@ -1442,7 +1442,7 @@ deltaIntersection=0.1
               i=30
             inc=28
               m=105.7
-        maxStep=1
+        maxStep=0.1
         minStep=0.01
     num_periods=30
               p=200
@@ -6015,364 +6015,364 @@ pillbox RFC: Time OK  timeOffset=0.9229 ns, incremented to 0.9229 ns
 pillbox RFC: Time OK  timeOffset=2.6217 ns, incremented to 2.6217 ns
 pillbox RFC: Time OK  timeOffset=3.5657 ns, incremented to 3.5657 ns
 pillbox RFC: Time OK  timeOffset=5.2645 ns, incremented to 5.2645 ns
-pillbox RFC: Time OK  timeOffset=6.2101 ns, incremented to 6.2101 ns
+pillbox RFC: Time OK  timeOffset=6.2102 ns, incremented to 6.2102 ns
 pillbox RFC: Time OK  timeOffset=7.9089 ns, incremented to 7.9089 ns
 pillbox RFC: Time OK  timeOffset=8.8529 ns, incremented to 8.8529 ns
 pillbox RFC: Time OK  timeOffset=10.5517 ns, incremented to 10.5517 ns
 pillbox RFC: Time OK  timeOffset=11.4974 ns, incremented to 11.4974 ns
-pillbox RFC: Time OK  timeOffset=13.1961 ns, incremented to 13.1961 ns
-pillbox RFC: Time OK  timeOffset=14.1401 ns, incremented to 14.1401 ns
-pillbox RFC: Time OK  timeOffset=15.8389 ns, incremented to 15.8389 ns
-pillbox RFC: Time OK  timeOffset=16.7846 ns, incremented to 16.7846 ns
-pillbox RFC: Time OK  timeOffset=18.4833 ns, incremented to 18.4833 ns
-pillbox RFC: Time OK  timeOffset=19.4273 ns, incremented to 19.4273 ns
-pillbox RFC: Time OK  timeOffset=21.1261 ns, incremented to 21.1261 ns
-pillbox RFC: Time OK  timeOffset=22.0718 ns, incremented to 22.0718 ns
-pillbox RFC: Time OK  timeOffset=23.7706 ns, incremented to 23.7706 ns
-pillbox RFC: Time OK  timeOffset=24.7145 ns, incremented to 24.7145 ns
-pillbox RFC: Time OK  timeOffset=26.4133 ns, incremented to 26.4133 ns
-pillbox RFC: Time OK  timeOffset=27.3590 ns, incremented to 27.3590 ns
-pillbox RFC: Time OK  timeOffset=29.0578 ns, incremented to 29.0578 ns
-pillbox RFC: Time OK  timeOffset=30.0018 ns, incremented to 30.0018 ns
-pillbox RFC: Time OK  timeOffset=31.7006 ns, incremented to 31.7006 ns
-pillbox RFC: Time OK  timeOffset=32.6462 ns, incremented to 32.6462 ns
-pillbox RFC: Time OK  timeOffset=34.3450 ns, incremented to 34.3450 ns
-pillbox RFC: Time OK  timeOffset=35.2890 ns, incremented to 35.2890 ns
-pillbox RFC: Time OK  timeOffset=36.9878 ns, incremented to 36.9878 ns
-pillbox RFC: Time OK  timeOffset=37.9335 ns, incremented to 37.9335 ns
-pillbox RFC: Time OK  timeOffset=39.6323 ns, incremented to 39.6323 ns
-pillbox RFC: Time OK  timeOffset=40.5762 ns, incremented to 40.5762 ns
-pillbox RFC: Time OK  timeOffset=42.2751 ns, incremented to 42.2751 ns
-pillbox RFC: Time OK  timeOffset=43.2207 ns, incremented to 43.2207 ns
-pillbox RFC: Time OK  timeOffset=44.9195 ns, incremented to 44.9195 ns
-pillbox RFC: Time OK  timeOffset=45.8635 ns, incremented to 45.8635 ns
-pillbox RFC: Time OK  timeOffset=47.5623 ns, incremented to 47.5623 ns
-pillbox RFC: Time OK  timeOffset=48.5080 ns, incremented to 48.5080 ns
-pillbox RFC: Time OK  timeOffset=50.2068 ns, incremented to 50.2068 ns
-pillbox RFC: Time OK  timeOffset=51.1507 ns, incremented to 51.1507 ns
-pillbox RFC: Time OK  timeOffset=52.8496 ns, incremented to 52.8496 ns
-pillbox RFC: Time OK  timeOffset=53.7952 ns, incremented to 53.7952 ns
-pillbox RFC: Time OK  timeOffset=55.4940 ns, incremented to 55.4940 ns
-pillbox RFC: Time OK  timeOffset=56.4380 ns, incremented to 56.4380 ns
-pillbox RFC: Time OK  timeOffset=58.1368 ns, incremented to 58.1368 ns
-pillbox RFC: Time OK  timeOffset=59.0825 ns, incremented to 59.0825 ns
-pillbox RFC: Time OK  timeOffset=60.7813 ns, incremented to 60.7813 ns
-pillbox RFC: Time OK  timeOffset=61.7252 ns, incremented to 61.7252 ns
-pillbox RFC: Time OK  timeOffset=63.4241 ns, incremented to 63.4241 ns
-pillbox RFC: Time OK  timeOffset=64.3697 ns, incremented to 64.3697 ns
-pillbox RFC: Time OK  timeOffset=66.0685 ns, incremented to 66.0685 ns
-pillbox RFC: Time OK  timeOffset=67.0125 ns, incremented to 67.0125 ns
-pillbox RFC: Time OK  timeOffset=68.7114 ns, incremented to 68.7114 ns
-pillbox RFC: Time OK  timeOffset=69.6570 ns, incremented to 69.6570 ns
-pillbox RFC: Time OK  timeOffset=71.3558 ns, incremented to 71.3558 ns
-pillbox RFC: Time OK  timeOffset=72.2998 ns, incremented to 72.2998 ns
-pillbox RFC: Time OK  timeOffset=73.9986 ns, incremented to 73.9986 ns
-pillbox RFC: Time OK  timeOffset=74.9443 ns, incremented to 74.9443 ns
-pillbox RFC: Time OK  timeOffset=76.6431 ns, incremented to 76.6431 ns
-pillbox RFC: Time OK  timeOffset=77.5871 ns, incremented to 77.5871 ns
-pillbox RFC: Time OK  timeOffset=79.2859 ns, incremented to 79.2859 ns
-pillbox RFC: Time OK  timeOffset=80.2316 ns, incremented to 80.2316 ns
-pillbox RFC: Time OK  timeOffset=81.9304 ns, incremented to 81.9304 ns
-pillbox RFC: Time OK  timeOffset=82.8743 ns, incremented to 82.8743 ns
-pillbox RFC: Time OK  timeOffset=84.5732 ns, incremented to 84.5732 ns
-pillbox RFC: Time OK  timeOffset=85.5189 ns, incremented to 85.5189 ns
-pillbox RFC: Time OK  timeOffset=87.2177 ns, incremented to 87.2177 ns
-pillbox RFC: Time OK  timeOffset=88.1616 ns, incremented to 88.1616 ns
-pillbox RFC: Time OK  timeOffset=89.8605 ns, incremented to 89.8605 ns
-pillbox RFC: Time OK  timeOffset=90.8062 ns, incremented to 90.8062 ns
-pillbox RFC: Time OK  timeOffset=92.5050 ns, incremented to 92.5050 ns
-pillbox RFC: Time OK  timeOffset=93.4489 ns, incremented to 93.4489 ns
-pillbox RFC: Time OK  timeOffset=95.1478 ns, incremented to 95.1478 ns
-pillbox RFC: Time OK  timeOffset=96.0935 ns, incremented to 96.0935 ns
-pillbox RFC: Time OK  timeOffset=97.7923 ns, incremented to 97.7923 ns
-pillbox RFC: Time OK  timeOffset=98.7362 ns, incremented to 98.7362 ns
-pillbox RFC: Time OK  timeOffset=100.4351 ns, incremented to 100.4351 ns
-pillbox RFC: Time OK  timeOffset=101.3808 ns, incremented to 101.3808 ns
-pillbox RFC: Time OK  timeOffset=103.0796 ns, incremented to 103.0796 ns
-pillbox RFC: Time OK  timeOffset=104.0236 ns, incremented to 104.0236 ns
-pillbox RFC: Time OK  timeOffset=105.7224 ns, incremented to 105.7224 ns
-pillbox RFC: Time OK  timeOffset=106.6681 ns, incremented to 106.6681 ns
-pillbox RFC: Time OK  timeOffset=108.3669 ns, incremented to 108.3669 ns
-pillbox RFC: Time OK  timeOffset=109.3109 ns, incremented to 109.3109 ns
-pillbox RFC: Time OK  timeOffset=111.0097 ns, incremented to 111.0097 ns
-pillbox RFC: Time OK  timeOffset=111.9554 ns, incremented to 111.9554 ns
-pillbox RFC: Time OK  timeOffset=113.6542 ns, incremented to 113.6542 ns
-pillbox RFC: Time OK  timeOffset=114.5982 ns, incremented to 114.5982 ns
-pillbox RFC: Time OK  timeOffset=116.2971 ns, incremented to 116.2971 ns
-pillbox RFC: Time OK  timeOffset=117.2427 ns, incremented to 117.2427 ns
-pillbox RFC: Time OK  timeOffset=118.9416 ns, incremented to 118.9416 ns
-pillbox RFC: Time OK  timeOffset=119.8855 ns, incremented to 119.8855 ns
-pillbox RFC: Time OK  timeOffset=121.5844 ns, incremented to 121.5844 ns
-pillbox RFC: Time OK  timeOffset=122.5301 ns, incremented to 122.5301 ns
-pillbox RFC: Time OK  timeOffset=124.2289 ns, incremented to 124.2289 ns
-pillbox RFC: Time OK  timeOffset=125.1729 ns, incremented to 125.1729 ns
-pillbox RFC: Time OK  timeOffset=126.8718 ns, incremented to 126.8718 ns
-pillbox RFC: Time OK  timeOffset=127.8174 ns, incremented to 127.8174 ns
-pillbox RFC: Time OK  timeOffset=129.5163 ns, incremented to 129.5163 ns
-pillbox RFC: Time OK  timeOffset=130.4602 ns, incremented to 130.4602 ns
-pillbox RFC: Time OK  timeOffset=132.1591 ns, incremented to 132.1591 ns
-pillbox RFC: Time OK  timeOffset=133.1048 ns, incremented to 133.1048 ns
-pillbox RFC: Time OK  timeOffset=134.8036 ns, incremented to 134.8036 ns
-pillbox RFC: Time OK  timeOffset=135.7476 ns, incremented to 135.7476 ns
-pillbox RFC: Time OK  timeOffset=137.4465 ns, incremented to 137.4465 ns
-pillbox RFC: Time OK  timeOffset=138.3922 ns, incremented to 138.3922 ns
-pillbox RFC: Time OK  timeOffset=140.0910 ns, incremented to 140.0910 ns
-pillbox RFC: Time OK  timeOffset=141.0350 ns, incremented to 141.0350 ns
-pillbox RFC: Time OK  timeOffset=142.7338 ns, incremented to 142.7338 ns
-pillbox RFC: Time OK  timeOffset=143.6795 ns, incremented to 143.6795 ns
-pillbox RFC: Time OK  timeOffset=145.3784 ns, incremented to 145.3784 ns
-pillbox RFC: Time OK  timeOffset=146.3223 ns, incremented to 146.3223 ns
-pillbox RFC: Time OK  timeOffset=148.0212 ns, incremented to 148.0212 ns
-pillbox RFC: Time OK  timeOffset=148.9669 ns, incremented to 148.9669 ns
-pillbox RFC: Time OK  timeOffset=150.6657 ns, incremented to 150.6657 ns
-pillbox RFC: Time OK  timeOffset=151.6097 ns, incremented to 151.6097 ns
-pillbox RFC: Time OK  timeOffset=153.3086 ns, incremented to 153.3086 ns
-pillbox RFC: Time OK  timeOffset=154.2543 ns, incremented to 154.2543 ns
-pillbox RFC: Time OK  timeOffset=155.9531 ns, incremented to 155.9531 ns
-pillbox RFC: Time OK  timeOffset=156.8971 ns, incremented to 156.8971 ns
-pillbox RFC: Time OK  timeOffset=158.5960 ns, incremented to 158.5960 ns
-pillbox RFC: Time OK  timeOffset=159.5417 ns, incremented to 159.5417 ns
-pillbox RFC: Time OK  timeOffset=161.2405 ns, incremented to 161.2405 ns
-pillbox RFC: Time OK  timeOffset=162.1845 ns, incremented to 162.1845 ns
-pillbox RFC: Time OK  timeOffset=163.8834 ns, incremented to 163.8834 ns
-pillbox RFC: Time OK  timeOffset=164.8291 ns, incremented to 164.8291 ns
-pillbox RFC: Time OK  timeOffset=166.5279 ns, incremented to 166.5279 ns
-pillbox RFC: Time OK  timeOffset=167.4719 ns, incremented to 167.4719 ns
-pillbox RFC: Time OK  timeOffset=169.1708 ns, incremented to 169.1708 ns
-pillbox RFC: Time OK  timeOffset=170.1165 ns, incremented to 170.1165 ns
-pillbox RFC: Time OK  timeOffset=171.8154 ns, incremented to 171.8154 ns
-pillbox RFC: Time OK  timeOffset=172.7594 ns, incremented to 172.7594 ns
-pillbox RFC: Time OK  timeOffset=174.4582 ns, incremented to 174.4582 ns
-pillbox RFC: Time OK  timeOffset=175.4039 ns, incremented to 175.4039 ns
-pillbox RFC: Time OK  timeOffset=177.1028 ns, incremented to 177.1028 ns
-pillbox RFC: Time OK  timeOffset=178.0468 ns, incremented to 178.0468 ns
-pillbox RFC: Time OK  timeOffset=179.7457 ns, incremented to 179.7457 ns
-pillbox RFC: Time OK  timeOffset=180.6914 ns, incremented to 180.6914 ns
-pillbox RFC: Time OK  timeOffset=182.3902 ns, incremented to 182.3902 ns
-pillbox RFC: Time OK  timeOffset=183.3342 ns, incremented to 183.3342 ns
-pillbox RFC: Time OK  timeOffset=185.0331 ns, incremented to 185.0331 ns
-pillbox RFC: Time OK  timeOffset=185.9788 ns, incremented to 185.9788 ns
-pillbox RFC: Time OK  timeOffset=187.6777 ns, incremented to 187.6777 ns
-pillbox RFC: Time OK  timeOffset=188.6217 ns, incremented to 188.6217 ns
-pillbox RFC: Time OK  timeOffset=190.3206 ns, incremented to 190.3206 ns
-pillbox RFC: Time OK  timeOffset=191.2663 ns, incremented to 191.2663 ns
-pillbox RFC: Time OK  timeOffset=192.9651 ns, incremented to 192.9651 ns
-pillbox RFC: Time OK  timeOffset=193.9091 ns, incremented to 193.9091 ns
-pillbox RFC: Time OK  timeOffset=195.6080 ns, incremented to 195.6080 ns
-pillbox RFC: Time OK  timeOffset=196.5537 ns, incremented to 196.5537 ns
-pillbox RFC: Time OK  timeOffset=198.2526 ns, incremented to 198.2526 ns
-pillbox RFC: Time OK  timeOffset=199.1966 ns, incremented to 199.1966 ns
-pillbox RFC: Time OK  timeOffset=200.8955 ns, incremented to 200.8955 ns
-pillbox RFC: Time OK  timeOffset=201.8412 ns, incremented to 201.8412 ns
-pillbox RFC: Time OK  timeOffset=203.5401 ns, incremented to 203.5401 ns
-pillbox RFC: Time OK  timeOffset=204.4841 ns, incremented to 204.4841 ns
-pillbox RFC: Time OK  timeOffset=206.1830 ns, incremented to 206.1830 ns
-pillbox RFC: Time OK  timeOffset=207.1287 ns, incremented to 207.1287 ns
-pillbox RFC: Time OK  timeOffset=208.8276 ns, incremented to 208.8276 ns
-pillbox RFC: Time OK  timeOffset=209.7716 ns, incremented to 209.7716 ns
-pillbox RFC: Time OK  timeOffset=211.4705 ns, incremented to 211.4705 ns
-pillbox RFC: Time OK  timeOffset=212.4162 ns, incremented to 212.4162 ns
-pillbox RFC: Time OK  timeOffset=214.1151 ns, incremented to 214.1151 ns
-pillbox RFC: Time OK  timeOffset=215.0591 ns, incremented to 215.0591 ns
-pillbox RFC: Time OK  timeOffset=216.7580 ns, incremented to 216.7580 ns
-pillbox RFC: Time OK  timeOffset=217.7037 ns, incremented to 217.7037 ns
-pillbox RFC: Time OK  timeOffset=219.4026 ns, incremented to 219.4026 ns
-pillbox RFC: Time OK  timeOffset=220.3466 ns, incremented to 220.3466 ns
-pillbox RFC: Time OK  timeOffset=222.0455 ns, incremented to 222.0455 ns
-pillbox RFC: Time OK  timeOffset=222.9912 ns, incremented to 222.9912 ns
-pillbox RFC: Time OK  timeOffset=224.6901 ns, incremented to 224.6901 ns
-pillbox RFC: Time OK  timeOffset=225.6341 ns, incremented to 225.6341 ns
-pillbox RFC: Time OK  timeOffset=227.3331 ns, incremented to 227.3331 ns
-pillbox RFC: Time OK  timeOffset=228.2788 ns, incremented to 228.2788 ns
-pillbox RFC: Time OK  timeOffset=229.9776 ns, incremented to 229.9776 ns
-pillbox RFC: Time OK  timeOffset=230.9217 ns, incremented to 230.9217 ns
-pillbox RFC: Time OK  timeOffset=232.6206 ns, incremented to 232.6206 ns
-pillbox RFC: Time OK  timeOffset=233.5663 ns, incremented to 233.5663 ns
-pillbox RFC: Time OK  timeOffset=235.2652 ns, incremented to 235.2652 ns
-pillbox RFC: Time OK  timeOffset=236.2092 ns, incremented to 236.2092 ns
-pillbox RFC: Time OK  timeOffset=237.9082 ns, incremented to 237.9082 ns
-pillbox RFC: Time OK  timeOffset=238.8539 ns, incremented to 238.8539 ns
-pillbox RFC: Time OK  timeOffset=240.5528 ns, incremented to 240.5528 ns
-pillbox RFC: Time OK  timeOffset=241.4968 ns, incremented to 241.4968 ns
-pillbox RFC: Time OK  timeOffset=243.1957 ns, incremented to 243.1957 ns
-pillbox RFC: Time OK  timeOffset=244.1414 ns, incremented to 244.1414 ns
-pillbox RFC: Time OK  timeOffset=245.8403 ns, incremented to 245.8403 ns
-pillbox RFC: Time OK  timeOffset=246.7844 ns, incremented to 246.7844 ns
-pillbox RFC: Time OK  timeOffset=248.4833 ns, incremented to 248.4833 ns
-pillbox RFC: Time OK  timeOffset=249.4290 ns, incremented to 249.4290 ns
-pillbox RFC: Time OK  timeOffset=251.1279 ns, incremented to 251.1279 ns
-pillbox RFC: Time OK  timeOffset=252.0720 ns, incremented to 252.0720 ns
-pillbox RFC: Time OK  timeOffset=253.7709 ns, incremented to 253.7709 ns
-pillbox RFC: Time OK  timeOffset=254.7166 ns, incremented to 254.7166 ns
-pillbox RFC: Time OK  timeOffset=256.4155 ns, incremented to 256.4155 ns
-pillbox RFC: Time OK  timeOffset=257.3596 ns, incremented to 257.3596 ns
-pillbox RFC: Time OK  timeOffset=259.0585 ns, incremented to 259.0585 ns
-pillbox RFC: Time OK  timeOffset=260.0042 ns, incremented to 260.0042 ns
-pillbox RFC: Time OK  timeOffset=261.7031 ns, incremented to 261.7031 ns
-pillbox RFC: Time OK  timeOffset=262.6472 ns, incremented to 262.6472 ns
-pillbox RFC: Time OK  timeOffset=264.3461 ns, incremented to 264.3461 ns
-pillbox RFC: Time OK  timeOffset=265.2919 ns, incremented to 265.2919 ns
-pillbox RFC: Time OK  timeOffset=266.9908 ns, incremented to 266.9908 ns
-pillbox RFC: Time OK  timeOffset=267.9348 ns, incremented to 267.9348 ns
-pillbox RFC: Time OK  timeOffset=269.6338 ns, incremented to 269.6338 ns
-pillbox RFC: Time OK  timeOffset=270.5795 ns, incremented to 270.5795 ns
-pillbox RFC: Time OK  timeOffset=272.2784 ns, incremented to 272.2784 ns
-pillbox RFC: Time OK  timeOffset=273.2225 ns, incremented to 273.2225 ns
-pillbox RFC: Time OK  timeOffset=274.9214 ns, incremented to 274.9214 ns
-pillbox RFC: Time OK  timeOffset=275.8672 ns, incremented to 275.8672 ns
-pillbox RFC: Time OK  timeOffset=277.5661 ns, incremented to 277.5661 ns
-pillbox RFC: Time OK  timeOffset=278.5101 ns, incremented to 278.5101 ns
-pillbox RFC: Time OK  timeOffset=280.2091 ns, incremented to 280.2091 ns
-pillbox RFC: Time OK  timeOffset=281.1548 ns, incremented to 281.1548 ns
-pillbox RFC: Time OK  timeOffset=282.8538 ns, incremented to 282.8538 ns
-pillbox RFC: Time OK  timeOffset=283.7978 ns, incremented to 283.7978 ns
-pillbox RFC: Time OK  timeOffset=285.4968 ns, incremented to 285.4968 ns
-pillbox RFC: Time OK  timeOffset=286.4425 ns, incremented to 286.4425 ns
-pillbox RFC: Time OK  timeOffset=288.1414 ns, incremented to 288.1414 ns
-pillbox RFC: Time OK  timeOffset=289.0855 ns, incremented to 289.0855 ns
-pillbox RFC: Time OK  timeOffset=290.7845 ns, incremented to 290.7845 ns
-pillbox RFC: Time OK  timeOffset=291.7302 ns, incremented to 291.7302 ns
-pillbox RFC: Time OK  timeOffset=293.4292 ns, incremented to 293.4292 ns
-pillbox RFC: Time OK  timeOffset=294.3732 ns, incremented to 294.3732 ns
-pillbox RFC: Time OK  timeOffset=296.0722 ns, incremented to 296.0722 ns
-pillbox RFC: Time OK  timeOffset=297.0179 ns, incremented to 297.0179 ns
-pillbox RFC: Time OK  timeOffset=298.7169 ns, incremented to 298.7169 ns
-pillbox RFC: Time OK  timeOffset=299.6609 ns, incremented to 299.6609 ns
-pillbox RFC: Time OK  timeOffset=301.3599 ns, incremented to 301.3599 ns
-pillbox RFC: Time OK  timeOffset=302.3057 ns, incremented to 302.3057 ns
-pillbox RFC: Time OK  timeOffset=304.0046 ns, incremented to 304.0046 ns
-pillbox RFC: Time OK  timeOffset=304.9487 ns, incremented to 304.9487 ns
-pillbox RFC: Time OK  timeOffset=306.6477 ns, incremented to 306.6477 ns
-pillbox RFC: Time OK  timeOffset=307.5934 ns, incremented to 307.5934 ns
-pillbox RFC: Time OK  timeOffset=309.2924 ns, incremented to 309.2924 ns
-pillbox RFC: Time OK  timeOffset=310.2364 ns, incremented to 310.2364 ns
-pillbox RFC: Time OK  timeOffset=311.9354 ns, incremented to 311.9354 ns
-pillbox RFC: Time OK  timeOffset=312.8812 ns, incremented to 312.8812 ns
-pillbox RFC: Time OK  timeOffset=314.5801 ns, incremented to 314.5801 ns
-pillbox RFC: Time OK  timeOffset=315.5242 ns, incremented to 315.5242 ns
-pillbox RFC: Time OK  timeOffset=317.2232 ns, incremented to 317.2232 ns
-pillbox RFC: Time OK  timeOffset=318.1690 ns, incremented to 318.1690 ns
-pillbox RFC: Time OK  timeOffset=319.8679 ns, incremented to 319.8679 ns
-pillbox RFC: Time OK  timeOffset=320.8120 ns, incremented to 320.8120 ns
-pillbox RFC: Time OK  timeOffset=322.5110 ns, incremented to 322.5110 ns
-pillbox RFC: Time OK  timeOffset=323.4568 ns, incremented to 323.4568 ns
-pillbox RFC: Time OK  timeOffset=325.1557 ns, incremented to 325.1557 ns
-pillbox RFC: Time OK  timeOffset=326.0998 ns, incremented to 326.0998 ns
-pillbox RFC: Time OK  timeOffset=327.7988 ns, incremented to 327.7988 ns
-pillbox RFC: Time OK  timeOffset=328.7446 ns, incremented to 328.7446 ns
-pillbox RFC: Time OK  timeOffset=330.4436 ns, incremented to 330.4436 ns
-pillbox RFC: Time OK  timeOffset=331.3876 ns, incremented to 331.3876 ns
-pillbox RFC: Time OK  timeOffset=333.0867 ns, incremented to 333.0867 ns
-pillbox RFC: Time OK  timeOffset=334.0324 ns, incremented to 334.0324 ns
-pillbox RFC: Time OK  timeOffset=335.7314 ns, incremented to 335.7314 ns
-pillbox RFC: Time OK  timeOffset=336.6755 ns, incremented to 336.6755 ns
-pillbox RFC: Time OK  timeOffset=338.3745 ns, incremented to 338.3745 ns
-pillbox RFC: Time OK  timeOffset=339.3203 ns, incremented to 339.3203 ns
-pillbox RFC: Time OK  timeOffset=341.0193 ns, incremented to 341.0193 ns
-pillbox RFC: Time OK  timeOffset=341.9634 ns, incremented to 341.9634 ns
-pillbox RFC: Time OK  timeOffset=343.6624 ns, incremented to 343.6624 ns
-pillbox RFC: Time OK  timeOffset=344.6082 ns, incremented to 344.6082 ns
-pillbox RFC: Time OK  timeOffset=346.3072 ns, incremented to 346.3072 ns
-pillbox RFC: Time OK  timeOffset=347.2513 ns, incremented to 347.2513 ns
-pillbox RFC: Time OK  timeOffset=348.9503 ns, incremented to 348.9503 ns
-pillbox RFC: Time OK  timeOffset=349.8961 ns, incremented to 349.8961 ns
-pillbox RFC: Time OK  timeOffset=351.5951 ns, incremented to 351.5951 ns
-pillbox RFC: Time OK  timeOffset=352.5392 ns, incremented to 352.5392 ns
-pillbox RFC: Time OK  timeOffset=354.2382 ns, incremented to 354.2382 ns
-pillbox RFC: Time OK  timeOffset=355.1840 ns, incremented to 355.1840 ns
-pillbox RFC: Time OK  timeOffset=356.8830 ns, incremented to 356.8830 ns
-pillbox RFC: Time OK  timeOffset=357.8271 ns, incremented to 357.8271 ns
-pillbox RFC: Time OK  timeOffset=359.5262 ns, incremented to 359.5262 ns
-pillbox RFC: Time OK  timeOffset=360.4719 ns, incremented to 360.4719 ns
-pillbox RFC: Time OK  timeOffset=362.1709 ns, incremented to 362.1709 ns
-pillbox RFC: Time OK  timeOffset=363.1150 ns, incremented to 363.1150 ns
-pillbox RFC: Time OK  timeOffset=364.8141 ns, incremented to 364.8141 ns
-pillbox RFC: Time OK  timeOffset=365.7599 ns, incremented to 365.7599 ns
-pillbox RFC: Time OK  timeOffset=367.4589 ns, incremented to 367.4589 ns
-pillbox RFC: Time OK  timeOffset=368.4030 ns, incremented to 368.4030 ns
-pillbox RFC: Time OK  timeOffset=370.1021 ns, incremented to 370.1021 ns
-pillbox RFC: Time OK  timeOffset=371.0479 ns, incremented to 371.0479 ns
-pillbox RFC: Time OK  timeOffset=372.7469 ns, incremented to 372.7469 ns
-pillbox RFC: Time OK  timeOffset=373.6910 ns, incremented to 373.6910 ns
-pillbox RFC: Time OK  timeOffset=375.3901 ns, incremented to 375.3901 ns
-pillbox RFC: Time OK  timeOffset=376.3359 ns, incremented to 376.3359 ns
-pillbox RFC: Time OK  timeOffset=378.0349 ns, incremented to 378.0349 ns
-pillbox RFC: Time OK  timeOffset=378.9790 ns, incremented to 378.9790 ns
-pillbox RFC: Time OK  timeOffset=380.6781 ns, incremented to 380.6781 ns
-pillbox RFC: Time OK  timeOffset=381.6239 ns, incremented to 381.6239 ns
-pillbox RFC: Time OK  timeOffset=383.3230 ns, incremented to 383.3230 ns
-pillbox RFC: Time OK  timeOffset=384.2671 ns, incremented to 384.2671 ns
-pillbox RFC: Time OK  timeOffset=385.9662 ns, incremented to 385.9662 ns
-pillbox RFC: Time OK  timeOffset=386.9120 ns, incremented to 386.9120 ns
-pillbox RFC: Time OK  timeOffset=388.6110 ns, incremented to 388.6110 ns
-pillbox RFC: Time OK  timeOffset=389.5551 ns, incremented to 389.5551 ns
-pillbox RFC: Time OK  timeOffset=391.2542 ns, incremented to 391.2542 ns
-pillbox RFC: Time OK  timeOffset=392.2001 ns, incremented to 392.2001 ns
-pillbox RFC: Time OK  timeOffset=393.8991 ns, incremented to 393.8991 ns
-pillbox RFC: Time OK  timeOffset=394.8432 ns, incremented to 394.8432 ns
-pillbox RFC: Time OK  timeOffset=396.5423 ns, incremented to 396.5423 ns
-pillbox RFC: Time OK  timeOffset=397.4882 ns, incremented to 397.4882 ns
-pillbox RFC: Time OK  timeOffset=399.1872 ns, incremented to 399.1872 ns
-pillbox RFC: Time OK  timeOffset=400.1314 ns, incremented to 400.1314 ns
-pillbox RFC: Time OK  timeOffset=401.8305 ns, incremented to 401.8305 ns
-pillbox RFC: Time OK  timeOffset=402.7763 ns, incremented to 402.7763 ns
-pillbox RFC: Time OK  timeOffset=404.4754 ns, incremented to 404.4754 ns
-pillbox RFC: Time OK  timeOffset=405.4195 ns, incremented to 405.4195 ns
-pillbox RFC: Time OK  timeOffset=407.1186 ns, incremented to 407.1186 ns
-pillbox RFC: Time OK  timeOffset=408.0644 ns, incremented to 408.0644 ns
-pillbox RFC: Time OK  timeOffset=409.7635 ns, incremented to 409.7635 ns
-pillbox RFC: Time OK  timeOffset=410.7077 ns, incremented to 410.7077 ns
-pillbox RFC: Time OK  timeOffset=412.4068 ns, incremented to 412.4068 ns
-pillbox RFC: Time OK  timeOffset=413.3526 ns, incremented to 413.3526 ns
-pillbox RFC: Time OK  timeOffset=415.0517 ns, incremented to 415.0517 ns
-pillbox RFC: Time OK  timeOffset=415.9959 ns, incremented to 415.9959 ns
-pillbox RFC: Time OK  timeOffset=417.6950 ns, incremented to 417.6950 ns
-pillbox RFC: Time OK  timeOffset=418.6408 ns, incremented to 418.6408 ns
-pillbox RFC: Time OK  timeOffset=420.3399 ns, incremented to 420.3399 ns
-pillbox RFC: Time OK  timeOffset=421.2841 ns, incremented to 421.2841 ns
-pillbox RFC: Time OK  timeOffset=422.9832 ns, incremented to 422.9832 ns
-pillbox RFC: Time OK  timeOffset=423.9291 ns, incremented to 423.9291 ns
-pillbox RFC: Time OK  timeOffset=425.6282 ns, incremented to 425.6282 ns
-pillbox RFC: Time OK  timeOffset=426.5723 ns, incremented to 426.5723 ns
-pillbox RFC: Time OK  timeOffset=428.2715 ns, incremented to 428.2715 ns
-pillbox RFC: Time OK  timeOffset=429.2173 ns, incremented to 429.2173 ns
-pillbox RFC: Time OK  timeOffset=430.9164 ns, incremented to 430.9164 ns
-pillbox RFC: Time OK  timeOffset=431.8606 ns, incremented to 431.8606 ns
-pillbox RFC: Time OK  timeOffset=433.5598 ns, incremented to 433.5598 ns
-pillbox RFC: Time OK  timeOffset=434.5056 ns, incremented to 434.5056 ns
-pillbox RFC: Time OK  timeOffset=436.2047 ns, incremented to 436.2047 ns
-pillbox RFC: Time OK  timeOffset=437.1489 ns, incremented to 437.1489 ns
-pillbox RFC: Time OK  timeOffset=438.8481 ns, incremented to 438.8481 ns
-pillbox RFC: Time OK  timeOffset=439.7939 ns, incremented to 439.7939 ns
-pillbox RFC: Time OK  timeOffset=441.4931 ns, incremented to 441.4931 ns
-pillbox RFC: Time OK  timeOffset=442.4373 ns, incremented to 442.4373 ns
-pillbox RFC: Time OK  timeOffset=444.1364 ns, incremented to 444.1364 ns
-pillbox RFC: Time OK  timeOffset=445.0823 ns, incremented to 445.0823 ns
-pillbox RFC: Time OK  timeOffset=446.7814 ns, incremented to 446.7814 ns
-pillbox RFC: Time OK  timeOffset=447.7256 ns, incremented to 447.7256 ns
-pillbox RFC: Time OK  timeOffset=449.4248 ns, incremented to 449.4248 ns
-pillbox RFC: Time OK  timeOffset=450.3707 ns, incremented to 450.3707 ns
-pillbox RFC: Time OK  timeOffset=452.0698 ns, incremented to 452.0698 ns
-pillbox RFC: Time OK  timeOffset=453.0140 ns, incremented to 453.0140 ns
-pillbox RFC: Time OK  timeOffset=454.7132 ns, incremented to 454.7132 ns
-pillbox RFC: Time OK  timeOffset=455.6591 ns, incremented to 455.6591 ns
-pillbox RFC: Time OK  timeOffset=457.3583 ns, incremented to 457.3583 ns
-pillbox RFC: Time OK  timeOffset=458.3025 ns, incremented to 458.3025 ns
-pillbox RFC: Time OK  timeOffset=460.0017 ns, incremented to 460.0017 ns
-pillbox RFC: Time OK  timeOffset=460.9475 ns, incremented to 460.9475 ns
-pillbox RFC: Time OK  timeOffset=462.6467 ns, incremented to 462.6467 ns
-pillbox RFC: Time OK  timeOffset=463.5909 ns, incremented to 463.5909 ns
-pillbox RFC: Time OK  timeOffset=465.2902 ns, incremented to 465.2902 ns
-pillbox RFC: Time OK  timeOffset=466.2360 ns, incremented to 466.2360 ns
-pillbox RFC: Time OK  timeOffset=467.9352 ns, incremented to 467.9352 ns
-pillbox RFC: Time OK  timeOffset=468.8794 ns, incremented to 468.8794 ns
-pillbox RFC: Time OK  timeOffset=470.5787 ns, incremented to 470.5787 ns
-pillbox RFC: Time OK  timeOffset=471.5245 ns, incremented to 471.5245 ns
-pillbox RFC: Time OK  timeOffset=473.2237 ns, incremented to 473.2237 ns
-pillbox RFC: Time OK  timeOffset=474.1679 ns, incremented to 474.1679 ns
-Run complete  1 Events  1 seconds
+pillbox RFC: Time OK  timeOffset=13.1962 ns, incremented to 13.1962 ns
+pillbox RFC: Time OK  timeOffset=14.1402 ns, incremented to 14.1402 ns
+pillbox RFC: Time OK  timeOffset=15.8390 ns, incremented to 15.8390 ns
+pillbox RFC: Time OK  timeOffset=16.7847 ns, incremented to 16.7847 ns
+pillbox RFC: Time OK  timeOffset=18.4834 ns, incremented to 18.4834 ns
+pillbox RFC: Time OK  timeOffset=19.4274 ns, incremented to 19.4274 ns
+pillbox RFC: Time OK  timeOffset=21.1263 ns, incremented to 21.1263 ns
+pillbox RFC: Time OK  timeOffset=22.0719 ns, incremented to 22.0719 ns
+pillbox RFC: Time OK  timeOffset=23.7707 ns, incremented to 23.7707 ns
+pillbox RFC: Time OK  timeOffset=24.7147 ns, incremented to 24.7147 ns
+pillbox RFC: Time OK  timeOffset=26.4136 ns, incremented to 26.4136 ns
+pillbox RFC: Time OK  timeOffset=27.3592 ns, incremented to 27.3592 ns
+pillbox RFC: Time OK  timeOffset=29.0580 ns, incremented to 29.0580 ns
+pillbox RFC: Time OK  timeOffset=30.0020 ns, incremented to 30.0020 ns
+pillbox RFC: Time OK  timeOffset=31.7009 ns, incremented to 31.7009 ns
+pillbox RFC: Time OK  timeOffset=32.6465 ns, incremented to 32.6465 ns
+pillbox RFC: Time OK  timeOffset=34.3453 ns, incremented to 34.3453 ns
+pillbox RFC: Time OK  timeOffset=35.2893 ns, incremented to 35.2893 ns
+pillbox RFC: Time OK  timeOffset=36.9882 ns, incremented to 36.9882 ns
+pillbox RFC: Time OK  timeOffset=37.9339 ns, incremented to 37.9339 ns
+pillbox RFC: Time OK  timeOffset=39.6327 ns, incremented to 39.6327 ns
+pillbox RFC: Time OK  timeOffset=40.5767 ns, incremented to 40.5767 ns
+pillbox RFC: Time OK  timeOffset=42.2755 ns, incremented to 42.2755 ns
+pillbox RFC: Time OK  timeOffset=43.2212 ns, incremented to 43.2212 ns
+pillbox RFC: Time OK  timeOffset=44.9200 ns, incremented to 44.9200 ns
+pillbox RFC: Time OK  timeOffset=45.8640 ns, incremented to 45.8640 ns
+pillbox RFC: Time OK  timeOffset=47.5629 ns, incremented to 47.5629 ns
+pillbox RFC: Time OK  timeOffset=48.5086 ns, incremented to 48.5086 ns
+pillbox RFC: Time OK  timeOffset=50.2074 ns, incremented to 50.2074 ns
+pillbox RFC: Time OK  timeOffset=51.1514 ns, incremented to 51.1514 ns
+pillbox RFC: Time OK  timeOffset=52.8503 ns, incremented to 52.8503 ns
+pillbox RFC: Time OK  timeOffset=53.7959 ns, incremented to 53.7959 ns
+pillbox RFC: Time OK  timeOffset=55.4948 ns, incremented to 55.4948 ns
+pillbox RFC: Time OK  timeOffset=56.4388 ns, incremented to 56.4388 ns
+pillbox RFC: Time OK  timeOffset=58.1377 ns, incremented to 58.1377 ns
+pillbox RFC: Time OK  timeOffset=59.0833 ns, incremented to 59.0833 ns
+pillbox RFC: Time OK  timeOffset=60.7822 ns, incremented to 60.7822 ns
+pillbox RFC: Time OK  timeOffset=61.7262 ns, incremented to 61.7262 ns
+pillbox RFC: Time OK  timeOffset=63.4251 ns, incremented to 63.4251 ns
+pillbox RFC: Time OK  timeOffset=64.3708 ns, incremented to 64.3708 ns
+pillbox RFC: Time OK  timeOffset=66.0696 ns, incremented to 66.0696 ns
+pillbox RFC: Time OK  timeOffset=67.0136 ns, incremented to 67.0136 ns
+pillbox RFC: Time OK  timeOffset=68.7125 ns, incremented to 68.7125 ns
+pillbox RFC: Time OK  timeOffset=69.6582 ns, incremented to 69.6582 ns
+pillbox RFC: Time OK  timeOffset=71.3571 ns, incremented to 71.3571 ns
+pillbox RFC: Time OK  timeOffset=72.3011 ns, incremented to 72.3011 ns
+pillbox RFC: Time OK  timeOffset=74.0000 ns, incremented to 74.0000 ns
+pillbox RFC: Time OK  timeOffset=74.9457 ns, incremented to 74.9457 ns
+pillbox RFC: Time OK  timeOffset=76.6445 ns, incremented to 76.6445 ns
+pillbox RFC: Time OK  timeOffset=77.5885 ns, incremented to 77.5885 ns
+pillbox RFC: Time OK  timeOffset=79.2874 ns, incremented to 79.2874 ns
+pillbox RFC: Time OK  timeOffset=80.2331 ns, incremented to 80.2331 ns
+pillbox RFC: Time OK  timeOffset=81.9320 ns, incremented to 81.9320 ns
+pillbox RFC: Time OK  timeOffset=82.8760 ns, incremented to 82.8760 ns
+pillbox RFC: Time OK  timeOffset=84.5749 ns, incremented to 84.5749 ns
+pillbox RFC: Time OK  timeOffset=85.5206 ns, incremented to 85.5206 ns
+pillbox RFC: Time OK  timeOffset=87.2195 ns, incremented to 87.2195 ns
+pillbox RFC: Time OK  timeOffset=88.1635 ns, incremented to 88.1635 ns
+pillbox RFC: Time OK  timeOffset=89.8625 ns, incremented to 89.8625 ns
+pillbox RFC: Time OK  timeOffset=90.8082 ns, incremented to 90.8082 ns
+pillbox RFC: Time OK  timeOffset=92.5070 ns, incremented to 92.5070 ns
+pillbox RFC: Time OK  timeOffset=93.4511 ns, incremented to 93.4511 ns
+pillbox RFC: Time OK  timeOffset=95.1500 ns, incremented to 95.1500 ns
+pillbox RFC: Time OK  timeOffset=96.0957 ns, incremented to 96.0957 ns
+pillbox RFC: Time OK  timeOffset=97.7946 ns, incremented to 97.7946 ns
+pillbox RFC: Time OK  timeOffset=98.7386 ns, incremented to 98.7386 ns
+pillbox RFC: Time OK  timeOffset=100.4375 ns, incremented to 100.4375 ns
+pillbox RFC: Time OK  timeOffset=101.3833 ns, incremented to 101.3833 ns
+pillbox RFC: Time OK  timeOffset=103.0822 ns, incremented to 103.0822 ns
+pillbox RFC: Time OK  timeOffset=104.0262 ns, incremented to 104.0262 ns
+pillbox RFC: Time OK  timeOffset=105.7251 ns, incremented to 105.7251 ns
+pillbox RFC: Time OK  timeOffset=106.6708 ns, incremented to 106.6708 ns
+pillbox RFC: Time OK  timeOffset=108.3697 ns, incremented to 108.3697 ns
+pillbox RFC: Time OK  timeOffset=109.3138 ns, incremented to 109.3138 ns
+pillbox RFC: Time OK  timeOffset=111.0127 ns, incremented to 111.0127 ns
+pillbox RFC: Time OK  timeOffset=111.9585 ns, incremented to 111.9585 ns
+pillbox RFC: Time OK  timeOffset=113.6574 ns, incremented to 113.6574 ns
+pillbox RFC: Time OK  timeOffset=114.6014 ns, incremented to 114.6014 ns
+pillbox RFC: Time OK  timeOffset=116.3004 ns, incremented to 116.3004 ns
+pillbox RFC: Time OK  timeOffset=117.2461 ns, incremented to 117.2461 ns
+pillbox RFC: Time OK  timeOffset=118.9450 ns, incremented to 118.9450 ns
+pillbox RFC: Time OK  timeOffset=119.8891 ns, incremented to 119.8891 ns
+pillbox RFC: Time OK  timeOffset=121.5880 ns, incremented to 121.5880 ns
+pillbox RFC: Time OK  timeOffset=122.5338 ns, incremented to 122.5338 ns
+pillbox RFC: Time OK  timeOffset=124.2327 ns, incremented to 124.2327 ns
+pillbox RFC: Time OK  timeOffset=125.1767 ns, incremented to 125.1767 ns
+pillbox RFC: Time OK  timeOffset=126.8757 ns, incremented to 126.8757 ns
+pillbox RFC: Time OK  timeOffset=127.8214 ns, incremented to 127.8214 ns
+pillbox RFC: Time OK  timeOffset=129.5204 ns, incremented to 129.5204 ns
+pillbox RFC: Time OK  timeOffset=130.4644 ns, incremented to 130.4644 ns
+pillbox RFC: Time OK  timeOffset=132.1634 ns, incremented to 132.1634 ns
+pillbox RFC: Time OK  timeOffset=133.1092 ns, incremented to 133.1092 ns
+pillbox RFC: Time OK  timeOffset=134.8081 ns, incremented to 134.8081 ns
+pillbox RFC: Time OK  timeOffset=135.7522 ns, incremented to 135.7522 ns
+pillbox RFC: Time OK  timeOffset=137.4512 ns, incremented to 137.4512 ns
+pillbox RFC: Time OK  timeOffset=138.3969 ns, incremented to 138.3969 ns
+pillbox RFC: Time OK  timeOffset=140.0958 ns, incremented to 140.0958 ns
+pillbox RFC: Time OK  timeOffset=141.0399 ns, incremented to 141.0399 ns
+pillbox RFC: Time OK  timeOffset=142.7389 ns, incremented to 142.7389 ns
+pillbox RFC: Time OK  timeOffset=143.6847 ns, incremented to 143.6847 ns
+pillbox RFC: Time OK  timeOffset=145.3836 ns, incremented to 145.3836 ns
+pillbox RFC: Time OK  timeOffset=146.3277 ns, incremented to 146.3277 ns
+pillbox RFC: Time OK  timeOffset=148.0267 ns, incremented to 148.0267 ns
+pillbox RFC: Time OK  timeOffset=148.9725 ns, incremented to 148.9725 ns
+pillbox RFC: Time OK  timeOffset=150.6714 ns, incremented to 150.6714 ns
+pillbox RFC: Time OK  timeOffset=151.6155 ns, incremented to 151.6155 ns
+pillbox RFC: Time OK  timeOffset=153.3145 ns, incremented to 153.3145 ns
+pillbox RFC: Time OK  timeOffset=154.2603 ns, incremented to 154.2603 ns
+pillbox RFC: Time OK  timeOffset=155.9592 ns, incremented to 155.9592 ns
+pillbox RFC: Time OK  timeOffset=156.9033 ns, incremented to 156.9033 ns
+pillbox RFC: Time OK  timeOffset=158.6024 ns, incremented to 158.6024 ns
+pillbox RFC: Time OK  timeOffset=159.5481 ns, incremented to 159.5481 ns
+pillbox RFC: Time OK  timeOffset=161.2471 ns, incremented to 161.2471 ns
+pillbox RFC: Time OK  timeOffset=162.1912 ns, incremented to 162.1912 ns
+pillbox RFC: Time OK  timeOffset=163.8902 ns, incremented to 163.8902 ns
+pillbox RFC: Time OK  timeOffset=164.8360 ns, incremented to 164.8360 ns
+pillbox RFC: Time OK  timeOffset=166.5350 ns, incremented to 166.5350 ns
+pillbox RFC: Time OK  timeOffset=167.4791 ns, incremented to 167.4791 ns
+pillbox RFC: Time OK  timeOffset=169.1781 ns, incremented to 169.1781 ns
+pillbox RFC: Time OK  timeOffset=170.1239 ns, incremented to 170.1239 ns
+pillbox RFC: Time OK  timeOffset=171.8229 ns, incremented to 171.8229 ns
+pillbox RFC: Time OK  timeOffset=172.7670 ns, incremented to 172.7670 ns
+pillbox RFC: Time OK  timeOffset=174.4661 ns, incremented to 174.4661 ns
+pillbox RFC: Time OK  timeOffset=175.4118 ns, incremented to 175.4118 ns
+pillbox RFC: Time OK  timeOffset=177.1109 ns, incremented to 177.1109 ns
+pillbox RFC: Time OK  timeOffset=178.0550 ns, incremented to 178.0550 ns
+pillbox RFC: Time OK  timeOffset=179.7540 ns, incremented to 179.7540 ns
+pillbox RFC: Time OK  timeOffset=180.6998 ns, incremented to 180.6998 ns
+pillbox RFC: Time OK  timeOffset=182.3988 ns, incremented to 182.3988 ns
+pillbox RFC: Time OK  timeOffset=183.3429 ns, incremented to 183.3429 ns
+pillbox RFC: Time OK  timeOffset=185.0420 ns, incremented to 185.0420 ns
+pillbox RFC: Time OK  timeOffset=185.9878 ns, incremented to 185.9878 ns
+pillbox RFC: Time OK  timeOffset=187.6869 ns, incremented to 187.6869 ns
+pillbox RFC: Time OK  timeOffset=188.6310 ns, incremented to 188.6310 ns
+pillbox RFC: Time OK  timeOffset=190.3301 ns, incremented to 190.3301 ns
+pillbox RFC: Time OK  timeOffset=191.2759 ns, incremented to 191.2759 ns
+pillbox RFC: Time OK  timeOffset=192.9749 ns, incremented to 192.9749 ns
+pillbox RFC: Time OK  timeOffset=193.9190 ns, incremented to 193.9190 ns
+pillbox RFC: Time OK  timeOffset=195.6181 ns, incremented to 195.6181 ns
+pillbox RFC: Time OK  timeOffset=196.5639 ns, incremented to 196.5639 ns
+pillbox RFC: Time OK  timeOffset=198.2630 ns, incremented to 198.2630 ns
+pillbox RFC: Time OK  timeOffset=199.2071 ns, incremented to 199.2071 ns
+pillbox RFC: Time OK  timeOffset=200.9062 ns, incremented to 200.9062 ns
+pillbox RFC: Time OK  timeOffset=201.8520 ns, incremented to 201.8520 ns
+pillbox RFC: Time OK  timeOffset=203.5511 ns, incremented to 203.5511 ns
+pillbox RFC: Time OK  timeOffset=204.4952 ns, incremented to 204.4952 ns
+pillbox RFC: Time OK  timeOffset=206.1944 ns, incremented to 206.1944 ns
+pillbox RFC: Time OK  timeOffset=207.1402 ns, incremented to 207.1402 ns
+pillbox RFC: Time OK  timeOffset=208.8393 ns, incremented to 208.8393 ns
+pillbox RFC: Time OK  timeOffset=209.7834 ns, incremented to 209.7834 ns
+pillbox RFC: Time OK  timeOffset=211.4825 ns, incremented to 211.4825 ns
+pillbox RFC: Time OK  timeOffset=212.4284 ns, incremented to 212.4284 ns
+pillbox RFC: Time OK  timeOffset=214.1274 ns, incremented to 214.1274 ns
+pillbox RFC: Time OK  timeOffset=215.0716 ns, incremented to 215.0716 ns
+pillbox RFC: Time OK  timeOffset=216.7707 ns, incremented to 216.7707 ns
+pillbox RFC: Time OK  timeOffset=217.7166 ns, incremented to 217.7166 ns
+pillbox RFC: Time OK  timeOffset=219.4157 ns, incremented to 219.4157 ns
+pillbox RFC: Time OK  timeOffset=220.3598 ns, incremented to 220.3598 ns
+pillbox RFC: Time OK  timeOffset=222.0590 ns, incremented to 222.0590 ns
+pillbox RFC: Time OK  timeOffset=223.0048 ns, incremented to 223.0048 ns
+pillbox RFC: Time OK  timeOffset=224.7039 ns, incremented to 224.7039 ns
+pillbox RFC: Time OK  timeOffset=225.6481 ns, incremented to 225.6481 ns
+pillbox RFC: Time OK  timeOffset=227.3473 ns, incremented to 227.3473 ns
+pillbox RFC: Time OK  timeOffset=228.2931 ns, incremented to 228.2931 ns
+pillbox RFC: Time OK  timeOffset=229.9922 ns, incremented to 229.9922 ns
+pillbox RFC: Time OK  timeOffset=230.9364 ns, incremented to 230.9364 ns
+pillbox RFC: Time OK  timeOffset=232.6356 ns, incremented to 232.6356 ns
+pillbox RFC: Time OK  timeOffset=233.5814 ns, incremented to 233.5814 ns
+pillbox RFC: Time OK  timeOffset=235.2806 ns, incremented to 235.2806 ns
+pillbox RFC: Time OK  timeOffset=236.2248 ns, incremented to 236.2248 ns
+pillbox RFC: Time OK  timeOffset=237.9240 ns, incremented to 237.9240 ns
+pillbox RFC: Time OK  timeOffset=238.8698 ns, incremented to 238.8698 ns
+pillbox RFC: Time OK  timeOffset=240.5690 ns, incremented to 240.5690 ns
+pillbox RFC: Time OK  timeOffset=241.5131 ns, incremented to 241.5131 ns
+pillbox RFC: Time OK  timeOffset=243.2124 ns, incremented to 243.2124 ns
+pillbox RFC: Time OK  timeOffset=244.1582 ns, incremented to 244.1582 ns
+pillbox RFC: Time OK  timeOffset=245.8574 ns, incremented to 245.8574 ns
+pillbox RFC: Time OK  timeOffset=246.8016 ns, incremented to 246.8016 ns
+pillbox RFC: Time OK  timeOffset=248.5008 ns, incremented to 248.5008 ns
+pillbox RFC: Time OK  timeOffset=249.4467 ns, incremented to 249.4467 ns
+pillbox RFC: Time OK  timeOffset=251.1459 ns, incremented to 251.1459 ns
+pillbox RFC: Time OK  timeOffset=252.0901 ns, incremented to 252.0901 ns
+pillbox RFC: Time OK  timeOffset=253.7893 ns, incremented to 253.7893 ns
+pillbox RFC: Time OK  timeOffset=254.7352 ns, incremented to 254.7352 ns
+pillbox RFC: Time OK  timeOffset=256.4344 ns, incremented to 256.4344 ns
+pillbox RFC: Time OK  timeOffset=257.3786 ns, incremented to 257.3786 ns
+pillbox RFC: Time OK  timeOffset=259.0778 ns, incremented to 259.0778 ns
+pillbox RFC: Time OK  timeOffset=260.0237 ns, incremented to 260.0237 ns
+pillbox RFC: Time OK  timeOffset=261.7229 ns, incremented to 261.7229 ns
+pillbox RFC: Time OK  timeOffset=262.6671 ns, incremented to 262.6671 ns
+pillbox RFC: Time OK  timeOffset=264.3664 ns, incremented to 264.3664 ns
+pillbox RFC: Time OK  timeOffset=265.3123 ns, incremented to 265.3123 ns
+pillbox RFC: Time OK  timeOffset=267.0115 ns, incremented to 267.0115 ns
+pillbox RFC: Time OK  timeOffset=267.9558 ns, incremented to 267.9558 ns
+pillbox RFC: Time OK  timeOffset=269.6550 ns, incremented to 269.6550 ns
+pillbox RFC: Time OK  timeOffset=270.6009 ns, incremented to 270.6009 ns
+pillbox RFC: Time OK  timeOffset=272.3002 ns, incremented to 272.3002 ns
+pillbox RFC: Time OK  timeOffset=273.2444 ns, incremented to 273.2444 ns
+pillbox RFC: Time OK  timeOffset=274.9437 ns, incremented to 274.9437 ns
+pillbox RFC: Time OK  timeOffset=275.8896 ns, incremented to 275.8896 ns
+pillbox RFC: Time OK  timeOffset=277.5889 ns, incremented to 277.5889 ns
+pillbox RFC: Time OK  timeOffset=278.5331 ns, incremented to 278.5331 ns
+pillbox RFC: Time OK  timeOffset=280.2325 ns, incremented to 280.2325 ns
+pillbox RFC: Time OK  timeOffset=281.1784 ns, incremented to 281.1784 ns
+pillbox RFC: Time OK  timeOffset=282.8776 ns, incremented to 282.8776 ns
+pillbox RFC: Time OK  timeOffset=283.8219 ns, incremented to 283.8219 ns
+pillbox RFC: Time OK  timeOffset=285.5212 ns, incremented to 285.5212 ns
+pillbox RFC: Time OK  timeOffset=286.4672 ns, incremented to 286.4672 ns
+pillbox RFC: Time OK  timeOffset=288.1664 ns, incremented to 288.1664 ns
+pillbox RFC: Time OK  timeOffset=289.1107 ns, incremented to 289.1107 ns
+pillbox RFC: Time OK  timeOffset=290.8101 ns, incremented to 290.8101 ns
+pillbox RFC: Time OK  timeOffset=291.7560 ns, incremented to 291.7560 ns
+pillbox RFC: Time OK  timeOffset=293.4553 ns, incremented to 293.4553 ns
+pillbox RFC: Time OK  timeOffset=294.3996 ns, incremented to 294.3996 ns
+pillbox RFC: Time OK  timeOffset=296.0989 ns, incremented to 296.0989 ns
+pillbox RFC: Time OK  timeOffset=297.0449 ns, incremented to 297.0449 ns
+pillbox RFC: Time OK  timeOffset=298.7442 ns, incremented to 298.7442 ns
+pillbox RFC: Time OK  timeOffset=299.6885 ns, incremented to 299.6885 ns
+pillbox RFC: Time OK  timeOffset=301.3879 ns, incremented to 301.3879 ns
+pillbox RFC: Time OK  timeOffset=302.3338 ns, incremented to 302.3338 ns
+pillbox RFC: Time OK  timeOffset=304.0332 ns, incremented to 304.0332 ns
+pillbox RFC: Time OK  timeOffset=304.9774 ns, incremented to 304.9774 ns
+pillbox RFC: Time OK  timeOffset=306.6768 ns, incremented to 306.6768 ns
+pillbox RFC: Time OK  timeOffset=307.6228 ns, incremented to 307.6228 ns
+pillbox RFC: Time OK  timeOffset=309.3222 ns, incremented to 309.3222 ns
+pillbox RFC: Time OK  timeOffset=310.2665 ns, incremented to 310.2665 ns
+pillbox RFC: Time OK  timeOffset=311.9659 ns, incremented to 311.9659 ns
+pillbox RFC: Time OK  timeOffset=312.9119 ns, incremented to 312.9119 ns
+pillbox RFC: Time OK  timeOffset=314.6112 ns, incremented to 314.6112 ns
+pillbox RFC: Time OK  timeOffset=315.5555 ns, incremented to 315.5555 ns
+pillbox RFC: Time OK  timeOffset=317.2550 ns, incremented to 317.2550 ns
+pillbox RFC: Time OK  timeOffset=318.2010 ns, incremented to 318.2010 ns
+pillbox RFC: Time OK  timeOffset=319.9004 ns, incremented to 319.9004 ns
+pillbox RFC: Time OK  timeOffset=320.8447 ns, incremented to 320.8447 ns
+pillbox RFC: Time OK  timeOffset=322.5441 ns, incremented to 322.5441 ns
+pillbox RFC: Time OK  timeOffset=323.4901 ns, incremented to 323.4901 ns
+pillbox RFC: Time OK  timeOffset=325.1896 ns, incremented to 325.1896 ns
+pillbox RFC: Time OK  timeOffset=326.1339 ns, incremented to 326.1339 ns
+pillbox RFC: Time OK  timeOffset=327.8334 ns, incremented to 327.8334 ns
+pillbox RFC: Time OK  timeOffset=328.7794 ns, incremented to 328.7794 ns
+pillbox RFC: Time OK  timeOffset=330.4788 ns, incremented to 330.4788 ns
+pillbox RFC: Time OK  timeOffset=331.4231 ns, incremented to 331.4231 ns
+pillbox RFC: Time OK  timeOffset=333.1226 ns, incremented to 333.1226 ns
+pillbox RFC: Time OK  timeOffset=334.0687 ns, incremented to 334.0687 ns
+pillbox RFC: Time OK  timeOffset=335.7681 ns, incremented to 335.7681 ns
+pillbox RFC: Time OK  timeOffset=336.7125 ns, incremented to 336.7125 ns
+pillbox RFC: Time OK  timeOffset=338.4120 ns, incremented to 338.4120 ns
+pillbox RFC: Time OK  timeOffset=339.3580 ns, incremented to 339.3580 ns
+pillbox RFC: Time OK  timeOffset=341.0575 ns, incremented to 341.0575 ns
+pillbox RFC: Time OK  timeOffset=342.0018 ns, incremented to 342.0018 ns
+pillbox RFC: Time OK  timeOffset=343.7014 ns, incremented to 343.7014 ns
+pillbox RFC: Time OK  timeOffset=344.6474 ns, incremented to 344.6474 ns
+pillbox RFC: Time OK  timeOffset=346.3469 ns, incremented to 346.3469 ns
+pillbox RFC: Time OK  timeOffset=347.2913 ns, incremented to 347.2913 ns
+pillbox RFC: Time OK  timeOffset=348.9909 ns, incremented to 348.9909 ns
+pillbox RFC: Time OK  timeOffset=349.9369 ns, incremented to 349.9369 ns
+pillbox RFC: Time OK  timeOffset=351.6364 ns, incremented to 351.6364 ns
+pillbox RFC: Time OK  timeOffset=352.5808 ns, incremented to 352.5808 ns
+pillbox RFC: Time OK  timeOffset=354.2804 ns, incremented to 354.2804 ns
+pillbox RFC: Time OK  timeOffset=355.2265 ns, incremented to 355.2265 ns
+pillbox RFC: Time OK  timeOffset=356.9260 ns, incremented to 356.9260 ns
+pillbox RFC: Time OK  timeOffset=357.8704 ns, incremented to 357.8704 ns
+pillbox RFC: Time OK  timeOffset=359.5700 ns, incremented to 359.5700 ns
+pillbox RFC: Time OK  timeOffset=360.5161 ns, incremented to 360.5161 ns
+pillbox RFC: Time OK  timeOffset=362.2156 ns, incremented to 362.2156 ns
+pillbox RFC: Time OK  timeOffset=363.1601 ns, incremented to 363.1601 ns
+pillbox RFC: Time OK  timeOffset=364.8597 ns, incremented to 364.8597 ns
+pillbox RFC: Time OK  timeOffset=365.8058 ns, incremented to 365.8058 ns
+pillbox RFC: Time OK  timeOffset=367.5054 ns, incremented to 367.5054 ns
+pillbox RFC: Time OK  timeOffset=368.4498 ns, incremented to 368.4498 ns
+pillbox RFC: Time OK  timeOffset=370.1494 ns, incremented to 370.1494 ns
+pillbox RFC: Time OK  timeOffset=371.0955 ns, incremented to 371.0955 ns
+pillbox RFC: Time OK  timeOffset=372.7951 ns, incremented to 372.7951 ns
+pillbox RFC: Time OK  timeOffset=373.7396 ns, incremented to 373.7396 ns
+pillbox RFC: Time OK  timeOffset=375.4393 ns, incremented to 375.4393 ns
+pillbox RFC: Time OK  timeOffset=376.3854 ns, incremented to 376.3854 ns
+pillbox RFC: Time OK  timeOffset=378.0850 ns, incremented to 378.0850 ns
+pillbox RFC: Time OK  timeOffset=379.0295 ns, incremented to 379.0295 ns
+pillbox RFC: Time OK  timeOffset=380.7292 ns, incremented to 380.7292 ns
+pillbox RFC: Time OK  timeOffset=381.6753 ns, incremented to 381.6753 ns
+pillbox RFC: Time OK  timeOffset=383.3749 ns, incremented to 383.3749 ns
+pillbox RFC: Time OK  timeOffset=384.3194 ns, incremented to 384.3194 ns
+pillbox RFC: Time OK  timeOffset=386.0191 ns, incremented to 386.0191 ns
+pillbox RFC: Time OK  timeOffset=386.9653 ns, incremented to 386.9653 ns
+pillbox RFC: Time OK  timeOffset=388.6650 ns, incremented to 388.6650 ns
+pillbox RFC: Time OK  timeOffset=389.6094 ns, incremented to 389.6094 ns
+pillbox RFC: Time OK  timeOffset=391.3092 ns, incremented to 391.3092 ns
+pillbox RFC: Time OK  timeOffset=392.2553 ns, incremented to 392.2553 ns
+pillbox RFC: Time OK  timeOffset=393.9550 ns, incremented to 393.9550 ns
+pillbox RFC: Time OK  timeOffset=394.8995 ns, incremented to 394.8995 ns
+pillbox RFC: Time OK  timeOffset=396.5993 ns, incremented to 396.5993 ns
+pillbox RFC: Time OK  timeOffset=397.5455 ns, incremented to 397.5455 ns
+pillbox RFC: Time OK  timeOffset=399.2452 ns, incremented to 399.2452 ns
+pillbox RFC: Time OK  timeOffset=400.1897 ns, incremented to 400.1897 ns
+pillbox RFC: Time OK  timeOffset=401.8895 ns, incremented to 401.8895 ns
+pillbox RFC: Time OK  timeOffset=402.8357 ns, incremented to 402.8357 ns
+pillbox RFC: Time OK  timeOffset=404.5355 ns, incremented to 404.5355 ns
+pillbox RFC: Time OK  timeOffset=405.4800 ns, incremented to 405.4800 ns
+pillbox RFC: Time OK  timeOffset=407.1798 ns, incremented to 407.1798 ns
+pillbox RFC: Time OK  timeOffset=408.1260 ns, incremented to 408.1260 ns
+pillbox RFC: Time OK  timeOffset=409.8258 ns, incremented to 409.8258 ns
+pillbox RFC: Time OK  timeOffset=410.7704 ns, incremented to 410.7704 ns
+pillbox RFC: Time OK  timeOffset=412.4702 ns, incremented to 412.4702 ns
+pillbox RFC: Time OK  timeOffset=413.4164 ns, incremented to 413.4164 ns
+pillbox RFC: Time OK  timeOffset=415.1163 ns, incremented to 415.1163 ns
+pillbox RFC: Time OK  timeOffset=416.0608 ns, incremented to 416.0608 ns
+pillbox RFC: Time OK  timeOffset=417.7607 ns, incremented to 417.7607 ns
+pillbox RFC: Time OK  timeOffset=418.7069 ns, incremented to 418.7069 ns
+pillbox RFC: Time OK  timeOffset=420.4068 ns, incremented to 420.4068 ns
+pillbox RFC: Time OK  timeOffset=421.3514 ns, incremented to 421.3514 ns
+pillbox RFC: Time OK  timeOffset=423.0513 ns, incremented to 423.0513 ns
+pillbox RFC: Time OK  timeOffset=423.9975 ns, incremented to 423.9975 ns
+pillbox RFC: Time OK  timeOffset=425.6974 ns, incremented to 425.6974 ns
+pillbox RFC: Time OK  timeOffset=426.6420 ns, incremented to 426.6420 ns
+pillbox RFC: Time OK  timeOffset=428.3420 ns, incremented to 428.3420 ns
+pillbox RFC: Time OK  timeOffset=429.2882 ns, incremented to 429.2882 ns
+pillbox RFC: Time OK  timeOffset=430.9881 ns, incremented to 430.9881 ns
+pillbox RFC: Time OK  timeOffset=431.9327 ns, incremented to 431.9327 ns
+pillbox RFC: Time OK  timeOffset=433.6327 ns, incremented to 433.6327 ns
+pillbox RFC: Time OK  timeOffset=434.5790 ns, incremented to 434.5790 ns
+pillbox RFC: Time OK  timeOffset=436.2789 ns, incremented to 436.2789 ns
+pillbox RFC: Time OK  timeOffset=437.2236 ns, incremented to 437.2236 ns
+pillbox RFC: Time OK  timeOffset=438.9236 ns, incremented to 438.9236 ns
+pillbox RFC: Time OK  timeOffset=439.8699 ns, incremented to 439.8699 ns
+pillbox RFC: Time OK  timeOffset=441.5698 ns, incremented to 441.5698 ns
+pillbox RFC: Time OK  timeOffset=442.5145 ns, incremented to 442.5145 ns
+pillbox RFC: Time OK  timeOffset=444.2145 ns, incremented to 444.2145 ns
+pillbox RFC: Time OK  timeOffset=445.1608 ns, incremented to 445.1608 ns
+pillbox RFC: Time OK  timeOffset=446.8608 ns, incremented to 446.8608 ns
+pillbox RFC: Time OK  timeOffset=447.8055 ns, incremented to 447.8055 ns
+pillbox RFC: Time OK  timeOffset=449.5056 ns, incremented to 449.5056 ns
+pillbox RFC: Time OK  timeOffset=450.4519 ns, incremented to 450.4519 ns
+pillbox RFC: Time OK  timeOffset=452.1520 ns, incremented to 452.1520 ns
+pillbox RFC: Time OK  timeOffset=453.0966 ns, incremented to 453.0966 ns
+pillbox RFC: Time OK  timeOffset=454.7968 ns, incremented to 454.7968 ns
+pillbox RFC: Time OK  timeOffset=455.7431 ns, incremented to 455.7431 ns
+pillbox RFC: Time OK  timeOffset=457.4432 ns, incremented to 457.4432 ns
+pillbox RFC: Time OK  timeOffset=458.3879 ns, incremented to 458.3879 ns
+pillbox RFC: Time OK  timeOffset=460.0880 ns, incremented to 460.0880 ns
+pillbox RFC: Time OK  timeOffset=461.0344 ns, incremented to 461.0344 ns
+pillbox RFC: Time OK  timeOffset=462.7345 ns, incremented to 462.7345 ns
+pillbox RFC: Time OK  timeOffset=463.6792 ns, incremented to 463.6792 ns
+pillbox RFC: Time OK  timeOffset=465.3794 ns, incremented to 465.3794 ns
+pillbox RFC: Time OK  timeOffset=466.3258 ns, incremented to 466.3258 ns
+pillbox RFC: Time OK  timeOffset=468.0259 ns, incremented to 468.0259 ns
+pillbox RFC: Time OK  timeOffset=468.9707 ns, incremented to 468.9707 ns
+pillbox RFC: Time OK  timeOffset=470.6709 ns, incremented to 470.6709 ns
+pillbox RFC: Time OK  timeOffset=471.6173 ns, incremented to 471.6173 ns
+pillbox RFC: Time OK  timeOffset=473.3175 ns, incremented to 473.3175 ns
+pillbox RFC: Time OK  timeOffset=474.2622 ns, incremented to 474.2622 ns
+Run complete  1 Events  13 seconds
 ================== Begin Reference Particle(s) ===============
-Run complete  1 Events  1 seconds
+Run complete  1 Events  14 seconds
 ================== Prepare Tracking Beam ==================
 **************************************************************************
 *** G4Exception: All stochastic processes disabled
@@ -6380,8 +6380,8 @@ Run complete  1 Events  1 seconds
 ***   issued by: physics
 **************************************************************************
 ================== Begin Tracking Beam ===============
-Event 1 Completed  1 events  realTime=1 sec  1.0 ev/sec
-Run complete  1 Events  1 seconds
+Event 1 Completed  1 events  realTime=10 sec  0.1 ev/sec
+Run complete  1 Events  10 seconds
 NTuple Z500                   2 entries
 NTuple Z510                   2 entries
 NTuple Z520                   2 entries
@@ -18983,7 +18983,7 @@ NTuple Z126470                2 entries
 NTuple Z126480                2 entries
 NTuple Z126490                2 entries
 NTuple Z126500                2 entries
-NTuple AllTracks         263468 entries
+NTuple AllTracks        2599799 entries
 
 Exceptions: 0 Fatal, 0 Events Aborted, 0 Stuck Tracks (stopped), 3 Warnings
       1 times: All stochastic processes disabled

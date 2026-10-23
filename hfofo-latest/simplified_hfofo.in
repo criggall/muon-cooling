@@ -22,33 +22,78 @@ param pitch=-0.1432394487827058 #deg
 param period_len=4200 #mm
 
 # Initial conditions:
-param X=-11.2945 #mm
-param Y=14.0917 #mm
-param Xp=0.823201/224.995 #radians
-param Yp=-1.27215/224.995 #radians
+param X=9.47954 #mm
+param Y=16.0791 #mm
+param Xp=0.064143 #radians
+param Yp=-0.03725 #radians
+
+param Xavg=9.91782273036963
+param Yavg=15.596720602187812
+param Xpavg=0.06689560651644771
+param Ypavg=-0.03670911943095136
+param Ptotavg=200.30423895641164
+param Tavg=-0.006500556911088911
+
+param Xavg2=9.523367982017984
+param Yavg2=16.030861738261738
+param Xpavg2=0.06441825310768562
+param Ypavg2=-0.037195913963255924
+param Ptotavg2=200.03042154038738
+param Tavg2=-0.0006500556911088911
 
 ### BEAM ###
 
 #beam gaussian particle=mu+ nEvents=100 \
-#beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+#beamZ=500.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
 #sigmaX=10.0 sigmaY=10.0 sigmaXp=0.1 sigmaYp=0.1 \ 
 #meanMomentum=$p sigmaP=10.0 meanT=0.0 sigmaT=0.0
 
-beam gaussian particle=mu+ nEvents=10 \
-beamZ=0.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
-sigmaX=10.0 sigmaY=10.0 sigmaZ=100.0 sigmaXp=0.0 sigmaYp=0.0 \ 
-meanMomentum=$p sigmaP=0.0 meanT=0.0 sigmaT=0.0
+#beam gaussian particle=mu+ nEvents=10 \
+#beamZ=500.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+#sigmaX=10.0 sigmaY=10.0 sigmaZ=100.0 sigmaXp=0.0 sigmaYp=0.0 \ 
+#meanMomentum=$p sigmaP=0.0 meanT=0.0 sigmaT=0.0
+
+# Testing:
+#beam gaussian particle=mu+ nEvents=1000 \
+#beamZ=500.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+#sigmaX=10.0 sigmaY=10.0 sigmaZ=0.0 sigmaXp=0.1 sigmaYp=0.1 \ 
+#meanMomentum=$p sigmaP=10.0 meanT=0.0 sigmaT=0.1
+# --> zntuple_avg1.txt
+
+#beam gaussian particle=mu+ nEvents=1 \
+#beamZ=500.0 beamX=$Xavg beamY=$Yavg beamXp=$Xpavg beamYp=$Ypavg \ 
+#sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.0 sigmaYp=0.0 \ 
+#meanMomentum=$Ptotavg sigmaP=0.0 meanT=$Tavg sigmaT=0.0
+# --> zntuple_avg2.txt
+
+#beam gaussian particle=mu+ nEvents=1000 \
+#beamZ=500.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+#sigmaX=1.0 sigmaY=1.0 sigmaZ=0.0 sigmaXp=0.01 sigmaYp=0.01 \ 
+#meanMomentum=$p sigmaP=1.0 meanT=0.0 sigmaT=0.01
+# --> zntuple_avg1_2.txt
+
+#beam gaussian particle=mu+ nEvents=1 \
+#beamZ=500.0 beamX=$Xavg2 beamY=$Yavg2 beamXp=$Xpavg2 beamYp=$Ypavg2 \ 
+#sigmaX=0.0 sigmaY=0.0 sigmaZ=0.0 sigmaXp=0.0 sigmaYp=0.0 \ 
+#meanMomentum=$Ptotavg2 sigmaP=0.0 meanT=$Tavg2 sigmaT=0.0
+# --> zntuple_avg2.txt
+
+# Finding transfer matrix:
+beam gaussian particle=mu+ nEvents=1 \
+beamZ=500.0 beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp \ 
+sigmaX=0.0 sigmaY=0.0 sigmaXp=0.0 sigmaYp=0.0 \ 
+meanMomentum=$p sigmaP=0.0 meanT=0.0-3.8e-4 sigmaT=0.0
 
 ### REFERENCE PARTICLE ###
 
 # mu plus:
-#reference referenceMomentum=$p particle=mu+ beamX=0.0 beamY=0.0 beamZ=0.0 beamXp=0.0 beamYp=0.0
-reference referenceMomentum=$p particle=mu+ beamX=$X beamY=$Y beamZ=0.0 beamXp=$Xp beamYp=$Yp
+#reference referenceMomentum=$p particle=mu+ beamX=0.0 beamY=0.0 beamZ=500.0 beamXp=0.0 beamYp=0.0
+reference referenceMomentum=$p particle=mu+ beamX=$X beamY=$Y beamZ=500.0 beamXp=$Xp beamYp=$Yp
 
 # mu minus:
 param tshift=-1/(325e6)*0.5
 param zshift=$period_len*0.5
-#reference referenceMomentum=$p particle=mu- beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp beamZ=$zshift
+#reference referenceMomentum=$p particle=mu- beamX=$X beamY=$Y beamXp=$Xp beamYp=$Yp beamZ=500+$zshift
 
 #trace nTrace=0 format=ascii oneNTuple=1
 trace nTrace=10 format=ascii oneNTuple=1
